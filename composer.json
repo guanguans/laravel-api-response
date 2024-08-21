@@ -1,0 +1,208 @@
+{
+    "name": "guanguans/laravel-api-response",
+    "description": "Laravel API Response",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "api",
+        "response"
+    ],
+    "authors": [
+        {
+            "name": "guanguans",
+            "email": "ityaozm@gmail.com",
+            "homepage": "https://www.guanguans.cn",
+            "role": "developer"
+        }
+    ],
+    "homepage": "https://github.com/guanguans/laravel-api-response",
+    "support": {
+        "issues": "https://github.com/guanguans/laravel-api-response/issues",
+        "source": "https://github.com/guanguans/laravel-api-response"
+    },
+    "funding": [
+        {
+            "type": "wechat",
+            "url": "https://www.guanguans.cn/images/wechat.jpeg"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*",
+        "illuminate/support": "^8.23 || ^9.0 || ^10.0 || ^11.0"
+    },
+    "require-dev": {
+        "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
+        "driftingly/rector-laravel": "^1.2",
+        "ergebnis/composer-normalize": "^2.43",
+        "ergebnis/license": "^2.4",
+        "ergebnis/php-cs-fixer-config": "dev-main",
+        "ergebnis/rector-rules": "^1.0",
+        "guanguans/monorepo-builder-worker": "^1.4",
+        "hyperf/composer-plugin": "^1.0",
+        "icanhazstring/composer-unused": "^0.8",
+        "maglnet/composer-require-checker": "^3.8 || ^4.0",
+        "mockery/mockery": "^1.6",
+        "orchestra/testbench": "^6.45 || ^7.0 || ^8.0 || ^9.0",
+        "pestphp/pest": "^1.23 || ^2.0",
+        "pestphp/pest-plugin-faker": "^1.0 || ^2.0",
+        "pestphp/pest-plugin-laravel": "^1.2 || ^2.0",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^1.11",
+        "phpstan/phpstan-deprecation-rules": "^1.2",
+        "rector/rector": "^1.2"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Guanguans\\LaravelApiResponse\\": "src"
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Guanguans\\LaravelApiResponse\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "hyperf/composer-plugin": true,
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        },
+        "apcu-autoloader": true,
+        "classmap-authoritative": false,
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": true,
+            "forward-command": true,
+            "target-directory": "vendor-bin"
+        },
+        "hooks": {
+            "post-merge": [
+                "composer checks"
+            ],
+            "pre-commit": [
+                "composer checks"
+            ]
+        },
+        "hyperf": {
+            "plugin": {
+                "sort-autoload": {
+                    "guanguans/ai-commit": -1
+                }
+            }
+        },
+        "laravel": {
+            "aliases": {
+                "ApiResponse": "Guanguans\\LaravelApiResponse\\Facades\\ApiResponse"
+            },
+            "providers": [
+                "Guanguans\\LaravelApiResponse\\ApiResponseServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@cghooks add --ignore-lock",
+            "@cghooks update"
+        ],
+        "post-update-cmd": [
+            "@cghooks update"
+        ],
+        "ai-commit": "@php ./vendor/bin/ai-commit commit --generator=bito_cli --ansi",
+        "ai-commit-no-verify": "@ai-commit --no-verify",
+        "benchmark": "@php ./vendor/bin/phpbench run --warmup=1 --retry-threshold=1 --iterations=3 --revs=5 --ansi -v",
+        "cghooks": "@php ./vendor/bin/cghooks --ansi -v",
+        "checks": [
+            "@composer-normalize",
+            "@composer-validate",
+            "@composer-unused",
+            "@md-lint",
+            "@style-lint",
+            "@test",
+            "@phpstan",
+            "@rector-dry-run"
+        ],
+        "composer-bin-all-update": "@composer bin all update --ansi -v",
+        "composer-check-platform-reqs": "@composer check-platform-reqs --lock --ansi -v",
+        "composer-normalize": "@composer normalize --dry-run --diff --ansi -v",
+        "composer-require-checker": "@php ./vendor/bin/composer-require-checker check --config-file=composer-require-checker.json composer.json --ansi -v",
+        "composer-require-checker-json": "@php ./vendor/bin/composer-require-checker check --config-file=composer-require-checker.json composer.json --ansi -v --output=json | jq",
+        "composer-unused": "@php ./vendor/bin/composer-unused --ansi -v",
+        "composer-updater": "@php ./composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.3/bin/php --except-packages=pestphp/pest-plugin-laravel --ansi",
+        "composer-updater-dry-run": "@composer-updater --dry-run",
+        "composer-validate": "@composer validate --check-lock --strict --ansi -v",
+        "facade-lint": "@facade-update --lint",
+        "facade-update": [
+            "@putenvs",
+            "$PHP81 -f ./facade.php -- Guanguans\\\\LaravelApiResponse\\\\Facades\\\\ApiResponse"
+        ],
+        "lint": [
+            "@putenvs",
+            "for DIR in .; do find $DIR -maxdepth 1 -type f -name '*.php' -type f ! -name 'xxx.php' -exec $PHP74 -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done",
+            "for DIR in ./config ./src ./tests; do find $DIR -type f -name '*.php' -type f ! -name 'xxx.php' -exec $PHP74 -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done"
+        ],
+        "mark-finish": "printf '\\n!\\n!\\t\\033[0;32m%s\\033[0m\\n!\\n\\n' \"Finished\"",
+        "mark-separate": "printf '\\n!\\n!\\t\\033[0;33m%s\\033[0m\\n!\\n\\n' \"----------------\"",
+        "mark-start": "printf '\\n!\\n!\\t\\033[0;36m%s\\033[0m\\n!\\n\\n' \"Started\"",
+        "md-fix": "@md-lint --fix",
+        "md-lint": "lint-md --config .lintmdrc ./*.md ./.github/ ./docs/",
+        "pest": "@php ./vendor/bin/pest --coverage",
+        "pest-coverage": "@pest --coverage-html=./.build/phpunit/ --coverage-clover=./.build/phpunit/clover.xml --coverage",
+        "pest-migrate-configuration": "@pest --migrate-configuration",
+        "phpstan": "@php ./vendor/bin/phpstan analyse --ansi -v",
+        "phpstan-baseline": "@phpstan --generate-baseline --allow-empty-baseline",
+        "post-merge": [
+            "composer install --ansi -v"
+        ],
+        "psalm": "@php ./vendor/bin/psalm",
+        "psalm-baseline": "@psalm --update-baseline",
+        "putenvs": [
+            "@putenv PHP73=/opt/homebrew/opt/php@7.3/bin/php",
+            "@putenv PHP74=/opt/homebrew/opt/php@7.4/bin/php",
+            "@putenv PHP80=/opt/homebrew/opt/php@8.0/bin/php",
+            "@putenv PHP81=/opt/homebrew/opt/php@8.1/bin/php",
+            "@putenv PHP82=/opt/homebrew/opt/php@8.2/bin/php",
+            "@putenv PHP83=/opt/homebrew/opt/php@8.3/bin/php"
+        ],
+        "rector": "@php ./vendor/bin/rector --ansi -v",
+        "rector-custom-rule": "@rector custom-rule",
+        "rector-detect-node": "@rector detect-node --loop",
+        "rector-dry-run": "@rector --dry-run",
+        "rector-list-rules": "@rector list-rules",
+        "rector-setup-ci": "@rector setup-ci",
+        "release": "@php ./vendor/bin/monorepo-builder release --ansi -v",
+        "release-major": "@release major",
+        "release-major-dry-run": "@release-major --dry-run",
+        "release-minor": "@release minor",
+        "release-minor-dry-run": "@release-minor --dry-run",
+        "release-patch": "@release patch",
+        "release-patch-dry-run": "@release-patch --dry-run",
+        "style-fix": "@php ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --show-progress=dots --diff --ansi -v",
+        "style-lint": "@style-fix --diff --dry-run",
+        "test": "@pest",
+        "test-coverage": "@pest-coverage",
+        "test-migrate-configuration": "@pest-migrate-configuration"
+    },
+    "scripts-aliases": {
+        "pest": [
+            "test"
+        ],
+        "pest-coverage": [
+            "test-coverage"
+        ],
+        "pest-migrate-configuration": [
+            "test-migrate-configuration"
+        ]
+    }
+}

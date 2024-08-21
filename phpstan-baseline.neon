@@ -1,0 +1,66 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Anonymous function has invalid return type Guanguans\\\\LaravelApiResponse\\\\ApiResponseManager\\.$#"
+			count: 1
+			path: src/ApiResponseServiceProvider.php
+
+		-
+			message: "#^Anonymous function has invalid return type Guanguans\\\\LaravelApiResponse\\\\CollectorManager\\.$#"
+			count: 1
+			path: src/ApiResponseServiceProvider.php
+
+		-
+			message: "#^Call to static method reportIf\\(\\) on an unknown class Guanguans\\\\LaravelApiResponse\\\\Facades\\\\ApiResponse\\.$#"
+			count: 1
+			path: src/ApiResponseServiceProvider.php
+
+		-
+			message: "#^Class Guanguans\\\\LaravelApiResponse\\\\ApiResponseManager not found\\.$#"
+			count: 4
+			path: src/ApiResponseServiceProvider.php
+
+		-
+			message: "#^Class Guanguans\\\\LaravelApiResponse\\\\CollectorManager not found\\.$#"
+			count: 4
+			path: src/ApiResponseServiceProvider.php
+
+		-
+			message: "#^Class Guanguans\\\\LaravelApiResponse\\\\Commands\\\\TestCommand not found\\.$#"
+			count: 5
+			path: src/ApiResponseServiceProvider.php
+
+		-
+			message: "#^Class Guanguans\\\\LaravelApiResponse\\\\Facades\\\\ApiResponse not found\\.$#"
+			count: 1
+			path: src/ApiResponseServiceProvider.php
+
+		-
+			message: "#^Instantiated class Guanguans\\\\LaravelApiResponse\\\\ApiResponseManager not found\\.$#"
+			count: 1
+			path: src/ApiResponseServiceProvider.php
+
+		-
+			message: "#^Instantiated class Guanguans\\\\LaravelApiResponse\\\\CollectorManager not found\\.$#"
+			count: 1
+			path: src/ApiResponseServiceProvider.php
+
+		-
+			message: "#^Method Guanguans\\\\LaravelApiResponse\\\\Rectors\\\\ToInternalExceptionRector\\:\\:refactor\\(\\) should return 1\\|2\\|3\\|4\\|array\\<PhpParser\\\\Node\\>\\|PhpParser\\\\Node\\|null but empty return statement found\\.$#"
+			count: 1
+			path: src/Rectors/ToInternalExceptionRector.php
+
+		-
+			message: "#^Instantiated class Guanguans\\\\LaravelApiResponse\\\\Exceptions\\\\InvalidArgumentException not found\\.$#"
+			count: 2
+			path: src/Support/helpers.php
+
+		-
+			message: "#^Result of && is always false\\.$#"
+			count: 1
+			path: src/Support/helpers.php
+
+		-
+			message: "#^Throwing object of an unknown class Guanguans\\\\LaravelApiResponse\\\\Exceptions\\\\InvalidArgumentException\\.$#"
+			count: 2
+			path: src/Support/helpers.php
