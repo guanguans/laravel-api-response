@@ -1,0 +1,68 @@
+name: tests
+
+on: [ workflow_dispatch, push, pull_request ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+        php: [ 7.4, 8.3 ]
+        dependency-version: [ prefer-stable ]
+        laravel: [ 8.23.*, 9.*, 10.*, 11.* ]
+        include:
+          - laravel: 8.23.*
+            testbench: 6.*
+          - laravel: 9.*
+            testbench: 7.*
+          - laravel: 10.*
+            testbench: 8.*
+          - laravel: 11.*
+            testbench: 9.*
+        exclude:
+          - php: 7.4
+            laravel: 9.*
+          - php: 7.4
+            laravel: 10.*
+          - php: 7.4
+            laravel: 11.*
+          - php: 8.3
+            laravel: 8.23.*
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: |
+          composer remove "brainmaestro/composer-git-hooks" --no-interaction --no-scripts --dev --ansi -v
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update --ansi -v
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-scripts --ansi -W -v
+
+      - name: Execute tests
+        run: composer test-coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./.build/phpunit/clover.xml
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)

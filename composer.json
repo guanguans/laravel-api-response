@@ -30,7 +30,8 @@
     "require": {
         "php": ">=7.4",
         "ext-json": "*",
-        "illuminate/support": "^8.23 || ^9.0 || ^10.0 || ^11.0"
+        "illuminate/support": "^8.23 || ^9.0 || ^10.0 || ^11.0",
+        "spatie/laravel-package-tools": "^1.12"
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",

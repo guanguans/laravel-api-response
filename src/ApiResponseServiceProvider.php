@@ -13,147 +13,63 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse;
 
-use Guanguans\LaravelApiResponse\Commands\TestCommand;
-use Guanguans\LaravelApiResponse\Facades\ApiResponse;
-use Illuminate\Container\Container;
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class ApiResponseServiceProvider extends ServiceProvider
+class ApiResponseServiceProvider extends PackageServiceProvider
 {
-    public array $singletons = [];
-
-    public function register(): void
+    public function configurePackage(Package $package): void
     {
-        $this->setupConfig()
-            // ->registerMacros()
-            ->registerApiResponseManager()
-            ->registerCollectorManager()
-            ->registerTestCommand();
+        $package
+            ->name('laravel-api-response'); // ->hasConfigFile()
     }
 
-    public function boot(): void
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function packageBooted(): void
     {
-        $this->extendExceptionHandler()
-            ->registerCommands();
+        $this->registerRenderUsing();
     }
 
-    public function provides(): array
-    {
-        return [
-            $this->toAlias(CollectorManager::class),
-            $this->toAlias(ApiResponseManager::class),
-            $this->toAlias(TestCommand::class),
-            CollectorManager::class,
-            ApiResponseManager::class,
-            TestCommand::class,
-        ];
-    }
-
-    private function setupConfig(): self
-    {
-        /** @noinspection RealpathInStreamContextInspection */
-        $source = realpath($raw = __DIR__.'/../config/exception-notify.php') ?: $raw;
-
-        if ($this->app->runningInConsole()) {
-            $this->publishes([$source => config_path('exception-notify.php')], 'laravel-api-response');
-        }
-
-        $this->mergeConfigFrom($source, 'exception-notify');
-
-        return $this;
-    }
-
-    private function registerApiResponseManager(): self
+    public function packageRegistered(): void
     {
         $this->app->singleton(
-            ApiResponseManager::class,
-            static fn (Container $container): ApiResponseManager => new ApiResponseManager($container)
-        );
-
-        $this->alias(ApiResponseManager::class);
-
-        return $this;
-    }
-
-    private function registerCollectorManager(): self
-    {
-        $this->app->singleton(
-            CollectorManager::class,
-            static fn (Container $container): CollectorManager => new CollectorManager(
-                collect(config('exception-notify.collectors', []))
-                    ->map(static function ($parameters, $class) use ($container) {
-                        if (!\is_array($parameters)) {
-                            [$parameters, $class] = [(array) $class, $parameters];
-                        }
-
-                        return $container->make($class, $parameters);
-                    })
-                    ->all()
+            ApiResponse::class,
+            static fn (): ApiResponse => new ApiResponse(
+                collect(config('api-response.pipes')),
+                collect(config('api-response.exception_map'))
             )
         );
-
-        $this->alias(CollectorManager::class);
-
-        return $this;
     }
 
-    private function registerTestCommand(): self
+    /**
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    private function registerRenderUsing(): void
     {
-        $this->app->singleton(TestCommand::class);
-        $this->alias(TestCommand::class);
-
-        return $this;
-    }
-
-    private function extendExceptionHandler(): self
-    {
-        $this->app->extend(ExceptionHandler::class, static function (ExceptionHandler $exceptionHandler): ExceptionHandler {
-            if (method_exists($exceptionHandler, 'reportable')) {
-                $exceptionHandler->reportable(static function (\Throwable $throwable) use ($exceptionHandler): void {
-                    ApiResponse::reportIf($exceptionHandler->shouldReport($throwable), $throwable);
-                });
+        if (
+            ($renderUsingFactory = config('api-response.render_using_factory'))
+            && !$this->app->runningInConsole()
+            && method_exists($exceptionHandler = $this->app->make(ExceptionHandler::class), 'renderable')
+        ) {
+            if (\is_string($renderUsingFactory) && class_exists($renderUsingFactory)) {
+                $renderUsingFactory = $this->app->make($renderUsingFactory);
             }
 
-            return $exceptionHandler;
-        });
+            /** @var callable(\Throwable, Request): ?JsonResponse $renderUsing */
+            $renderUsing = $renderUsingFactory($exceptionHandler);
 
-        return $this;
-    }
+            if ($renderUsing instanceof \Closure) {
+                $renderUsing = $renderUsing->bindTo($exceptionHandler, $exceptionHandler);
+            }
 
-    private function registerCommands(): self
-    {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                TestCommand::class,
-            ]);
+            $exceptionHandler->renderable($renderUsing);
         }
-
-        return $this;
-    }
-
-    /**
-     * @param class-string $class
-     */
-    private function alias(string $class): self
-    {
-        $this->app->alias($class, $this->toAlias($class));
-
-        return $this;
-    }
-
-    /**
-     * @param class-string $class
-     */
-    private function toAlias(string $class): string
-    {
-        return Str::of($class)
-            ->replaceFirst(__NAMESPACE__, '')
-            ->start('\\'.class_basename(ApiResponse::class))
-            ->replaceFirst('\\', '')
-            ->explode('\\')
-            ->map(static fn (string $name): string => Str::snake($name, '-'))
-            ->implode('.');
     }
 }

@@ -57,7 +57,7 @@ return RectorConfig::configure()
     // ->withPhpSets()
     // ->withPreparedSets()
     ->withSets([
-        // DowngradeLevelSetList::DOWN_TO_PHP_74,
+        DowngradeLevelSetList::DOWN_TO_PHP_74,
         LevelSetList::UP_TO_PHP_74,
     ])
     ->withSets([
