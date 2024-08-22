@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @see https://github.com/jiannei/laravel-response
  * @see https://github.com/MarcinOrlowski/laravel-api-response-builder
  */
-interface ApiResponse
+interface ApiResponseContract
 {
     /**
      * @param mixed $data

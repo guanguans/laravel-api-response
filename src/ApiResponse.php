@@ -16,6 +16,7 @@ namespace Guanguans\LaravelApiResponse;
 use Guanguans\LaravelApiResponse\Concerns\ConcreteHttpStatusMethods;
 use Guanguans\LaravelApiResponse\Concerns\HasExceptionMap;
 use Guanguans\LaravelApiResponse\Concerns\HasPipes;
+use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pipeline\Pipeline;
@@ -37,7 +38,7 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
  *
  * @method array convertExceptionToArray(\Throwable $throwable)
  */
-class ApiResponse implements Contracts\ApiResponse
+class ApiResponse implements ApiResponseContract
 {
     // use Dumpable;
     use ConcreteHttpStatusMethods;

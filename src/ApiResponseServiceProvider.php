@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse;
 
+use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -38,8 +39,8 @@ class ApiResponseServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->app->singleton(
-            ApiResponse::class,
+        $this->app->bind(
+            ApiResponseContract::class,
             static fn (): ApiResponse => new ApiResponse(
                 collect(config('api-response.pipes')),
                 collect(config('api-response.exception_map'))

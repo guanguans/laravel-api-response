@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Facades;
 
+use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -61,6 +62,6 @@ class ApiResponse extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Guanguans\LaravelApiResponse\ApiResponse::class;
+        return ApiResponseContract::class;
     }
 }
