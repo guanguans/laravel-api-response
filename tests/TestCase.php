@@ -15,6 +15,7 @@ namespace Guanguans\LaravelApiResponse\Tests;
 
 use Guanguans\LaravelApiResponse\ApiResponseServiceProvider;
 use Guanguans\LaravelApiResponse\Facades\ApiResponse;
+use Illuminate\Http\Request;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
 
@@ -43,19 +44,16 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ];
     }
 
-    protected function defineEnvironment($app): void
-    {
-        // config()->set('exception-notify.job.queue', 'exception-notify');
-    }
+    /**
+     * @see https://github.com/staudenmeir
+     */
+    protected function defineDatabaseMigrations(): void {}
+
+    protected function defineEnvironment($app): void {}
 
     protected function defineRoutes($router): void
     {
-        $router->any('report-exception', static fn () => tap(response('report-exception'), static function (): void {
-            ApiResponse::report(new \Guanguans\LaravelApiResponse\Exceptions\RuntimeException('What happened?'), ['dump', 'log', 'bark', 'lark']);
-        }));
-
-        $router->any('exception', static fn () => tap(response('exception'), static function (): void {
-            throw new \Guanguans\LaravelApiResponse\Exceptions\RuntimeException('What happened?');
-        }));
+        $router->any('success', static fn (Request $request) => ApiResponse::success($request->input()));
+        $router->any('error', static fn (Request $request) => ApiResponse::error());
     }
 }

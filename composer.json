@@ -54,6 +54,7 @@
         "phpstan/phpstan": "^1.11",
         "phpstan/phpstan-deprecation-rules": "^1.2",
         "rector/rector": "^1.2",
+        "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
         "spaze/phpstan-disallowed-calls": "^3.4"
     },
     "minimum-stability": "stable",

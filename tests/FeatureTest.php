@@ -14,24 +14,17 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Illuminate\Http\UploadedFile;
-
-it('can report exception', function (): void {
+it('can return success json response', function (): void {
     $this
-        ->post('report-exception?foo=bar', [
+        ->post('success', [
+            'foo' => 'bar',
             'bar' => 'baz',
-            'password' => 'password',
-            'file' => new UploadedFile(__FILE__, basename(__FILE__)),
         ])
         ->assertOk();
 })->group(__DIR__, __FILE__);
 
-it('can auto report exception', function (): void {
+it('can return error json response', function (): void {
     $this
-        ->post('exception?foo=bar', [
-            'bar' => 'baz',
-            'password' => 'password',
-            'file' => new UploadedFile(__FILE__, basename(__FILE__)),
-        ])
-        ->assertStatus(500);
+        ->post('error')
+        ->assertOk();
 })->group(__DIR__, __FILE__);

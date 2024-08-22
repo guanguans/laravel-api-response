@@ -21,7 +21,7 @@ use Guanguans\LaravelApiResponse\Tests\TestCase;
 uses(TestCase::class)
     ->beforeAll(function (): void {})
     ->beforeEach(function (): void {
-        $this->markTestSkipped('Not implemented yet.');
+        // $this->markTestSkipped('Not implemented yet.');
     })
     ->afterEach(function (): void {})
     ->afterAll(function (): void {})

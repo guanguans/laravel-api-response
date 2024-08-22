@@ -40,9 +40,9 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
  */
 class ApiResponse implements ApiResponseContract
 {
+    // use Conditionable;
     // use Dumpable;
     use ConcreteHttpStatusMethods;
-    use Conditionable;
     use HasExceptionMap;
     use HasPipes;
     use Macroable;
