@@ -19,7 +19,7 @@ return [
     /**
      * @see \Guanguans\LaravelApiResponse\ApiResponseServiceProvider::registerRenderUsing()
      */
-    'render_using_factory' => Guanguans\LaravelApiResponse\RenderUsingFactory::class,
+    'render_using_factory' => Guanguans\LaravelApiResponse\RenderUsingFactories\DefaultRenderUsingFactory::class,
 
     /**
      * @see \Guanguans\LaravelApiResponse\ApiResponse::mapException()

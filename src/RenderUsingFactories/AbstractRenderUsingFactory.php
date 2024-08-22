@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse;
+namespace Guanguans\LaravelApiResponse\RenderUsingFactories;
 
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
@@ -19,11 +19,11 @@ use Illuminate\Http\Request;
 /**
  * @property \Illuminate\Contracts\Container\Container $container
  *
- * @method shouldReturnJson(\Illuminate\Http\Request $request, \Throwable $throwable)
+ * @method bool shouldReturnJson(\Illuminate\Http\Request $request, \Throwable $throwable)
  *
  * @mixin \Illuminate\Foundation\Exceptions\Handler
  */
-class RenderUsingFactory
+abstract class AbstractRenderUsingFactory
 {
     /**
      * @noinspection StaticClosureCanBeUsedInspection
@@ -42,7 +42,7 @@ class RenderUsingFactory
          */
         return function (\Throwable $throwable, Request $request) {
             try {
-                if ($this->shouldReturnJson($request, $throwable)) {
+                if ($this->when($request, $throwable)) {
                     return app(ApiResponse::class)->throw($throwable);
                 }
             } catch (\Throwable $throwable) {
@@ -52,4 +52,6 @@ class RenderUsingFactory
             }
         };
     }
+
+    abstract protected function when(Request $request, \Throwable $throwable): bool;
 }
