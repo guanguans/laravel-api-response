@@ -28,3 +28,9 @@ it('can return error json response', function (): void {
         ->post('error')
         ->assertOk();
 })->group(__DIR__, __FILE__);
+
+it('can return exception error json response', function (): void {
+    $this
+        ->post('throw')
+        ->assertOk();
+})->group(__DIR__, __FILE__);

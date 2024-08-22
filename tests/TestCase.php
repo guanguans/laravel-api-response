@@ -15,6 +15,9 @@ namespace Guanguans\LaravelApiResponse\Tests;
 
 use Guanguans\LaravelApiResponse\ApiResponseServiceProvider;
 use Guanguans\LaravelApiResponse\Facades\ApiResponse;
+use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
+use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
@@ -24,6 +27,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     use MockeryPHPUnitIntegration;
     use VarDumperTestTrait;
     use Faker;
+    use ApiResponseFactory;
 
     protected function setUp(): void
     {
@@ -55,5 +59,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $router->any('success', static fn (Request $request) => ApiResponse::success($request->input()));
         $router->any('error', static fn (Request $request) => ApiResponse::error());
+        $router->any('throw', static function (): void {
+            $app = app(ExceptionHandler::class);
+
+            // dd($app);
+            throw new \RuntimeException('error');
+        })->middleware(SetAcceptHeader::class);
     }
 }

@@ -111,7 +111,7 @@ final class ToInternalExceptionRector extends AbstractRector implements Configur
             return;
         }
 
-        $file = __DIR__."/../Exceptions/{$name->getLast()}.php";
+        $file = __DIR__."/../../Exceptions/{$name->getLast()}.php";
 
         /** @noinspection MkdirRaceConditionInspection */
         is_dir($dir = \dirname($file)) or mkdir($dir, 0755, true);

@@ -183,6 +183,7 @@ return RectorConfig::configure()
     ->withSkip([
         '**/Fixtures/*',
         '**/__snapshots__/*',
+        __DIR__.'/src/RenderUsingFactories/RenderUsingFactory.php',
     ])
     ->withSkip([
         EncapsedStringsToSprintfRector::class,
@@ -206,6 +207,9 @@ return RectorConfig::configure()
         ],
         RenameForeachValueVariableToMatchExprVariableRector::class => [
             // __DIR__.'/src/OutputManager.php',
+        ],
+        ToInternalExceptionRector::class => [
+            __DIR__.'/tests',
         ],
         StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
             __DIR__.'/tests',

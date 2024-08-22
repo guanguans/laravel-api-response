@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\RenderUsingFactories;
 
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
 
 class ApiPathsRenderUsingFactory extends RenderUsingFactory
@@ -22,7 +23,7 @@ class ApiPathsRenderUsingFactory extends RenderUsingFactory
         'api/*',
     ];
 
-    protected function when(Request $request, \Throwable $throwable): bool
+    public function when(Request $request, \Throwable $throwable, ExceptionHandler $exceptionHandler): bool
     {
         return $request->is(...$this->patternsPaths);
     }

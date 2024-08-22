@@ -26,9 +26,14 @@ parameters:
 			path: src/ApiResponse.php
 
 		-
-			message: "#^Method Guanguans\\\\LaravelApiResponse\\\\Rectors\\\\ToInternalExceptionRector\\:\\:refactor\\(\\) should return 1\\|2\\|3\\|4\\|array\\<PhpParser\\\\Node\\>\\|PhpParser\\\\Node\\|null but empty return statement found\\.$#"
+			message: "#^Call to an undefined method Illuminate\\\\Contracts\\\\Debug\\\\ExceptionHandler\\:\\:shouldReturnJson\\(\\)\\.$#"
 			count: 1
-			path: src/Rectors/ToInternalExceptionRector.php
+			path: src/RenderUsingFactories/DefaultRenderUsingFactory.php
+
+		-
+			message: "#^Method Guanguans\\\\LaravelApiResponse\\\\Support\\\\Rectors\\\\ToInternalExceptionRector\\:\\:refactor\\(\\) should return 1\\|2\\|3\\|4\\|array\\<PhpParser\\\\Node\\>\\|PhpParser\\\\Node\\|null but empty return statement found\\.$#"
+			count: 1
+			path: src/Support/Rectors/ToInternalExceptionRector.php
 
 		-
 			message: "#^Result of && is always false\\.$#"

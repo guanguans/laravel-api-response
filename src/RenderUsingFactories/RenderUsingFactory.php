@@ -31,12 +31,14 @@ abstract class RenderUsingFactory
      */
     public function __invoke(ExceptionHandler $exceptionHandler): \Closure
     {
+        $renderUsingFactory = $this;
+
         /**
          * @return \Illuminate\Http\JsonResponse|void
          */
-        return function (\Throwable $throwable, Request $request) {
+        return function (\Throwable $throwable, Request $request) use ($exceptionHandler, $renderUsingFactory) {
             try {
-                if ($this->when($request, $throwable)) {
+                if (\call_user_func([$renderUsingFactory, 'when'], $request, $throwable, $exceptionHandler)) {
                     return app(ApiResponseContract::class)->throw($throwable);
                 }
             } catch (\Throwable $throwable) {
@@ -47,5 +49,5 @@ abstract class RenderUsingFactory
         };
     }
 
-    abstract protected function when(Request $request, \Throwable $throwable): bool;
+    abstract public function when(Request $request, \Throwable $throwable, ExceptionHandler $exceptionHandler): bool;
 }

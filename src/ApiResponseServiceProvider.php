@@ -67,7 +67,7 @@ class ApiResponseServiceProvider extends PackageServiceProvider
     {
         if (
             ($renderUsingFactory = config('api-response.render_using_factory'))
-            && !$this->app->runningInConsole()
+            // && !$this->app->runningInConsole()
             && method_exists($exceptionHandler = $this->app->make(ExceptionHandler::class), 'renderable')
         ) {
             if (\is_string($renderUsingFactory) && class_exists($renderUsingFactory)) {

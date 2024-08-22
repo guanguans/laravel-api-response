@@ -80,7 +80,7 @@ class ApiResponse implements ApiResponseContract
 
         /** @noinspection PhpCastIsUnnecessaryInspection */
         $code = (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
-        $message = app()->hasDebugModeEnabled() ? $throwable->getMessage() : '';
+        $message = config('app.debug') ? $throwable->getMessage() : '';
         $error = (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class));
         $headers = [];
 
