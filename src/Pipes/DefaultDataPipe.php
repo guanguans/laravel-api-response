@@ -15,12 +15,9 @@ namespace Guanguans\LaravelApiResponse\Pipes;
 
 use Guanguans\LaravelApiResponse\Pipes\Concerns\WithArgs;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Pagination\AbstractCursorPaginator;
-use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Routing\Router;
 
-class DataPipe
+class DefaultDataPipe
 {
     use WithArgs;
 
@@ -61,10 +58,6 @@ class DataPipe
      */
     private function dataFor($data)
     {
-        if ($data instanceof AbstractCursorPaginator || $data instanceof AbstractPaginator) {
-            return ResourceCollection::make($data)->toResponse(request())->getData();
-        }
-
         if (($response = Router::toResponse(request(), $data)) instanceof JsonResponse) {
             return $response->getData();
         }
