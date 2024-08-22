@@ -125,9 +125,9 @@ final class ToInternalExceptionRector extends AbstractRector implements Configur
 
                 namespace Guanguans\\LaravelApiResponse\\Exceptions;
 
-                use Guanguans\\LaravelApiResponse\\Contracts\\Throwable;
+                use Guanguans\\LaravelApiResponse\\Contracts\\ThrowableContract;
 
-                class {$name->getLast()} extends \\$externalExceptionClass implements Throwable {}
+                class {$name->getLast()} extends \\$externalExceptionClass implements ThrowableContract {}
 
                 PHP
         );

@@ -13,6 +13,6 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Exceptions;
 
-use Guanguans\LaravelApiResponse\Contracts\Throwable;
+use Guanguans\LaravelApiResponse\Contracts\ThrowableContract;
 
-class InvalidArgumentException extends \InvalidArgumentException implements Throwable {}
+class InvalidArgumentException extends \InvalidArgumentException implements ThrowableContract {}

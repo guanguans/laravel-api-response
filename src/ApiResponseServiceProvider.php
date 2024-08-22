@@ -24,7 +24,8 @@ class ApiResponseServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-api-response'); // ->hasConfigFile()
+            ->name('laravel-api-response')
+            ->hasConfigFile();
     }
 
     /**
