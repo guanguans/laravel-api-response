@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\RenderUsingFactories;
 
+use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
 
@@ -23,15 +24,12 @@ use Illuminate\Http\Request;
  *
  * @mixin \Illuminate\Foundation\Exceptions\Handler
  */
-abstract class AbstractRenderUsingFactory
+abstract class RenderUsingFactory
 {
     /**
      * @noinspection StaticClosureCanBeUsedInspection
      * @noinspection AnonymousFunctionStaticInspection
      * @noinspection PhpInconsistentReturnPointsInspection
-     *
-     * @psalm-suppress UndefinedThisPropertyFetch
-     * @psalm-suppress InaccessibleProperty
      *
      * @see \Guanguans\LaravelApiResponse\ApiResponseServiceProvider::registerRenderUsing()
      */
@@ -43,7 +41,7 @@ abstract class AbstractRenderUsingFactory
         return function (\Throwable $throwable, Request $request) {
             try {
                 if ($this->when($request, $throwable)) {
-                    return app(ApiResponse::class)->throw($throwable);
+                    return app(ApiResponseContract::class)->throw($throwable);
                 }
             } catch (\Throwable $throwable) {
                 // If catch an exception, only report it,

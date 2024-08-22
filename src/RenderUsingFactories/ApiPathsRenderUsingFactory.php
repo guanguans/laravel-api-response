@@ -15,7 +15,7 @@ namespace Guanguans\LaravelApiResponse\RenderUsingFactories;
 
 use Illuminate\Http\Request;
 
-class ApiPathsRenderUsingFactory extends AbstractRenderUsingFactory
+class ApiPathsRenderUsingFactory extends RenderUsingFactory
 {
     /** @var list<string> */
     protected array $patternsPaths = [

@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 use Guanguans\LaravelApiResponse\Rectors\ToInternalExceptionRector;
 use Illuminate\Support\Str;
+use PhpParser\Node\Expr\ClassConstFetch;
+use PhpParser\Node\Identifier;
+use PhpParser\Node\Name\FullyQualified;
+use PhpParser\Node\Scalar\LNumber;
 use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
@@ -22,6 +26,7 @@ use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\Naming\Rector\Assign\RenameVariableToMatchMethodCallReturnTypeRector;
 use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
 use Rector\Naming\Rector\Foreach_\RenameForeachValueVariableToMatchExprVariableRector;
@@ -37,6 +42,7 @@ use Rector\Transform\Rector\StaticCall\StaticCallToFuncCallRector;
 use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use Rector\Transform\ValueObject\StaticCallToFuncCall;
 use RectorLaravel\Set\LaravelSetList;
+use Symfony\Component\HttpFoundation\Response;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -170,6 +176,17 @@ return RectorConfig::configure()
     ->withConfiguredRule(FuncCallToStaticCallRector::class, [
         new FuncCallToStaticCall('str', Str::class, 'of'),
     ])
+    // ->withConfiguredRule(ScalarValueToConstFetchRector::class, array_map(
+    //     static fn (int $value, string $constant): ScalarValueToConstFetch => new ScalarValueToConstFetch(
+    //         new LNumber($value),
+    //         new ClassConstFetch(new FullyQualified(Response::class), new Identifier($constant))
+    //     ),
+    //     $constants = array_filter(
+    //         (new \ReflectionClass(Response::class))->getConstants(),
+    //         static fn ($value): bool => \is_int($value),
+    //     ),
+    //     array_keys($constants)
+    // ))
     ->withSkip([
         '**/Fixtures/*',
         '**/__snapshots__/*',
@@ -190,6 +207,9 @@ return RectorConfig::configure()
         ],
         RemoveExtraParametersRector::class => [
             // __DIR__.'/src/Macros/QueryBuilderMacro.php',
+        ],
+        RemoveUselessReturnTagRector::class => [
+            __DIR__.'/src/Support/Traits/ApiResponseFactory.php',
         ],
         RenameForeachValueVariableToMatchExprVariableRector::class => [
             // __DIR__.'/src/OutputManager.php',

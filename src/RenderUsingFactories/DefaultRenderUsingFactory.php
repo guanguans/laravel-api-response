@@ -15,7 +15,7 @@ namespace Guanguans\LaravelApiResponse\RenderUsingFactories;
 
 use Illuminate\Http\Request;
 
-class DefaultRenderUsingFactory extends AbstractRenderUsingFactory
+class DefaultRenderUsingFactory extends RenderUsingFactory
 {
     protected function when(Request $request, \Throwable $throwable): bool
     {
