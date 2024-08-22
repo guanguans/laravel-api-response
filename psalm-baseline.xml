@@ -5,10 +5,4 @@
       <code>headers</code>
     </UndefinedMagicMethod>
   </file>
-  <file src="src/Support/ExceptionContext.php">
-    <UndefinedVariable>
-      <code>$exceptionLine</code>
-      <code>$exceptionLine</code>
-    </UndefinedVariable>
-  </file>
 </files>

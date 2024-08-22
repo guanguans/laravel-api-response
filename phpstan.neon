@@ -5,6 +5,10 @@ includes:
 #    - vendor/phpstan/phpstan-strict-rules/rules.neon
 #    - vendor/ergebnis/phpstan-rules/rules.neon
 #    - vendor/ekino/phpstan-banned-code/extension.neon
+    - vendor/spaze/phpstan-disallowed-calls/disallowed-dangerous-calls.neon
+    - vendor/spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon
+    - vendor/spaze/phpstan-disallowed-calls/disallowed-insecure-calls.neon
+    - vendor/spaze/phpstan-disallowed-calls/disallowed-loose-calls.neon
 
 parameters:
     level: 5
@@ -30,6 +34,19 @@ parameters:
 #        strictCalls: false
 #        switchConditionsMatchingType: false
 #        noVariableVariables: false
+    disallowedFunctionCalls:
+        -
+            function: 'env()'
+            message: 'use config() instead'
+        -
+            function: 'env_explode()'
+            message: 'use config() instead'
+        -
+            function: 'env_getcsv()'
+            message: 'use config() instead'
     ignoreErrors:
 #        - "#^Unsafe usage of new static\\(\\)\\.$#"
 #        - "#^Unsafe call to private method Guanguans\\\\LaravelApiResponse\\\\.*\\:\\:.*\\(\\) through static\\:\\:\\.$#"
+        -
+            message: "#^Calling env\\(\\) is forbidden, use config\\(\\) instead\\.$#"
+            path: src/Support/helpers.php
