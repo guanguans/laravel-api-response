@@ -40,8 +40,8 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
  */
 class ApiResponse implements ApiResponseContract
 {
-    // use Conditionable;
     // use Dumpable;
+    use Conditionable;
     use ConcreteHttpStatusMethods;
     use HasExceptionMap;
     use HasPipes;
@@ -80,7 +80,7 @@ class ApiResponse implements ApiResponseContract
 
         /** @noinspection PhpCastIsUnnecessaryInspection */
         $code = (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
-        $message = config('app.debug') ? $throwable->getMessage() : '';
+        $message = app()->hasDebugModeEnabled() ? $throwable->getMessage() : '';
         $error = (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class));
         $headers = [];
 
