@@ -13,11 +13,14 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Middleware;
 
+use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetAcceptHeader
 {
+    use WithPipeArgs;
+
     /**
      * Handle an incoming request.
      *

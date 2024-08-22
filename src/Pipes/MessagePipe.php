@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Pipes;
 
-use Guanguans\LaravelApiResponse\Pipes\Concerns\WithArgs;
+use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Guanguans\LaravelApiResponse\Support\Utils;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class MessagePipe
 {
-    use WithArgs;
+    use WithPipeArgs;
 
     /**
      * @param \Closure(array): \Illuminate\Http\JsonResponse $next

@@ -48,6 +48,7 @@ return [
          * Before...
          */
         Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe::class,
+        Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe::class,
         Guanguans\LaravelApiResponse\Pipes\DefaultDataPipe::class,
         Guanguans\LaravelApiResponse\Pipes\MessagePipe::with(),
         Guanguans\LaravelApiResponse\Pipes\ErrorPipe::with(/* ! app()->hasDebugModeEnabled() */),

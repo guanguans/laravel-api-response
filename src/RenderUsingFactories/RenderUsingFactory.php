@@ -27,10 +27,6 @@ use Illuminate\Http\Request;
 abstract class RenderUsingFactory
 {
     /**
-     * @noinspection StaticClosureCanBeUsedInspection
-     * @noinspection AnonymousFunctionStaticInspection
-     * @noinspection PhpInconsistentReturnPointsInspection
-     *
      * @see \Guanguans\LaravelApiResponse\ApiResponseServiceProvider::registerRenderUsing()
      */
     public function __invoke(ExceptionHandler $exceptionHandler): \Closure

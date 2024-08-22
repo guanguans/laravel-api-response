@@ -107,6 +107,8 @@ class ApiResponse implements ApiResponseContract
     }
 
     /**
+     * @noinspection CompactReplacementInspection
+     *
      * @param int<100, 599>|int<10000, 59999> $code
      * @param mixed $data
      * @param null|array<string, mixed> $error
@@ -114,8 +116,14 @@ class ApiResponse implements ApiResponseContract
     public function json(bool $status, int $code, string $message = '', $data = null, ?array $error = null): JsonResponse
     {
         return (new Pipeline(app()))
-            ->send(['status' => $status, 'code' => $code, 'message' => $message, 'data' => $data, 'error' => $error])
-            ->through($this->pipes())
+            ->send([
+                'status' => $status,
+                'code' => $code,
+                'message' => $message,
+                'data' => $data,
+                'error' => $error,
+            ])
+            ->through($this->pipes->all())
             ->then(static fn (array $data): JsonResponse => new JsonResponse(
                 $data,
                 200,

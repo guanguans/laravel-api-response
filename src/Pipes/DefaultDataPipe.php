@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Pipes;
 
-use Guanguans\LaravelApiResponse\Pipes\Concerns\WithArgs;
+use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Router;
 
 class DefaultDataPipe
 {
-    use WithArgs;
+    use WithPipeArgs;
 
     /**
      * @param \Closure(array): \Illuminate\Http\JsonResponse $next
@@ -40,17 +39,7 @@ class DefaultDataPipe
 
     /**
      * @see \Illuminate\Foundation\Exceptions\Handler::render()
-     * @see \Illuminate\Routing\Router::toResponse()
-     * @see \Illuminate\Http\Resources\Json\ResourceCollection::toResponse()
-     * @see \Illuminate\Http\Resources\Json\JsonResource::toResponse()
-     * @see \Illuminate\Http\Resources\Json\ResourceResponse::toResponse()
-     * @see \Illuminate\Http\Resources\Json\PaginatedResourceResponse::toResponse()
-     * @see \Illuminate\Pagination\Paginator::toArray()
-     * @see \Illuminate\Pagination\LengthAwarePaginator::toArray()
-     * @see \Illuminate\Pagination\CursorPaginator::toArray()
      * @see \Illuminate\Http\JsonResponse::setData()
-     *
-     * @noinspection PhpPossiblePolymorphicInvocationInspection
      *
      * @param mixed $data
      *
@@ -58,10 +47,6 @@ class DefaultDataPipe
      */
     private function dataFor($data)
     {
-        if (($response = Router::toResponse(request(), $data)) instanceof JsonResponse) {
-            return $response->getData();
-        }
-
         !\is_array($data) and !\is_object($data) and $data = (object) $data;
 
         return $data;

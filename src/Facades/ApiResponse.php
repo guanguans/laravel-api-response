@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool hasMacro(string $name)
  * @method static \Illuminate\Http\JsonResponse json(bool $status, int $code, string $message = '', mixed $data = null, null|array $error = null)
  * @method static \Illuminate\Http\JsonResponse localize(mixed $data = null, string $message = '', int $code = 200, string|null $location = null)
- * @method static void macro(string $name, object|callable $macro, object|callable $macro = null)
+ * @method static void macro(string $name, object|callable $macro)
  * @method static \Illuminate\Http\JsonResponse methodNotAllowed(string $message = '')
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static \Illuminate\Http\JsonResponse noContent(string $message = '')
@@ -44,17 +44,15 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Guanguans\LaravelApiResponse\ApiResponse putExceptionMap(string $exception, array|callable|\Throwable $mapper)
  * @method static \Illuminate\Http\JsonResponse requestTimeout(string $message = '')
  * @method static \Illuminate\Http\JsonResponse success(mixed $data = null, string $message = '', int $code = 200)
- * @method static void tap(callable|null $callback = null)
+ * @method static \Guanguans\LaravelApiResponse\ApiResponse|\Illuminate\Support\HigherOrderTapProxy tap(callable|null $callback = null)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse tapExceptionMap(callable $callback)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse tapPipes(callable $callback)
  * @method static \Illuminate\Http\JsonResponse teapot(string $message = '')
  * @method static \Illuminate\Http\JsonResponse throw(\Throwable $throwable)
  * @method static \Illuminate\Http\JsonResponse tooManyRequests(string $message = '')
  * @method static \Illuminate\Http\JsonResponse unauthorized(string $message = '')
- * @method static \Guanguans\LaravelApiResponse\ApiResponse|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static \Illuminate\Http\JsonResponse unprocessableEntity(string $message = '')
  * @method static \Guanguans\LaravelApiResponse\ApiResponse unshiftPipes(void ...$pipes)
- * @method static \Guanguans\LaravelApiResponse\ApiResponse|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  *
  * @see \Guanguans\LaravelApiResponse\ApiResponse
  */

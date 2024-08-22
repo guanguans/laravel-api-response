@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\Pipes;
 
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
-use Guanguans\LaravelApiResponse\Support\Utils;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Router;
 
-class SetStatusCodePipe
+class ToJsonResponseDataPipe
 {
     use WithPipeArgs;
 
@@ -31,8 +31,27 @@ class SetStatusCodePipe
      *  error: ?array,
      * }  $data
      */
-    public function handle(array $data, \Closure $next, ?int $statusCode = null): JsonResponse
+    public function handle(array $data, \Closure $next): JsonResponse
     {
-        return $next($data)->setStatusCode($statusCode ?? Utils::statusCodeFor($data['code']));
+        $data['data'] = $this->dataFor($data['data']);
+
+        return $next($data);
+    }
+
+    /**
+     * @see \Illuminate\Foundation\Exceptions\Handler::render()
+     * @see \Illuminate\Routing\Router::toResponse()
+     *
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     *
+     * @param mixed $data
+     *
+     * @return mixed
+     */
+    private function dataFor($data)
+    {
+        return ($response = Router::toResponse(request(), $data)) instanceof JsonResponse
+            ? $response->getData()
+            : $data;
     }
 }

@@ -46,7 +46,7 @@ trait HasExceptionMap
 
     public function extendExceptionMap(callable $callback): self
     {
-        $this->exceptionMap = $callback($this->exceptionMap);
+        $this->exceptionMap = $this->exceptionMap->pipe($callback);
 
         return $this;
     }

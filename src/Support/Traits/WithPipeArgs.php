@@ -11,9 +11,9 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Pipes\Concerns;
+namespace Guanguans\LaravelApiResponse\Support\Traits;
 
-trait WithArgs
+trait WithPipeArgs
 {
     public static function with(...$args): string
     {

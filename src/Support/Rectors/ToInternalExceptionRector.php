@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Rectors;
+namespace Guanguans\LaravelApiResponse\Support\Rectors;
 
 use Illuminate\Support\Str;
 use PhpParser\Node;

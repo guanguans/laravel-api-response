@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Pipes;
 
-use Guanguans\LaravelApiResponse\Pipes\Concerns\WithArgs;
+use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 
 class ErrorPipe
 {
-    use WithArgs;
+    use WithPipeArgs;
 
     /**
      * @param \Closure(array): \Illuminate\Http\JsonResponse $next

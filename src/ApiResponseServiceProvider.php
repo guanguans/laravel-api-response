@@ -17,6 +17,7 @@ use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -46,6 +47,15 @@ class ApiResponseServiceProvider extends PackageServiceProvider
                 collect(config('api-response.exception_map'))
             )
         );
+        $this->alias(ApiResponseContract::class);
+    }
+
+    public function provides(): array
+    {
+        return [
+            $this->toAlias(ApiResponseContract::class),
+            ApiResponseContract::class,
+        ];
     }
 
     /**
@@ -73,5 +83,29 @@ class ApiResponseServiceProvider extends PackageServiceProvider
 
             $exceptionHandler->renderable($renderUsing);
         }
+    }
+
+    /**
+     * @param class-string $class
+     */
+    private function alias(string $class): self
+    {
+        $this->app->alias($class, $this->toAlias($class));
+
+        return $this;
+    }
+
+    /**
+     * @param class-string $class
+     */
+    private function toAlias(string $class): string
+    {
+        return Str::of($class)
+            ->replaceFirst(__NAMESPACE__, '')
+            ->start('\\'.class_basename(ApiResponse::class))
+            ->replaceFirst('\\', '')
+            ->explode('\\')
+            ->map(static fn (string $name): string => Str::snake($name, '-'))
+            ->implode('.');
     }
 }

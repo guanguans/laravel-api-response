@@ -38,7 +38,7 @@ trait HasPipes
 
     public function extendPipes(callable $callback): self
     {
-        $this->pipes = $callback($this->pipes);
+        $this->pipes = $this->pipes->pipe($callback);
 
         return $this;
     }
@@ -48,10 +48,5 @@ trait HasPipes
         tap($this->pipes, $callback);
 
         return $this;
-    }
-
-    private function pipes(): array
-    {
-        return $this->pipes->all();
     }
 }
