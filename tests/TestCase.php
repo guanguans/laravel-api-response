@@ -16,6 +16,7 @@ namespace Guanguans\LaravelApiResponse\Tests;
 use Guanguans\LaravelApiResponse\ApiResponseServiceProvider;
 use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
@@ -55,8 +56,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function defineRoutes($router): void
     {
-        $router->any('success', fn (Request $request) => $this->apiResponse()->success($request->input()));
-        $router->any('error', fn (Request $request) => $this->apiResponse()->error());
+        $router->any('success', fn (Request $request): JsonResponse => $this->apiResponse()->success($request->input()));
+        $router->any('error', fn (Request $request): JsonResponse => $this->apiResponse()->error());
         $router->any('exception', static function (): void {
             throw new \RuntimeException('error');
         })->middleware(SetAcceptHeader::class);

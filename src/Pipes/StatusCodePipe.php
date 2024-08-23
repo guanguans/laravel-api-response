@@ -17,7 +17,7 @@ use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Guanguans\LaravelApiResponse\Support\Utils;
 use Illuminate\Http\JsonResponse;
 
-class SetStatusCodePipe
+class StatusCodePipe
 {
     use WithPipeArgs;
 
@@ -31,8 +31,10 @@ class SetStatusCodePipe
      *  error: ?array,
      * }  $data
      */
-    public function handle(array $data, \Closure $next, ?int $statusCode = null): JsonResponse
+    public function handle(array $data, \Closure $next, int $fallbackStatusCode = 500): JsonResponse
     {
-        return $next($data)->setStatusCode($statusCode ?? Utils::statusCodeFor($data['code']));
+        $statusCode = Utils::statusCodeFor($data['code']);
+
+        return $next($data)->setStatusCode(100 > $statusCode || 600 <= $statusCode ? $statusCode : $fallbackStatusCode);
     }
 }

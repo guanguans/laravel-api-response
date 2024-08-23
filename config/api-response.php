@@ -13,14 +13,19 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Symfony\Component\HttpFoundation\Response;
-
 return [
     /**
-     * @see \Guanguans\LaravelApiResponse\ApiResponseServiceProvider::registerRenderUsing()
+     * @see Guanguans\LaravelApiResponse\ApiResponseServiceProvider::registerRenderUsing()
+     * @see Illuminate\Foundation\Exceptions\Handler::renderable()
+     * @see Guanguans\LaravelApiResponse\RenderUsingFactories\ApiPathsRenderUsingFactory::class
+     *
+     * Render using factory.
      */
     'render_using_factory' => Guanguans\LaravelApiResponse\RenderUsingFactories\DefaultRenderUsingFactory::class,
 
+    /**
+     * Handle exception.
+     */
     'exception_pipes' => [
         /*
          * Before...
@@ -35,6 +40,9 @@ return [
         // Guanguans\LaravelApiResponse\ExceptionPipes\HideMessageExceptionPipe::with(),
     ],
 
+    /**
+     * Handle JSON response.
+     */
     'pipes' => [
         /*
          * Before...
@@ -48,6 +56,6 @@ return [
         /*
          * After...
          */
-        // Guanguans\LaravelApiResponse\Pipes\SetStatusCodePipe::with(),
+        // Guanguans\LaravelApiResponse\Pipes\StatusCodePipe::with(),
     ],
 ];
