@@ -8,15 +8,17 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
-<a name="2.0.0-beta1"></a>
-## 2.0.0-beta1 - 2024-08-23
+<a name="1.0.0-beta1"></a>
+## 1.0.0-beta1 - 2024-08-23
 ### Bug Fixes
 - **api-response:** fix exception handling and improve test coverage
 
 ### Code Refactoring
 - Rename Throwable interface and update usage
+- **MessagePipe:** rename default parameter and update method logic
 - **api:** replace ApiResponse with ApiResponseContract
 - **api-response:** rename interface and update bindings
+- **pipes:** rename SetStatusCodePipe to StatusCodePipe
 - **pipes:** rename DataPipe to DefaultDataPipe and add PaginatorDataPipe
 - **render:** restructure render factories and update usage
 
@@ -32,6 +34,7 @@ All notable changes to this project will be documented in this file.
 
 ### Test
 - Refactor tests and skip unimplemented tests
+- **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.0.0-beta1...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta1...HEAD
