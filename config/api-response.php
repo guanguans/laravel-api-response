@@ -43,6 +43,18 @@ return [
         // ],
     ],
 
+    'exception_pipes' => [
+        /*
+         * Before...
+         */
+
+        /*
+         * After...
+         */
+        Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe::class,
+        Guanguans\LaravelApiResponse\ExceptionPipes\HttpExceptionPipe::class,
+    ],
+
     'pipes' => [
         /*
          * Before...

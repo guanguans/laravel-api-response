@@ -53,7 +53,7 @@ class ApiResponse implements ApiResponseContract
     public function __construct(?Collection $pipes = null, ?Collection $exceptionMap = null)
     {
         $this->pipes = collect($pipes);
-        $this->exceptionMap = collect($exceptionMap);
+        $this->exceptionPipes = collect($exceptionMap);
     }
 
     /**
