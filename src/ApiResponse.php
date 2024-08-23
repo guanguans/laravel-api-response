@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse;
 
 use Guanguans\LaravelApiResponse\Concerns\ConcreteHttpStatusMethods;
-use Guanguans\LaravelApiResponse\Concerns\HasExceptionMap;
 use Guanguans\LaravelApiResponse\Concerns\HasExceptionPipes;
 use Guanguans\LaravelApiResponse\Concerns\HasPipes;
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
@@ -26,9 +25,7 @@ use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Dumpable;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Traits\Tappable;
-use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**
  * @see https://github.com/dingo/api
@@ -44,7 +41,6 @@ class ApiResponse implements ApiResponseContract
     // use Dumpable;
     use Conditionable;
     use ConcreteHttpStatusMethods;
-    use HasExceptionMap;
     use HasExceptionPipes;
     use HasPipes;
     use Macroable;
@@ -67,45 +63,6 @@ class ApiResponse implements ApiResponseContract
     public function error(string $message = '', int $code = Response::HTTP_BAD_REQUEST, ?array $error = null): JsonResponse
     {
         return $this->json(false, $code, $message, null, $error);
-    }
-
-    /**
-     * @see \Illuminate\Foundation\Exceptions\Handler::render()
-     * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
-     * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
-     * @see \Illuminate\Database\QueryException
-     */
-    public function throw(\Throwable $throwable): JsonResponse
-    {
-        $newThrowable = $this->mapException($throwable);
-        $newThrowable instanceof \Throwable and $throwable = $newThrowable;
-
-        /** @noinspection PhpCastIsUnnecessaryInspection */
-        $code = (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
-        $message = app()->hasDebugModeEnabled() ? $throwable->getMessage() : '';
-        $error = (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class));
-        $headers = [];
-
-        if ($throwable instanceof HttpExceptionInterface) {
-            $message = $throwable->getMessage();
-            $code = $throwable->getStatusCode();
-            $headers = $throwable->getHeaders();
-        }
-
-        if ($throwable instanceof ValidationException) {
-            $message = $throwable->getMessage();
-            $code = $throwable->status;
-            $error = $throwable->errors();
-        }
-
-        if (\is_array($newThrowable) && $newThrowable) {
-            $message = $newThrowable['message'] ?? null ?: $message;
-            $code = $newThrowable['code'] ?? null ?: $code;
-            $error = $newThrowable['error'] ?? null ?: $error;
-            $headers = $newThrowable['headers'] ?? null ?: $headers;
-        }
-
-        return $this->error($message, $code, $error)->withHeaders($headers);
     }
 
     /**

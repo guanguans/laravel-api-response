@@ -18,7 +18,7 @@ use Guanguans\LaravelApiResponse\Facades\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
 it('can throw exception', function (): void {
-    expect(ApiResponse::throw(new \Exception('foo')))
+    expect(ApiResponse::exception(new \Exception('foo')))
         ->toBeInstanceOf(JsonResponse::class)
         ->status()->toBe(200);
 })->group(__DIR__, __FILE__);

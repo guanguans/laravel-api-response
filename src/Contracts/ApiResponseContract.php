@@ -25,7 +25,7 @@ interface ApiResponseContract
 
     public function error(string $message = '', int $code = Response::HTTP_BAD_REQUEST, ?array $error = null): JsonResponse;
 
-    public function throw(\Throwable $throwable): JsonResponse;
+    public function exception(\Throwable $throwable): JsonResponse;
 
     /**
      * @param int<100, 599>|int<10000, 59999> $code

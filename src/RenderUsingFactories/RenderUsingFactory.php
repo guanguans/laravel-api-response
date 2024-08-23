@@ -39,7 +39,7 @@ abstract class RenderUsingFactory
         return function (\Throwable $throwable, Request $request) use ($exceptionHandler, $renderUsingFactory) {
             try {
                 if (\call_user_func([$renderUsingFactory, 'when'], $request, $throwable, $exceptionHandler)) {
-                    return app(ApiResponseContract::class)->throw($throwable);
+                    return app(ApiResponseContract::class)->exception($throwable);
                 }
             } catch (\Throwable $throwable) {
                 // If catch an exception, only report it,

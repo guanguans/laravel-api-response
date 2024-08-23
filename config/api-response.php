@@ -21,28 +21,6 @@ return [
      */
     'render_using_factory' => Guanguans\LaravelApiResponse\RenderUsingFactories\DefaultRenderUsingFactory::class,
 
-    /**
-     * @see \Guanguans\LaravelApiResponse\ApiResponse::mapException()
-     */
-    'exception_map' => [
-        Illuminate\Auth\AuthenticationException::class => [
-            'code' => Response::HTTP_UNAUTHORIZED,
-        ],
-        // Illuminate\Database\QueryException::class => [
-        //     'message' => '',
-        //     'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
-        // ],
-        // Illuminate\Validation\ValidationException::class => [
-        //     'code' => Response::HTTP_UNPROCESSABLE_ENTITY,
-        // ],
-        // Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class => [
-        //     'message' => '',
-        // ],
-        // Illuminate\Database\Eloquent\ModelNotFoundException::class => [
-        //     'message' => '',
-        // ],
-    ],
-
     'exception_pipes' => [
         /*
          * Before...
@@ -51,8 +29,9 @@ return [
         /*
          * After...
          */
-        Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe::class,
         Guanguans\LaravelApiResponse\ExceptionPipes\HttpExceptionPipe::class,
+        Guanguans\LaravelApiResponse\ExceptionPipes\AuthenticationExceptionPipe::class,
+        Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe::class,
     ],
 
     'pipes' => [
@@ -68,6 +47,6 @@ return [
         /*
          * After...
          */
-        // Guanguans\LaravelApiResponse\Pipes\SetStatusCodePipe::class::with(),
+        // Guanguans\LaravelApiResponse\Pipes\SetStatusCodePipe::with(),
     ],
 ];
