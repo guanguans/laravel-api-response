@@ -3,7 +3,7 @@
     "code": 200,
     "message": "OK",
     "data": {
-        "scalar": true
+        "data": true
     },
     "error": {}
 }

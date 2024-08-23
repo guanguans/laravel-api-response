@@ -61,14 +61,14 @@ it('can return resource type data JSON response', function (): void {
 
 it('can return callable type data JSON response', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success(fn (): string => 'callable')->content());
-})->group(__DIR__, __FILE__)->skip('Callable type data is not supported');
+})->group(__DIR__, __FILE__);
 
 it('can return iterable type data JSON response', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success(new ArrayIterator(['iterable']))->content());
-})->group(__DIR__, __FILE__)->skip('Iterable type data is not supported');
+})->group(__DIR__, __FILE__);
 
 it('can return generator type data JSON response', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success((function () {
         yield 'generator';
     })())->content());
-})->group(__DIR__, __FILE__)->skip('Generator type data is not supported');
+})->group(__DIR__, __FILE__);

@@ -15,9 +15,9 @@ namespace Guanguans\LaravelApiResponse\Pipes;
 
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Router;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ToJsonResponseDataPipe
+class ScalarDataPipe
 {
     use WithPipeArgs;
 
@@ -31,36 +31,34 @@ class ToJsonResponseDataPipe
      *  error: ?array,
      * }  $data
      */
-    public function handle(array $data, \Closure $next): JsonResponse
+    public function handle(array $data, \Closure $next, bool $associative = false, ?string $wrap = null): JsonResponse
     {
-        $data['data'] = $this->dataFor($data['data']);
+        $data['data'] = $this->dataFor($data['data'], $associative, $wrap);
 
         return $next($data);
     }
 
     /**
-     * @see \Illuminate\Foundation\Exceptions\Handler::render()
-     * @see \Illuminate\Routing\Router::toResponse()
-     *
-     * @noinspection PhpPossiblePolymorphicInvocationInspection
-     * @noinspection BadExceptionsProcessingInspection
-     *
      * @param mixed $data
      *
      * @return mixed
      */
-    private function dataFor($data)
+    private function dataFor($data, bool $associative, ?string $wrap)
     {
-        try {
-            return ($response = Router::toResponse(request(), $data)) instanceof JsonResponse
-                ? $response->getData()
-                : $data;
-        } catch (\TypeError $typeError) {
-            return $data;
-        } catch (\Throwable $throwable) {
-            report($throwable);
+        if (\is_scalar($data)) {
+            if ($associative) {
+                return (array) $data;
+            }
 
-            return $data;
+            $wrap ??= JsonResource::$wrap;
+
+            if (null === $wrap) {
+                return (object) $data;
+            }
+
+            return [$wrap => $data];
         }
+
+        return $data;
     }
 }
