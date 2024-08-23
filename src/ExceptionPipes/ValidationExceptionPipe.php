@@ -35,7 +35,7 @@ class ValidationExceptionPipe
         $data = $next($throwable);
 
         if ($throwable instanceof ValidationException) {
-            $data = [
+            return [
                 'message' => $throwable->getMessage(),
                 'code' => $throwable->status,
                 'errors' => $throwable->errors(),

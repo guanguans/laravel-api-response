@@ -32,6 +32,7 @@ return [
         Guanguans\LaravelApiResponse\ExceptionPipes\HttpExceptionPipe::class,
         Guanguans\LaravelApiResponse\ExceptionPipes\AuthenticationExceptionPipe::class,
         Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe::class,
+        // Guanguans\LaravelApiResponse\ExceptionPipes\HideMessageExceptionPipe::with(),
     ],
 
     'pipes' => [

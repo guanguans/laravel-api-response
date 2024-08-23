@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\ExceptionPipes;
 
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Illuminate\Support\Arr;
 
-class HttpExceptionPipe
+class HideMessageExceptionPipe
 {
     use WithPipeArgs;
 
@@ -30,15 +30,13 @@ class HttpExceptionPipe
      *     headers: array,
      * }
      */
-    public function handle(\Throwable $throwable, \Closure $next): array
+    public function handle(\Throwable $throwable, \Closure $next, string ...$exceptionClasses): array
     {
         $data = $next($throwable);
 
-        if ($throwable instanceof HttpExceptionInterface) {
+        if (Arr::first($exceptionClasses, static fn (string $class): bool => $throwable instanceof $class)) {
             return [
-                'message' => $throwable->getMessage(),
-                'code' => $throwable->getStatusCode(),
-                'headers' => $throwable->getHeaders(),
+                'message' => '',
             ] + $data;
         }
 

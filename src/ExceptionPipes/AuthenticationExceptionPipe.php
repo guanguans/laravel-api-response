@@ -36,7 +36,7 @@ class AuthenticationExceptionPipe
         $data = $next($throwable);
 
         if ($throwable instanceof AuthenticationException) {
-            $data = [
+            return [
                 'code' => Response::HTTP_UNAUTHORIZED,
             ] + $data;
         }
