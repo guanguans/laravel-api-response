@@ -24,7 +24,7 @@ class MessagePipe
 
     /**
      * @param \Closure(array): \Illuminate\Http\JsonResponse $next
-     * @param string $default // ['Whoops, looks like something went wrong.', 'Server Error', 'Unknown Status']
+     * @param string $fallbackMessage // ['Whoops, looks like something went wrong.', 'Server Error', 'Unknown Status']
      * @param  array{
      *  status: string,
      *  code: int,
@@ -33,9 +33,13 @@ class MessagePipe
      *  error: ?array,
      * }  $data
      */
-    public function handle(array $data, \Closure $next, string $mainKey = 'http-statuses', string $default = 'Whoops, looks like something went wrong.'): JsonResponse
-    {
-        $data['message'] = __($data['message'] ?: $this->keyFor($data['code'], $mainKey, $default));
+    public function handle(
+        array $data,
+        \Closure $next,
+        string $mainTransKey = 'http-statuses',
+        string $fallbackMessage = 'Whoops, looks like something went wrong.'
+    ): JsonResponse {
+        $data['message'] = __($data['message'] ?: $this->transKeyFor($data['code'], $mainTransKey) ?: $fallbackMessage);
 
         return $next($data);
     }
@@ -45,21 +49,21 @@ class MessagePipe
      * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
      * @see \Symfony\Component\HttpFoundation\Response::setStatusCode()
      */
-    private function keyFor(int $code, string $mainKey, string $default): string
+    private function transKeyFor(int $code, string $mainTransKey): ?string
     {
         /** @var \Illuminate\Translation\Translator $translator */
         $translator = trans();
 
-        if ($translator->has($key = "$mainKey.$code")) {
+        if ($translator->has($key = "$mainTransKey.$code")) {
             return $key;
         }
 
         $statusCode = Utils::statusCodeFor($code);
 
-        if ($translator->has($key = "$mainKey.$statusCode")) {
+        if ($translator->has($key = "$mainTransKey.$statusCode")) {
             return $key;
         }
 
-        return Response::$statusTexts[$statusCode] ?? $default;
+        return Response::$statusTexts[$statusCode] ?? null;
     }
 }
