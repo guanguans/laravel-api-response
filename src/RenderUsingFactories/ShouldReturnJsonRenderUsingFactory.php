@@ -16,7 +16,7 @@ namespace Guanguans\LaravelApiResponse\RenderUsingFactories;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
 
-class DefaultRenderUsingFactory extends RenderUsingFactory
+class ShouldReturnJsonRenderUsingFactory extends RenderUsingFactory
 {
     public function when(Request $request, \Throwable $throwable, ExceptionHandler $exceptionHandler): bool
     {

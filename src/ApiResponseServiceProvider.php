@@ -74,8 +74,8 @@ class ApiResponseServiceProvider extends PackageServiceProvider
             // && !$this->app->runningInConsole()
             && method_exists($exceptionHandler = $this->app->make(ExceptionHandler::class), 'renderable')
         ) {
-            if (\is_string($renderUsingFactory) && class_exists($renderUsingFactory)) {
-                $renderUsingFactory = $this->app->make($renderUsingFactory);
+            if (!\is_callable($renderUsingFactory)) {
+                $renderUsingFactory = make($renderUsingFactory);
             }
 
             /** @var callable(\Throwable, Request): ?JsonResponse $renderUsing */

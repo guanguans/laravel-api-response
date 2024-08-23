@@ -21,7 +21,10 @@ return [
      *
      * Render using factory.
      */
-    'render_using_factory' => Guanguans\LaravelApiResponse\RenderUsingFactories\DefaultRenderUsingFactory::class,
+    // 'render_using_factory' => new Guanguans\LaravelApiResponse\RenderUsingFactories\ApiPathsRenderUsingFactory([
+    //     'api/*',
+    // ]),
+    'render_using_factory' => Guanguans\LaravelApiResponse\RenderUsingFactories\ShouldReturnJsonRenderUsingFactory::class,
 
     /**
      * Handle exception.
