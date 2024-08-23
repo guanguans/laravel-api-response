@@ -78,16 +78,11 @@ class ApiResponse implements ApiResponseContract
             'message' => $message,
             'error' => $error,
             'headers' => $headers
-        ] = (new Pipeline(app()))
+        ] = $this
+            ->newPipeline()
             ->send($throwable)
             ->through($this->exceptionPipes->all())
-            ->then(static fn (\Throwable $throwable): array => [
-                /** @see \Illuminate\Database\QueryException */
-                'code' => (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR,
-                'message' => app()->hasDebugModeEnabled() ? $throwable->getMessage() : '',
-                'error' => (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class)),
-                'headers' => [],
-            ]);
+            ->then($this->exceptionDestination());
 
         return $this->error($message, $code, $error)->withHeaders($headers);
     }
@@ -101,7 +96,8 @@ class ApiResponse implements ApiResponseContract
      */
     public function json(bool $status, int $code, string $message = '', $data = null, ?array $error = null): JsonResponse
     {
-        return (new Pipeline(app()))
+        return $this
+            ->newPipeline()
             ->send([
                 'status' => $status,
                 'code' => $code,
@@ -110,12 +106,36 @@ class ApiResponse implements ApiResponseContract
                 'error' => $error,
             ])
             ->through($this->pipes->all())
-            ->then(static fn (array $data): JsonResponse => new JsonResponse(
-                $data,
-                200,
-                [],
-                \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
-                | \JSON_HEX_TAG | \JSON_HEX_APOS | \JSON_HEX_AMP | \JSON_HEX_QUOT
-            ));
+            ->then($this->dataDestination());
+    }
+
+    protected function newPipeline(): Pipeline
+    {
+        return new Pipeline(app());
+    }
+
+    /**
+     * @noinspection PhpCastIsUnnecessaryInspection
+     */
+    protected function exceptionDestination(): \Closure
+    {
+        return static fn (\Throwable $throwable): array => [
+            /** @see \Illuminate\Database\QueryException */
+            'code' => (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR,
+            'message' => app()->hasDebugModeEnabled() ? $throwable->getMessage() : '',
+            'error' => (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class)),
+            'headers' => [],
+        ];
+    }
+
+    protected function dataDestination(): \Closure
+    {
+        return static fn (array $data): JsonResponse => new JsonResponse(
+            $data,
+            200,
+            [],
+            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
+            | \JSON_HEX_TAG | \JSON_HEX_APOS | \JSON_HEX_AMP | \JSON_HEX_QUOT
+        );
     }
 }
