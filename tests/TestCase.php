@@ -18,8 +18,6 @@ use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
 use Guanguans\LaravelApiResponse\RenderUsingFactories\ApiPathsRenderUsingFactory;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
 
@@ -59,11 +57,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function defineRoutes($router): void
     {
-        $router->any('success', fn (Request $request): JsonResponse => $this->apiResponse()->success($request->input()));
-        $router->any('error', fn (Request $request): JsonResponse => $this->apiResponse()->error());
         $router->any('exception', static function (): void {
             throw new \RuntimeException('error');
         })->middleware(SetAcceptHeader::class);
+
         $router->any('api/exception', static function (): void {
             $exceptionHandler = app(ExceptionHandler::class);
             $exceptionHandler->renderable(app(ApiPathsRenderUsingFactory::class)($exceptionHandler));

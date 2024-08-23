@@ -14,21 +14,6 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-it('can return success json response', function (): void {
-    $this
-        ->post('success', [
-            'foo' => 'bar',
-            'bar' => 'baz',
-        ])
-        ->assertOk();
-})->group(__DIR__, __FILE__);
-
-it('can return error json response', function (): void {
-    $this
-        ->post('error')
-        ->assertOk();
-})->group(__DIR__, __FILE__);
-
 it('can return exception error json response', function (): void {
     $this
         ->post('exception')

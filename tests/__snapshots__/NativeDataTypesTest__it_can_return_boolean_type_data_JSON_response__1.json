@@ -1,0 +1,9 @@
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": {
+        "scalar": true
+    },
+    "error": {}
+}
