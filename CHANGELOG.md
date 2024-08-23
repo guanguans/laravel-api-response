@@ -8,6 +8,16 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.0-beta2"></a>
+## [1.0.0-beta2] - 2024-08-23
+### Bug Fixes
+- **CollectionMacro:** add unshift method to CollectionMacro
+
+### Test
+- Remove old success and error response tests
+- Add unit tests for ApiResponse functionality
+
+
 <a name="1.0.0-beta1"></a>
 ## 1.0.0-beta1 - 2024-08-23
 ### Bug Fixes
@@ -37,4 +47,5 @@ All notable changes to this project will be documented in this file.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta1...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta2...HEAD
+[1.0.0-beta2]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta1...1.0.0-beta2
