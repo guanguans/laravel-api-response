@@ -15,6 +15,7 @@ namespace Guanguans\LaravelApiResponse;
 
 use Guanguans\LaravelApiResponse\Concerns\ConcreteHttpStatusMethods;
 use Guanguans\LaravelApiResponse\Concerns\HasExceptionMap;
+use Guanguans\LaravelApiResponse\Concerns\HasExceptionPipes;
 use Guanguans\LaravelApiResponse\Concerns\HasPipes;
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -44,6 +45,7 @@ class ApiResponse implements ApiResponseContract
     use Conditionable;
     use ConcreteHttpStatusMethods;
     use HasExceptionMap;
+    use HasExceptionPipes;
     use HasPipes;
     use Macroable;
     use Tappable;
@@ -102,6 +104,33 @@ class ApiResponse implements ApiResponseContract
             $error = $newThrowable['error'] ?? null ?: $error;
             $headers = $newThrowable['headers'] ?? null ?: $headers;
         }
+
+        return $this->error($message, $code, $error)->withHeaders($headers);
+    }
+
+    /**
+     * @see \Illuminate\Foundation\Exceptions\Handler::render()
+     * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
+     * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
+     * @see \Illuminate\Database\QueryException
+     */
+    public function exception(\Throwable $throwable): JsonResponse
+    {
+        [
+            'code' => $code,
+            'message' => $message,
+            'error' => $error,
+            'headers' => $headers
+        ] = (new Pipeline(app()))
+            ->send($throwable)
+            ->through($this->exceptionPipes->all())
+            ->then(static fn (\Throwable $throwable): array => [
+                /** @see \Illuminate\Database\QueryException */
+                'code' => (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => app()->hasDebugModeEnabled() ? $throwable->getMessage() : '',
+                'error' => (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class)),
+                'headers' => [],
+            ]);
 
         return $this->error($message, $code, $error)->withHeaders($headers);
     }
