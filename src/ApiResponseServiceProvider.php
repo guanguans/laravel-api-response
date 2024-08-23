@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse;
 
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
+use Guanguans\LaravelApiResponse\Support\Macros\CollectionMacro;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -32,9 +34,11 @@ class ApiResponseServiceProvider extends PackageServiceProvider
 
     /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \ReflectionException
      */
     public function packageBooted(): void
     {
+        Collection::mixin(new CollectionMacro);
         $this->registerRenderUsing();
     }
 
