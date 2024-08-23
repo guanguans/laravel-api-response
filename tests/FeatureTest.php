@@ -31,6 +31,6 @@ it('can return error json response', function (): void {
 
 it('can return exception error json response', function (): void {
     $this
-        ->post('throw')
+        ->post('exception')
         ->assertOk();
 })->group(__DIR__, __FILE__);

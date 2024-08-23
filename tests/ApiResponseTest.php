@@ -14,11 +14,10 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Guanguans\LaravelApiResponse\Facades\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
 it('can throw exception', function (): void {
-    expect(ApiResponse::exception(new \Exception('foo')))
+    expect($this->apiResponse()->exception(new \RuntimeException('foo')))
         ->toBeInstanceOf(JsonResponse::class)
         ->status()->toBe(200);
 })->group(__DIR__, __FILE__);

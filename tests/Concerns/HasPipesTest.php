@@ -21,5 +21,5 @@ it('can use pipes', function (): void {
     expect($this->apiResponse())
         // ->unshiftPipes()->toBeInstanceOf(ApiResponse::class)
         ->pushPipes()->toBeInstanceOf(ApiResponse::class)
-        ->extendPipes(fn (Collection $pipes): \Illuminate\Support\Collection => $pipes)->toBeInstanceOf(ApiResponse::class);
+        ->extendPipes(fn (Collection $pipes): Collection => $pipes)->toBeInstanceOf(ApiResponse::class);
 })->group(__DIR__, __FILE__);

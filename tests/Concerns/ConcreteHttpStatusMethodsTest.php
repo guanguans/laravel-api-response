@@ -14,7 +14,6 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Guanguans\LaravelApiResponse\Facades\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Pest\Expectation;
 
@@ -38,7 +37,7 @@ it('can use http status methods', function (): void {
         'unprocessableEntity',
         'tooManyRequests',
     ])->each(function (Expectation $expectation): void {
-        expect(ApiResponse::{$expectation->value}())
+        expect($this->apiResponse()->{$expectation->value}())
             ->toBeInstanceOf(JsonResponse::class)
             ->status()->toBe(200);
     });
