@@ -1,12 +1,15 @@
 {
     "name": "guanguans/laravel-api-response",
-    "description": "Laravel API Response",
+    "description": "A Laravel package for building API responses.",
     "license": "MIT",
     "type": "library",
     "keywords": [
-        "laravel",
         "api",
-        "response"
+        "json",
+        "laravel",
+        "response",
+        "rest",
+        "restful"
     ],
     "authors": [
         {
