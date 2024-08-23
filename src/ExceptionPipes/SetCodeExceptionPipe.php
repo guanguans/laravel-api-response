@@ -30,11 +30,11 @@ class SetCodeExceptionPipe
      *     headers: array,
      * }
      */
-    public function handle(\Throwable $throwable, \Closure $next, int $code, string ...$exceptionClasses): array
+    public function handle(\Throwable $throwable, \Closure $next, int $code, string ...$classes): array
     {
         $data = $next($throwable);
 
-        if (Arr::first($exceptionClasses, static fn (string $class): bool => $throwable instanceof $class)) {
+        if (Arr::first($classes, static fn (string $class): bool => $throwable instanceof $class)) {
             return ['code' => $code] + $data;
         }
 

@@ -13,12 +13,22 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\ExceptionPipes;
 
+use Guanguans\LaravelApiResponse\Support\Traits\CreateStaticable;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Support\Arr;
 
-class SetMessageExceptionPipe
+class SetErrorExceptionPipe
 {
     use WithPipeArgs;
+    use CreateStaticable;
+    private array $classes;
+    private ?array $error;
+
+    public function __construct(?array $error, string ...$classes)
+    {
+        $this->error = $error;
+        $this->classes = $classes;
+    }
 
     /**
      * @param \Closure(\Throwable): array $next
@@ -30,12 +40,12 @@ class SetMessageExceptionPipe
      *     headers: array,
      * }
      */
-    public function handle(\Throwable $throwable, \Closure $next, string $message, string ...$classes): array
+    public function handle(\Throwable $throwable, \Closure $next): array
     {
         $data = $next($throwable);
 
-        if (Arr::first($classes, static fn (string $class): bool => $throwable instanceof $class)) {
-            return ['message' => $message] + $data;
+        if (Arr::first($this->classes, static fn (string $class): bool => $throwable instanceof $class)) {
+            return ['error' => $this->error] + $data;
         }
 
         return $data;

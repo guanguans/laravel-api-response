@@ -30,14 +30,12 @@ class HideOriginalMessageExceptionPipe
      *     headers: array,
      * }
      */
-    public function handle(\Throwable $throwable, \Closure $next, string ...$exceptionClasses): array
+    public function handle(\Throwable $throwable, \Closure $next, string ...$classes): array
     {
         $data = $next($throwable);
 
-        if (Arr::first($exceptionClasses, static fn (string $class): bool => $throwable instanceof $class)) {
-            return [
-                'message' => '',
-            ] + $data;
+        if (Arr::first($classes, static fn (string $class): bool => $throwable instanceof $class)) {
+            return ['message' => ''] + $data;
         }
 
         return $data;

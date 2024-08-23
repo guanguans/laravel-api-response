@@ -45,7 +45,7 @@ parameters:
             function: 'env_getcsv()'
             message: 'use config() instead'
     ignoreErrors:
-#        - "#^Unsafe usage of new static\\(\\)\\.$#"
+        - "#^Unsafe usage of new static\\(\\)\\.$#"
 #        - "#^Unsafe call to private method Guanguans\\\\LaravelApiResponse\\\\.*\\:\\:.*\\(\\) through static\\:\\:\\.$#"
         -
             message: "#^Calling env\\(\\) is forbidden, use config\\(\\) instead\\.$#"
