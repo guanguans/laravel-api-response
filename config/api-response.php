@@ -51,7 +51,6 @@ return [
         Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe::class,
         Guanguans\LaravelApiResponse\Pipes\NullDataPipe::with(false),
         Guanguans\LaravelApiResponse\Pipes\ScalarDataPipe::with(false),
-        Guanguans\LaravelApiResponse\Pipes\DefaultDataPipe::class,
         Guanguans\LaravelApiResponse\Pipes\MessagePipe::with(),
         Guanguans\LaravelApiResponse\Pipes\ErrorPipe::with(/* ! app()->hasDebugModeEnabled() */),
 
