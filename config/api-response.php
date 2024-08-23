@@ -45,6 +45,14 @@ return [
             // Illuminate\Database\Eloquent\ModelNotFoundException::class,
             // Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class,
         ),
+        Guanguans\LaravelApiResponse\ExceptionPipes\SetCodeExceptionPipe::with(
+            Symfony\Component\HttpFoundation\Response::HTTP_INTERNAL_SERVER_ERROR,
+            // ...
+        ),
+        Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe::with(
+            'Server Error',
+            // ...
+        ),
     ],
 
     /**
