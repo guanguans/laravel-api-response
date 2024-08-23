@@ -41,10 +41,10 @@ abstract class RenderUsingFactory
                 if (\call_user_func([$renderUsingFactory, 'when'], $request, $throwable, $exceptionHandler)) {
                     return app(ApiResponseContract::class)->exception($throwable);
                 }
-            } catch (\Throwable $throwable) {
+            } catch (\Throwable $throwable) { // @codeCoverageIgnore
                 // If catch an exception, only report it,
                 // and to let the default exception handler handle original exception.
-                report($throwable);
+                report($throwable); // @codeCoverageIgnore
             }
         };
     }

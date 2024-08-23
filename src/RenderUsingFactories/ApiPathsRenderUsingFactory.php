@@ -19,12 +19,29 @@ use Illuminate\Http\Request;
 class ApiPathsRenderUsingFactory extends RenderUsingFactory
 {
     /** @var list<string> */
-    protected array $patternsPaths = [
-        'api/*',
-    ];
+    protected array $patternsPaths;
+
+    /**
+     * @noinspection MagicMethodsValidityInspection
+     * @noinspection MissingParentCallInspection
+     */
+    public function __construct(?array $patternsPaths = null)
+    {
+        $this->patternsPaths = $patternsPaths ?? $this->defaultPatternsPaths();
+    }
+
+    public static function __set_state($properties): self
+    {
+        return new self($properties['patternsPaths']);
+    }
 
     public function when(Request $request, \Throwable $throwable, ExceptionHandler $exceptionHandler): bool
     {
         return $request->is(...$this->patternsPaths);
+    }
+
+    protected function defaultPatternsPaths(): array
+    {
+        return ['api/*'];
     }
 }

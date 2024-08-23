@@ -182,6 +182,7 @@ return RectorConfig::configure()
     //     array_keys($constants)
     // ))
     ->withSkip([
+        '**/fixtures/*',
         '**/Fixtures/*',
         '**/__snapshots__/*',
         __DIR__.'/src/RenderUsingFactories/RenderUsingFactory.php',

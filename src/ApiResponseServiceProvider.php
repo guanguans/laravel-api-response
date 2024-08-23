@@ -48,7 +48,7 @@ class ApiResponseServiceProvider extends PackageServiceProvider
             ApiResponseContract::class,
             static fn (): ApiResponse => new ApiResponse(
                 collect(config('api-response.pipes')),
-                collect(config('api-response.exception_map'))
+                collect(config('api-response.exception_pipes'))
             )
         );
         $this->alias(ApiResponseContract::class);

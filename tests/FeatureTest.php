@@ -33,4 +33,8 @@ it('can return exception error json response', function (): void {
     $this
         ->post('exception')
         ->assertOk();
+
+    $this
+        ->post('api/exception')
+        ->assertOk();
 })->group(__DIR__, __FILE__);

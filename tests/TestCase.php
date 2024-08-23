@@ -15,7 +15,9 @@ namespace Guanguans\LaravelApiResponse\Tests;
 
 use Guanguans\LaravelApiResponse\ApiResponseServiceProvider;
 use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
+use Guanguans\LaravelApiResponse\RenderUsingFactories\ApiPathsRenderUsingFactory;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -31,6 +33,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->app->useLangPath(__DIR__.'/lang');
         $this->startMockery();
     }
 
@@ -61,5 +64,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $router->any('exception', static function (): void {
             throw new \RuntimeException('error');
         })->middleware(SetAcceptHeader::class);
+        $router->any('api/exception', static function (): void {
+            $exceptionHandler = app(ExceptionHandler::class);
+            $exceptionHandler->renderable(app(ApiPathsRenderUsingFactory::class)($exceptionHandler));
+
+            throw new \RuntimeException('error');
+        });
     }
 }
