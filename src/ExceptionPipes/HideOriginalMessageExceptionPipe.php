@@ -16,7 +16,7 @@ namespace Guanguans\LaravelApiResponse\ExceptionPipes;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Support\Arr;
 
-class HideMessageExceptionPipe
+class HideOriginalMessageExceptionPipe
 {
     use WithPipeArgs;
 
