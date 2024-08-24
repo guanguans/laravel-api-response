@@ -46,10 +46,10 @@ class ApiResponse implements ApiResponseContract
     use Macroable;
     use Tappable;
 
-    public function __construct(?Collection $pipes = null, ?Collection $exceptionMap = null)
+    public function __construct(?Collection $pipes = null, ?Collection $exceptionPipes = null)
     {
         $this->pipes = collect($pipes);
-        $this->exceptionPipes = collect($exceptionMap);
+        $this->exceptionPipes = collect($exceptionPipes);
     }
 
     /**

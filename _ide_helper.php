@@ -17,7 +17,9 @@ namespace {
 
 namespace Illuminate\Support {
     /**
-     * @mixin \Illuminate\Support\Stringable
+     * @method self unshift(...$values)
+     *
+     * @see \Guanguans\LaravelApiResponse\Support\Macros\CollectionMacro
      */
-    class Stringable {}
+    class Collection {}
 }

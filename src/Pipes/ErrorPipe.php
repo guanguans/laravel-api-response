@@ -32,10 +32,10 @@ class ErrorPipe
      */
     public function handle(array $data, \Closure $next, bool $hidden = false): JsonResponse
     {
+        $data['error'] = $data['error'] ?: (object) [];
+
         if ($hidden) {
             unset($data['error']);
-        } else {
-            $data['error'] = $data['error'] ?: (object) [];
         }
 
         return $next($data);

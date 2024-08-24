@@ -37,7 +37,7 @@ class MessagePipe
         array $data,
         \Closure $next,
         string $mainTransKey = 'http-statuses',
-        string $fallbackMessage = 'Whoops, looks like something went wrong.'
+        string $fallbackMessage = 'Server Error'
     ): JsonResponse {
         $data['message'] = __($data['message'] ?: $this->transKeyFor($data['code'], $mainTransKey) ?: $fallbackMessage);
 

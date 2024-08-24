@@ -16,6 +16,7 @@ namespace Guanguans\LaravelApiResponse;
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Guanguans\LaravelApiResponse\Support\Macros\CollectionMacro;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
@@ -42,12 +43,18 @@ class ApiResponseServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->app->bind(
-            ApiResponseContract::class,
+        $this->app->singleton(
+            ApiResponse::class,
             static fn (): ApiResponse => new ApiResponse(
                 collect(config('api-response.pipes')),
                 collect(config('api-response.exception_pipes'))
             )
+        );
+        $this->alias(ApiResponse::class);
+
+        $this->app->bind(
+            ApiResponseContract::class,
+            static fn (Application $app): ApiResponseContract => $app->make(ApiResponse::class)
         );
         $this->alias(ApiResponseContract::class);
     }
