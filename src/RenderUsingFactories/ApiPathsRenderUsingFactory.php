@@ -13,11 +13,14 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\RenderUsingFactories;
 
+use Guanguans\LaravelApiResponse\Support\Traits\SetStateable;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;
 
 class ApiPathsRenderUsingFactory extends RenderUsingFactory
 {
+    use SetStateable;
+
     /** @var list<string> */
     protected array $patternsPaths;
 
@@ -28,11 +31,6 @@ class ApiPathsRenderUsingFactory extends RenderUsingFactory
     public function __construct(?array $patternsPaths = null)
     {
         $this->patternsPaths = $patternsPaths ?? $this->defaultPatternsPaths();
-    }
-
-    public static function __set_state($properties): self
-    {
-        return new self($properties['patternsPaths']);
     }
 
     public function when(Request $request, \Throwable $throwable, ExceptionHandler $exceptionHandler): bool
