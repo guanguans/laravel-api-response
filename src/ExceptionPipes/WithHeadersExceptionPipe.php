@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\ExceptionPipes;
 
-use Guanguans\LaravelApiResponse\Support\Traits\CreateStaticable;
+use Guanguans\LaravelApiResponse\Support\Traits\MakeStaticable;
 use Guanguans\LaravelApiResponse\Support\Traits\SetStateable;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Support\Arr;
@@ -21,7 +21,7 @@ use Illuminate\Support\Arr;
 class WithHeadersExceptionPipe
 {
     use WithPipeArgs;
-    use CreateStaticable;
+    use MakeStaticable;
     use SetStateable;
     private array $headers;
     private array $classes;

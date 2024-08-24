@@ -13,22 +13,9 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Support\Traits;
 
-trait CreateStaticable
+trait MakeStaticable
 {
-    public static function create(...$parameters): self
-    {
-        return static::new(...$parameters);
-    }
-
     public static function make(...$parameters): self
-    {
-        return static::new(...$parameters);
-    }
-
-    /**
-     * @noinspection PhpMethodParametersCountMismatchInspection
-     */
-    public static function new(...$parameters): self
     {
         return new static(...$parameters);
     }
