@@ -16,13 +16,13 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Guanguans\LaravelApiResponse\RenderUsingFactories\ApiPathsRenderUsingFactory;
+use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Illuminate\Support\Facades\File;
 
 it('can return a JsonResponse', function (): void {
-    $varExport = var_export(new ApiPathsRenderUsingFactory, true);
+    $varExport = var_export(new ApiPathsRenderUsing, true);
     File::put(
-        $path = fixtures_path('ApiPathsRenderUsingFactory.php'),
+        $path = fixtures_path('ApiPathsRenderUsing.php'),
         <<<PHP
             <?php
 
@@ -32,5 +32,5 @@ it('can return a JsonResponse', function (): void {
 
             PHP
     );
-    expect(require $path)->toBeInstanceOf(ApiPathsRenderUsingFactory::class);
+    expect(require $path)->toBeInstanceOf(ApiPathsRenderUsing::class);
 })->group(__DIR__, __FILE__);

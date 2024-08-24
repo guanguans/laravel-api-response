@@ -16,8 +16,6 @@ namespace Guanguans\LaravelApiResponse;
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Guanguans\LaravelApiResponse\Support\Macros\CollectionMacro;
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
@@ -70,19 +68,12 @@ class ApiResponseServiceProvider extends PackageServiceProvider
     private function registerRenderUsing(): void
     {
         if (
-            ($renderUsingFactory = config('api-response.render_using_factory'))
+            ($renderUsing = config('api-response.render_using'))
             // && !$this->app->runningInConsole()
             && method_exists($exceptionHandler = $this->app->make(ExceptionHandler::class), 'renderable')
         ) {
-            if (!\is_callable($renderUsingFactory)) {
-                $renderUsingFactory = make($renderUsingFactory);
-            }
-
-            /** @var callable(\Throwable, Request): ?JsonResponse $renderUsing */
-            $renderUsing = $renderUsingFactory($exceptionHandler);
-
-            if ($renderUsing instanceof \Closure) {
-                $renderUsing = $renderUsing->bindTo($exceptionHandler, $exceptionHandler);
+            if (!\is_callable($renderUsing)) {
+                $renderUsing = make($renderUsing);
             }
 
             $exceptionHandler->renderable($renderUsing);

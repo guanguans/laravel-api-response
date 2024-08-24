@@ -185,7 +185,7 @@ return RectorConfig::configure()
         '**/fixtures/*',
         '**/Fixtures/*',
         '**/__snapshots__/*',
-        __DIR__.'/src/RenderUsingFactories/RenderUsingFactory.php',
+        __DIR__.'/src/RenderUsings/RenderUsing.php',
     ])
     ->withSkip([
         EncapsedStringsToSprintfRector::class,

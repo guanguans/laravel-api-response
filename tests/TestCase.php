@@ -15,7 +15,7 @@ namespace Guanguans\LaravelApiResponse\Tests;
 
 use Guanguans\LaravelApiResponse\ApiResponseServiceProvider;
 use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
-use Guanguans\LaravelApiResponse\RenderUsingFactories\ApiPathsRenderUsingFactory;
+use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -62,8 +62,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
         })->middleware(SetAcceptHeader::class);
 
         $router->any('api/exception', static function (): void {
-            $exceptionHandler = app(ExceptionHandler::class);
-            $exceptionHandler->renderable(app(ApiPathsRenderUsingFactory::class)($exceptionHandler));
+            /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+            app(ExceptionHandler::class)->renderable(app(ApiPathsRenderUsing::class));
 
             throw new \RuntimeException('error');
         });

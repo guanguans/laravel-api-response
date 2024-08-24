@@ -17,17 +17,17 @@ return [
     /**
      * @see Guanguans\LaravelApiResponse\ApiResponseServiceProvider::registerRenderUsing()
      * @see Illuminate\Foundation\Exceptions\Handler::renderable()
-     * @see Guanguans\LaravelApiResponse\RenderUsingFactories\ApiPathsRenderUsingFactory::class
+     * @see Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing::class
      *
-     * Render using factory.
+     * Render using.
      */
-    // 'render_using_factory' => new Guanguans\LaravelApiResponse\RenderUsingFactories\ApiPathsRenderUsingFactory([
+    // 'render_using' => new Guanguans\LaravelApiResponse\RenderUsingFactories\ApiPathsRenderUsing([
     //     'api/*',
     // ]),
-    'render_using_factory' => Guanguans\LaravelApiResponse\RenderUsingFactories\ShouldReturnJsonRenderUsingFactory::class,
+    'render_using' => Guanguans\LaravelApiResponse\RenderUsings\ShouldReturnJsonRenderUsing::class,
 
     /**
-     * Handle exception.
+     * Exception pipes.
      */
     'exception_pipes' => [
         /*
@@ -71,7 +71,7 @@ return [
     ],
 
     /**
-     * Handle JSON response.
+     * Pipes.
      */
     'pipes' => [
         /*
