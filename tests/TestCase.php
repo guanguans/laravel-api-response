@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\Tests;
 
 use Guanguans\LaravelApiResponse\ApiResponseServiceProvider;
+use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
@@ -43,8 +44,18 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getPackageProviders($app): array
     {
+        return array_merge(
+            parent::getPackageProviders($app),
+            [
+                ApiResponseServiceProvider::class,
+            ]
+        );
+    }
+
+    protected function getPackageAliases($app): array
+    {
         return [
-            ApiResponseServiceProvider::class,
+            'ApiResponseFacade' => ApiResponseFacade::class,
         ];
     }
 

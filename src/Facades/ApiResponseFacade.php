@@ -58,7 +58,7 @@ use Illuminate\Support\Facades\Facade;
  *
  * @see \Guanguans\LaravelApiResponse\ApiResponse
  */
-class ApiResponse extends Facade
+class ApiResponseFacade extends Facade
 {
     protected static function getFacadeAccessor(): string
     {

@@ -14,8 +14,10 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Illuminate\Http\JsonResponse;
 
 it('can return a JsonResponse', function (): void {
-    expect(\Guanguans\LaravelApiResponse\Facades\ApiResponse::success())->toBeInstanceOf(JsonResponse::class);
+    expect(ApiResponseFacade::success())->toBeInstanceOf(JsonResponse::class)
+        ->and(\ApiResponseFacade::success())->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);

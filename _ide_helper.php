@@ -12,7 +12,7 @@ declare(strict_types=1);
  */
 
 namespace {
-    class ApiResponse extends Guanguans\LaravelApiResponse\Facades\ApiResponse {}
+    class ApiResponseFacade extends Guanguans\LaravelApiResponse\Facades\ApiResponseFacade {}
 }
 
 namespace Illuminate\Support {

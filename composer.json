@@ -111,7 +111,7 @@
         },
         "laravel": {
             "aliases": {
-                "ApiResponse": "Guanguans\\LaravelApiResponse\\Facades\\ApiResponse"
+                "ApiResponseFacade": "Guanguans\\LaravelApiResponse\\Facades\\ApiResponseFacade"
             },
             "providers": [
                 "Guanguans\\LaravelApiResponse\\ApiResponseServiceProvider"
@@ -152,7 +152,7 @@
         "facade-lint": "@facade-update --lint",
         "facade-update": [
             "@putenvs",
-            "$PHP81 -f ./facade.php -- Guanguans\\\\LaravelApiResponse\\\\Facades\\\\ApiResponse"
+            "$PHP81 -f ./facade.php -- Guanguans\\\\LaravelApiResponse\\\\Facades\\\\ApiResponseFacade"
         ],
         "lint": [
             "@putenvs",
