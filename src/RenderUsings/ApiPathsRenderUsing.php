@@ -13,27 +13,29 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\RenderUsings;
 
+use Guanguans\LaravelApiResponse\Support\Traits\MakeStaticable;
 use Guanguans\LaravelApiResponse\Support\Traits\SetStateable;
 use Illuminate\Http\Request;
 
 class ApiPathsRenderUsing extends RenderUsing
 {
     use SetStateable;
+    use MakeStaticable;
 
     /** @var list<string> */
-    protected array $patternsPaths;
+    protected array $paths;
 
-    public function __construct(?array $patternsPaths = null)
+    public function __construct(?array $paths = null)
     {
-        $this->patternsPaths = $patternsPaths ?? $this->defaultPatternsPaths();
+        $this->paths = $paths ?? $this->defaultPaths();
     }
 
     protected function when(Request $request, \Throwable $throwable): bool
     {
-        return $request->is(...$this->patternsPaths);
+        return $request->is(...$this->paths);
     }
 
-    protected function defaultPatternsPaths(): array
+    protected function defaultPaths(): array
     {
         return ['api/*'];
     }

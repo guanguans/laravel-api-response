@@ -30,9 +30,9 @@ class NullDataPipe
      *  error: ?array,
      * }  $data
      */
-    public function handle(array $data, \Closure $next, bool $associative = false): JsonResponse
+    public function handle(array $data, \Closure $next, bool $assoc = false): JsonResponse
     {
-        $data['data'] = $this->dataFor($data['data'], $associative);
+        $data['data'] = $this->dataFor($data['data'], $assoc);
 
         return $next($data);
     }
@@ -42,8 +42,8 @@ class NullDataPipe
      *
      * @return mixed
      */
-    private function dataFor($data, bool $associative)
+    private function dataFor($data, bool $assoc)
     {
-        return $data ?? ($associative ? [] : (object) []);
+        return $data ?? ($assoc ? [] : (object) []);
     }
 }

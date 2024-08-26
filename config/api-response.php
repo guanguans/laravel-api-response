@@ -13,18 +13,32 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Guanguans\LaravelApiResponse\ExceptionPipes\HttpExceptionPipe;
+use Guanguans\LaravelApiResponse\ExceptionPipes\SetCodeExceptionPipe;
+use Guanguans\LaravelApiResponse\ExceptionPipes\SetErrorExceptionPipe;
+use Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe;
+use Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe;
+use Guanguans\LaravelApiResponse\ExceptionPipes\WithHeadersExceptionPipe;
+use Guanguans\LaravelApiResponse\Pipes\ErrorPipe;
+use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
+use Guanguans\LaravelApiResponse\Pipes\NullDataPipe;
+use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
+use Guanguans\LaravelApiResponse\Pipes\ScalarDataPipe;
+use Guanguans\LaravelApiResponse\Pipes\StatusCodePipe;
+use Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe;
+use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
+use Guanguans\LaravelApiResponse\RenderUsings\ShouldReturnJsonRenderUsing;
+use Illuminate\Auth\AuthenticationException;
+use Symfony\Component\HttpFoundation\Response;
+
 return [
     /**
-     * @see Guanguans\LaravelApiResponse\ApiResponseServiceProvider::registerRenderUsing()
-     * @see Illuminate\Foundation\Exceptions\Handler::renderable()
-     * @see Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing::class
-     *
      * Render using.
      */
-    // 'render_using' => new Guanguans\LaravelApiResponse\RenderUsingFactories\ApiPathsRenderUsing([
+    'render_using' => ShouldReturnJsonRenderUsing::class,
+    // 'render_using' => ApiPathsRenderUsing::make([
     //     'api/*',
     // ]),
-    'render_using' => Guanguans\LaravelApiResponse\RenderUsings\ShouldReturnJsonRenderUsing::class,
 
     /**
      * Exception pipes.
@@ -37,25 +51,20 @@ return [
         /*
          * After...
          */
-        Guanguans\LaravelApiResponse\ExceptionPipes\HttpExceptionPipe::class,
-        Guanguans\LaravelApiResponse\ExceptionPipes\AuthenticationExceptionPipe::class,
-        Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe::class,
-        Guanguans\LaravelApiResponse\ExceptionPipes\HideOriginalMessageExceptionPipe::with(
-            Illuminate\Database\QueryException::class,
-            // Illuminate\Database\Eloquent\ModelNotFoundException::class,
-            // Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class,
-        ),
-        Guanguans\LaravelApiResponse\ExceptionPipes\SetCodeExceptionPipe::with(
-            Symfony\Component\HttpFoundation\Response::HTTP_INTERNAL_SERVER_ERROR,
+        HttpExceptionPipe::class,
+        ValidationExceptionPipe::class,
+        SetCodeExceptionPipe::with(
+            Response::HTTP_UNAUTHORIZED,
+            AuthenticationException::class,
             // class...
             // ...
         ),
-        Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe::with(
+        SetMessageExceptionPipe::with(
             'Server Error',
             // class...
             // ...
         ),
-        Guanguans\LaravelApiResponse\ExceptionPipes\WithHeadersExceptionPipe::make(
+        WithHeadersExceptionPipe::make(
             [
                 // header...
                 // ...
@@ -63,7 +72,7 @@ return [
             // class...
             // ...
         ),
-        Guanguans\LaravelApiResponse\ExceptionPipes\SetErrorExceptionPipe::make(
+        SetErrorExceptionPipe::make(
             null
             // class...
             // ...
@@ -77,16 +86,16 @@ return [
         /*
          * Before...
          */
-        Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe::class,
-        Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe::class,
-        Guanguans\LaravelApiResponse\Pipes\NullDataPipe::with(false),
-        Guanguans\LaravelApiResponse\Pipes\ScalarDataPipe::with(false),
-        Guanguans\LaravelApiResponse\Pipes\MessagePipe::with(),
-        Guanguans\LaravelApiResponse\Pipes\ErrorPipe::with(/* ! app()->hasDebugModeEnabled() */),
+        PaginatorDataPipe::class,
+        ToJsonResponseDataPipe::class,
+        NullDataPipe::with(false),
+        ScalarDataPipe::with(false),
+        MessagePipe::with(),
+        ErrorPipe::with(/* ! app()->hasDebugModeEnabled() */),
 
         /*
          * After...
          */
-        // Guanguans\LaravelApiResponse\Pipes\StatusCodePipe::with(),
+        // StatusCodePipe::with(),
     ],
 ];

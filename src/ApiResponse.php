@@ -106,7 +106,7 @@ class ApiResponse implements ApiResponseContract
                 'error' => $error,
             ])
             ->through($this->pipes->all())
-            ->then($this->dataDestination());
+            ->then($this->destination());
     }
 
     protected function newPipeline(): Pipeline
@@ -128,7 +128,7 @@ class ApiResponse implements ApiResponseContract
         ];
     }
 
-    protected function dataDestination(): \Closure
+    protected function destination(): \Closure
     {
         return static fn (array $data): JsonResponse => new JsonResponse(
             $data,

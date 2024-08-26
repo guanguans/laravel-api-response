@@ -62,7 +62,9 @@ class ApiResponseServiceProvider extends PackageServiceProvider
     public function provides(): array
     {
         return [
+            $this->toAlias(ApiResponse::class),
             $this->toAlias(ApiResponseContract::class),
+            ApiResponse::class,
             ApiResponseContract::class,
         ];
     }
