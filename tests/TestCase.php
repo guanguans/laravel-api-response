@@ -18,6 +18,7 @@ use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Guanguans\LaravelApiResponse\Tests\seeders\TablesSeeder;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
@@ -38,6 +39,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function tearDown(): void
     {
+        (require __DIR__.'/migrations/create_tables.php')->down();
         $this->closeMockery();
         parent::tearDown();
     }
@@ -60,11 +62,26 @@ class TestCase extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * @see https://github.com/staudenmeir
+     * @see https://github.com/staudenmeir/eloquent-eager-limit
      */
-    protected function defineDatabaseMigrations(): void {}
+    protected function defineDatabaseMigrations(): void
+    {
+        (require __DIR__.'/migrations/create_tables.php')->up();
+        // $this->loadMigrationsFrom($paths);
+    }
 
-    protected function defineEnvironment($app): void {}
+    protected function defineDatabaseSeeders(): void
+    {
+        $this->seed(TablesSeeder::class);
+    }
+
+    protected function defineEnvironment($app): void
+    {
+        config()->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
+        config()->set('database.default', 'sqlite');
+        config()->set('database.connections.sqlite.driver', 'sqlite');
+        config()->set('database.connections.sqlite.database', ':memory:');
+    }
 
     protected function defineRoutes($router): void
     {
