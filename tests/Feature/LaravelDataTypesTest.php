@@ -14,8 +14,16 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Guanguans\LaravelApiResponse\Tests\Models\User;
+use Guanguans\LaravelApiResponse\Tests\Resources\UserResource;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 it('can return Model type data JSON response', function (): void {
-    assertMatchesJsonSnapshot($this->apiResponse()->success(null)->content());
-})->group(__DIR__, __FILE__)->skip('To do ...');
+    $user = User::query()->with('posts')->first();
+    assertMatchesJsonSnapshot($this->apiResponse()->success($user)->content());
+})->group(__DIR__, __FILE__);
+
+it('can return Resource type data JSON response', function (): void {
+    $userResource = UserResource::make(User::query()->with('posts')->first());
+    assertMatchesJsonSnapshot($this->apiResponse()->success($userResource)->content());
+})->group(__DIR__, __FILE__);

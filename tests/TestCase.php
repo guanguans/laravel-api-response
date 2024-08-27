@@ -39,7 +39,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function tearDown(): void
     {
-        (require __DIR__.'/migrations/create_tables.php')->down();
+        // (require __DIR__.'/migrations/create_tables.php')->down();
         $this->closeMockery();
         parent::tearDown();
     }
@@ -66,8 +66,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function defineDatabaseMigrations(): void
     {
-        (require __DIR__.'/migrations/create_tables.php')->up();
-        // $this->loadMigrationsFrom($paths);
+        // (require __DIR__.'/migrations/create_tables.php')->up();
+        $this->loadMigrationsFrom(__DIR__.'/migrations');
     }
 
     protected function defineDatabaseSeeders(): void
@@ -77,10 +77,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function defineEnvironment($app): void
     {
-        config()->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
-        config()->set('database.default', 'sqlite');
-        config()->set('database.connections.sqlite.driver', 'sqlite');
-        config()->set('database.connections.sqlite.database', ':memory:');
+        // config()->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
+        config()->set('database.default', 'testing');
     }
 
     protected function defineRoutes($router): void

@@ -1,0 +1,16 @@
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": {
+        "data": {
+            "id": 1,
+            "country_id": "1",
+            "posts_count": null,
+            "posts_with_offset_count": null,
+            "roles_count": null,
+            "roles_with_offset_count": null
+        }
+    },
+    "error": {}
+}

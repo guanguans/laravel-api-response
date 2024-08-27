@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Post extends Model
 {
+    public $timestamps = false;
+
     public function comment(): MorphOne
     {
         return $this->morphOne(Comment::class, 'commentable')->latest()->limit(1);

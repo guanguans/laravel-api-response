@@ -29,7 +29,7 @@ class User extends Model
 
     public function postWithOffset(): HasOne
     {
-        return $this->hasOne(Post::class)->latest()->limit(1)->offset(1);
+        return $this->hasOne(Post::class)->latest();
     }
 
     public function posts(): HasMany

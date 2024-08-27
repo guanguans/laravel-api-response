@@ -69,6 +69,14 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropAllTables();
+        // Schema::dropAllTables();
+        Schema::dropIfExists('countries');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('posts');
+        Schema::dropIfExists('comments');
+        Schema::dropIfExists('roles');
+        Schema::dropIfExists('role_user');
+        Schema::dropIfExists('tags');
+        Schema::dropIfExists('taggables');
     }
 };
