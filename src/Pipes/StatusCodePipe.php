@@ -35,15 +35,17 @@ class StatusCodePipe
      */
     public function handle(array $data, \Closure $next, int $fallbackStatusCode = 500): JsonResponse
     {
-        $statusCode = Utils::statusCodeFor($data['code']);
-
-        return $next($data)->setStatusCode($this->IsInvalidStatusCode($statusCode) ? $fallbackStatusCode : $statusCode);
+        return $next($data)->setStatusCode(
+            $this->isInvalidStatusCode($statusCode = Utils::statusCodeFor($data['code']))
+                ? $fallbackStatusCode
+                : $statusCode
+        );
     }
 
     /**
      * @see \Symfony\Component\HttpFoundation\Response::isInvalid()
      */
-    private function IsInvalidStatusCode(int $statusCode): bool
+    private function isInvalidStatusCode(int $statusCode): bool
     {
         return 100 > $statusCode || 600 <= $statusCode;
     }

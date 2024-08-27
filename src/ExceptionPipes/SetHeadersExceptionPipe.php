@@ -18,7 +18,7 @@ use Guanguans\LaravelApiResponse\Support\Traits\SetStateable;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Support\Arr;
 
-class WithHeadersExceptionPipe
+class SetHeadersExceptionPipe
 {
     use WithPipeArgs;
     use MakeStaticable;

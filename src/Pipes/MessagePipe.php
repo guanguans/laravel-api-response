@@ -41,7 +41,7 @@ class MessagePipe
         string $mainTransKey = 'http-statuses',
         string $fallbackMessage = 'Server Error'
     ): JsonResponse {
-        $data['message'] = __($data['message'] ?: $this->transKeyFor($data['code'], $mainTransKey) ?: $fallbackMessage);
+        $data['message'] = __($data['message'] ?: $this->transKeyFor($data['code'], $mainTransKey, $fallbackMessage));
 
         return $next($data);
     }
@@ -51,7 +51,7 @@ class MessagePipe
      * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
      * @see \Symfony\Component\HttpFoundation\Response::setStatusCode()
      */
-    private function transKeyFor(int $code, string $mainTransKey): ?string
+    private function transKeyFor(int $code, string $mainTransKey, string $fallbackMessage): ?string
     {
         /** @var \Illuminate\Translation\Translator $translator */
         $translator = trans();
@@ -66,6 +66,6 @@ class MessagePipe
             return $key;
         }
 
-        return Response::$statusTexts[$statusCode] ?? null;
+        return Response::$statusTexts[$statusCode] ?? $fallbackMessage;
     }
 }

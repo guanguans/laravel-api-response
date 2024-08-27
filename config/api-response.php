@@ -16,9 +16,9 @@ declare(strict_types=1);
 use Guanguans\LaravelApiResponse\ExceptionPipes\HttpExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetCodeExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetErrorExceptionPipe;
+use Guanguans\LaravelApiResponse\ExceptionPipes\SetHeadersExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe;
-use Guanguans\LaravelApiResponse\ExceptionPipes\WithHeadersExceptionPipe;
 use Guanguans\LaravelApiResponse\Pipes\ErrorPipe;
 use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
 use Guanguans\LaravelApiResponse\Pipes\NullDataPipe;
@@ -51,31 +51,28 @@ return [
         /*
          * After...
          */
-        HttpExceptionPipe::class,
         ValidationExceptionPipe::class,
+        HttpExceptionPipe::class,
         SetCodeExceptionPipe::with(
-            Response::HTTP_UNAUTHORIZED,
+            Response::HTTP_UNAUTHORIZED, // code...
             AuthenticationException::class,
             // class...
-            // ...
         ),
         SetMessageExceptionPipe::with(
             'Server Error',
             // class...
-            // ...
         ),
-        WithHeadersExceptionPipe::make(
+        SetHeadersExceptionPipe::make(
             [
                 // header...
-                // ...
             ],
             // class...
-            // ...
         ),
         SetErrorExceptionPipe::make(
-            null
+            [
+                // error...
+            ]
             // class...
-            // ...
         ),
     ],
 

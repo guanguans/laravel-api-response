@@ -103,11 +103,9 @@ class ApiResponseServiceProvider extends PackageServiceProvider
     /**
      * @param class-string $class
      */
-    private function alias(string $class): self
+    private function alias(string $class): void
     {
         $this->app->alias($class, $this->toAlias($class));
-
-        return $this;
     }
 
     /**

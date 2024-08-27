@@ -47,20 +47,20 @@ class ScalarDataPipe
      */
     private function dataFor($data, bool $assoc, ?string $wrap)
     {
-        if (\is_scalar($data)) {
-            if ($assoc) {
-                return (array) $data;
-            }
-
-            $wrap ??= JsonResource::$wrap;
-
-            if (null === $wrap) {
-                return (object) $data;
-            }
-
-            return [$wrap => $data];
+        if (!\is_scalar($data)) {
+            return $data;
         }
 
-        return $data;
+        if ($assoc) {
+            return (array) $data;
+        }
+
+        $wrap ??= JsonResource::$wrap;
+
+        if (null === $wrap) {
+            return (object) $data;
+        }
+
+        return [$wrap => $data];
     }
 }

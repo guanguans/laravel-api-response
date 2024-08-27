@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\RenderUsings;
 
-use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
+use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Illuminate\Http\Request;
 
 abstract class RenderUsing
@@ -28,7 +28,7 @@ abstract class RenderUsing
     {
         try {
             if ($this->when($request, $throwable)) {
-                return app(ApiResponseContract::class)->exception($throwable);
+                return ApiResponseFacade::exception($throwable);
             }
         } catch (\Throwable $throwable) { // @codeCoverageIgnore
             // If catch an exception, only report it,
