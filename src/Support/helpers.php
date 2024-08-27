@@ -16,6 +16,8 @@ use Illuminate\Support\Arr;
 
 if (!\function_exists('make')) {
     /**
+     * @codeCoverageIgnore
+     *
      * @param array<string, mixed>|string $abstract
      * @param array<string, mixed> $parameters
      *

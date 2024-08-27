@@ -39,6 +39,6 @@ it('can use http status methods', function (): void {
     ])->each(function (Expectation $expectation): void {
         expect($this->apiResponse()->{$expectation->value}())
             ->toBeInstanceOf(JsonResponse::class)
-            ->status()->toBe(200);
+            ->isOK()->toBeTrue();
     });
 })->group(__DIR__, __FILE__);

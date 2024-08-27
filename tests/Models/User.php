@@ -21,6 +21,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class User extends Model
 {
     public $timestamps = false;
+    protected $casts = [
+        'country_id' => 'int',
+    ];
 
     public function post(): HasOne
     {

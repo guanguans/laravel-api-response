@@ -16,8 +16,8 @@ declare(strict_types=1);
 
 use Illuminate\Http\JsonResponse;
 
-it('can throw exception', function (): void {
+it('can return JsonResponse', function (): void {
     expect($this->apiResponse()->exception(new \RuntimeException('foo')))
         ->toBeInstanceOf(JsonResponse::class)
-        ->status()->toBe(200);
+        ->isOk()->toBeTrue();
 })->group(__DIR__, __FILE__);

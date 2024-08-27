@@ -15,17 +15,39 @@ declare(strict_types=1);
  */
 
 use Guanguans\LaravelApiResponse\Pipes\ErrorPipe;
+use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
+use Guanguans\LaravelApiResponse\Pipes\NullDataPipe;
+use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
+use Guanguans\LaravelApiResponse\Pipes\ScalarDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\StatusCodePipe;
+use Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-it('can return a JsonResponse', function (): void {
+it('can use pipes', function (): void {
+    JsonResource::$wrap = null;
     expect($this->apiResponse())
-        ->pushPipes(ErrorPipe::with(true))
-        ->exception(new HttpException(500))->toBeInstanceOf(JsonResponse::class)
-        ->exception(new HttpException(50000))->toBeInstanceOf(JsonResponse::class)
-        ->exception(new HttpException(-1))->toBeInstanceOf(JsonResponse::class)
-        ->pushPipes(StatusCodePipe::with())
+        ->pushPipes(
+            /*
+             * Before...
+             */
+            PaginatorDataPipe::class,
+            NullDataPipe::with(true),
+            ScalarDataPipe::with(true),
+            ToJsonResponseDataPipe::class,
+            MessagePipe::with(),
+            ErrorPipe::with(true),
+
+            /*
+             * After...
+             */
+            StatusCodePipe::with(),
+        )
+        ->unshiftPipes(ScalarDataPipe::with(true))
+        ->exception(new HttpException(600))->toBeInstanceOf(JsonResponse::class)
+        ->success()->toBeInstanceOf(JsonResponse::class)
+        ->success(1)->toBeInstanceOf(JsonResponse::class)
         ->success(new Paginator([], 15))->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);

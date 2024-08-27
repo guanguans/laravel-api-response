@@ -17,7 +17,7 @@ declare(strict_types=1);
 use Guanguans\LaravelApiResponse\ApiResponse;
 use Illuminate\Support\Collection;
 
-it('can use pipes', function (): void {
+it('can use exception pipes', function (): void {
     expect($this->apiResponse())
         ->unshiftExceptionPipes()->toBeInstanceOf(ApiResponse::class)
         ->pushExceptionPipes()->toBeInstanceOf(ApiResponse::class)

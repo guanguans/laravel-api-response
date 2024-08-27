@@ -21,6 +21,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class Post extends Model
 {
     public $timestamps = false;
+    protected $casts = [
+        'user_id' => 'int',
+    ];
 
     public function comment(): MorphOne
     {

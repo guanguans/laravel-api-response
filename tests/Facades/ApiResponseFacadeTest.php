@@ -17,7 +17,7 @@ declare(strict_types=1);
 use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Illuminate\Http\JsonResponse;
 
-it('can return a JsonResponse', function (): void {
+it('can return JsonResponse', function (): void {
     expect(ApiResponseFacade::success())->toBeInstanceOf(JsonResponse::class)
         ->and(\ApiResponseFacade::success())->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);

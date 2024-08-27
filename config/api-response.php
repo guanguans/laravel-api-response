@@ -71,7 +71,7 @@ return [
         SetErrorExceptionPipe::make(
             [
                 // error...
-            ]
+            ],
             // class...
         ),
     ],
@@ -83,10 +83,10 @@ return [
         /*
          * Before...
          */
-        PaginatorDataPipe::class,
-        ToJsonResponseDataPipe::class,
         NullDataPipe::with(false),
         ScalarDataPipe::with(false),
+        PaginatorDataPipe::class,
+        ToJsonResponseDataPipe::class,
         MessagePipe::with(),
         ErrorPipe::with(/* ! app()->hasDebugModeEnabled() */),
 
