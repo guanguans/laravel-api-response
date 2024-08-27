@@ -23,16 +23,21 @@ class SetErrorExceptionPipe
     use WithPipeArgs;
     use MakeStaticable;
     use SetStateable;
-    private array $classes;
     private ?array $error;
+    private array $classes;
 
-    public function __construct(?array $error, string ...$classes)
+    /**
+     * @param string ...$classes
+     */
+    public function __construct(?array $error, ...$classes)
     {
         $this->error = $error;
         $this->classes = $classes;
     }
 
     /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
      * @param \Closure(\Throwable): array $next
      *
      * @return array{

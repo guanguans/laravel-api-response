@@ -16,11 +16,9 @@ use Illuminate\Support\Arr;
 
 if (!\function_exists('make')) {
     /**
-     * @psalm-param string|array<string, mixed> $abstract
+     * @param array<string, mixed>|string $abstract
+     * @param array<string, mixed> $parameters
      *
-     * @param mixed $abstract
-     *
-     * @throws \InvalidArgumentException
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      *
      * @return mixed
@@ -37,17 +35,13 @@ if (!\function_exists('make')) {
             return resolve($abstract, $parameters);
         }
 
-        $classes = ['__class', '_class', 'class'];
-
-        foreach ($classes as $class) {
-            if (!isset($abstract[$class])) {
-                continue;
+        foreach ($classes = ['__class', '_class', 'class'] as $class) {
+            if (isset($abstract[$class])) {
+                return make(
+                    $abstract[$class],
+                    Arr::except($abstract, $class) + $parameters,
+                );
             }
-
-            $parameters = Arr::except($abstract, $class) + $parameters;
-            $abstract = $abstract[$class];
-
-            return make($abstract, $parameters);
         }
 
         throw new InvalidArgumentException(\sprintf(

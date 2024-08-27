@@ -43,20 +43,8 @@ class ApiResponseServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->app->singleton(
-            ApiResponse::class,
-            static fn (): ApiResponse => new ApiResponse(
-                collect(config('api-response.pipes')),
-                collect(config('api-response.exception_pipes'))
-            )
-        );
-        $this->alias(ApiResponse::class);
-
-        $this->app->bind(
-            ApiResponseContract::class,
-            static fn (Application $app): ApiResponseContract => $app->make(ApiResponse::class)
-        );
-        $this->alias(ApiResponseContract::class);
+        $this->registerApiResponse();
+        $this->registerApiResponseContract();
     }
 
     public function provides(): array
@@ -87,6 +75,29 @@ class ApiResponseServiceProvider extends PackageServiceProvider
 
             $exceptionHandler->renderable($renderUsing);
         }
+    }
+
+    private function registerApiResponse(): void
+    {
+        $this->app->singleton(
+            ApiResponse::class,
+            static fn (): ApiResponse => new ApiResponse(
+                collect(config('api-response.pipes')),
+                collect(config('api-response.exception_pipes'))
+            )
+        );
+
+        $this->alias(ApiResponse::class);
+    }
+
+    private function registerApiResponseContract(): void
+    {
+        $this->app->bind(
+            ApiResponseContract::class,
+            static fn (Application $app): ApiResponseContract => $app->make(ApiResponse::class)
+        );
+
+        $this->alias(ApiResponseContract::class);
     }
 
     /**

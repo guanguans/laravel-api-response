@@ -21,6 +21,8 @@ class ValidationExceptionPipe
     use WithPipeArgs;
 
     /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
      * @param \Closure(\Throwable): array $next
      *
      * @return array{

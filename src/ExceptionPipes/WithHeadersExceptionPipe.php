@@ -26,13 +26,18 @@ class WithHeadersExceptionPipe
     private array $headers;
     private array $classes;
 
-    public function __construct(array $headers, string ...$classes)
+    /**
+     * @param string ...$classes
+     */
+    public function __construct(array $headers, ...$classes)
     {
         $this->headers = $headers;
         $this->classes = $classes;
     }
 
     /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
      * @param \Closure(\Throwable): array $next
      *
      * @return array{

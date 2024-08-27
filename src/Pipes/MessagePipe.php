@@ -23,6 +23,8 @@ class MessagePipe
     use WithPipeArgs;
 
     /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
      * @param \Closure(array): \Illuminate\Http\JsonResponse $next
      * @param string $fallbackMessage // ['Whoops, looks like something went wrong.', 'Server Error', 'Unknown Status']
      * @param  array{

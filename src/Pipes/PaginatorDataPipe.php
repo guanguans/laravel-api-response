@@ -24,6 +24,8 @@ class PaginatorDataPipe
     use WithPipeArgs;
 
     /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
      * @param \Closure(array): \Illuminate\Http\JsonResponse $next
      * @param  array{
      *  status: string,
