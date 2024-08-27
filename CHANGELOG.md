@@ -8,6 +8,40 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.0-beta3"></a>
+## [1.0.0-beta3] - 2024-08-27
+### Bug Fixes
+- **api-response:** rename HideMessageExceptionPipe to HideOriginalMessageExceptionPipe
+
+### Code Refactoring
+- implement __set_state method using SetStateable traitReplace the explicit __set_state method with the SetStateable trait in theApiPathsRenderUsingFactory class to improve code reuse and readability.
+- **ApiResponse:** inline pipeline instantiates and extracts destination closure
+- **ApiResponseServiceProvider:** simplify registration methods
+- **api-response:** rename WithHeadersExceptionPipe to SetHeadersExceptionPipe
+- **api-response:** handle authentication and hide sensitive errors
+- **api-response:** optimize status code validation and error handling
+- **api-response:** remove default data pipe to simplify response data handling
+- **render-usings:** rename classes and adjust naming convention
+
+### Features
+- remove invalid argument exception and runtime exception classes
+- add null data pipe and scalar data pipe classes to process data
+- **ApiResponseServiceProvider:** modifying exception handling factory classes and methods
+- **Facades:** rename ApiResponse to ApiResponseFacade
+- **api-response:** add exception pipes for headers and error handling
+- **api-response:** add exception pipes for status code and message settingAdd new exception pipes to handle the setting of status codes and messages uniformly across exceptions. This enhances the error handling in the API by allowing customizable response formatting through `SetCodeExceptionPipe` and `SetMessageExceptionPipe`, providing better control over the error messages and codes returned.
+- **tests:** add test models and seeder for API responsesAdded model classes and a seeder for database tables to expand testing coverage of API responses. This includes the creation of models for Country, User, Post, Comment, Role, and Tag entities, along with a seeder class to populate these models with test data.
+
+### Test
+- **api:** update exception pipes and response handling
+- **api-response:** update tests for model and resource data types
+
+### BREAKING CHANGE
+
+Exception handling logic might need to be updated to accommodate the
+new pipes for proper header and error handling.
+
+
 <a name="1.0.0-beta2"></a>
 ## [1.0.0-beta2] - 2024-08-23
 ### Bug Fixes
@@ -47,5 +81,6 @@ All notable changes to this project will be documented in this file.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta2...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta3...HEAD
+[1.0.0-beta3]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta2...1.0.0-beta3
 [1.0.0-beta2]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta1...1.0.0-beta2
