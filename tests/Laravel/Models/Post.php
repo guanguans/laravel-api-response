@@ -30,28 +30,13 @@ class Post extends Model
         return $this->morphOne(Comment::class, 'commentable')->latest()->limit(1);
     }
 
-    public function commentWithOffset(): MorphOne
-    {
-        return $this->morphOne(Comment::class, 'commentable')->latest()->limit(1)->offset(1);
-    }
-
     public function comments(): MorphMany
     {
-        return $this->morphMany(Comment::class, 'commentable')->latest()->limit(2);
-    }
-
-    public function commentsWithOffset(): MorphMany
-    {
-        return $this->morphMany(Comment::class, 'commentable')->latest()->limit(2)->offset(1);
+        return $this->morphMany(Comment::class, 'commentable')->latest();
     }
 
     public function tags(): MorphToMany
     {
-        return $this->morphToMany(Tag::class, 'taggable')->latest()->limit(2);
-    }
-
-    public function tagsWithOffset(): MorphToMany
-    {
-        return $this->morphToMany(Tag::class, 'taggable')->latest()->limit(2)->offset(1);
+        return $this->morphToMany(Tag::class, 'taggable')->latest();
     }
 }

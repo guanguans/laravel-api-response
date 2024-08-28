@@ -24,18 +24,8 @@ class Country extends Model
         return $this->hasOneThrough(Post::class, User::class)->latest()->limit(1);
     }
 
-    public function postWithOffset(): HasOneThrough
-    {
-        return $this->hasOneThrough(Post::class, User::class)->latest()->limit(1)->offset(1);
-    }
-
     public function posts(): HasManyThrough
     {
-        return $this->hasManyThrough(Post::class, User::class)->latest()->take(2);
-    }
-
-    public function postsWithOffset(): HasManyThrough
-    {
-        return $this->hasManyThrough(Post::class, User::class)->latest()->take(2)->offset(1);
+        return $this->hasManyThrough(Post::class, User::class)->latest();
     }
 }

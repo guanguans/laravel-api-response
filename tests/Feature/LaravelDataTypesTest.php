@@ -15,6 +15,7 @@ declare(strict_types=1);
  */
 
 use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
+use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserCollection;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserResource;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
@@ -23,7 +24,22 @@ it('can return Model type data JSON response', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success($user)->content());
 })->group(__DIR__, __FILE__);
 
+it('can return Collection type data JSON response', function (): void {
+    $users = User::query()->with(['posts', 'roles'])->get();
+    assertMatchesJsonSnapshot($this->apiResponse()->success($users)->content());
+})->group(__DIR__, __FILE__);
+
+it('can return Paginator type data JSON response', function (): void {
+    $users = User::query()->with(['posts', 'roles'])->paginate(3);
+    assertMatchesJsonSnapshot($this->apiResponse()->success($users)->content());
+})->group(__DIR__, __FILE__);
+
 it('can return Resource type data JSON response', function (): void {
     $userResource = UserResource::make(User::query()->with('posts')->first());
     assertMatchesJsonSnapshot($this->apiResponse()->success($userResource)->content());
+})->group(__DIR__, __FILE__);
+
+it('can return ResourceCollection type data JSON response', function (): void {
+    $userCollection = UserCollection::make(User::query()->with(['posts', 'roles'])->get());
+    assertMatchesJsonSnapshot($this->apiResponse()->success($userCollection)->content());
 })->group(__DIR__, __FILE__);

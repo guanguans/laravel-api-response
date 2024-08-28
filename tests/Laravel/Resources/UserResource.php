@@ -30,10 +30,9 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'country_id' => $this->country_id,
-            'posts_count' => $this->posts_count,
-            'posts_with_offset_count' => $this->posts_with_offset_count,
-            'roles_count' => $this->roles_count,
-            'roles_with_offset_count' => $this->roles_with_offset_count,
+            'post' => $this->post,
+            'posts' => $this->posts,
+            'roles' => $this->roles,
         ];
     }
 }

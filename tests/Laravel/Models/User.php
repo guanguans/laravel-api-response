@@ -30,28 +30,13 @@ class User extends Model
         return $this->hasOne(Post::class)->latest()->limit(1);
     }
 
-    public function postWithOffset(): HasOne
-    {
-        return $this->hasOne(Post::class)->latest();
-    }
-
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class)->latest()->limit(2);
-    }
-
-    public function postsWithOffset(): HasMany
-    {
-        return $this->hasMany(Post::class)->latest()->limit(2)->offset(1);
+        return $this->hasMany(Post::class)->latest();
     }
 
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class)->latest()->limit(2);
-    }
-
-    public function rolesWithOffset(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class)->latest()->limit(2)->offset(1);
+        return $this->belongsToMany(Role::class)->latest();
     }
 }
