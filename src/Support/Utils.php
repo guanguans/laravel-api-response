@@ -17,7 +17,6 @@ class Utils
 {
     public static function statusCodeFor(int $code): int
     {
-        // return (int) str_pad(substr((string) $code, 0, 3), 3, '0');
         return (int) substr((string) $code, 0, 3);
     }
 }

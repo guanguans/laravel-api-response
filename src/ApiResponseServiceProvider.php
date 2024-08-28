@@ -66,7 +66,6 @@ class ApiResponseServiceProvider extends PackageServiceProvider
     {
         if (
             ($renderUsing = config('api-response.render_using'))
-            // && !$this->app->runningInConsole()
             && method_exists($exceptionHandler = $this->app->make(ExceptionHandler::class), 'renderable')
         ) {
             if (!\is_callable($renderUsing)) {

@@ -13,6 +13,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Guanguans\LaravelApiResponse\ExceptionPipes\AuthenticationExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\HttpExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetCodeExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetErrorExceptionPipe;
@@ -28,7 +29,7 @@ use Guanguans\LaravelApiResponse\Pipes\StatusCodePipe;
 use Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\RenderUsings\ShouldReturnJsonRenderUsing;
-use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Symfony\Component\HttpFoundation\Response;
 
 return [
@@ -51,26 +52,26 @@ return [
         /*
          * After...
          */
-        ValidationExceptionPipe::class,
+        AuthenticationExceptionPipe::class,
         HttpExceptionPipe::class,
+        ValidationExceptionPipe::class,
         SetCodeExceptionPipe::with(
-            Response::HTTP_UNAUTHORIZED, // code...
-            AuthenticationException::class,
+            Response::HTTP_UNAUTHORIZED, // code.
             // class...
         ),
         SetMessageExceptionPipe::with(
-            'Server Error',
-            // class...
-        ),
-        SetHeadersExceptionPipe::make(
-            [
-                // header...
-            ],
+            'Whoops, looks like something went wrong.', // message.
             // class...
         ),
         SetErrorExceptionPipe::make(
             [
                 // error...
+            ],
+            // class...
+        ),
+        SetHeadersExceptionPipe::make(
+            [
+                // header...
             ],
             // class...
         ),
@@ -84,11 +85,11 @@ return [
          * Before...
          */
         NullDataPipe::with(false),
-        ScalarDataPipe::with(false),
+        ScalarDataPipe::with(false, JsonResource::$wrap),
         PaginatorDataPipe::class,
         ToJsonResponseDataPipe::class,
-        MessagePipe::with(),
-        ErrorPipe::with(/* ! app()->hasDebugModeEnabled() */),
+        MessagePipe::with('http-statuses', 'Server Error'),
+        ErrorPipe::with(/* !app()->hasDebugModeEnabled() */),
 
         /*
          * After...

@@ -15,7 +15,6 @@ namespace Guanguans\LaravelApiResponse\Pipes;
 
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class ScalarDataPipe
 {
@@ -55,12 +54,6 @@ class ScalarDataPipe
             return (array) $data;
         }
 
-        $wrap ??= JsonResource::$wrap;
-
-        if (null === $wrap) {
-            return (object) $data;
-        }
-
-        return [$wrap => $data];
+        return $wrap ? [$wrap => $data] : (object) $data;
     }
 }

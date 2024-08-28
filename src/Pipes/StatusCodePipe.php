@@ -35,11 +35,14 @@ class StatusCodePipe
      */
     public function handle(array $data, \Closure $next, int $fallbackStatusCode = 500): JsonResponse
     {
-        return $next($data)->setStatusCode(
-            $this->isInvalidStatusCode($statusCode = Utils::statusCodeFor($data['code']))
-                ? $fallbackStatusCode
-                : $statusCode
-        );
+        return $next($data)->setStatusCode($this->statusCodeFor($data['code'], $fallbackStatusCode));
+    }
+
+    private function statusCodeFor(int $code, int $fallbackStatusCode): int
+    {
+        return $this->isInvalidStatusCode($statusCode = Utils::statusCodeFor($code))
+            ? $fallbackStatusCode
+            : $statusCode;
     }
 
     /**

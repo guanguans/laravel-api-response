@@ -38,8 +38,8 @@ class HttpExceptionPipe
 
         if ($throwable instanceof HttpExceptionInterface) {
             return [
-                'message' => $throwable->getMessage(),
                 'code' => $throwable->getStatusCode(),
+                'message' => $throwable->getMessage(),
                 'headers' => $throwable->getHeaders(),
             ] + $data;
         }

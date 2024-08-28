@@ -34,12 +34,22 @@ class ErrorPipe
      */
     public function handle(array $data, \Closure $next, bool $hidden = false): JsonResponse
     {
-        $data['error'] = $data['error'] ?: (object) [];
+        $data['error'] = $this->errorFor($data['error']);
 
         if ($hidden) {
             unset($data['error']);
         }
 
         return $next($data);
+    }
+
+    /**
+     * @param null|array|object $error
+     *
+     * @return array|object
+     */
+    private function errorFor($error)
+    {
+        return $error ?: (object) [];
     }
 }

@@ -65,12 +65,6 @@ class ApiResponse implements ApiResponseContract
         return $this->json(false, $code, $message, null, $error);
     }
 
-    /**
-     * @see \Illuminate\Foundation\Exceptions\Handler::render()
-     * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
-     * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
-     * @see \Illuminate\Database\QueryException
-     */
     public function exception(\Throwable $throwable): JsonResponse
     {
         [
@@ -115,13 +109,16 @@ class ApiResponse implements ApiResponseContract
     }
 
     /**
-     * @noinspection PhpCastIsUnnecessaryInspection
+     * @see \Illuminate\Foundation\Exceptions\Handler::render()
+     * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
+     * @see \Illuminate\Foundation\Exceptions\Handler::prepareJsonResponse()
+     * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
+     * @see \Illuminate\Database\QueryException
      */
     protected function exceptionDestination(): \Closure
     {
         return static fn (\Throwable $throwable): array => [
-            /** @see \Illuminate\Database\QueryException */
-            'code' => (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR,
+            'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
             'message' => app()->hasDebugModeEnabled() ? $throwable->getMessage() : '',
             'error' => (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class)),
             'headers' => [],

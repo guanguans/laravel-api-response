@@ -1,6 +1,6 @@
 # laravel-api-response
 
-> A Laravel package for building API responses.
+> Normalize and standardize Laravel API response data structures.
 
 [![tests](https://github.com/guanguans/laravel-api-response/workflows/tests/badge.svg)](https://github.com/guanguans/laravel-api-response/actions)
 [![check & fix styling](https://github.com/guanguans/laravel-api-response/workflows/check%20&%20fix%20styling/badge.svg)](https://github.com/guanguans/laravel-api-response/actions)

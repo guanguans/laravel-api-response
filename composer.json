@@ -1,15 +1,19 @@
 {
     "name": "guanguans/laravel-api-response",
-    "description": "A Laravel package for building API responses.",
+    "description": "Normalize and standardize Laravel API response data structures.",
     "license": "MIT",
     "type": "library",
     "keywords": [
         "api",
+        "data",
         "json",
         "laravel",
+        "normalize",
         "response",
         "rest",
-        "restful"
+        "restful",
+        "standardize",
+        "structure"
     ],
     "authors": [
         {

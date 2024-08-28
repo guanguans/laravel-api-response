@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\ExceptionPipes;
 
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
+use Symfony\Component\HttpFoundation\Response;
 
-class ValidationExceptionPipe
+class AuthenticationExceptionPipe
 {
     use WithPipeArgs;
 
@@ -36,11 +37,10 @@ class ValidationExceptionPipe
     {
         $data = $next($throwable);
 
-        if ($throwable instanceof ValidationException) {
+        if ($throwable instanceof AuthenticationException) {
             return [
-                'code' => $throwable->status,
+                'code' => Response::HTTP_UNAUTHORIZED,
                 'message' => $throwable->getMessage(),
-                'error' => $throwable->errors(),
             ] + $data;
         }
 
