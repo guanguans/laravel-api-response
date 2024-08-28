@@ -93,6 +93,6 @@ return [
         /*
          * After...
          */
-        // StatusCodePipe::with(),
+        StatusCodePipe::with(),
     ],
 ];

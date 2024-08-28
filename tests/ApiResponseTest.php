@@ -19,5 +19,5 @@ use Illuminate\Http\JsonResponse;
 it('can return JsonResponse', function (): void {
     expect($this->apiResponse()->exception(new \RuntimeException('foo')))
         ->toBeInstanceOf(JsonResponse::class)
-        ->isOk()->toBeTrue();
+        ->isServerError()->toBeTrue();
 })->group(__DIR__, __FILE__);

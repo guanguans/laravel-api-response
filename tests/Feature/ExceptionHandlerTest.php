@@ -17,9 +17,9 @@ declare(strict_types=1);
 it('can return exception error json response', function (): void {
     $this
         ->post('exception')
-        ->assertOk();
+        ->assertStatus(500);
 
     $this
         ->post('api/exception')
-        ->assertOk();
+        ->assertStatus(500);
 })->group(__DIR__, __FILE__);

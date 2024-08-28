@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpInternalEntityUsedInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
 
@@ -17,14 +18,22 @@ declare(strict_types=1);
 use Illuminate\Http\JsonResponse;
 use Pest\Expectation;
 
-it('can use http status methods', function (): void {
+it('can use success http status methods', function (): void {
     expect([
         'ok',
         'created',
         'accepted',
         'localize',
         'noContent',
+    ])->each(function (Expectation $expectation): void {
+        expect($this->apiResponse()->{$expectation->value}())
+            ->toBeInstanceOf(JsonResponse::class)
+            ->isSuccessful()->toBeTrue();
+    });
+})->group(__DIR__, __FILE__);
 
+it('can use client error http status methods', function (): void {
+    expect([
         'badRequest',
         'unauthorized',
         'paymentRequired',
@@ -39,6 +48,6 @@ it('can use http status methods', function (): void {
     ])->each(function (Expectation $expectation): void {
         expect($this->apiResponse()->{$expectation->value}())
             ->toBeInstanceOf(JsonResponse::class)
-            ->isOK()->toBeTrue();
+            ->isClientError()->toBeTrue();
     });
 })->group(__DIR__, __FILE__);
