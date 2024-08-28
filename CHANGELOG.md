@@ -8,6 +8,19 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.0-rc1"></a>
+## [1.0.0-rc1] - 2024-08-28
+### Code Refactoring
+- **models:** simplify relationship methods
+
+### Features
+- **exception-pipes:** add HttpResponseExceptionPipe and ResponsableExceptionPipe
+- **tests:** update HTTP status checks for API responses
+
+### Test
+- **refactor:** rename test directories and update paths
+
+
 <a name="1.0.0-beta3"></a>
 ## [1.0.0-beta3] - 2024-08-27
 ### Bug Fixes
@@ -81,6 +94,7 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta3...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-rc1...HEAD
+[1.0.0-rc1]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta3...1.0.0-rc1
 [1.0.0-beta3]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta2...1.0.0-beta3
 [1.0.0-beta2]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta1...1.0.0-beta2
