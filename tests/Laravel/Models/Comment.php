@@ -11,8 +11,8 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Tests\Models;
+namespace Guanguans\LaravelApiResponse\Tests\Laravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model {}
+class Comment extends Model {}

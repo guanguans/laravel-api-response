@@ -18,7 +18,7 @@ use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponse\Tests\seeders\TablesSeeder;
+use Guanguans\LaravelApiResponse\Tests\Laravel\seeders\TablesSeeder;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
@@ -33,7 +33,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->app->useLangPath(__DIR__.'/lang');
+        $this->app->useLangPath(__DIR__.'/Laravel/lang');
         $this->startMockery();
     }
 
@@ -67,7 +67,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function defineDatabaseMigrations(): void
     {
         // (require __DIR__.'/migrations/create_tables.php')->up();
-        $this->loadMigrationsFrom(__DIR__.'/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/Laravel/migrations');
     }
 
     protected function defineDatabaseSeeders(): void

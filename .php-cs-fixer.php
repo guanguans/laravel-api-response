@@ -192,6 +192,7 @@ return Config\Factory::fromRuleSet($ruleSet)
                 'vendor-bin/',
                 '__snapshots__/',
                 'tests/fixtures/',
+                'tests/Fixtures/',
             ])
             ->append(glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE))
             ->append([

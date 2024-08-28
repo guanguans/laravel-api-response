@@ -14,8 +14,8 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Guanguans\LaravelApiResponse\Tests\Models\User;
-use Guanguans\LaravelApiResponse\Tests\Resources\UserResource;
+use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
+use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserResource;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 it('can return Model type data JSON response', function (): void {
