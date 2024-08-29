@@ -94,6 +94,6 @@ return [
         /*
          * After...
          */
-        StatusCodePipe::with(),
+        StatusCodePipe::with(Response::HTTP_INTERNAL_SERVER_ERROR, Response::HTTP_OK),
     ],
 ];

@@ -27,22 +27,35 @@ class StatusCodePipe
      *
      * @param \Closure(array): \Illuminate\Http\JsonResponse $next
      * @param  array{
-     *  status: string,
+     *  status: bool,
      *  code: int,
      *  message: string,
      *  data: mixed,
      *  error: ?array,
      * }  $data
      */
-    public function handle(array $data, \Closure $next, int $fallbackStatusCode = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse
-    {
-        return $next($data)->setStatusCode($this->statusCodeFor($data['code'], $fallbackStatusCode));
+    public function handle(
+        array $data,
+        \Closure $next,
+        int $fallbackErrorStatusCode = Response::HTTP_INTERNAL_SERVER_ERROR,
+        int $fallbackSuccessStatusCode = Response::HTTP_OK
+    ): JsonResponse {
+        return $next($data)->setStatusCode($this->statusCodeFor($data, $fallbackErrorStatusCode, $fallbackSuccessStatusCode));
     }
 
-    private function statusCodeFor(int $code, int $fallbackStatusCode): int
+    /**
+     * @param  array{
+     *  status: bool,
+     *  code: int,
+     *  message: string,
+     *  data: mixed,
+     *  error: ?array,
+     * }  $data
+     */
+    private function statusCodeFor(array $data, int $fallbackErrorStatusCode, int $fallbackSuccessStatusCode): int
     {
-        return $this->isInvalidStatusCode($statusCode = Utils::statusCodeFor($code))
-            ? $fallbackStatusCode
+        return $this->isInvalidStatusCode($statusCode = Utils::statusCodeFor($data['code']))
+            ? ($data['status'] ? $fallbackSuccessStatusCode : $fallbackErrorStatusCode)
             : $statusCode;
     }
 

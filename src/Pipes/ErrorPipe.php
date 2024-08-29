@@ -25,7 +25,7 @@ class ErrorPipe
      *
      * @param \Closure(array): \Illuminate\Http\JsonResponse $next
      * @param  array{
-     *  status: string,
+     *  status: bool,
      *  code: int,
      *  message: string,
      *  data: mixed,

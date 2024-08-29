@@ -28,7 +28,7 @@ class MessagePipe
      * @param \Closure(array): \Illuminate\Http\JsonResponse $next
      * @param string $fallbackMessage // ['Whoops, looks like something went wrong.', 'Server Error', 'Unknown Status']
      * @param  array{
-     *  status: string,
+     *  status: bool,
      *  code: int,
      *  message: string,
      *  data: mixed,
