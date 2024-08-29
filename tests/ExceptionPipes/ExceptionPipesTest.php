@@ -48,6 +48,6 @@ it('can use exception pipes', function (): void {
                 \Throwable::class,
             )
         )
-        ->exception(new HttpException(500))->toBeInstanceOf(JsonResponse::class)
+        ->exception(new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR))->toBeInstanceOf(JsonResponse::class)
         ->exception(new ValidationException(Validator::make(['foo' => 'bar'], ['bar' => ['int']])))->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);

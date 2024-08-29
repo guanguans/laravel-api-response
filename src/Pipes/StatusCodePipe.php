@@ -16,6 +16,7 @@ namespace Guanguans\LaravelApiResponse\Pipes;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Guanguans\LaravelApiResponse\Support\Utils;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class StatusCodePipe
 {
@@ -33,7 +34,7 @@ class StatusCodePipe
      *  error: ?array,
      * }  $data
      */
-    public function handle(array $data, \Closure $next, int $fallbackStatusCode = 500): JsonResponse
+    public function handle(array $data, \Closure $next, int $fallbackStatusCode = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse
     {
         return $next($data)->setStatusCode($this->statusCodeFor($data['code'], $fallbackStatusCode));
     }
@@ -50,6 +51,6 @@ class StatusCodePipe
      */
     private function isInvalidStatusCode(int $statusCode): bool
     {
-        return 100 > $statusCode || 600 <= $statusCode;
+        return Response::HTTP_CONTINUE > $statusCode || 600 <= $statusCode;
     }
 }

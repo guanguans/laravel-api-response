@@ -14,12 +14,14 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Symfony\Component\HttpFoundation\Response;
+
 it('can return exception error json response', function (): void {
     $this
         ->post('exception')
-        ->assertStatus(500);
+        ->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
 
     $this
         ->post('api/exception')
-        ->assertStatus(500);
+        ->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
 })->group(__DIR__, __FILE__);

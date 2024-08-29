@@ -129,7 +129,7 @@ class ApiResponse implements ApiResponseContract
     {
         return static fn (array $data): JsonResponse => new JsonResponse(
             $data,
-            200,
+            Response::HTTP_OK,
             [],
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
             | \JSON_HEX_TAG | \JSON_HEX_APOS | \JSON_HEX_AMP | \JSON_HEX_QUOT

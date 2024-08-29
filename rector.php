@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 use Guanguans\LaravelApiResponse\Support\Rectors\ToInternalExceptionRector;
 use Illuminate\Support\Str;
+use PhpParser\Node\Expr\ClassConstFetch;
+use PhpParser\Node\Identifier;
+use PhpParser\Node\Name\FullyQualified;
+use PhpParser\Node\Scalar\LNumber;
 use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
@@ -35,8 +39,11 @@ use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
+use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
 use Rector\Transform\ValueObject\FuncCallToStaticCall;
+use Rector\Transform\ValueObject\ScalarValueToConstFetch;
 use RectorLaravel\Set\LaravelSetList;
+use Symfony\Component\HttpFoundation\Response;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -170,17 +177,17 @@ return RectorConfig::configure()
     ->withConfiguredRule(FuncCallToStaticCallRector::class, [
         new FuncCallToStaticCall('str', Str::class, 'of'),
     ])
-    // ->withConfiguredRule(ScalarValueToConstFetchRector::class, array_map(
-    //     static fn (int $value, string $constant): ScalarValueToConstFetch => new ScalarValueToConstFetch(
-    //         new LNumber($value),
-    //         new ClassConstFetch(new FullyQualified(Response::class), new Identifier($constant))
-    //     ),
-    //     $constants = array_filter(
-    //         (new \ReflectionClass(Response::class))->getConstants(),
-    //         static fn ($value): bool => \is_int($value),
-    //     ),
-    //     array_keys($constants)
-    // ))
+    ->withConfiguredRule(ScalarValueToConstFetchRector::class, array_map(
+        static fn (int $value, string $constant): ScalarValueToConstFetch => new ScalarValueToConstFetch(
+            new LNumber($value),
+            new ClassConstFetch(new FullyQualified(Response::class), new Identifier($constant))
+        ),
+        $constants = array_filter(
+            (new \ReflectionClass(Response::class))->getConstants(),
+            static fn ($value): bool => \is_int($value),
+        ),
+        array_keys($constants)
+    ))
     ->withSkip([
         '**/fixtures/*',
         '**/Fixtures/*',
