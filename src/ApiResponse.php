@@ -127,12 +127,18 @@ class ApiResponse implements ApiResponseContract
 
     protected function destination(): \Closure
     {
-        return static fn (array $data): JsonResponse => new JsonResponse(
-            $data,
-            Response::HTTP_OK,
-            [],
-            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
-            | \JSON_HEX_TAG | \JSON_HEX_APOS | \JSON_HEX_AMP | \JSON_HEX_QUOT
-        );
+        return static function (array $data): JsonResponse {
+            $options = \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
+                | \JSON_HEX_TAG | \JSON_HEX_APOS | \JSON_HEX_AMP | \JSON_HEX_QUOT;
+
+            $data['status'] or $options |= \JSON_PRETTY_PRINT;
+
+            return new JsonResponse(
+                $data,
+                Response::HTTP_OK,
+                [],
+                $options
+            );
+        };
     }
 }
