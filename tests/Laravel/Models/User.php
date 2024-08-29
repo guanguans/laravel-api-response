@@ -37,6 +37,6 @@ class User extends Model
 
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class)->latest();
+        return $this->belongsToMany(Role::class)->using(RoleUser::class)->latest();
     }
 }
