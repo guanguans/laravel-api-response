@@ -37,9 +37,14 @@ return [
      * Render using.
      */
     'render_using' => ShouldReturnJsonRenderUsing::class,
-    // 'render_using' => ApiPathsRenderUsing::make([
-    //     'api/*',
-    // ]),
+    // 'render_using' => ApiPathsRenderUsing::make(
+    //     [
+    //         'api/*',
+    //     ],
+    //     [
+    //         // except...
+    //     ],
+    // ),
 
     /**
      * Exception pipes.

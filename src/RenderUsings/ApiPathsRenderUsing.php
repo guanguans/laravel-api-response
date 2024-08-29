@@ -23,19 +23,23 @@ class ApiPathsRenderUsing extends RenderUsing
     use MakeStaticable;
 
     /** @var list<string> */
-    protected array $paths;
+    protected array $only;
 
-    public function __construct(?array $paths = null)
+    /** @var list<string> */
+    protected array $except;
+
+    public function __construct(?array $only = null, array $except = [])
     {
-        $this->paths = $paths ?? $this->defaultPaths();
+        $this->only = $only ?? $this->defaultOnly();
+        $this->except = $except;
     }
 
     protected function when(Request $request, \Throwable $throwable): bool
     {
-        return $request->is(...$this->paths);
+        return $request->is(...$this->only) && !$request->is(...$this->except);
     }
 
-    protected function defaultPaths(): array
+    protected function defaultOnly(): array
     {
         return ['api/*'];
     }
