@@ -10,12 +10,6 @@
 [![Total Downloads](https://poser.pugx.org/guanguans/laravel-api-response/downloads)](https://packagist.org/packages/guanguans/laravel-api-response)
 [![License](https://poser.pugx.org/guanguans/laravel-api-response/license)](https://packagist.org/packages/guanguans/laravel-api-response)
 
-## Features
-
-* Support for ...
-
-## Related Links
-
 ## Requirement
 
 * PHP >= 7.4
@@ -34,15 +28,817 @@ composer require guanguans/laravel-api-response --ansi -v
 php artisan vendor:publish --provider="Guanguans\\LaravelApiResponse\\ApiResponseServiceProvider" --ansi -v
 ```
 
-### Configure channels in the `config/api-response.php` and `.env` file
-
-```dotenv
-...
-```
-
 ## Usage
 
-> ...
+### Get Instance
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
+use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
+use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+
+class Controller extends \App\Http\Controllers\Controller
+{
+    use ApiResponseFactory;
+
+    public function get()
+    {
+        /** @var \Guanguans\LaravelApiResponse\ApiResponse $apiResponse */
+        $apiResponse = $this->apiResponse(); //
+        $apiResponse = ApiResponseFacade::getFacadeRoot();
+        $apiResponse = resolve(ApiResponseContract::class);
+        $apiResponse = app(ApiResponseContract::class);
+    }
+}
+```
+
+### Response examples
+
+<details>
+<summary><b>Model data</b></summary>
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\User;
+use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Http\JsonResponse;
+
+class Controller extends \App\Http\Controllers\Controller
+{
+    use ApiResponseFactory;
+
+    public function example(): JsonResponse
+    {
+        return $this->apiResponse()->success(
+            User::query()->with('posts')->first()
+        );
+    }
+}
+```
+
+```json
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": {
+        "id": 1,
+        "country_id": 1,
+        "posts": [
+            {
+                "id": 3,
+                "user_id": 1,
+                "created_at": "2024-01-01 00:00:03",
+                "updated_at": null
+            },
+            {
+                "id": 2,
+                "user_id": 1,
+                "created_at": "2024-01-01 00:00:02",
+                "updated_at": null
+            },
+            {
+                "id": 1,
+                "user_id": 1,
+                "created_at": "2024-01-01 00:00:01",
+                "updated_at": null
+            }
+        ]
+    },
+    "error": {}
+}
+```
+</details>
+
+<details>
+<summary><b>Collection data</b></summary>
+
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\User;
+use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Http\JsonResponse;
+
+class Controller extends \App\Http\Controllers\Controller
+{
+    use ApiResponseFactory;
+
+    public function example(): JsonResponse
+    {
+        return $this->apiResponse()->success(
+            User::query()->with(['posts', 'roles'])->get()
+        );
+    }
+}
+```
+
+```json
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": [
+        {
+            "id": 1,
+            "country_id": 1,
+            "posts": [
+                {
+                    "id": 3,
+                    "user_id": 1,
+                    "created_at": "2024-01-01 00:00:03",
+                    "updated_at": null
+                },
+                {
+                    "id": 2,
+                    "user_id": 1,
+                    "created_at": "2024-01-01 00:00:02",
+                    "updated_at": null
+                },
+                {
+                    "id": 1,
+                    "user_id": 1,
+                    "created_at": "2024-01-01 00:00:01",
+                    "updated_at": null
+                }
+            ],
+            "roles": [
+                {
+                    "id": 3,
+                    "created_at": "2024-01-01 00:00:03",
+                    "updated_at": null,
+                    "pivot": {
+                        "user_id": 1,
+                        "role_id": 3
+                    }
+                },
+                {
+                    "id": 2,
+                    "created_at": "2024-01-01 00:00:02",
+                    "updated_at": null,
+                    "pivot": {
+                        "user_id": 1,
+                        "role_id": 2
+                    }
+                },
+                {
+                    "id": 1,
+                    "created_at": "2024-01-01 00:00:01",
+                    "updated_at": null,
+                    "pivot": {
+                        "user_id": 1,
+                        "role_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "country_id": 2,
+            "posts": [
+                {
+                    "id": 6,
+                    "user_id": 2,
+                    "created_at": "2024-01-01 00:00:06",
+                    "updated_at": null
+                },
+                {
+                    "id": 5,
+                    "user_id": 2,
+                    "created_at": "2024-01-01 00:00:05",
+                    "updated_at": null
+                },
+                {
+                    "id": 4,
+                    "user_id": 2,
+                    "created_at": "2024-01-01 00:00:04",
+                    "updated_at": null
+                }
+            ],
+            "roles": [
+                {
+                    "id": 6,
+                    "created_at": "2024-01-01 00:00:06",
+                    "updated_at": null,
+                    "pivot": {
+                        "user_id": 2,
+                        "role_id": 6
+                    }
+                },
+                {
+                    "id": 5,
+                    "created_at": "2024-01-01 00:00:05",
+                    "updated_at": null,
+                    "pivot": {
+                        "user_id": 2,
+                        "role_id": 5
+                    }
+                },
+                {
+                    "id": 4,
+                    "created_at": "2024-01-01 00:00:04",
+                    "updated_at": null,
+                    "pivot": {
+                        "user_id": 2,
+                        "role_id": 4
+                    }
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "country_id": 3,
+            "posts": [
+                {
+                    "id": 7,
+                    "user_id": 3,
+                    "created_at": "2024-01-01 00:00:07",
+                    "updated_at": null
+                }
+            ],
+            "roles": [
+                {
+                    "id": 7,
+                    "created_at": "2024-01-01 00:00:07",
+                    "updated_at": null,
+                    "pivot": {
+                        "user_id": 3,
+                        "role_id": 7
+                    }
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "country_id": 4,
+            "posts": [],
+            "roles": []
+        },
+        {
+            "id": 5,
+            "country_id": 5,
+            "posts": [],
+            "roles": []
+        },
+        {
+            "id": 6,
+            "country_id": 6,
+            "posts": [],
+            "roles": []
+        },
+        {
+            "id": 7,
+            "country_id": 7,
+            "posts": [],
+            "roles": []
+        }
+    ],
+    "error": {}
+}
+```
+</details>
+
+<details>
+<summary><b>Paginate data</b></summary>
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\User;
+use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Http\JsonResponse;
+
+class Controller extends \App\Http\Controllers\Controller
+{
+    use ApiResponseFactory;
+
+    public function example(): JsonResponse
+    {
+        return $this->apiResponse()->success(
+            User::query()->with(['posts', 'roles'])->paginate(3)
+        );
+    }
+}
+```
+
+```json
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": {
+        "data": [
+            {
+                "id": 1,
+                "country_id": 1,
+                "posts": [
+                    {
+                        "id": 3,
+                        "user_id": 1,
+                        "created_at": "2024-01-01 00:00:03",
+                        "updated_at": null
+                    },
+                    {
+                        "id": 2,
+                        "user_id": 1,
+                        "created_at": "2024-01-01 00:00:02",
+                        "updated_at": null
+                    },
+                    {
+                        "id": 1,
+                        "user_id": 1,
+                        "created_at": "2024-01-01 00:00:01",
+                        "updated_at": null
+                    }
+                ],
+                "roles": [
+                    {
+                        "id": 3,
+                        "created_at": "2024-01-01 00:00:03",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 1,
+                            "role_id": 3
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "created_at": "2024-01-01 00:00:02",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 1,
+                            "role_id": 2
+                        }
+                    },
+                    {
+                        "id": 1,
+                        "created_at": "2024-01-01 00:00:01",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 1,
+                            "role_id": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "country_id": 2,
+                "posts": [
+                    {
+                        "id": 6,
+                        "user_id": 2,
+                        "created_at": "2024-01-01 00:00:06",
+                        "updated_at": null
+                    },
+                    {
+                        "id": 5,
+                        "user_id": 2,
+                        "created_at": "2024-01-01 00:00:05",
+                        "updated_at": null
+                    },
+                    {
+                        "id": 4,
+                        "user_id": 2,
+                        "created_at": "2024-01-01 00:00:04",
+                        "updated_at": null
+                    }
+                ],
+                "roles": [
+                    {
+                        "id": 6,
+                        "created_at": "2024-01-01 00:00:06",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 2,
+                            "role_id": 6
+                        }
+                    },
+                    {
+                        "id": 5,
+                        "created_at": "2024-01-01 00:00:05",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 2,
+                            "role_id": 5
+                        }
+                    },
+                    {
+                        "id": 4,
+                        "created_at": "2024-01-01 00:00:04",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 2,
+                            "role_id": 4
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "country_id": 3,
+                "posts": [
+                    {
+                        "id": 7,
+                        "user_id": 3,
+                        "created_at": "2024-01-01 00:00:07",
+                        "updated_at": null
+                    }
+                ],
+                "roles": [
+                    {
+                        "id": 7,
+                        "created_at": "2024-01-01 00:00:07",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 3,
+                            "role_id": 7
+                        }
+                    }
+                ]
+            }
+        ],
+        "links": {
+            "first": "http:\/\/localhost?page=1",
+            "last": "http:\/\/localhost?page=3",
+            "prev": null,
+            "next": "http:\/\/localhost?page=2"
+        },
+        "meta": {
+            "current_page": 1,
+            "from": 1,
+            "last_page": 3,
+            "links": [
+                {
+                    "url": null,
+                    "label": "pagination.previous",
+                    "active": false
+                },
+                {
+                    "url": "http:\/\/localhost?page=1",
+                    "label": "1",
+                    "active": true
+                },
+                {
+                    "url": "http:\/\/localhost?page=2",
+                    "label": "2",
+                    "active": false
+                },
+                {
+                    "url": "http:\/\/localhost?page=3",
+                    "label": "3",
+                    "active": false
+                },
+                {
+                    "url": "http:\/\/localhost?page=2",
+                    "label": "pagination.next",
+                    "active": false
+                }
+            ],
+            "path": "http:\/\/localhost",
+            "per_page": 3,
+            "to": 3,
+            "total": 7
+        }
+    },
+    "error": {}
+}
+```
+</details>
+
+<details>
+<summary><b>Resource data</b></summary>
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Http\JsonResponse;
+
+class Controller extends \App\Http\Controllers\Controller
+{
+    use ApiResponseFactory;
+
+    public function example(): JsonResponse
+    {
+        return $this->apiResponse()->success(
+            UserResource::make(User::query()->with('posts')->first())
+        );
+    }
+}
+```
+
+```json
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": {
+        "data": {
+            "id": 1,
+            "country_id": 1,
+            "post": {
+                "id": 3,
+                "user_id": 1,
+                "created_at": "2024-01-01 00:00:03",
+                "updated_at": null
+            },
+            "posts": [
+                {
+                    "id": 3,
+                    "user_id": 1,
+                    "created_at": "2024-01-01 00:00:03",
+                    "updated_at": null
+                },
+                {
+                    "id": 2,
+                    "user_id": 1,
+                    "created_at": "2024-01-01 00:00:02",
+                    "updated_at": null
+                },
+                {
+                    "id": 1,
+                    "user_id": 1,
+                    "created_at": "2024-01-01 00:00:01",
+                    "updated_at": null
+                }
+            ],
+            "roles": [
+                {
+                    "id": 3,
+                    "created_at": "2024-01-01 00:00:03",
+                    "updated_at": null,
+                    "pivot": {
+                        "user_id": 1,
+                        "role_id": 3
+                    }
+                },
+                {
+                    "id": 2,
+                    "created_at": "2024-01-01 00:00:02",
+                    "updated_at": null,
+                    "pivot": {
+                        "user_id": 1,
+                        "role_id": 2
+                    }
+                },
+                {
+                    "id": 1,
+                    "created_at": "2024-01-01 00:00:01",
+                    "updated_at": null,
+                    "pivot": {
+                        "user_id": 1,
+                        "role_id": 1
+                    }
+                }
+            ]
+        }
+    },
+    "error": {}
+}
+```
+</details>
+
+<details>
+<summary><b>ResourceCollection data</b></summary>
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Resources\UserCollection;
+use App\Models\User;
+use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Http\JsonResponse;
+
+class Controller extends \App\Http\Controllers\Controller
+{
+    use ApiResponseFactory;
+
+    public function example(): JsonResponse
+    {
+        return $this->apiResponse()->success(
+            UserCollection::make(User::query()->with(['posts', 'roles'])->get()),
+        );
+    }
+}
+```
+
+```json
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": {
+        "data": [
+            {
+                "id": 1,
+                "country_id": 1,
+                "post": {
+                    "id": 3,
+                    "user_id": 1,
+                    "created_at": "2024-01-01 00:00:03",
+                    "updated_at": null
+                },
+                "posts": [
+                    {
+                        "id": 3,
+                        "user_id": 1,
+                        "created_at": "2024-01-01 00:00:03",
+                        "updated_at": null
+                    },
+                    {
+                        "id": 2,
+                        "user_id": 1,
+                        "created_at": "2024-01-01 00:00:02",
+                        "updated_at": null
+                    },
+                    {
+                        "id": 1,
+                        "user_id": 1,
+                        "created_at": "2024-01-01 00:00:01",
+                        "updated_at": null
+                    }
+                ],
+                "roles": [
+                    {
+                        "id": 3,
+                        "created_at": "2024-01-01 00:00:03",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 1,
+                            "role_id": 3
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "created_at": "2024-01-01 00:00:02",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 1,
+                            "role_id": 2
+                        }
+                    },
+                    {
+                        "id": 1,
+                        "created_at": "2024-01-01 00:00:01",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 1,
+                            "role_id": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "country_id": 2,
+                "post": {
+                    "id": 6,
+                    "user_id": 2,
+                    "created_at": "2024-01-01 00:00:06",
+                    "updated_at": null
+                },
+                "posts": [
+                    {
+                        "id": 6,
+                        "user_id": 2,
+                        "created_at": "2024-01-01 00:00:06",
+                        "updated_at": null
+                    },
+                    {
+                        "id": 5,
+                        "user_id": 2,
+                        "created_at": "2024-01-01 00:00:05",
+                        "updated_at": null
+                    },
+                    {
+                        "id": 4,
+                        "user_id": 2,
+                        "created_at": "2024-01-01 00:00:04",
+                        "updated_at": null
+                    }
+                ],
+                "roles": [
+                    {
+                        "id": 6,
+                        "created_at": "2024-01-01 00:00:06",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 2,
+                            "role_id": 6
+                        }
+                    },
+                    {
+                        "id": 5,
+                        "created_at": "2024-01-01 00:00:05",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 2,
+                            "role_id": 5
+                        }
+                    },
+                    {
+                        "id": 4,
+                        "created_at": "2024-01-01 00:00:04",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 2,
+                            "role_id": 4
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "country_id": 3,
+                "post": {
+                    "id": 7,
+                    "user_id": 3,
+                    "created_at": "2024-01-01 00:00:07",
+                    "updated_at": null
+                },
+                "posts": [
+                    {
+                        "id": 7,
+                        "user_id": 3,
+                        "created_at": "2024-01-01 00:00:07",
+                        "updated_at": null
+                    }
+                ],
+                "roles": [
+                    {
+                        "id": 7,
+                        "created_at": "2024-01-01 00:00:07",
+                        "updated_at": null,
+                        "pivot": {
+                            "user_id": 3,
+                            "role_id": 7
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "country_id": 4,
+                "post": null,
+                "posts": [],
+                "roles": []
+            },
+            {
+                "id": 5,
+                "country_id": 5,
+                "post": null,
+                "posts": [],
+                "roles": []
+            },
+            {
+                "id": 6,
+                "country_id": 6,
+                "post": null,
+                "posts": [],
+                "roles": []
+            },
+            {
+                "id": 7,
+                "country_id": 7,
+                "post": null,
+                "posts": [],
+                "roles": []
+            }
+        ]
+    },
+    "error": {}
+}
+```
+</details>
+
+[More examples...](tests/__snapshots__)
+
+### Methods of http status
+
+[ConcreteHttpStatusMethods.php](src/Concerns/ConcreteHttpStatusMethods.php)
+
+### Status Code Pipe
+
+### Render using
 
 ## Testing
 

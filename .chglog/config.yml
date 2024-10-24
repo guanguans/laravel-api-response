@@ -7,16 +7,20 @@ options:
   commits:
     filters:
       Type:
+        - build
+        - chore
+        - ci
+        - docs
         - feat
         - fix
         - perf
         - refactor
-        - docs
-        - test
-        - ci
         - revert
+        - style
+        - test
   commit_groups:
     title_maps:
+      chore: Chores
       ci: CI
       feat: Features
       fix: Bug Fixes
