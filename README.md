@@ -10,6 +10,15 @@
 [![Total Downloads](https://poser.pugx.org/guanguans/laravel-api-response/downloads)](https://packagist.org/packages/guanguans/laravel-api-response)
 [![License](https://poser.pugx.org/guanguans/laravel-api-response/license)](https://packagist.org/packages/guanguans/laravel-api-response)
 
+## Features
+
+* Support for customized response data structure
+* Support for restful API response(optional)
+* Support for automatically handled exception
+* Support for localized message
+* Support for customized data pipe
+* Support for customized exception pipe
+
 ## Requirement
 
 * PHP >= 7.4
