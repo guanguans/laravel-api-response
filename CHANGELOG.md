@@ -8,8 +8,36 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.0-rc2"></a>
+## [1.0.0-rc2] - 2024-10-25
+### Chores
+- **commit:** Update project dependencies
+- **composer:** Add phpmnd package
+- **release:** 1.0.0-rc1
+
+### Code Refactoring
+- **api:** replace magic numbers with constants
+- **pipes:** update StatusCodePipe to handle success/error codes
+
+### Docs
+- **api-response:** Add features section
+
+### Features
+- **ApiResponse:** improve JSON response options
+- **rendering:** Refactor ApiPathsRenderUsing to include 'only' and 'except' parameters
+
+### Test
+- Add snapshot update command and new RoleUser model
+- **Feature:** update LaravelDataTypesTest
+- **commit:** Update ApiResponse, ApiResponseContract, and related classes
+
+
 <a name="1.0.0-rc1"></a>
 ## [1.0.0-rc1] - 2024-08-28
+### Chores
+- **dependencies:** update phpstan to version 1.12
+- **release:** 1.0.0-beta3
+
 ### Code Refactoring
 - **models:** simplify relationship methods
 
@@ -25,6 +53,9 @@ All notable changes to this project will be documented in this file.
 ## [1.0.0-beta3] - 2024-08-27
 ### Bug Fixes
 - **api-response:** rename HideMessageExceptionPipe to HideOriginalMessageExceptionPipe
+
+### Chores
+- **release:** 1.0.0-beta2
 
 ### Code Refactoring
 - implement __set_state method using SetStateable traitReplace the explicit __set_state method with the SetStateable trait in theApiPathsRenderUsingFactory class to improve code reuse and readability.
@@ -60,6 +91,9 @@ new pipes for proper header and error handling.
 ### Bug Fixes
 - **CollectionMacro:** add unshift method to CollectionMacro
 
+### Chores
+- **release:** 1.0.0-beta1
+
 ### Test
 - Remove old success and error response tests
 - Add unit tests for ApiResponse functionality
@@ -69,6 +103,10 @@ new pipes for proper header and error handling.
 ## 1.0.0-beta1 - 2024-08-23
 ### Bug Fixes
 - **api-response:** fix exception handling and improve test coverage
+
+### Chores
+- updating configuration and removing useless files
+- **release:** 2.0.0-beta1
 
 ### Code Refactoring
 - Rename Throwable interface and update usage
@@ -94,7 +132,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-rc1...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-rc2...HEAD
+[1.0.0-rc2]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-rc1...1.0.0-rc2
 [1.0.0-rc1]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta3...1.0.0-rc1
 [1.0.0-beta3]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta2...1.0.0-beta3
 [1.0.0-beta2]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-beta1...1.0.0-beta2
