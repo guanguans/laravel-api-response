@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\Tests\Laravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Post extends Model
 {
@@ -25,18 +24,20 @@ class Post extends Model
         'user_id' => 'int',
     ];
 
-    public function comment(): MorphOne
+    public function user(): BelongsTo
     {
-        return $this->morphOne(Comment::class, 'commentable')->latest()->limit(1);
+        return $this->belongsTo(User::class);
     }
 
-    public function comments(): MorphMany
+    public function userCountry(): HasOneThrough
     {
-        return $this->morphMany(Comment::class, 'commentable')->latest();
-    }
-
-    public function tags(): MorphToMany
-    {
-        return $this->morphToMany(Tag::class, 'taggable')->latest();
+        return $this->hasOneThrough(
+            Country::class,
+            User::class,
+            'country_id',
+            'id',
+            'user_id',
+            'country_id'
+        );
     }
 }

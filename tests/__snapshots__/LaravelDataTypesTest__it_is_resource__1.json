@@ -1,0 +1,44 @@
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": {
+        "data": {
+            "id": 1,
+            "name": "John",
+            "country_id": 1,
+            "created_at": "2024-01-01 00:00:01",
+            "updated_at": "2024-01-01 00:00:01",
+            "country": {
+                "id": 1,
+                "name": "China",
+                "created_at": "2024-01-01 00:00:01",
+                "updated_at": "2024-01-01 00:00:01"
+            },
+            "posts": [
+                {
+                    "id": 1,
+                    "title": "PHP is the best language!",
+                    "user_id": 1,
+                    "created_at": "2024-01-01 00:00:01",
+                    "updated_at": "2024-01-01 00:00:01"
+                },
+                {
+                    "id": 2,
+                    "title": "JAVA is the best language!",
+                    "user_id": 1,
+                    "created_at": "2024-01-01 00:00:02",
+                    "updated_at": "2024-01-01 00:00:02"
+                },
+                {
+                    "id": 3,
+                    "title": "Python is the best language!",
+                    "user_id": 1,
+                    "created_at": "2024-01-01 00:00:03",
+                    "updated_at": "2024-01-01 00:00:03"
+                }
+            ]
+        }
+    },
+    "error": {}
+}

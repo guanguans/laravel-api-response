@@ -21,18 +21,20 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class UserResource extends JsonResource
 {
     /**
-     * @noinspection MissingParentCallInspection
-     *
      * @param mixed $request
      */
     public function toArray($request): array
     {
-        return [
-            'id' => $this->id,
-            'country_id' => $this->country_id,
-            'post' => $this->post,
-            'posts' => $this->posts,
-            'roles' => $this->roles,
-        ];
+        // return [
+        //     'id' => $this->id,
+        //     'name' => $this->name,
+        //     'country_id' => $this->country_id,
+        //     'country' => $this->country,
+        //     'posts' => $this->posts,
+        //     'created_at' => $this->created_at,
+        //     'updated_at' => $this->updated_at,
+        // ];
+
+        return parent::toArray($request);
     }
 }

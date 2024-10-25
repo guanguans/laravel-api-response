@@ -14,18 +14,20 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\Tests\Laravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Country extends Model
 {
-    public function post(): HasOneThrough
+    public $timestamps = false;
+
+    public function users(): HasMany
     {
-        return $this->hasOneThrough(Post::class, User::class)->latest()->limit(1);
+        return $this->hasMany(User::class);
     }
 
     public function posts(): HasManyThrough
     {
-        return $this->hasManyThrough(Post::class, User::class)->latest();
+        return $this->hasManyThrough(Post::class, User::class);
     }
 }

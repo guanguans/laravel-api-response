@@ -84,14 +84,17 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function defineRoutes($router): void
     {
         $router->any('exception', static function (): void {
-            throw new \RuntimeException('error');
+            config()->set('app.debug', false);
+
+            throw new \RuntimeException('This is a runtime exception.');
         })->middleware(SetAcceptHeader::class);
 
-        $router->any('api/exception', static function (): void {
+        $router->any('debug-exception', static function (): void {
             /** @noinspection PhpPossiblePolymorphicInvocationInspection */
-            app(ExceptionHandler::class)->renderable(app(ApiPathsRenderUsing::class));
+            app(ExceptionHandler::class)->renderable(app(ApiPathsRenderUsing::class, ['only' => ['*']]));
+            config()->set('app.debug', true);
 
-            throw new \RuntimeException('error');
+            throw new \RuntimeException('This is a runtime exception.');
         });
     }
 }

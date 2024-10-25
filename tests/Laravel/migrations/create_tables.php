@@ -23,44 +23,22 @@ return new class extends Migration {
     {
         Schema::create('countries', static function (Blueprint $table): void {
             $table->increments('id');
+            $table->string('name');
             $table->timestamps();
         });
 
         Schema::create('users', static function (Blueprint $table): void {
             $table->increments('id');
+            $table->string('name');
             $table->unsignedInteger('country_id');
+            $table->timestamps();
         });
 
         Schema::create('posts', static function (Blueprint $table): void {
             $table->increments('id');
+            $table->string('title');
             $table->unsignedInteger('user_id');
             $table->timestamps();
-        });
-
-        Schema::create('comments', static function (Blueprint $table): void {
-            $table->increments('id');
-            $table->morphs('commentable');
-            $table->timestamps();
-        });
-
-        Schema::create('roles', static function (Blueprint $table): void {
-            $table->increments('id');
-            $table->timestamps();
-        });
-
-        Schema::create('role_user', static function (Blueprint $table): void {
-            $table->unsignedInteger('role_id');
-            $table->unsignedInteger('user_id');
-        });
-
-        Schema::create('tags', static function (Blueprint $table): void {
-            $table->increments('id');
-            $table->timestamps();
-        });
-
-        Schema::create('taggables', static function (Blueprint $table): void {
-            $table->unsignedInteger('tag_id');
-            $table->morphs('taggable');
         });
     }
 
@@ -73,10 +51,5 @@ return new class extends Migration {
         Schema::dropIfExists('countries');
         Schema::dropIfExists('users');
         Schema::dropIfExists('posts');
-        Schema::dropIfExists('comments');
-        Schema::dropIfExists('roles');
-        Schema::dropIfExists('role_user');
-        Schema::dropIfExists('tags');
-        Schema::dropIfExists('taggables');
     }
 };

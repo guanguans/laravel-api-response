@@ -1,0 +1,9 @@
+{
+    "status": false,
+    "code": 500,
+    "message": "Internal Server Error",
+    "data": {},
+    "error": {
+        "message": "Server Error"
+    }
+}

@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\Tests\Laravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Model
 {
@@ -25,18 +24,13 @@ class User extends Model
         'country_id' => 'int',
     ];
 
-    public function post(): HasOne
+    public function country(): BelongsTo
     {
-        return $this->hasOne(Post::class)->latest()->limit(1);
+        return $this->belongsTo(Country::class);
     }
 
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class)->latest();
-    }
-
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class)->using(RoleUser::class)->latest();
+        return $this->hasMany(Post::class);
     }
 }
