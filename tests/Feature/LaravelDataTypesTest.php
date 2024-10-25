@@ -19,7 +19,13 @@ use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserCollection;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserResource;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Resources\Json\JsonResource;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
+
+beforeEach(function (): void {
+    // JsonResource::$wrap = 'data';
+    // JsonResource::$wrap = 'list';
+});
 
 it('is model', function (): void {
     $user = User::query()->with(['country', 'posts'])->first();

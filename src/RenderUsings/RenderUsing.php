@@ -30,10 +30,10 @@ abstract class RenderUsing
             if ($this->when($request, $throwable)) {
                 return ApiResponseFacade::exception($throwable);
             }
-        } catch (\Throwable $throwable) {
+        } catch (\Throwable $throwable) { // @codeCoverageIgnoreStart
             // If catch an exception, only report it,
             // and to let the default exception handler handle original exception.
-            report($throwable);
+            report($throwable); // @codeCoverageIgnoreEnd
         }
     }
 

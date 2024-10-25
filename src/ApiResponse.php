@@ -84,7 +84,7 @@ class ApiResponse implements ApiResponseContract
     /**
      * @noinspection CompactReplacementInspection
      *
-     * @param int<100, 599>|int<10000, 59999> $code
+     * @param int<100, 599>|int<100000, 599999> $code
      * @param mixed $data
      * @param null|array<string, mixed> $error
      */

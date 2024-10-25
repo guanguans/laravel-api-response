@@ -18,6 +18,7 @@ use Guanguans\LaravelApiResponse\ExceptionPipes\SetCodeExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetErrorExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetHeadersExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -48,6 +49,7 @@ it('can use exception pipes', function (): void {
                 \Throwable::class,
             )
         )
+        ->exception(new AuthenticationException)->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR))->toBeInstanceOf(JsonResponse::class)
         ->exception(new ValidationException(Validator::make(['foo' => 'bar'], ['bar' => ['int']])))->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);

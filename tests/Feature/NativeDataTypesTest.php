@@ -14,7 +14,13 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
+
+beforeEach(function (): void {
+    // JsonResource::$wrap = 'data';
+    // JsonResource::$wrap = 'list';
+});
 
 /** @see https://www.php.net/manual/en/language.types.php */
 it('is null', function (): void {

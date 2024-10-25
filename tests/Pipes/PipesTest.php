@@ -24,6 +24,7 @@ use Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 it('can use pipes', function (): void {
@@ -46,6 +47,8 @@ it('can use pipes', function (): void {
             StatusCodePipe::with(),
         )
         ->unshiftPipes(ScalarDataPipe::with(true))
+        ->exception(new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR))->toBeInstanceOf(JsonResponse::class)
+        ->exception(new HttpException(500000))->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(600))->toBeInstanceOf(JsonResponse::class)
         ->success()->toBeInstanceOf(JsonResponse::class)
         ->success(1)->toBeInstanceOf(JsonResponse::class)
