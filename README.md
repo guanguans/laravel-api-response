@@ -1082,7 +1082,78 @@ class Controller extends \App\Http\Controllers\Controller
 <details>
 <summary>Render using</summary>
 
+### `ShouldReturnJsonRenderUsing`
 
+#### `app/Http/Kernel.php`
+
+```php
+<?php
+
+namespace App\Http;
+
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
+
+class Kernel extends HttpKernel
+{
+    ...
+    protected $middlewareGroups = [
+        ...
+        'api' => [
+            \Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader::class,
+            ...
+        ],
+    ];
+    ...
+}
+```
+
+#### `bootstrap/app.php`
+
+````php
+<?php
+
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Middleware;
+
+return Application::configure(basePath: dirname(__DIR__))
+    ...
+    ->withMiddleware(static function (Middleware $middleware) {
+        $middleware->prependToGroup('api', [
+            \Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader::class,
+        ]);
+    })
+    ...
+    ->create();
+````
+
+### `ApiPathsRenderUsing`
+
+#### `config/api-response.php`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
+use Guanguans\LaravelApiResponse\RenderUsings\ShouldReturnJsonRenderUsing;
+
+return [
+    /**
+     * Render using.
+     */
+    // 'render_using' => ShouldReturnJsonRenderUsing::class,
+    'render_using' => ApiPathsRenderUsing::make(
+        [
+            'api/*',
+        ],
+        [
+            // except...
+        ],
+    ),
+    ...
+];
+```
 </details>
 
 <details>
