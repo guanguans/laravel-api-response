@@ -178,7 +178,7 @@
                 "type": "->"
             },
             {
-                "file": "\/tests\/Feature\/ExceptionDataTypesTest.php",
+                "file": "\/tests\/Feature\/ExceptionTest.php",
                 "line": 31,
                 "function": "post",
                 "class": "Orchestra\\Testbench\\TestCase",
@@ -186,7 +186,7 @@
             },
             {
                 "function": "{closure}",
-                "class": "P\\Tests\\Feature\\ExceptionDataTypesTest",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
                 "type": "->"
             },
             {
@@ -196,7 +196,7 @@
             },
             {
                 "function": "Pest\\Factories\\{closure}",
-                "class": "P\\Tests\\Feature\\ExceptionDataTypesTest",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
                 "type": "->"
             },
             {
@@ -208,7 +208,7 @@
                 "file": "\/vendor\/pestphp\/pest\/src\/Support\/ExceptionTrace.php",
                 "line": 29,
                 "function": "Pest\\Concerns\\{closure}",
-                "class": "P\\Tests\\Feature\\ExceptionDataTypesTest",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
                 "type": "->"
             },
             {
@@ -222,14 +222,14 @@
                 "file": "\/vendor\/pestphp\/pest\/src\/Concerns\/Testable.php",
                 "line": 278,
                 "function": "__callClosure",
-                "class": "P\\Tests\\Feature\\ExceptionDataTypesTest",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
                 "type": "->"
             },
             {
                 "file": "\/vendor\/phpunit\/phpunit\/src\/Framework\/TestCase.php",
                 "line": 1617,
                 "function": "__test",
-                "class": "P\\Tests\\Feature\\ExceptionDataTypesTest",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
                 "type": "->"
             },
             {
