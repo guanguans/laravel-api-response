@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse;
 
-use Guanguans\LaravelApiResponse\Concerns\ConcreteHttpStatusMethods;
+use Guanguans\LaravelApiResponse\Concerns\ConcreteHttpStatus;
 use Guanguans\LaravelApiResponse\Concerns\HasExceptionPipes;
 use Guanguans\LaravelApiResponse\Concerns\HasPipes;
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
@@ -40,7 +40,7 @@ class ApiResponse implements ApiResponseContract
 {
     // use Dumpable;
     use Conditionable;
-    use ConcreteHttpStatusMethods;
+    use ConcreteHttpStatus;
     use HasExceptionPipes;
     use HasPipes;
     use Macroable;

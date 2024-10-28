@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @mixin \Guanguans\LaravelApiResponse\ApiResponse
  */
-trait ConcreteHttpStatusMethods
+trait ConcreteHttpStatus
 {
     public function ok(string $message = '', int $code = Response::HTTP_OK): JsonResponse
     {

@@ -843,7 +843,7 @@ class Controller extends \App\Http\Controllers\Controller
 
 ### Methods of http status
 
-[ConcreteHttpStatusMethods.php](src/Concerns/ConcreteHttpStatusMethods.php)
+[ConcreteHttpStatus.php](src/Concerns/ConcreteHttpStatus.php)
 
 ### Status Code Pipe
 
