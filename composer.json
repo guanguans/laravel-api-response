@@ -146,6 +146,7 @@
         "checks": [
             "@composer-normalize",
             "@composer-validate",
+            "@composer-require-checker",
             "@composer-unused",
             "@md-lint",
             "@style-lint",
