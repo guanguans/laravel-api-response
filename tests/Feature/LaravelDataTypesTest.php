@@ -20,6 +20,7 @@ use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserCollection;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserResource;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Fluent;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {
@@ -32,7 +33,7 @@ it('is model', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success($user)->content());
 })->group(__DIR__, __FILE__);
 
-it('is collection', function (): void {
+it('is eloquent collection', function (): void {
     $users = User::query()->with(['country', 'posts'])->get();
     assertMatchesJsonSnapshot($this->apiResponse()->success($users)->content());
 })->group(__DIR__, __FILE__);
@@ -63,4 +64,48 @@ it('is resource collection', function (): void {
 
     $userCollection = UserCollection::make(User::query()->with(['country', 'posts'])->simplePaginate(3));
     assertMatchesJsonSnapshot($this->apiResponse()->success($userCollection)->content());
+})->group(__DIR__, __FILE__);
+
+it('is collection', function (): void {
+    $collection = collect([
+        'name' => 'guanguans/laravel-api-response',
+        'license' => 'MIT',
+        'type' => 'library',
+        'authors' => [
+            [
+                'name' => 'guanguans',
+                'email' => 'ityaozm@gmail.com',
+                'homepage' => 'https://www.guanguans.cn',
+                'role' => 'developer',
+            ],
+        ],
+        'homepage' => 'https://github.com/guanguans/laravel-api-response',
+        'support' => [
+            'issues' => 'https://github.com/guanguans/laravel-api-response/issues',
+            'source' => 'https://github.com/guanguans/laravel-api-response',
+        ],
+    ]);
+    assertMatchesJsonSnapshot($this->apiResponse()->success($collection)->content());
+})->group(__DIR__, __FILE__);
+
+it('is fluent', function (): void {
+    $fluent = new Fluent([
+        'name' => 'guanguans/laravel-api-response',
+        'license' => 'MIT',
+        'type' => 'library',
+        'authors' => [
+            [
+                'name' => 'guanguans',
+                'email' => 'ityaozm@gmail.com',
+                'homepage' => 'https://www.guanguans.cn',
+                'role' => 'developer',
+            ],
+        ],
+        'homepage' => 'https://github.com/guanguans/laravel-api-response',
+        'support' => [
+            'issues' => 'https://github.com/guanguans/laravel-api-response/issues',
+            'source' => 'https://github.com/guanguans/laravel-api-response',
+        ],
+    ]);
+    assertMatchesJsonSnapshot($this->apiResponse()->success($fluent)->content());
 })->group(__DIR__, __FILE__);
