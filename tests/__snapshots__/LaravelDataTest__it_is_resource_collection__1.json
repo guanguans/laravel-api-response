@@ -2,159 +2,157 @@
     "status": true,
     "code": 200,
     "message": "OK",
-    "data": {
-        "data": [
-            {
+    "data": [
+        {
+            "id": 1,
+            "name": "John",
+            "country_id": 1,
+            "created_at": "2024-01-01 00:00:01",
+            "updated_at": "2024-01-01 00:00:01",
+            "country": {
                 "id": 1,
-                "name": "John",
-                "country_id": 1,
+                "name": "China",
                 "created_at": "2024-01-01 00:00:01",
-                "updated_at": "2024-01-01 00:00:01",
-                "country": {
+                "updated_at": "2024-01-01 00:00:01"
+            },
+            "posts": [
+                {
                     "id": 1,
-                    "name": "China",
+                    "title": "PHP is the best language!",
+                    "user_id": 1,
                     "created_at": "2024-01-01 00:00:01",
                     "updated_at": "2024-01-01 00:00:01"
                 },
-                "posts": [
-                    {
-                        "id": 1,
-                        "title": "PHP is the best language!",
-                        "user_id": 1,
-                        "created_at": "2024-01-01 00:00:01",
-                        "updated_at": "2024-01-01 00:00:01"
-                    },
-                    {
-                        "id": 2,
-                        "title": "JAVA is the best language!",
-                        "user_id": 1,
-                        "created_at": "2024-01-01 00:00:02",
-                        "updated_at": "2024-01-01 00:00:02"
-                    },
-                    {
-                        "id": 3,
-                        "title": "Python is the best language!",
-                        "user_id": 1,
-                        "created_at": "2024-01-01 00:00:03",
-                        "updated_at": "2024-01-01 00:00:03"
-                    }
-                ]
-            },
-            {
-                "id": 2,
-                "name": "Tom",
-                "country_id": 2,
-                "created_at": "2024-01-01 00:00:02",
-                "updated_at": "2024-01-01 00:00:02",
-                "country": {
+                {
                     "id": 2,
-                    "name": "USA",
+                    "title": "JAVA is the best language!",
+                    "user_id": 1,
                     "created_at": "2024-01-01 00:00:02",
                     "updated_at": "2024-01-01 00:00:02"
                 },
-                "posts": [
-                    {
-                        "id": 4,
-                        "title": "Go is the best language!",
-                        "user_id": 2,
-                        "created_at": "2024-01-01 00:00:04",
-                        "updated_at": "2024-01-01 00:00:04"
-                    },
-                    {
-                        "id": 5,
-                        "title": "JavaScript is the best language!",
-                        "user_id": 2,
-                        "created_at": "2024-01-01 00:00:05",
-                        "updated_at": "2024-01-01 00:00:05"
-                    },
-                    {
-                        "id": 6,
-                        "title": "Ruby is the best language!",
-                        "user_id": 2,
-                        "created_at": "2024-01-01 00:00:06",
-                        "updated_at": "2024-01-01 00:00:06"
-                    }
-                ]
-            },
-            {
-                "id": 3,
-                "name": "Jerry",
-                "country_id": 3,
-                "created_at": "2024-01-01 00:00:03",
-                "updated_at": "2024-01-01 00:00:03",
-                "country": {
+                {
                     "id": 3,
-                    "name": "Japan",
+                    "title": "Python is the best language!",
+                    "user_id": 1,
                     "created_at": "2024-01-01 00:00:03",
                     "updated_at": "2024-01-01 00:00:03"
-                },
-                "posts": [
-                    {
-                        "id": 7,
-                        "title": "C is the best language!",
-                        "user_id": 3,
-                        "created_at": "2024-01-01 00:00:07",
-                        "updated_at": "2024-01-01 00:00:07"
-                    }
-                ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Tom",
+            "country_id": 2,
+            "created_at": "2024-01-01 00:00:02",
+            "updated_at": "2024-01-01 00:00:02",
+            "country": {
+                "id": 2,
+                "name": "USA",
+                "created_at": "2024-01-01 00:00:02",
+                "updated_at": "2024-01-01 00:00:02"
             },
-            {
-                "id": 4,
-                "name": "Jack",
-                "country_id": 4,
-                "created_at": "2024-01-01 00:00:04",
-                "updated_at": "2024-01-01 00:00:04",
-                "country": {
+            "posts": [
+                {
                     "id": 4,
-                    "name": "Korea",
+                    "title": "Go is the best language!",
+                    "user_id": 2,
                     "created_at": "2024-01-01 00:00:04",
                     "updated_at": "2024-01-01 00:00:04"
                 },
-                "posts": []
-            },
-            {
-                "id": 5,
-                "name": "Rose",
-                "country_id": 5,
-                "created_at": "2024-01-01 00:00:05",
-                "updated_at": "2024-01-01 00:00:05",
-                "country": {
+                {
                     "id": 5,
-                    "name": "UK",
+                    "title": "JavaScript is the best language!",
+                    "user_id": 2,
                     "created_at": "2024-01-01 00:00:05",
                     "updated_at": "2024-01-01 00:00:05"
                 },
-                "posts": []
-            },
-            {
-                "id": 6,
-                "name": "Lucy",
-                "country_id": 6,
-                "created_at": "2024-01-01 00:00:06",
-                "updated_at": "2024-01-01 00:00:06",
-                "country": {
+                {
                     "id": 6,
-                    "name": "France",
+                    "title": "Ruby is the best language!",
+                    "user_id": 2,
                     "created_at": "2024-01-01 00:00:06",
                     "updated_at": "2024-01-01 00:00:06"
-                },
-                "posts": []
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Jerry",
+            "country_id": 3,
+            "created_at": "2024-01-01 00:00:03",
+            "updated_at": "2024-01-01 00:00:03",
+            "country": {
+                "id": 3,
+                "name": "Japan",
+                "created_at": "2024-01-01 00:00:03",
+                "updated_at": "2024-01-01 00:00:03"
             },
-            {
-                "id": 7,
-                "name": "Lily",
-                "country_id": 7,
-                "created_at": "2024-01-01 00:00:07",
-                "updated_at": "2024-01-01 00:00:07",
-                "country": {
+            "posts": [
+                {
                     "id": 7,
-                    "name": "Germany",
+                    "title": "C is the best language!",
+                    "user_id": 3,
                     "created_at": "2024-01-01 00:00:07",
                     "updated_at": "2024-01-01 00:00:07"
-                },
-                "posts": []
-            }
-        ]
-    },
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Jack",
+            "country_id": 4,
+            "created_at": "2024-01-01 00:00:04",
+            "updated_at": "2024-01-01 00:00:04",
+            "country": {
+                "id": 4,
+                "name": "Korea",
+                "created_at": "2024-01-01 00:00:04",
+                "updated_at": "2024-01-01 00:00:04"
+            },
+            "posts": []
+        },
+        {
+            "id": 5,
+            "name": "Rose",
+            "country_id": 5,
+            "created_at": "2024-01-01 00:00:05",
+            "updated_at": "2024-01-01 00:00:05",
+            "country": {
+                "id": 5,
+                "name": "UK",
+                "created_at": "2024-01-01 00:00:05",
+                "updated_at": "2024-01-01 00:00:05"
+            },
+            "posts": []
+        },
+        {
+            "id": 6,
+            "name": "Lucy",
+            "country_id": 6,
+            "created_at": "2024-01-01 00:00:06",
+            "updated_at": "2024-01-01 00:00:06",
+            "country": {
+                "id": 6,
+                "name": "France",
+                "created_at": "2024-01-01 00:00:06",
+                "updated_at": "2024-01-01 00:00:06"
+            },
+            "posts": []
+        },
+        {
+            "id": 7,
+            "name": "Lily",
+            "country_id": 7,
+            "created_at": "2024-01-01 00:00:07",
+            "updated_at": "2024-01-01 00:00:07",
+            "country": {
+                "id": 7,
+                "name": "Germany",
+                "created_at": "2024-01-01 00:00:07",
+                "updated_at": "2024-01-01 00:00:07"
+            },
+            "posts": []
+        }
+    ],
     "error": {}
 }

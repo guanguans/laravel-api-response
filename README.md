@@ -546,7 +546,6 @@ use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class Controller extends \App\Http\Controllers\Controller
 {
@@ -554,7 +553,6 @@ class Controller extends \App\Http\Controllers\Controller
 
     public function example(): JsonResponse
     {
-        JsonResource::withoutWrapping();
         $userResource = UserResource::make(User::query()->with(['country', 'posts'])->first());
 
         return $this->apiResponse()->success($userResource);

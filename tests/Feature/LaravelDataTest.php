@@ -58,7 +58,7 @@ it('is resource', function (): void {
     $userResource = UserResource::make(User::query()->with(['country', 'posts'])->first());
     assertMatchesJsonSnapshot($this->apiResponse()->success($userResource)->content());
 
-    JsonResource::withoutWrapping();
+    JsonResource::wrap('data');
     assertMatchesJsonSnapshot($this->apiResponse()->success($userResource)->content());
 })->group(__DIR__, __FILE__);
 
