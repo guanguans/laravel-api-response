@@ -20,7 +20,7 @@ abstract class RenderUsing
 {
     /**
      * @see \Illuminate\Foundation\Exceptions\Handler::renderable()
-     * @see \Guanguans\LaravelApiResponse\ApiResponseServiceProvider::registerRenderUsing()
+     * @see \Guanguans\LaravelApiResponse\ServiceProvider::registerRenderUsing()
      *
      * @return \Illuminate\Http\JsonResponse|void
      */

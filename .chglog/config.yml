@@ -8,7 +8,7 @@ options:
     filters:
       Type:
         - build
-        - chore
+        # - chore
         - ci
         - docs
         - feat

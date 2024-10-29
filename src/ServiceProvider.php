@@ -22,7 +22,7 @@ use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class ApiResponseServiceProvider extends PackageServiceProvider
+class ServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {

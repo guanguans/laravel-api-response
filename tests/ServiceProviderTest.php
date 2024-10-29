@@ -14,9 +14,9 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Guanguans\LaravelApiResponse\ApiResponseServiceProvider;
+use Guanguans\LaravelApiResponse\ServiceProvider;
 
 it('can get provides', function (): void {
-    expect(new ApiResponseServiceProvider(app()))
+    expect(new ServiceProvider(app()))
         ->provides()->toBeArray();
 })->group(__DIR__, __FILE__);

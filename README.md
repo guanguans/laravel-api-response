@@ -34,7 +34,7 @@ composer require guanguans/laravel-api-response --ansi -v
 ### Publish files(optional)
 
 ```bash
-php artisan vendor:publish --provider="Guanguans\\LaravelApiResponse\\ApiResponseServiceProvider" --ansi -v
+php artisan vendor:publish --provider="Guanguans\\LaravelApiResponse\\ServiceProvider" --ansi -v
 ```
 
 ## Usage

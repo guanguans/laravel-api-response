@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Tests;
 
-use Guanguans\LaravelApiResponse\ApiResponseServiceProvider;
 use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
+use Guanguans\LaravelApiResponse\ServiceProvider;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Guanguans\LaravelApiResponse\Tests\Laravel\seeders\TablesSeeder;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -49,7 +49,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         return array_merge(
             parent::getPackageProviders($app),
             [
-                ApiResponseServiceProvider::class,
+                ServiceProvider::class,
             ]
         );
     }
