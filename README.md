@@ -16,8 +16,8 @@
 * Support for restful API response(optional)
 * Support for automatically handled api exception
 * Support for localized message
-* Support for customized data pipe
-* Support for customized exception pipe
+* Support for customized pipe(Pipeline processing of the whole response)
+* Support for customized exception pipe(Pipeline processing exception response)
 
 ## Requirement
 
@@ -25,7 +25,7 @@
 
 ## Installation
 
-```bash
+```shell
 composer require guanguans/laravel-api-response --ansi -v
 ```
 
@@ -33,7 +33,7 @@ composer require guanguans/laravel-api-response --ansi -v
 
 ### Publish files(optional)
 
-```bash
+```shell
 php artisan vendor:publish --provider="Guanguans\\LaravelApiResponse\\ServiceProvider" --ansi -v
 ```
 
@@ -110,6 +110,7 @@ class Controller extends \App\Http\Controllers\Controller
     }
 }
 ```
+
 </details>
 
 ### Default response structure
@@ -126,6 +127,7 @@ class Controller extends \App\Http\Controllers\Controller
     "error": "object"
 }
 ```
+
 </details>
 
 ### Default response examples
@@ -199,6 +201,7 @@ class Controller extends \App\Http\Controllers\Controller
     "error": {}
 }
 ```
+
 </details>
 
 <details>
@@ -386,6 +389,7 @@ class Controller extends \App\Http\Controllers\Controller
     "error": {}
 }
 ```
+
 </details>
 
 <details>
@@ -532,6 +536,7 @@ class Controller extends \App\Http\Controllers\Controller
     "error": {}
 }
 ```
+
 </details>
 
 <details>
@@ -604,6 +609,7 @@ class Controller extends \App\Http\Controllers\Controller
     "error": {}
 }
 ```
+
 </details>
 
 <details>
@@ -794,6 +800,7 @@ class Controller extends \App\Http\Controllers\Controller
     "error": {}
 }
 ```
+
 </details>
 
 <details>
@@ -827,6 +834,7 @@ class Controller extends \App\Http\Controllers\Controller
     "error": {}
 }
 ```
+
 </details>
 
 <details>
@@ -865,6 +873,7 @@ class Controller extends \App\Http\Controllers\Controller
     }
 }
 ```
+
 </details>
 
 <details>
@@ -1029,6 +1038,7 @@ class Controller extends \App\Http\Controllers\Controller
     }
 }
 ```
+
 </details>
 
 <details>
@@ -1069,6 +1079,7 @@ class Controller extends \App\Http\Controllers\Controller
     }
 }
 ```
+
 </details>
 
 <details>
@@ -1108,6 +1119,7 @@ class Controller extends \App\Http\Controllers\Controller
     }
 }
 ```
+
 </details>
 
 <details>
@@ -1115,6 +1127,7 @@ class Controller extends \App\Http\Controllers\Controller
 
 * [feature](tests/Feature)
 * [examples](tests/__snapshots__)
+
 </details>
 
 ### FAQ
@@ -1123,12 +1136,68 @@ class Controller extends \App\Http\Controllers\Controller
 <summary>How to customize pipe</summary>
 
 * Reference to the [Pipes](src/Pipes)
+* Simple example:
+
+```php
+<?php
+
+static function (array $data, \Closure $next): JsonResponse {
+    if ($data['data'] instanceof \iterable) {
+        $data['data'] = iterator_to_array($data['data']);
+    }
+
+    return $next($data);
+};
+```
+
 </details>
 
 <details>
 <summary>How to customize exception pipe</summary>
 
 * Reference to the [ExceptionPipes](src/ExceptionPipes)
+
+</details>
+
+<details>
+<summary>How to customize pipe in a single api</summary>
+
+* Reference to the [HasPipes.php](src/Concerns/HasPipes.php)、[HasExceptionPipes.php](src/Concerns/HasExceptionPipes.php)
+* Simple example:
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Http\JsonResponse;
+
+class Controller extends \App\Http\Controllers\Controller
+{
+    use ApiResponseFactory;
+
+    public function example(): JsonResponse
+    {
+        return $this
+            ->apiResponse()
+            // ->unshiftPipes(...)
+            ->pushPipes(
+                static function (array $data, \Closure $next): JsonResponse {
+                    if ($data['data'] instanceof \iterable) {
+                        $data['data'] = iterator_to_array($data['data']);
+                    }
+
+                    return $next($data);
+                }
+            )
+            // ->unshiftExceptionPipes(...)
+            // ->pushExceptionPipes(...)
+            ->success($iterator);
+    }
+}
+```
+
 </details>
 
 <details>
@@ -1136,6 +1205,7 @@ class Controller extends \App\Http\Controllers\Controller
 
 * Reference to the [StatusCodePipe.php](src/Pipes/StatusCodePipe.php)
 * Remove the configuration `api-response.pipes.StatusCodePipe`
+
 </details>
 
 <details>
@@ -1143,17 +1213,19 @@ class Controller extends \App\Http\Controllers\Controller
 
 * Reference to the [MessagePipe.php](src/Pipes/MessagePipe.php)
 * Install [Laravel-Lang/http-statuses](https://github.com/Laravel-Lang/http-statuses) `composer require --dev laravel-lang/http-statuses` or create lang files `resources/lang/***/http-statuses.php`
+
 </details>
 
 <details>
 <summary>Shortcut methods of http status</summary>
 
 * Reference to the [ConcreteHttpStatus.php](src/Concerns/ConcreteHttpStatus.php)
+
 </details>
 
 ## Testing
 
-```bash
+```shell
 composer test
 ```
 
