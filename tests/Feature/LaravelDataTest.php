@@ -24,8 +24,9 @@ use Illuminate\Support\Fluent;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {
-    // JsonResource::$wrap = 'data';
-    // JsonResource::$wrap = 'list';
+    // JsonResource::wrap('data');
+    // JsonResource::wrap('list');
+    // JsonResource::withoutWrapping();
 });
 
 it('is model', function (): void {
@@ -55,6 +56,9 @@ it('is cursor paginate', function (): void {
 
 it('is resource', function (): void {
     $userResource = UserResource::make(User::query()->with(['country', 'posts'])->first());
+    assertMatchesJsonSnapshot($this->apiResponse()->success($userResource)->content());
+
+    JsonResource::withoutWrapping();
     assertMatchesJsonSnapshot($this->apiResponse()->success($userResource)->content());
 })->group(__DIR__, __FILE__);
 

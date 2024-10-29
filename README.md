@@ -1,6 +1,6 @@
 # laravel-api-response
 
-> Normalize and standardize Laravel API response data structures.
+> Normalize and standardize Laravel API response data structures. - 规范化和标准化 Laravel API 响应数据结构。
 
 [![tests](https://github.com/guanguans/laravel-api-response/workflows/tests/badge.svg)](https://github.com/guanguans/laravel-api-response/actions)
 [![check & fix styling](https://github.com/guanguans/laravel-api-response/workflows/check%20&%20fix%20styling/badge.svg)](https://github.com/guanguans/laravel-api-response/actions)
@@ -39,7 +39,7 @@ php artisan vendor:publish --provider="Guanguans\\LaravelApiResponse\\ServicePro
 
 ## Usage
 
-### Get Instance
+### Quick start
 
 <details>
 <summary>details</summary>
@@ -51,19 +51,62 @@ namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
+use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
 {
     use ApiResponseFactory;
 
-    public function get()
+    public function __construct()
+    {
+        $this->middleware(SetAcceptHeader::class)->only('exceptionHandler');
+    }
+
+    public function getInstance(): JsonResponse
     {
         /** @var \Guanguans\LaravelApiResponse\ApiResponse $apiResponse */
+        // $apiResponse = ApiResponseFacade::getFacadeRoot();
+        // $apiResponse = resolve(ApiResponseContract::class);
+        // $apiResponse = app(ApiResponseContract::class);
         $apiResponse = $this->apiResponse();
-        $apiResponse = ApiResponseFacade::getFacadeRoot();
-        $apiResponse = resolve(ApiResponseContract::class);
-        $apiResponse = app(ApiResponseContract::class);
+
+        return $apiResponse->success($data);
+    }
+
+    public function exampleMethods(): JsonResponse
+    {
+        // return $this->apiResponse()->error($message);
+        // return $this->apiResponse()->exception($exception);
+        return $this->apiResponse()->success($data);
+    }
+
+    /**
+     * @response
+     *
+     * ```json
+     * {
+     *     "status": false,
+     *     "code": 500,
+     *     "message": "This is a runtime exception.",
+     *     "data": {},
+     *     "error": {
+     *         "message": "This is a runtime exception.",
+     *         "exception": "RuntimeException",
+     *         ...
+     *         "trace": [
+     *             ...
+     *         ]
+     *     }
+     * }
+     * ```
+     */
+    public function exceptionHandler(): JsonResponse
+    {
+        config()->set('app.debug', true);
+
+        throw new \RuntimeException('This is a runtime exception.');
     }
 }
 ```
@@ -503,6 +546,7 @@ use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class Controller extends \App\Http\Controllers\Controller
 {
@@ -510,6 +554,7 @@ class Controller extends \App\Http\Controllers\Controller
 
     public function example(): JsonResponse
     {
+        JsonResource::withoutWrapping();
         $userResource = UserResource::make(User::query()->with(['country', 'posts'])->first());
 
         return $this->apiResponse()->success($userResource);
@@ -523,42 +568,40 @@ class Controller extends \App\Http\Controllers\Controller
     "code": 200,
     "message": "OK",
     "data": {
-        "data": {
+        "id": 1,
+        "name": "John",
+        "country_id": 1,
+        "created_at": "2024-01-01 00:00:01",
+        "updated_at": "2024-01-01 00:00:01",
+        "country": {
             "id": 1,
-            "name": "John",
-            "country_id": 1,
+            "name": "China",
             "created_at": "2024-01-01 00:00:01",
-            "updated_at": "2024-01-01 00:00:01",
-            "country": {
+            "updated_at": "2024-01-01 00:00:01"
+        },
+        "posts": [
+            {
                 "id": 1,
-                "name": "China",
+                "title": "PHP is the best language!",
+                "user_id": 1,
                 "created_at": "2024-01-01 00:00:01",
                 "updated_at": "2024-01-01 00:00:01"
             },
-            "posts": [
-                {
-                    "id": 1,
-                    "title": "PHP is the best language!",
-                    "user_id": 1,
-                    "created_at": "2024-01-01 00:00:01",
-                    "updated_at": "2024-01-01 00:00:01"
-                },
-                {
-                    "id": 2,
-                    "title": "JAVA is the best language!",
-                    "user_id": 1,
-                    "created_at": "2024-01-01 00:00:02",
-                    "updated_at": "2024-01-01 00:00:02"
-                },
-                {
-                    "id": 3,
-                    "title": "Python is the best language!",
-                    "user_id": 1,
-                    "created_at": "2024-01-01 00:00:03",
-                    "updated_at": "2024-01-01 00:00:03"
-                }
-            ]
-        }
+            {
+                "id": 2,
+                "title": "JAVA is the best language!",
+                "user_id": 1,
+                "created_at": "2024-01-01 00:00:02",
+                "updated_at": "2024-01-01 00:00:02"
+            },
+            {
+                "id": 3,
+                "title": "Python is the best language!",
+                "user_id": 1,
+                "created_at": "2024-01-01 00:00:03",
+                "updated_at": "2024-01-01 00:00:03"
+            }
+        ]
     },
     "error": {}
 }
@@ -998,12 +1041,15 @@ class Controller extends \App\Http\Controllers\Controller
 
 namespace App\Http\Controllers\Api;
 
-use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
 {
-    use ApiResponseFactory;
+    public function __construct()
+    {
+        $this->middleware(SetAcceptHeader::class)->only('example');
+    }
 
     public function example(): JsonResponse
     {
@@ -1073,99 +1119,38 @@ class Controller extends \App\Http\Controllers\Controller
 * [examples](tests/__snapshots__)
 </details>
 
-### Methods of http status
-
-[ConcreteHttpStatus.php](src/Concerns/ConcreteHttpStatus.php)
-
-### Configuration
+### FAQ
 
 <details>
-<summary>Render using</summary>
+<summary>How to customize pipe</summary>
 
-### `ShouldReturnJsonRenderUsing`
-
-#### `app/Http/Kernel.php`
-
-```php
-<?php
-
-namespace App\Http;
-
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
-
-class Kernel extends HttpKernel
-{
-    ...
-    protected $middlewareGroups = [
-        ...
-        'api' => [
-            \Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader::class,
-            ...
-        ],
-    ];
-    ...
-}
-```
-
-#### `bootstrap/app.php`
-
-````php
-<?php
-
-use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Middleware;
-
-return Application::configure(basePath: dirname(__DIR__))
-    ...
-    ->withMiddleware(static function (Middleware $middleware) {
-        $middleware->prependToGroup('api', [
-            \Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader::class,
-        ]);
-    })
-    ...
-    ->create();
-````
-
-### `ApiPathsRenderUsing`
-
-#### `config/api-response.php`
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
-use Guanguans\LaravelApiResponse\RenderUsings\ShouldReturnJsonRenderUsing;
-
-return [
-    /**
-     * Render using.
-     */
-    // 'render_using' => ShouldReturnJsonRenderUsing::class,
-    'render_using' => ApiPathsRenderUsing::make(
-        [
-            'api/*',
-        ],
-        [
-            // except...
-        ],
-    ),
-    ...
-];
-```
+* Reference to the [Pipes](src/Pipes)
 </details>
 
 <details>
-<summary>Exception pipes</summary>
+<summary>How to customize exception pipe</summary>
 
-
+* Reference to the [ExceptionPipes](src/ExceptionPipes)
 </details>
 
 <details>
-<summary>Pipes</summary>
+<summary>How to always respond with successful http status code</summary>
 
+* Reference to the [StatusCodePipe.php](src/Pipes/StatusCodePipe.php)
+* Remove the configuration `api-response.pipes.StatusCodePipe`
+</details>
 
+<details>
+<summary>How to localize message</summary>
+
+* Reference to the [MessagePipe.php](src/Pipes/MessagePipe.php)
+* Install [Laravel-Lang/http-statuses](https://github.com/Laravel-Lang/http-statuses) `composer require --dev laravel-lang/http-statuses` or create lang files `resources/lang/***/http-statuses.php`
+</details>
+
+<details>
+<summary>Shortcut methods of http status</summary>
+
+* Reference to the [ConcreteHttpStatus.php](src/Concerns/ConcreteHttpStatus.php)
 </details>
 
 ## Testing

@@ -18,8 +18,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {
-    // JsonResource::$wrap = 'data';
-    // JsonResource::$wrap = 'list';
+    // JsonResource::wrap('data');
+    // JsonResource::wrap('list');
+    // JsonResource::withoutWrapping();
 });
 
 /** @see https://www.php.net/manual/en/language.types.php */

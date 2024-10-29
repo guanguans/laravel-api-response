@@ -59,10 +59,10 @@ class ToJsonResponseDataPipe
                 : $data;
         } catch (\TypeError $typeError) {
             return $data;
-        } catch (\Throwable $throwable) { // @codeCoverageIgnoreStart
+        } catch (\Throwable $throwable) {
             report($throwable);
 
-            return $data; // @codeCoverageIgnoreEnd
+            return $data;
         }
     }
 }
