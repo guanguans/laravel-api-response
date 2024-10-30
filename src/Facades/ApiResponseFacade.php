@@ -55,6 +55,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Guanguans\LaravelApiResponse\ApiResponse unshiftExceptionPipes(void ...$exceptionPipes)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse unshiftPipes(void ...$pipes)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
+ * @method static mixed withLocale(string $locale, \Closure $callback)
  *
  * @see \Guanguans\LaravelApiResponse\ApiResponse
  */

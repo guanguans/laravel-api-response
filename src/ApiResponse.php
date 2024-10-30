@@ -23,6 +23,7 @@ use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Dumpable;
+use Illuminate\Support\Traits\Localizable;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Traits\Tappable;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,10 +40,11 @@ use Symfony\Component\HttpFoundation\Response;
 class ApiResponse implements ApiResponseContract
 {
     // use Dumpable;
-    use Conditionable;
     use ConcreteHttpStatus;
+    use Conditionable;
     use HasExceptionPipes;
     use HasPipes;
+    use Localizable;
     use Macroable;
     use Tappable;
 
