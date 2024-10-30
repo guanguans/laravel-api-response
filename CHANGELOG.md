@@ -8,6 +8,19 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.1"></a>
+## [1.0.1] - 2024-10-30
+### Bug Fixes
+- **ExceptionPipes:** fix validation error message
+- **Pipes:** Fix error handling in ErrorPipe
+
+### Features
+- **api:** Add Localizable trait to ApiResponse
+
+### Test
+- **test:** Add exception tests
+
+
 <a name="1.0.0"></a>
 ## [1.0.0] - 2024-10-29
 ### Docs
@@ -140,7 +153,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/guanguans/laravel-api-response/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-rc3...1.0.0
 [1.0.0-rc3]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-rc2...1.0.0-rc3
 [1.0.0-rc2]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-rc1...1.0.0-rc2
