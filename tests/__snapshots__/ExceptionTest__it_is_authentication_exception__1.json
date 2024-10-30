@@ -4,6 +4,6 @@
     "message": "Unauthenticated.",
     "data": {},
     "error": {
-        "message": "Server Error"
+        "message": "Unauthenticated."
     }
 }

@@ -24,6 +24,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
+beforeEach(function (): void {
+    config()->set('app.debug', false);
+});
+
 it('is exception handler', function (): void {
     $response = $this->post('exception');
     $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -32,6 +36,7 @@ it('is exception handler', function (): void {
 })->group(__DIR__, __FILE__);
 
 it('is debug exception handler', function (): void {
+    config()->set('app.debug', true);
     $response = $this->post('debug-exception');
     $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
 
@@ -39,9 +44,11 @@ it('is debug exception handler', function (): void {
 })->group(__DIR__, __FILE__)->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0'));
 
 it('is exception', function (): void {
-    config()->set('app.debug', false);
     $runtimeException = new \RuntimeException('This is a runtime exception.');
     assertMatchesJsonSnapshot($this->apiResponse()->exception($runtimeException)->content());
+
+    $httpException = new HttpException(Response::HTTP_BAD_REQUEST, 'This is a http exception.');
+    assertMatchesJsonSnapshot($this->apiResponse()->exception($httpException)->content());
 })->group(__DIR__, __FILE__);
 
 it('is debug exception', function (): void {
@@ -51,20 +58,12 @@ it('is debug exception', function (): void {
     assertMatchesJsonSnapshot((string) Str::of($response->content())->remove(\dirname(__DIR__, 2)));
 })->group(__DIR__, __FILE__)->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0'));
 
-it('is http exception', function (): void {
-    config()->set('app.debug', false);
-    $httpException = new HttpException(Response::HTTP_NOT_FOUND, 'This is a http exception.');
-    assertMatchesJsonSnapshot($this->apiResponse()->exception($httpException)->content());
-})->group(__DIR__, __FILE__);
+it('is locale exception', function (): void {
+    config()->set('app.locale', 'zh_CN');
 
-it('is authentication exception', function (): void {
-    config()->set('app.debug', false);
-    $authenticationException = new AuthenticationException;
-    assertMatchesJsonSnapshot($this->apiResponse()->exception($authenticationException)->content());
-})->group(__DIR__, __FILE__);
+    $runtimeException = new \RuntimeException('This is a runtime exception.');
+    assertMatchesJsonSnapshot($this->apiResponse()->exception($runtimeException)->content());
 
-it('is validation exception', function (): void {
-    config()->set('app.debug', false);
     $validationException = new ValidationException(
         Validator::make(
             ['foo' => 'bar', 'bar' => 'baz'],
@@ -74,10 +73,22 @@ it('is validation exception', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->exception($validationException)->content());
 })->group(__DIR__, __FILE__);
 
-it('is locale exception', function (): void {
-    config()->set('app.debug', false);
-    config()->set('app.locale', 'zh_CN');
+it('is authentication exception', function (): void {
+    $authenticationException = new AuthenticationException;
+    assertMatchesJsonSnapshot($this->apiResponse()->exception($authenticationException)->content());
+})->group(__DIR__, __FILE__);
 
-    $runtimeException = new \RuntimeException('This is a runtime exception.');
-    assertMatchesJsonSnapshot($this->apiResponse()->exception($runtimeException)->content());
+it('is http exception', function (): void {
+    $httpException = new HttpException(Response::HTTP_NOT_FOUND);
+    assertMatchesJsonSnapshot($this->apiResponse()->exception($httpException)->content());
+})->group(__DIR__, __FILE__);
+
+it('is validation exception', function (): void {
+    $validationException = new ValidationException(
+        Validator::make(
+            ['foo' => 'bar', 'bar' => 'baz'],
+            ['foo' => ['required', 'int'], 'bar' => ['required', 'email'], 'baz' => ['required', 'string']]
+        )
+    );
+    assertMatchesJsonSnapshot($this->apiResponse()->exception($validationException)->content());
 })->group(__DIR__, __FILE__);

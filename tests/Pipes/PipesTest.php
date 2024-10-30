@@ -28,7 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 it('can use pipes', function (): void {
-    JsonResource::$wrap = null;
+    JsonResource::withoutWrapping();
     expect($this->apiResponse())
         ->pushPipes(
             /*

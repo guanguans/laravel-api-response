@@ -5,13 +5,13 @@
     "data": {},
     "error": {
         "foo": [
-            "The foo must be an integer."
+            "Foo \u5fc5\u987b\u662f\u6574\u6570\u3002"
         ],
         "bar": [
-            "The bar must be a valid email address."
+            "Bar \u4e0d\u662f\u4e00\u4e2a\u5408\u6cd5\u7684\u90ae\u7bb1\u3002"
         ],
         "baz": [
-            "The baz field is required."
+            "Baz \u4e0d\u80fd\u4e3a\u7a7a\u3002"
         ]
     }
 }

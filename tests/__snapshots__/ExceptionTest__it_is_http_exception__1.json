@@ -1,9 +1,9 @@
 {
     "status": false,
     "code": 404,
-    "message": "This is a http exception.",
+    "message": "Not Found",
     "data": {},
     "error": {
-        "message": "This is a http exception."
+        "message": "Not Found"
     }
 }

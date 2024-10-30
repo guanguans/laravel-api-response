@@ -70,11 +70,32 @@ it('is callable', function (): void {
 })->group(__DIR__, __FILE__);
 
 it('is iterable', function (): void {
-    assertMatchesJsonSnapshot($this->apiResponse()->success(new ArrayIterator(['iterable']))->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success(new ArrayIterator([
+        'name' => 'guanguans/laravel-api-response',
+        'license' => 'MIT',
+        'type' => 'library',
+        'authors' => [
+            [
+                'name' => 'guanguans',
+                'email' => 'ityaozm@gmail.com',
+                'homepage' => 'https://www.guanguans.cn',
+                'role' => 'developer',
+            ],
+        ],
+        'homepage' => 'https://github.com/guanguans/laravel-api-response',
+        'support' => [
+            'issues' => 'https://github.com/guanguans/laravel-api-response/issues',
+            'source' => 'https://github.com/guanguans/laravel-api-response',
+        ],
+    ]))->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success(new FilesystemIterator(__DIR__))->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success(new GlobIterator(__DIR__.'/*'))->content());
 })->group(__DIR__, __FILE__);
 
 it('is generator', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success((function () {
-        yield 'generator';
+        foreach (glob(__DIR__.'/*') as $file) {
+            yield $file;
+        }
     })())->content());
 })->group(__DIR__, __FILE__);

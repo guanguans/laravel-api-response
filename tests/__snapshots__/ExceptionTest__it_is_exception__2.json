@@ -1,0 +1,9 @@
+{
+    "status": false,
+    "code": 400,
+    "message": "This is a http exception.",
+    "data": {},
+    "error": {
+        "message": "This is a http exception."
+    }
+}

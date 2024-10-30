@@ -4,6 +4,6 @@
     "message": "Internal Server Error",
     "data": {},
     "error": {
-        "message": "Server Error"
+        "message": "Internal Server Error"
     }
 }
