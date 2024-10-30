@@ -3,7 +3,9 @@
     "code": 200,
     "message": "OK",
     "data": [
-        "array"
+        "foo",
+        "bar",
+        "baz"
     ],
     "error": {}
 }

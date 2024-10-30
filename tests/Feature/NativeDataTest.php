@@ -43,11 +43,16 @@ it('is string', function (): void {
 })->group(__DIR__, __FILE__);
 
 it('is array', function (): void {
-    assertMatchesJsonSnapshot($this->apiResponse()->success(['array'])->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success(['foo', 'bar', 'baz'])->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success(['foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz'])->content());
 })->group(__DIR__, __FILE__);
 
 it('is object', function (): void {
-    assertMatchesJsonSnapshot($this->apiResponse()->success((object) ['object' => 'object'])->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success((object) [
+        'name' => 'guanguans/laravel-api-response',
+        'license' => 'MIT',
+        'type' => 'library',
+    ])->content());
 })->group(__DIR__, __FILE__);
 
 it('is enum', function (): void {
@@ -70,6 +75,7 @@ it('is callable', function (): void {
 })->group(__DIR__, __FILE__);
 
 it('is iterable', function (): void {
+    /** @see \ArrayAccess */
     assertMatchesJsonSnapshot($this->apiResponse()->success(new ArrayIterator([
         'name' => 'guanguans/laravel-api-response',
         'license' => 'MIT',
@@ -90,9 +96,6 @@ it('is iterable', function (): void {
     ]))->content());
     assertMatchesJsonSnapshot($this->apiResponse()->success(new FilesystemIterator(__DIR__))->content());
     assertMatchesJsonSnapshot($this->apiResponse()->success(new GlobIterator(__DIR__.'/*'))->content());
-})->group(__DIR__, __FILE__);
-
-it('is generator', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success((function () {
         foreach (glob(__DIR__.'/*') as $file) {
             yield $file;

@@ -3,7 +3,9 @@
     "code": 200,
     "message": "OK",
     "data": {
-        "object": "object"
+        "name": "guanguans\/laravel-api-response",
+        "license": "MIT",
+        "type": "library"
     },
     "error": {}
 }

@@ -1,7 +1,7 @@
 {
     "status": false,
     "code": 422,
-    "message": "The given data was invalid.",
+    "message": "The foo must be an integer.",
     "data": {},
     "error": {
         "foo": [
