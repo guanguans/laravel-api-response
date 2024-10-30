@@ -15,9 +15,13 @@ declare(strict_types=1);
  */
 
 use Composer\Semver\Comparator;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 it('is exception handler', function (): void {
@@ -46,6 +50,29 @@ it('is debug exception', function (): void {
     $response = $this->apiResponse()->exception($runtimeException);
     assertMatchesJsonSnapshot((string) Str::of($response->content())->remove(\dirname(__DIR__, 2)));
 })->group(__DIR__, __FILE__)->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0'));
+
+it('is http exception', function (): void {
+    config()->set('app.debug', false);
+    $httpException = new HttpException(Response::HTTP_NOT_FOUND, 'This is a http exception.');
+    assertMatchesJsonSnapshot($this->apiResponse()->exception($httpException)->content());
+})->group(__DIR__, __FILE__);
+
+it('is authentication exception', function (): void {
+    config()->set('app.debug', false);
+    $authenticationException = new AuthenticationException;
+    assertMatchesJsonSnapshot($this->apiResponse()->exception($authenticationException)->content());
+})->group(__DIR__, __FILE__);
+
+it('is validation exception', function (): void {
+    config()->set('app.debug', false);
+    $validationException = new ValidationException(
+        Validator::make(
+            ['foo' => 'bar', 'bar' => 'baz'],
+            ['foo' => ['required', 'int'], 'bar' => ['required', 'email'], 'baz' => ['required', 'string']]
+        )
+    );
+    assertMatchesJsonSnapshot($this->apiResponse()->exception($validationException)->content());
+})->group(__DIR__, __FILE__);
 
 it('is locale exception', function (): void {
     config()->set('app.debug', false);

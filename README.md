@@ -16,8 +16,8 @@
 * Support for restful API response(optional)
 * Support for automatically handled api exception
 * Support for localized message
-* Support for customized pipe(Pipeline processing of the whole response)
-* Support for customized exception pipe(Pipeline processing exception response)
+* Support for customized pipe(Process api response structure through pipeline)
+* Support for customized exception pipe(Convert exception to api response through pipeline)
 
 ## Requirement
 

@@ -179,7 +179,7 @@
             },
             {
                 "file": "\/tests\/Feature\/ExceptionTest.php",
-                "line": 31,
+                "line": 35,
                 "function": "post",
                 "class": "Orchestra\\Testbench\\TestCase",
                 "type": "->"

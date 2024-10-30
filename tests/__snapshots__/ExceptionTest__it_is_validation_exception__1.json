@@ -1,0 +1,17 @@
+{
+    "status": false,
+    "code": 422,
+    "message": "The given data was invalid.",
+    "data": {},
+    "error": {
+        "foo": [
+            "validation.integer"
+        ],
+        "bar": [
+            "validation.email"
+        ],
+        "baz": [
+            "validation.required"
+        ]
+    }
+}

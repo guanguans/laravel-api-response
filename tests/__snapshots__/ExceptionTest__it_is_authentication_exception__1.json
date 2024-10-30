@@ -1,0 +1,9 @@
+{
+    "status": false,
+    "code": 401,
+    "message": "Unauthenticated.",
+    "data": {},
+    "error": {
+        "message": "Server Error"
+    }
+}
