@@ -5,7 +5,8 @@
     "data": {},
     "error": {
         "foo": [
-            "Foo \u5fc5\u987b\u662f\u6574\u6570\u3002"
+            "Foo \u5fc5\u987b\u662f\u6574\u6570\u3002",
+            "\u5df2\u9009\u7684\u5c5e\u6027 foo \u65e0\u6548\u3002"
         ],
         "bar": [
             "Bar \u4e0d\u662f\u4e00\u4e2a\u5408\u6cd5\u7684\u90ae\u7bb1\u3002"

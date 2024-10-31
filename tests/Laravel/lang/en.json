@@ -182,5 +182,6 @@
     "View": "View",
     "View :name": "View :name",
     "Web Server is Down": "Web Server is Down",
-    "Yes": "Yes"
+    "Yes": "Yes",
+    "Unauthenticated.": "Unauthenticated."
 }

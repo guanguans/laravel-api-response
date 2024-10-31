@@ -7,7 +7,7 @@
         "message": "This is a runtime exception.",
         "exception": "RuntimeException",
         "file": "\/tests\/TestCase.php",
-        "line": 97,
+        "line": 89,
         "trace": [
             {
                 "file": "\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Route.php",
@@ -35,6 +35,20 @@
                 "line": 128,
                 "function": "Illuminate\\Routing\\{closure}",
                 "class": "Illuminate\\Routing\\Router",
+                "type": "->"
+            },
+            {
+                "file": "\/src\/Middleware\/SetAcceptHeader.php",
+                "line": 33,
+                "function": "Illuminate\\Pipeline\\{closure}",
+                "class": "Illuminate\\Pipeline\\Pipeline",
+                "type": "->"
+            },
+            {
+                "file": "\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
+                "line": 167,
+                "function": "handle",
+                "class": "Guanguans\\LaravelApiResponse\\Middleware\\SetAcceptHeader",
                 "type": "->"
             },
             {
@@ -179,7 +193,7 @@
             },
             {
                 "file": "\/tests\/Feature\/ExceptionTest.php",
-                "line": 40,
+                "line": 29,
                 "function": "post",
                 "class": "Orchestra\\Testbench\\TestCase",
                 "type": "->"

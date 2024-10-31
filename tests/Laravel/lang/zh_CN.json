@@ -182,5 +182,6 @@
     "View": "看法",
     "View :name": "查看 :name",
     "Web Server is Down": "Web服务器已关闭",
-    "Yes": "是的"
+    "Yes": "是的",
+    "Unauthenticated.": "未认证。"
 }

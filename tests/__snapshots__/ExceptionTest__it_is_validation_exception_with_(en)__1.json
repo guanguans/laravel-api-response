@@ -5,7 +5,8 @@
     "data": {},
     "error": {
         "foo": [
-            "The foo must be an integer."
+            "The foo must be an integer.",
+            "The foo field value is not in the list of allowed values."
         ],
         "bar": [
             "The bar must be a valid email address."

@@ -19,8 +19,8 @@ use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\ServiceProvider;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Guanguans\LaravelApiResponse\Tests\Laravel\seeders\TablesSeeder;
-use Illuminate\Contracts\Debug\ExceptionHandler;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -83,18 +83,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function defineRoutes($router): void
     {
-        $router->any('exception', static function (): void {
-            config()->set('app.debug', false);
+        $router->any('api/exception', static function (): void {
+            config('api-response.render_using', ApiPathsRenderUsing::make());
 
-            throw new \RuntimeException('This is a runtime exception.');
+            throw new \RuntimeException('This is a runtime exception.', Response::HTTP_BAD_REQUEST);
         })->middleware(SetAcceptHeader::class);
-
-        $router->any('debug-exception', static function (): void {
-            /** @noinspection PhpPossiblePolymorphicInvocationInspection */
-            app(ExceptionHandler::class)->renderable(app(ApiPathsRenderUsing::class, ['only' => ['*']]));
-            config()->set('app.debug', true);
-
-            throw new \RuntimeException('This is a runtime exception.');
-        });
     }
 }
