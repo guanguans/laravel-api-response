@@ -35,10 +35,9 @@ it('is exception', function (bool $debug): void {
     config()->set('app.debug', $debug);
     $runtimeException = new \RuntimeException('This is a runtime exception.', Response::HTTP_BAD_REQUEST);
     $response = $this->apiResponse()->exception($runtimeException);
-    expect($response)->isClientError()->toBeTrue();
-    $response->assertStatus(Response::HTTP_BAD_REQUEST);
+    expect($response)->getStatusCode()->toBe(Response::HTTP_BAD_REQUEST);
     assertMatchesJsonSnapshot((string) Str::of($response->content())->remove(\dirname(__DIR__, 2)));
-})->group(__DIR__, __FILE__)->with('debugs')->skip();
+})->group(__DIR__, __FILE__)->with('debugs');
 
 it('is authentication exception', function (string $language): void {
     config()->set('app.locale', $language);
