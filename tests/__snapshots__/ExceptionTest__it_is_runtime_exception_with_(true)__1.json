@@ -1,13 +1,13 @@
 {
     "status": false,
-    "code": 500,
+    "code": 400,
     "message": "This is a runtime exception.",
     "data": {},
     "error": {
         "message": "This is a runtime exception.",
         "exception": "RuntimeException",
         "file": "\/tests\/Feature\/ExceptionTest.php",
-        "line": 36,
+        "line": 48,
         "trace": [
             {
                 "function": "{closure}",

@@ -1,6 +1,6 @@
 {
     "status": false,
-    "code": 500,
+    "code": 502,
     "message": "This is a runtime exception.",
     "data": {},
     "error": {
@@ -193,7 +193,7 @@
             },
             {
                 "file": "\/tests\/Feature\/ExceptionTest.php",
-                "line": 29,
+                "line": 37,
                 "function": "post",
                 "class": "Orchestra\\Testbench\\TestCase",
                 "type": "->"

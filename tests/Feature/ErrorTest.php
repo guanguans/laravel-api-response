@@ -14,9 +14,9 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Symfony\Component\HttpFoundation\Response;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
-it('is error', function (): void {
+it('is error', function (string $language): void {
+    config()->set('app.locale', $language);
     assertMatchesJsonSnapshot($this->apiResponse()->error('This is an error.')->content());
-})->group(__DIR__, __FILE__);
+})->group(__DIR__, __FILE__)->with('languages');

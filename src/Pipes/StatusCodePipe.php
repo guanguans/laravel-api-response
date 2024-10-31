@@ -54,16 +54,8 @@ class StatusCodePipe
      */
     private function statusCodeFor(array $data, int $fallbackErrorStatusCode, int $fallbackSuccessStatusCode): int
     {
-        return $this->isInvalidStatusCode($statusCode = Utils::statusCodeFor($data['code']))
-            ? ($data['status'] ? $fallbackSuccessStatusCode : $fallbackErrorStatusCode)
-            : $statusCode;
-    }
-
-    /**
-     * @see \Symfony\Component\HttpFoundation\Response::isInvalid()
-     */
-    private function isInvalidStatusCode(int $statusCode): bool
-    {
-        return Response::HTTP_CONTINUE > $statusCode || 600 <= $statusCode;
+        return Utils::isValidStatusCode($statusCode = Utils::statusCodeFor($data['code']))
+            ? $statusCode
+            : ($data['status'] ? $fallbackSuccessStatusCode : $fallbackErrorStatusCode);
     }
 }

@@ -19,19 +19,19 @@ dataset('arrays', [
             'name' => 'guanguans/laravel-api-response',
             'license' => 'MIT',
             'type' => 'library',
-            'authors' => [
-                [
-                    'name' => 'guanguans',
-                    'email' => 'ityaozm@gmail.com',
-                    'homepage' => 'https://www.guanguans.cn',
-                    'role' => 'developer',
-                ],
-            ],
-            'homepage' => 'https://github.com/guanguans/laravel-api-response',
-            'support' => [
-                'issues' => 'https://github.com/guanguans/laravel-api-response/issues',
-                'source' => 'https://github.com/guanguans/laravel-api-response',
-            ],
+            // 'authors' => [
+            //     [
+            //         'name' => 'guanguans',
+            //         'email' => 'ityaozm@gmail.com',
+            //         'homepage' => 'https://www.guanguans.cn',
+            //         'role' => 'developer',
+            //     ],
+            // ],
+            // 'homepage' => 'https://github.com/guanguans/laravel-api-response',
+            // 'support' => [
+            //     'issues' => 'https://github.com/guanguans/laravel-api-response/issues',
+            //     'source' => 'https://github.com/guanguans/laravel-api-response',
+            // ],
         ],
     ],
 ]);

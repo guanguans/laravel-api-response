@@ -18,9 +18,13 @@ use Composer\Semver\Comparator;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserCollection;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserResource;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Fluent;
+use Illuminate\Support\Str;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {
@@ -70,46 +74,58 @@ it('is resource collection', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success($userCollection)->content());
 })->group(__DIR__, __FILE__);
 
-it('is collection', function (): void {
-    $collection = collect([
-        'name' => 'guanguans/laravel-api-response',
-        'license' => 'MIT',
-        'type' => 'library',
-        'authors' => [
-            [
-                'name' => 'guanguans',
-                'email' => 'ityaozm@gmail.com',
-                'homepage' => 'https://www.guanguans.cn',
-                'role' => 'developer',
-            ],
-        ],
-        'homepage' => 'https://github.com/guanguans/laravel-api-response',
-        'support' => [
-            'issues' => 'https://github.com/guanguans/laravel-api-response/issues',
-            'source' => 'https://github.com/guanguans/laravel-api-response',
-        ],
-    ]);
-    assertMatchesJsonSnapshot($this->apiResponse()->success($collection)->content());
-})->group(__DIR__, __FILE__);
+it('is responsable', function (array $array): void {
+    $responsable = new class($array) implements Responsable {
+        private array $array;
 
-it('is fluent', function (): void {
-    $fluent = new Fluent([
-        'name' => 'guanguans/laravel-api-response',
-        'license' => 'MIT',
-        'type' => 'library',
-        'authors' => [
-            [
-                'name' => 'guanguans',
-                'email' => 'ityaozm@gmail.com',
-                'homepage' => 'https://www.guanguans.cn',
-                'role' => 'developer',
-            ],
-        ],
-        'homepage' => 'https://github.com/guanguans/laravel-api-response',
-        'support' => [
-            'issues' => 'https://github.com/guanguans/laravel-api-response/issues',
-            'source' => 'https://github.com/guanguans/laravel-api-response',
-        ],
-    ]);
-    assertMatchesJsonSnapshot($this->apiResponse()->success($fluent)->content());
-})->group(__DIR__, __FILE__);
+        public function __construct(array $array)
+        {
+            $this->array = $array;
+        }
+
+        public function toResponse($request): JsonResponse
+        {
+            return response()->json($this->array);
+        }
+    };
+    assertMatchesJsonSnapshot($this->apiResponse()->success($responsable)->content());
+})->group(__DIR__, __FILE__)->with('arrays');
+
+it('is stringable', function (array $array): void {
+    $stringable = Str::of(json_encode($array));
+    assertMatchesJsonSnapshot($this->apiResponse()->success($stringable)->content());
+})->group(__DIR__, __FILE__)->with('arrays');
+
+it('is arrayable', function (array $array): void {
+    $arrayable = new class($array) implements Arrayable {
+        private array $array;
+
+        public function __construct(array $array)
+        {
+            $this->array = $array;
+        }
+
+        public function toArray(): array
+        {
+            return $this->array;
+        }
+    };
+    assertMatchesJsonSnapshot($this->apiResponse()->success($arrayable)->content());
+})->group(__DIR__, __FILE__)->with('arrays');
+
+it('is jsonable', function (array $array): void {
+    $jsonable = new class($array) implements Jsonable {
+        private array $array;
+
+        public function __construct(array $array)
+        {
+            $this->array = $array;
+        }
+
+        public function toJson($options = 0)
+        {
+            return json_encode($this->array, $options);
+        }
+    };
+    assertMatchesJsonSnapshot($this->apiResponse()->success($jsonable)->content());
+})->group(__DIR__, __FILE__)->with('arrays');

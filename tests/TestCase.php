@@ -86,7 +86,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $router->any('api/exception', static function (): void {
             config('api-response.render_using', ApiPathsRenderUsing::make());
 
-            throw new \RuntimeException('This is a runtime exception.', Response::HTTP_BAD_REQUEST);
+            throw new \RuntimeException('This is a runtime exception.', Response::HTTP_BAD_GATEWAY);
         })->middleware(SetAcceptHeader::class);
     }
 }

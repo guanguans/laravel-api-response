@@ -183,7 +183,7 @@
         "pest-coverage": "@pest --coverage-html=./.build/phpunit/ --coverage-clover=./.build/phpunit/clover.xml --coverage",
         "pest-migrate-configuration": "@pest --migrate-configuration",
         "pest-update-snapshots": "@pest -d --update-snapshots",
-        "phpmnd": "@php ./vendor/bin/phpmnd src --exclude-path=Pipes/StatusCodePipe.php --hint --progress --ansi -v",
+        "phpmnd": "@php ./vendor/bin/phpmnd src --exclude-path=Support/Utils.php --hint --progress --ansi -v",
         "phpstan": "@php ./vendor/bin/phpstan analyse --ansi -v",
         "phpstan-baseline": "@phpstan --generate-baseline --allow-empty-baseline",
         "post-merge": [
