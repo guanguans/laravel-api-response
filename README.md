@@ -123,8 +123,8 @@ class Controller extends \App\Http\Controllers\Controller
     "status": "boolean",
     "code": "integer",
     "message": "string",
-    "data": "mixed",
-    "error": "object"
+    "data": "array<mixed>|array<string, mixed>",
+    "error": "array<string, mixed>"
 }
 ```
 

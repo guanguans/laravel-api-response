@@ -8,6 +8,16 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.2"></a>
+## [1.0.2] - 2024-10-31
+### Bug Fixes
+- **ApiResponse:** Fix error code handling in exceptionDestination
+- **utils:** Improve Utils class
+
+### Tests
+- **commit:** Add new datasets for testing
+
+
 <a name="1.0.1"></a>
 ## [1.0.1] - 2024-10-30
 ### Bug Fixes
@@ -17,7 +27,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 - **api:** Add Localizable trait to ApiResponse
 
-### Test
+### Tests
 - **test:** Add exception tests
 
 
@@ -43,7 +53,7 @@ All notable changes to this project will be documented in this file.
 - **api:** Add response structure documentation
 - **readme:** Add ShouldReturnJsonRenderUsing example
 
-### Test
+### Tests
 - **rename:** rename test files
 - **types:** add tests for LaravelDataTypesTest.php
 
@@ -61,7 +71,7 @@ All notable changes to this project will be documented in this file.
 - **ApiResponse:** improve JSON response options
 - **rendering:** Refactor ApiPathsRenderUsing to include 'only' and 'except' parameters
 
-### Test
+### Tests
 - Add snapshot update command and new RoleUser model
 - **Feature:** update LaravelDataTypesTest
 - **commit:** Update ApiResponse, ApiResponseContract, and related classes
@@ -76,7 +86,7 @@ All notable changes to this project will be documented in this file.
 - **exception-pipes:** add HttpResponseExceptionPipe and ResponsableExceptionPipe
 - **tests:** update HTTP status checks for API responses
 
-### Test
+### Tests
 - **refactor:** rename test directories and update paths
 
 
@@ -104,7 +114,7 @@ All notable changes to this project will be documented in this file.
 - **api-response:** add exception pipes for status code and message settingAdd new exception pipes to handle the setting of status codes and messages uniformly across exceptions. This enhances the error handling in the API by allowing customizable response formatting through `SetCodeExceptionPipe` and `SetMessageExceptionPipe`, providing better control over the error messages and codes returned.
 - **tests:** add test models and seeder for API responsesAdded model classes and a seeder for database tables to expand testing coverage of API responses. This includes the creation of models for Country, User, Post, Comment, Role, and Tag entities, along with a seeder class to populate these models with test data.
 
-### Test
+### Tests
 - **api:** update exception pipes and response handling
 - **api-response:** update tests for model and resource data types
 
@@ -119,7 +129,7 @@ new pipes for proper header and error handling.
 ### Bug Fixes
 - **CollectionMacro:** add unshift method to CollectionMacro
 
-### Test
+### Tests
 - Remove old success and error response tests
 - Add unit tests for ApiResponse functionality
 
@@ -148,12 +158,13 @@ new pipes for proper header and error handling.
 - **exception-pipes:** add HideMessageExceptionPipe
 - **exception-pipes:** add validation and HTTP exception pipes
 
-### Test
+### Tests
 - Refactor tests and skip unimplemented tests
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.1...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.2...HEAD
+[1.0.2]: https://github.com/guanguans/laravel-api-response/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/guanguans/laravel-api-response/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-rc3...1.0.0
 [1.0.0-rc3]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-rc2...1.0.0-rc3
