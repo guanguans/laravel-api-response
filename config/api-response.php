@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
 /** @noinspection LaravelFunctionsInspection */
 
 declare(strict_types=1);
@@ -71,6 +72,7 @@ return [
         ),
         SetErrorExceptionPipe::make(
             [
+                // 'message' => 'Whoops, looks like something went wrong.',
                 // error...
             ],
             // class...

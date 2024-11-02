@@ -17,7 +17,7 @@ use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SetAcceptHeader
+class SetJsonAcceptHeader
 {
     use WithPipeArgs;
 
@@ -26,9 +26,9 @@ class SetAcceptHeader
      *
      * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
-    public function handle(Request $request, \Closure $next, string $type): Response
+    public function handle(Request $request, \Closure $next): Response
     {
-        $request->headers->set('Accept', "application/$type");
+        $request->headers->set('Accept', 'application/json');
 
         return $next($request);
     }

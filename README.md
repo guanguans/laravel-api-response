@@ -51,7 +51,7 @@ namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
-use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
+use Guanguans\LaravelApiResponse\Middleware\SetJsonAcceptHeader;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Illuminate\Http\JsonResponse;
 
@@ -61,7 +61,7 @@ class Controller extends \App\Http\Controllers\Controller
 
     public function __construct()
     {
-        $this->middleware(SetAcceptHeader::class)->only('exceptionHandler');
+        $this->middleware(SetJsonAcceptHeader::class)->only('exceptionHandler');
     }
 
     public function getInstance(): JsonResponse
@@ -1049,14 +1049,14 @@ class Controller extends \App\Http\Controllers\Controller
 
 namespace App\Http\Controllers\Api;
 
-use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
+use Guanguans\LaravelApiResponse\Middleware\SetJsonAcceptHeader;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
 {
     public function __construct()
     {
-        $this->middleware(SetAcceptHeader::class)->only('example');
+        $this->middleware(SetJsonAcceptHeader::class)->only('example');
     }
 
     public function example(): JsonResponse

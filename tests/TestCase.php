@@ -17,6 +17,7 @@ namespace Guanguans\LaravelApiResponse\Tests;
 
 use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Guanguans\LaravelApiResponse\Middleware\SetAcceptHeader;
+use Guanguans\LaravelApiResponse\Middleware\SetJsonAcceptHeader;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\ServiceProvider;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
@@ -87,6 +88,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
             config('api-response.render_using', ApiPathsRenderUsing::make());
 
             throw new \RuntimeException('This is a runtime exception.', Response::HTTP_BAD_GATEWAY);
-        })->middleware(SetAcceptHeader::class);
+        })->middleware(SetAcceptHeader::with('json'), SetJsonAcceptHeader::class);
     }
 }

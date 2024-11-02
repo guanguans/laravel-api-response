@@ -7,7 +7,7 @@
         "message": "This is a runtime exception.",
         "exception": "RuntimeException",
         "file": "\/tests\/Feature\/ExceptionTest.php",
-        "line": 48,
+        "line": 51,
         "trace": [
             {
                 "function": "{closure}",
