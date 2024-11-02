@@ -26,12 +26,14 @@ use Guanguans\LaravelApiResponse\Pipes\JsonResourceDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
 use Guanguans\LaravelApiResponse\Pipes\NullDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
+use Guanguans\LaravelApiResponse\Pipes\ResourceCollectionDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\ScalarDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\StatusCodePipe;
 use Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\RenderUsings\ShouldReturnJsonRenderUsing;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 return [
@@ -96,6 +98,7 @@ return [
         ErrorPipe::with(/* !app()->hasDebugModeEnabled() */),
         NullDataPipe::with(false),
         ScalarDataPipe::with(JsonResource::$wrap),
+        ResourceCollectionDataPipe::with(ResourceCollection::$wrap),
         JsonResourceDataPipe::class,
         PaginatorDataPipe::class,
         ToJsonResponseDataPipe::class,

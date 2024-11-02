@@ -209,7 +209,7 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         DisallowedEmptyRuleFixerRector::class => [
-            // __DIR__.'/src/Support/QueryAnalyzer.php',
+            __DIR__.'/src/Pipes/ScalarDataPipe.php',
         ],
         ParenthesizeNestedTernaryRector::class => [
             __DIR__.'/src/Pipes/MessagePipe.php',
