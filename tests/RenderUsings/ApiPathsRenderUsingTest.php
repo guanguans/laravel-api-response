@@ -17,10 +17,16 @@ declare(strict_types=1);
  */
 
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
 
+it('can call ApiPathsRenderUsing', function (): void {
+    expect(ApiPathsRenderUsing::make(['*'])(new \RuntimeException($this->faker()->title()), request()))
+        ->toBeInstanceOf(JsonResponse::class);
+})->group(__DIR__, __FILE__);
+
 it('can set state for ApiPathsRenderUsing', function (): void {
-    $varExport = var_export(new ApiPathsRenderUsing, true);
+    $varExport = var_export(ApiPathsRenderUsing::make(), true);
     File::put(
         $path = fixtures_path('ApiPathsRenderUsing.php'),
         <<<PHP

@@ -1,1 +1,3 @@
 ApiPathsRenderUsing.php
+SetErrorExceptionPipe.php
+SetHeadersExceptionPipe.php

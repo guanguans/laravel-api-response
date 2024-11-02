@@ -92,13 +92,13 @@ return [
         /*
          * Before...
          */
-        JsonResourceDataPipe::class,
-        NullDataPipe::with(false),
-        ScalarDataPipe::with(false, JsonResource::$wrap),
-        PaginatorDataPipe::class,
-        ToJsonResponseDataPipe::class,
         MessagePipe::with('http-statuses', 'Server Error'),
         ErrorPipe::with(/* !app()->hasDebugModeEnabled() */),
+        NullDataPipe::with(false),
+        ScalarDataPipe::with(JsonResource::$wrap),
+        JsonResourceDataPipe::class,
+        PaginatorDataPipe::class,
+        ToJsonResponseDataPipe::class,
 
         /*
          * After...

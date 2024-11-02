@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection UsingInclusionReturnValueInspection */
+/** @noinspection DebugFunctionUsageInspection */
 /** @noinspection PhpMultipleClassDeclarationsInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
@@ -20,6 +22,7 @@ use Guanguans\LaravelApiResponse\ExceptionPipes\SetErrorExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetHeadersExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Response;
 
 it('can use exception pipes', function (): void {
@@ -47,4 +50,36 @@ it('can use exception pipes', function (): void {
             ),
         )
         ->exception(new \RuntimeException($this->faker()->title()))->toBeInstanceOf(JsonResponse::class);
+})->group(__DIR__, __FILE__);
+
+it('can set state for SetErrorExceptionPipe', function (): void {
+    $varExport = var_export(SetErrorExceptionPipe::make([]), true);
+    File::put(
+        $path = fixtures_path('SetErrorExceptionPipe.php'),
+        <<<PHP
+            <?php
+
+            /** @noinspection all */
+
+            return $varExport;
+
+            PHP
+    );
+    expect(require $path)->toBeInstanceOf(SetErrorExceptionPipe::class);
+})->group(__DIR__, __FILE__);
+
+it('can set state for SetHeadersExceptionPipe', function (): void {
+    $varExport = var_export(SetHeadersExceptionPipe::make([]), true);
+    File::put(
+        $path = fixtures_path('SetHeadersExceptionPipe.php'),
+        <<<PHP
+            <?php
+
+            /** @noinspection all */
+
+            return $varExport;
+
+            PHP
+    );
+    expect(require $path)->toBeInstanceOf(SetHeadersExceptionPipe::class);
 })->group(__DIR__, __FILE__);

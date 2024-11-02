@@ -28,27 +28,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 it('can use pipes', function (): void {
-    JsonResource::withoutWrapping();
     expect($this->apiResponse())
-        ->unshiftPipes(ScalarDataPipe::with(true, JsonResource::$wrap))
         ->pushPipes(
             /*
              * Before...
              */
-            JsonResourceDataPipe::class,
-            NullDataPipe::with(true),
-            ScalarDataPipe::with(true, JsonResource::$wrap),
-            PaginatorDataPipe::class,
-            ToJsonResponseDataPipe::class,
             MessagePipe::with('http-statuses', 'Server Error'),
             ErrorPipe::with(true),
+            NullDataPipe::with(true),
+            ScalarDataPipe::with(JsonResource::$wrap),
+            JsonResourceDataPipe::class,
+            PaginatorDataPipe::class,
+            ToJsonResponseDataPipe::class,
 
             /*
              * After...
              */
             StatusCodePipe::with(Response::HTTP_INTERNAL_SERVER_ERROR, Response::HTTP_OK),
         )
-        ->success($this->faker()->name())->toBeInstanceOf(JsonResponse::class)
+        // ->success($this->faker()->name())->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(500000))->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(600))->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);

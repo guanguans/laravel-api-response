@@ -32,9 +32,9 @@ class ScalarDataPipe
      *  error: ?array,
      * }  $data
      */
-    public function handle(array $data, \Closure $next, bool $assoc = false, ?string $wrap = null): JsonResponse
+    public function handle(array $data, \Closure $next, ?string $wrap = null): JsonResponse
     {
-        $data['data'] = $this->dataFor($data['data'], $assoc, $wrap);
+        $data['data'] = $this->dataFor($data['data'], $wrap);
 
         return $next($data);
     }
@@ -44,16 +44,12 @@ class ScalarDataPipe
      *
      * @return mixed
      */
-    private function dataFor($data, bool $assoc, ?string $wrap)
+    private function dataFor($data, ?string $wrap)
     {
-        if (!\is_scalar($data)) {
+        if (!\is_scalar($data) || empty($wrap)) {
             return $data;
         }
 
-        if ($assoc) {
-            return (array) $data;
-        }
-
-        return $wrap ? [$wrap => $data] : (object) $data;
+        return [$wrap => $data];
     }
 }
