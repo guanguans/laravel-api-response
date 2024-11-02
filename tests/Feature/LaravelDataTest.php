@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection JsonEncodingApiUsageInspection */
+/** @noinspection PhpMissingDocCommentInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
 

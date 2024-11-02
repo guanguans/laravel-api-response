@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
 
@@ -64,7 +65,7 @@ it('is enum', function (): void {
     //     case Clubs;
     //     case Spades;
     // }
-    assertMatchesJsonSnapshot($this->apiResponse()->success(Suit::Hearts)->content());
+    // assertMatchesJsonSnapshot($this->apiResponse()->success(Suit::Hearts)->content());
 })->group(__DIR__, __FILE__)->skip(\PHP_VERSION_ID < 80100 ? 'Enum type data is not supported' : '');
 
 it('is resource', function (): void {

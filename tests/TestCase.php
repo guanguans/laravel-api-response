@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpMissingDocCommentInspection */
+
 declare(strict_types=1);
 
 /**
@@ -39,7 +41,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function tearDown(): void
     {
-        // (require __DIR__.'/migrations/create_tables.php')->down();
         $this->closeMockery();
         parent::tearDown();
     }
@@ -66,7 +67,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function defineDatabaseMigrations(): void
     {
-        // (require __DIR__.'/migrations/create_tables.php')->up();
         $this->loadMigrationsFrom(__DIR__.'/Laravel/migrations');
     }
 

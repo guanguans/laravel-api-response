@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection JsonEncodingApiUsageInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
 

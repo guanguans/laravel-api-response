@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection SenselessProxyMethodInspection */
+
 declare(strict_types=1);
 
 /**

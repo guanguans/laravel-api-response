@@ -67,6 +67,8 @@ final class ToInternalExceptionRector extends AbstractRector implements Configur
     }
 
     /**
+     * @noinspection PhpInconsistentReturnPointsInspection
+     *
      * @param Node\Expr\New_ $node
      *
      * @throws \ReflectionException

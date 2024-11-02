@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection PhpMultipleClassDeclarationsInspection */
+/** @noinspection DebugFunctionUsageInspection */
+/** @noinspection ForgottenDebugOutputInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
 

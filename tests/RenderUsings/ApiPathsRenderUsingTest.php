@@ -1,7 +1,7 @@
 <?php
 
+/** @noinspection UsingInclusionReturnValueInspection */
 /** @noinspection DebugFunctionUsageInspection */
-
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
 
@@ -19,7 +19,7 @@ declare(strict_types=1);
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Illuminate\Support\Facades\File;
 
-it('can return a JsonResponse', function (): void {
+it('can set state for ApiPathsRenderUsing', function (): void {
     $varExport = var_export(new ApiPathsRenderUsing, true);
     File::put(
         $path = fixtures_path('ApiPathsRenderUsing.php'),

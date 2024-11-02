@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection PhpUnused */
+/** @noinspection PhpMissingDocCommentInspection */
+
 declare(strict_types=1);
 
 /**

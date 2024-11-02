@@ -117,6 +117,9 @@ class ApiResponse implements ApiResponseContract
      * @see \Illuminate\Foundation\Exceptions\Handler::prepareJsonResponse()
      * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
      * @see \Illuminate\Database\QueryException
+     *
+     * @noinspection UnnecessaryCastingInspection
+     * @noinspection PhpCastIsUnnecessaryInspection
      */
     protected function exceptionDestination(): \Closure
     {
