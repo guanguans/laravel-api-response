@@ -8,6 +8,19 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.3"></a>
+## [1.0.3] - 2024-11-02
+### Bug Fixes
+- **pipes:** Remove unused parameter from ScalarDataPipe
+
+### Features
+- **api-response:** Add ResourceCollectionDataPipe
+- **middleware:** Enhance accept header handling
+
+### Tests
+- **composer-updater:** improve process creation
+
+
 <a name="1.0.2"></a>
 ## [1.0.2] - 2024-10-31
 ### Bug Fixes
@@ -163,7 +176,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.2...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.3...HEAD
+[1.0.3]: https://github.com/guanguans/laravel-api-response/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/guanguans/laravel-api-response/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/guanguans/laravel-api-response/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/guanguans/laravel-api-response/compare/1.0.0-rc3...1.0.0
