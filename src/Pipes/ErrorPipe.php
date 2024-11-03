@@ -59,7 +59,7 @@ class ErrorPipe
         if (
             $structure['message']
             && isset($error['message'])
-            && (empty($error['message']) || 'Server Error' === $error['message'])
+            && \in_array($error['message'], ['', 'Server Error'], true)
         ) {
             $error['message'] = $structure['message'];
         }

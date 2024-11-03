@@ -26,7 +26,7 @@ class MessagePipe
      * @noinspection RedundantDocCommentTagInspection
      *
      * @param \Closure(array): \Illuminate\Http\JsonResponse $next
-     * @param string $fallbackMessage // ['Whoops, looks like something went wrong.', 'Server Error', 'Unknown Status']
+     * @param string $fallbackErrorMessage // ['Whoops, looks like something went wrong.', 'Server Error', 'Unknown Status']
      * @param  array{
      *  status: bool,
      *  code: int,
@@ -39,33 +39,42 @@ class MessagePipe
         array $structure,
         \Closure $next,
         string $mainTransKey = 'http-statuses',
-        string $fallbackMessage = 'Server Error'
+        string $fallbackErrorMessage = 'Internal Server Error',
+        string $fallbackSuccessMessage = 'OK'
     ): JsonResponse {
-        $structure['message'] = $this->messageFor($structure, $mainTransKey, $fallbackMessage);
+        $structure['message'] = __($structure['message'] ?: $this->transKeyFor(
+            $structure,
+            $mainTransKey,
+            $fallbackErrorMessage,
+            $fallbackSuccessMessage
+        ));
 
         return $next($structure);
     }
 
-    private function messageFor(array $structure, string $mainTransKey, string $fallbackMessage): string
-    {
-        return __($structure['message'] ?: $this->transKeyFor($structure['code'], $mainTransKey, $fallbackMessage));
-    }
+    /**
+     * @noinspection NullPointerExceptionInspection
+     */
+    private function transKeyFor(
+        array $structure,
+        string $mainTransKey,
+        string $fallbackErrorMessage,
+        string $fallbackSuccessMessage
+    ): string {
+        $code = $structure['code'];
 
-    private function transKeyFor(int $code, string $mainTransKey, string $fallbackMessage): ?string
-    {
-        /** @var \Illuminate\Translation\Translator $translator */
-        $translator = trans();
-
-        if ($translator->has($key = "$mainTransKey.$code")) {
+        if (trans()->has($key = "$mainTransKey.$code")) {
             return $key;
         }
 
         $statusCode = Utils::statusCodeFor($code);
 
-        if ($translator->has($key = "$mainTransKey.$statusCode")) {
+        if (trans()->has($key = "$mainTransKey.$statusCode")) {
             return $key;
         }
 
-        return Response::$statusTexts[$statusCode] ?? $fallbackMessage;
+        return Response::$statusTexts[$statusCode] ?? (
+            $structure['status'] ? $fallbackSuccessMessage : $fallbackErrorMessage
+        );
     }
 }

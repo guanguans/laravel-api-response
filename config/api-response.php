@@ -94,8 +94,13 @@ return [
         /*
          * Before...
          */
-        MessagePipe::with('http-statuses', 'Server Error'),
+        MessagePipe::with(
+            'http-statuses',
+            Response::$statusTexts[Response::HTTP_INTERNAL_SERVER_ERROR],
+            Response::$statusTexts[Response::HTTP_OK]
+        ),
         ErrorPipe::with(/* !app()->hasDebugModeEnabled() */),
+
         NullDataPipe::with(false),
         ScalarDataPipe::with(JsonResource::$wrap),
         ResourceCollectionDataPipe::with(ResourceCollection::$wrap),

@@ -6,6 +6,11 @@ parameters:
 			path: src/ApiResponse.php
 
 		-
+			message: "#^Cannot call method has\\(\\) on array\\|Illuminate\\\\Contracts\\\\Translation\\\\Translator\\|string\\.$#"
+			count: 2
+			path: src/Pipes/MessagePipe.php
+
+		-
 			message: "#^Method Guanguans\\\\LaravelApiResponse\\\\Support\\\\Rectors\\\\ToInternalExceptionRector\\:\\:refactor\\(\\) should return 1\\|2\\|3\\|4\\|array\\<PhpParser\\\\Node\\>\\|PhpParser\\\\Node\\|null but empty return statement found\\.$#"
 			count: 1
 			path: src/Support/Rectors/ToInternalExceptionRector.php
