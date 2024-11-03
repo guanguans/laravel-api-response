@@ -31,14 +31,14 @@ class JsonResourceDataPipe
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * }  $data
+     * }  $structure
      */
-    public function handle(array $data, \Closure $next): JsonResponse
+    public function handle(array $structure, \Closure $next): JsonResponse
     {
-        if ($data['data'] instanceof JsonResource) {
+        if ($structure['data'] instanceof JsonResource) {
             JsonResource::withoutWrapping();
         }
 
-        return $next($data);
+        return $next($structure);
     }
 }

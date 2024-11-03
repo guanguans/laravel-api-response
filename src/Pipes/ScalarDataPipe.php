@@ -30,13 +30,13 @@ class ScalarDataPipe
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * }  $data
+     * }  $structure
      */
-    public function handle(array $data, \Closure $next, ?string $wrap = null): JsonResponse
+    public function handle(array $structure, \Closure $next, ?string $wrap = null): JsonResponse
     {
-        $data['data'] = $this->dataFor($data['data'], $wrap);
+        $structure['data'] = $this->dataFor($structure['data'], $wrap);
 
-        return $next($data);
+        return $next($structure);
     }
 
     /**

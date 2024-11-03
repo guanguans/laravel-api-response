@@ -35,15 +35,15 @@ class AuthenticationExceptionPipe
      */
     public function handle(\Throwable $throwable, \Closure $next): array
     {
-        $data = $next($throwable);
+        $structure = $next($throwable);
 
         if ($throwable instanceof AuthenticationException) {
             return [
                 'code' => Response::HTTP_UNAUTHORIZED,
                 'message' => $throwable->getMessage(),
-            ] + $data;
+            ] + $structure;
         }
 
-        return $data;
+        return $structure;
     }
 }

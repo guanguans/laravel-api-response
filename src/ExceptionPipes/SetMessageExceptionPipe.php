@@ -34,12 +34,12 @@ class SetMessageExceptionPipe
      */
     public function handle(\Throwable $throwable, \Closure $next, string $message, string ...$classes): array
     {
-        $data = $next($throwable);
+        $structure = $next($throwable);
 
         if (Arr::first($classes, static fn (string $class): bool => $throwable instanceof $class)) {
-            return ['message' => $message] + $data;
+            return ['message' => $message] + $structure;
         }
 
-        return $data;
+        return $structure;
     }
 }

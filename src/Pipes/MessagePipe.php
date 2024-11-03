@@ -33,22 +33,22 @@ class MessagePipe
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * }  $data
+     * }  $structure
      */
     public function handle(
-        array $data,
+        array $structure,
         \Closure $next,
         string $mainTransKey = 'http-statuses',
         string $fallbackMessage = 'Server Error'
     ): JsonResponse {
-        $data['message'] = $this->messageFor($data, $mainTransKey, $fallbackMessage);
+        $structure['message'] = $this->messageFor($structure, $mainTransKey, $fallbackMessage);
 
-        return $next($data);
+        return $next($structure);
     }
 
-    private function messageFor(array $data, string $mainTransKey, string $fallbackMessage): string
+    private function messageFor(array $structure, string $mainTransKey, string $fallbackMessage): string
     {
-        return __($data['message'] ?: $this->transKeyFor($data['code'], $mainTransKey, $fallbackMessage));
+        return __($structure['message'] ?: $this->transKeyFor($structure['code'], $mainTransKey, $fallbackMessage));
     }
 
     private function transKeyFor(int $code, string $mainTransKey, string $fallbackMessage): ?string

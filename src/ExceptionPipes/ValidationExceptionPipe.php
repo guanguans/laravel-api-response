@@ -34,7 +34,7 @@ class ValidationExceptionPipe
      */
     public function handle(\Throwable $throwable, \Closure $next): array
     {
-        $data = $next($throwable);
+        $structure = $next($throwable);
 
         if ($throwable instanceof ValidationException) {
             return [
@@ -42,9 +42,9 @@ class ValidationExceptionPipe
                 // 'message' => $throwable->getMessage(),
                 'message' => $throwable->validator->errors()->first(),
                 'error' => $throwable->errors(),
-            ] + $data;
+            ] + $structure;
         }
 
-        return $data;
+        return $structure;
     }
 }

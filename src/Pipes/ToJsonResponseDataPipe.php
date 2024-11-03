@@ -31,13 +31,13 @@ class ToJsonResponseDataPipe
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * }  $data
+     * }  $structure
      */
-    public function handle(array $data, \Closure $next): JsonResponse
+    public function handle(array $structure, \Closure $next): JsonResponse
     {
-        $data['data'] = $this->dataFor($data['data']);
+        $structure['data'] = $this->dataFor($structure['data']);
 
-        return $next($data);
+        return $next($structure);
     }
 
     /**

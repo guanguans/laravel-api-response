@@ -30,17 +30,17 @@ class ErrorPipe
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * }  $data
+     * }  $structure
      */
-    public function handle(array $data, \Closure $next, bool $hidden = false): JsonResponse
+    public function handle(array $structure, \Closure $next, bool $hidden = false): JsonResponse
     {
-        $data['error'] = $this->errorFor($data);
+        $structure['error'] = $this->errorFor($structure);
 
         if ($hidden) {
-            unset($data['error']);
+            unset($structure['error']);
         }
 
-        return $next($data);
+        return $next($structure);
     }
 
     /**
@@ -48,9 +48,9 @@ class ErrorPipe
      *
      * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
      */
-    private function errorFor(array $data)
+    private function errorFor(array $structure)
     {
-        $error = (array) $data['error'];
+        $error = (array) $structure['error'];
 
         if ([] === $error) {
             return (object) $error;
@@ -60,7 +60,7 @@ class ErrorPipe
             isset($error['message'])
             && (empty($error['message']) || 'Server Error' === $error['message'])
         ) {
-            $error['message'] = $data['message'];
+            $error['message'] = $structure['message'];
         }
 
         return $error;

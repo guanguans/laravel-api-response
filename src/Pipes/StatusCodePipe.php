@@ -32,15 +32,15 @@ class StatusCodePipe
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * }  $data
+     * }  $structure
      */
     public function handle(
-        array $data,
+        array $structure,
         \Closure $next,
         int $fallbackErrorStatusCode = Response::HTTP_INTERNAL_SERVER_ERROR,
         int $fallbackSuccessStatusCode = Response::HTTP_OK
     ): JsonResponse {
-        return $next($data)->setStatusCode($this->statusCodeFor($data, $fallbackErrorStatusCode, $fallbackSuccessStatusCode));
+        return $next($structure)->setStatusCode($this->statusCodeFor($structure, $fallbackErrorStatusCode, $fallbackSuccessStatusCode));
     }
 
     /**
@@ -50,12 +50,12 @@ class StatusCodePipe
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * }  $data
+     * }  $structure
      */
-    private function statusCodeFor(array $data, int $fallbackErrorStatusCode, int $fallbackSuccessStatusCode): int
+    private function statusCodeFor(array $structure, int $fallbackErrorStatusCode, int $fallbackSuccessStatusCode): int
     {
-        return Utils::isValidStatusCode($statusCode = Utils::statusCodeFor($data['code']))
+        return Utils::isValidStatusCode($statusCode = Utils::statusCodeFor($structure['code']))
             ? $statusCode
-            : ($data['status'] ? $fallbackSuccessStatusCode : $fallbackErrorStatusCode);
+            : ($structure['status'] ? $fallbackSuccessStatusCode : $fallbackErrorStatusCode);
     }
 }

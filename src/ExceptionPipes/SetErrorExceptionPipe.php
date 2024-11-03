@@ -49,12 +49,12 @@ class SetErrorExceptionPipe
      */
     public function handle(\Throwable $throwable, \Closure $next): array
     {
-        $data = $next($throwable);
+        $structure = $next($throwable);
 
         if (Arr::first($this->classes, static fn (string $class): bool => $throwable instanceof $class)) {
-            return ['error' => $this->error] + $data;
+            return ['error' => $this->error] + $structure;
         }
 
-        return $data;
+        return $structure;
     }
 }

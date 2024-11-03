@@ -49,12 +49,12 @@ class SetHeadersExceptionPipe
      */
     public function handle(\Throwable $throwable, \Closure $next): array
     {
-        $data = $next($throwable);
+        $structure = $next($throwable);
 
         if (Arr::first($this->classes, static fn (string $class): bool => $throwable instanceof $class)) {
-            return ['headers' => $this->headers] + $data;
+            return ['headers' => $this->headers] + $structure;
         }
 
-        return $data;
+        return $structure;
     }
 }

@@ -30,13 +30,13 @@ class NullDataPipe
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * }  $data
+     * }  $structure
      */
-    public function handle(array $data, \Closure $next, bool $assoc = false): JsonResponse
+    public function handle(array $structure, \Closure $next, bool $assoc = false): JsonResponse
     {
-        $data['data'] = $this->dataFor($data['data'], $assoc);
+        $structure['data'] = $this->dataFor($structure['data'], $assoc);
 
-        return $next($data);
+        return $next($structure);
     }
 
     /**

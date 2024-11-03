@@ -34,16 +34,16 @@ class HttpExceptionPipe
      */
     public function handle(\Throwable $throwable, \Closure $next): array
     {
-        $data = $next($throwable);
+        $structure = $next($throwable);
 
         if ($throwable instanceof HttpExceptionInterface) {
             return [
                 'code' => $throwable->getStatusCode(),
                 'message' => $throwable->getMessage(),
                 'headers' => $throwable->getHeaders(),
-            ] + $data;
+            ] + $structure;
         }
 
-        return $data;
+        return $structure;
     }
 }

@@ -31,14 +31,14 @@ class ResourceCollectionDataPipe
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * }  $data
+     * }  $structure
      */
-    public function handle(array $data, \Closure $next, ?string $wrap = null): JsonResponse
+    public function handle(array $structure, \Closure $next, ?string $wrap = null): JsonResponse
     {
-        if ($data['data'] instanceof ResourceCollection) {
+        if ($structure['data'] instanceof ResourceCollection) {
             ResourceCollection::wrap($wrap);
         }
 
-        return $next($data);
+        return $next($structure);
     }
 }
