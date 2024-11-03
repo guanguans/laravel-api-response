@@ -2,7 +2,7 @@
     "status": false,
     "code": 404,
     "message": "Not Found",
-    "data": {},
+    "data": null,
     "error": {
         "message": "Not Found"
     }

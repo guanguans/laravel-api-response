@@ -2,7 +2,7 @@
     "status": false,
     "code": 422,
     "message": "The foo must be an integer.",
-    "data": {},
+    "data": null,
     "error": {
         "foo": [
             "The foo must be an integer.",

@@ -2,7 +2,7 @@
     "status": false,
     "code": 502,
     "message": "Bad Gateway",
-    "data": {},
+    "data": null,
     "error": {
         "message": "Bad Gateway"
     }

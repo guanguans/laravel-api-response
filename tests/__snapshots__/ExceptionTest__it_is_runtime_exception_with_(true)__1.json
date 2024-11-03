@@ -2,7 +2,7 @@
     "status": false,
     "code": 400,
     "message": "This is a runtime exception.",
-    "data": {},
+    "data": null,
     "error": {
         "message": "This is a runtime exception.",
         "exception": "RuntimeException",

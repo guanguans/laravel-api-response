@@ -54,7 +54,7 @@ it('can use pipes', function (): void {
              */
             StatusCodePipe::with(Response::HTTP_INTERNAL_SERVER_ERROR, Response::HTTP_OK),
         )
-        // ->success($this->faker()->name())->toBeInstanceOf(JsonResponse::class)
+        ->success($this->faker()->name())->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(500000))->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(600))->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);

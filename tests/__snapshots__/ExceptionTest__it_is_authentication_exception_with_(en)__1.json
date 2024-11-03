@@ -2,7 +2,7 @@
     "status": false,
     "code": 401,
     "message": "Unauthenticated.",
-    "data": {},
+    "data": null,
     "error": {
         "message": "Unauthenticated."
     }

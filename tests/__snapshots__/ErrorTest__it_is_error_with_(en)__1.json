@@ -2,6 +2,6 @@
     "status": false,
     "code": 400,
     "message": "This is an error.",
-    "data": {},
+    "data": null,
     "error": {}
 }

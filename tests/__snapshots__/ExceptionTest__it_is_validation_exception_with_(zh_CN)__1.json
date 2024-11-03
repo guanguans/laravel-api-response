@@ -2,7 +2,7 @@
     "status": false,
     "code": 422,
     "message": "Foo \u5fc5\u987b\u662f\u6574\u6570\u3002",
-    "data": {},
+    "data": null,
     "error": {
         "foo": [
             "Foo \u5fc5\u987b\u662f\u6574\u6570\u3002",

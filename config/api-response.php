@@ -101,7 +101,7 @@ return [
         ),
         ErrorPipe::with(/* !app()->hasDebugModeEnabled() */),
 
-        NullDataPipe::with(false),
+        // NullDataPipe::with(false),
         // ScalarDataPipe::with(JsonResource::$wrap),
         ResourceCollectionDataPipe::with(ResourceCollection::$wrap),
         PaginatorDataPipe::class,
