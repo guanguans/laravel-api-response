@@ -63,8 +63,10 @@ class PaginatorDataPipe
         }
 
         $originalWrap = ResourceCollection::$wrap;
+
         empty($wrap) or ResourceCollection::wrap($wrap);
         $data = ResourceCollection::make($data)->toResponse(request())->getData();
+
         ResourceCollection::wrap($originalWrap);
 
         return $data;

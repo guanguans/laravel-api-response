@@ -19,13 +19,11 @@ use Guanguans\LaravelApiResponse\Pipes\JsonResourceDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
 use Guanguans\LaravelApiResponse\Pipes\NullDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\ResourceCollectionDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\ScalarDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\StatusCodePipe;
 use Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -44,7 +42,6 @@ it('can use pipes', function (): void {
             ErrorPipe::with(true),
             NullDataPipe::with(false),
             ScalarDataPipe::with(JsonResource::$wrap),
-            ResourceCollectionDataPipe::with(ResourceCollection::$wrap),
             PaginatorDataPipe::class,
             JsonResourceDataPipe::class,
             ToJsonResponseDataPipe::class,
