@@ -2,8 +2,6 @@
     "status": true,
     "code": 200,
     "message": "OK",
-    "data": {
-        "data": "Guanguans\\LaravelApiResponse\\Support\\Utils::statusCodeFor"
-    },
+    "data": "Guanguans\\LaravelApiResponse\\Support\\Utils::statusCodeFor",
     "error": {}
 }

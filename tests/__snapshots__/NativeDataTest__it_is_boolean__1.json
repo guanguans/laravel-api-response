@@ -2,8 +2,6 @@
     "status": true,
     "code": 200,
     "message": "OK",
-    "data": {
-        "data": true
-    },
+    "data": true,
     "error": {}
 }
