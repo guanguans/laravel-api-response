@@ -40,7 +40,11 @@ class StatusCodePipe
         int $fallbackErrorStatusCode = Response::HTTP_INTERNAL_SERVER_ERROR,
         int $fallbackSuccessStatusCode = Response::HTTP_OK
     ): JsonResponse {
-        return $next($structure)->setStatusCode($this->statusCodeFor($structure, $fallbackErrorStatusCode, $fallbackSuccessStatusCode));
+        return $next($structure)->setStatusCode($this->statusCodeFor(
+            $structure,
+            $fallbackErrorStatusCode,
+            $fallbackSuccessStatusCode
+        ));
     }
 
     /**

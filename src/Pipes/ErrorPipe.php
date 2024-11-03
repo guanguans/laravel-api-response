@@ -57,7 +57,8 @@ class ErrorPipe
         }
 
         if (
-            isset($error['message'])
+            $structure['message']
+            && isset($error['message'])
             && (empty($error['message']) || 'Server Error' === $error['message'])
         ) {
             $error['message'] = $structure['message'];
