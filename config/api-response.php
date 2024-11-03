@@ -104,7 +104,7 @@ return [
         // NullDataPipe::with(false),
         // ScalarDataPipe::with(JsonResource::$wrap),
         ResourceCollectionDataPipe::with(ResourceCollection::$wrap),
-        PaginatorDataPipe::class,
+        PaginatorDataPipe::with(),
         JsonResourceDataPipe::class,
         ToJsonResponseDataPipe::class,
 

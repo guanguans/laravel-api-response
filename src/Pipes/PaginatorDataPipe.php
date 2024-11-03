@@ -35,9 +35,9 @@ class PaginatorDataPipe
      *  error: ?array,
      * }  $structure
      */
-    public function handle(array $structure, \Closure $next): JsonResponse
+    public function handle(array $structure, \Closure $next, ?string $wrap = null): JsonResponse
     {
-        $structure['data'] = $this->dataFor($structure['data']);
+        $structure['data'] = $this->dataFor($structure['data'], $wrap);
 
         return $next($structure);
     }
@@ -56,10 +56,17 @@ class PaginatorDataPipe
      *
      * @return mixed
      */
-    private function dataFor($data)
+    private function dataFor($data, ?string $wrap)
     {
-        return $data instanceof AbstractCursorPaginator || $data instanceof AbstractPaginator
-            ? ResourceCollection::make($data)->toResponse(request())->getData()
-            : $data;
+        if (!$data instanceof AbstractCursorPaginator && !$data instanceof AbstractPaginator) {
+            return $data;
+        }
+
+        $originalWrap = ResourceCollection::$wrap;
+        empty($wrap) or ResourceCollection::wrap($wrap);
+        $data = ResourceCollection::make($data)->toResponse(request())->getData();
+        ResourceCollection::wrap($originalWrap);
+
+        return $data;
     }
 }
