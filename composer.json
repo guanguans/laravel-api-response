@@ -64,8 +64,7 @@
         "povils/phpmnd": "^3.5",
         "rector/rector": "^1.2",
         "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
-        "spaze/phpstan-disallowed-calls": "^3.5",
-        "symfony/psr-http-message-bridge": "^2.3 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0"
+        "spaze/phpstan-disallowed-calls": "^3.5"
     },
     "suggest": {
         "laravel-lang/http-statuses": "Provide localized message for HTTP status code."

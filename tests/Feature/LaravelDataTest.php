@@ -17,6 +17,7 @@ declare(strict_types=1);
  */
 
 use Composer\Semver\Comparator;
+use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserCollection;
 use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserResource;
@@ -26,13 +27,17 @@ use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Str;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {
-    // JsonResource::wrap('data');
+    // JsonResource::$wrap;
     // JsonResource::wrap('list');
     // JsonResource::withoutWrapping();
+    // ResourceCollection::$wrap;
+    // ResourceCollection::wrap('list');
+    // ResourceCollection::withoutWrapping();
 });
 
 it('is model', function (): void {
@@ -45,20 +50,38 @@ it('is eloquent collection', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success($users)->content());
 })->group(__DIR__, __FILE__);
 
-it('is paginate', function (): void {
+it('is paginate', function (?string $wrap): void {
     $paginate = User::query()->with(['country', 'posts'])->paginate(3);
-    assertMatchesJsonSnapshot($this->apiResponse()->success($paginate)->content());
-})->group(__DIR__, __FILE__)->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '10.0.0'));
+    assertMatchesJsonSnapshot(
+        $this
+            ->apiResponse()
+            ->unshiftPipes(PaginatorDataPipe::with($wrap))
+            ->success($paginate)
+            ->content()
+    );
+})->group(__DIR__, __FILE__)->with('wraps')->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '10.0.0'));
 
-it('is simple paginate', function (): void {
+it('is simple paginate', function (?string $wrap): void {
     $simplePaginate = User::query()->with(['country', 'posts'])->simplePaginate(3);
-    assertMatchesJsonSnapshot($this->apiResponse()->success($simplePaginate)->content());
-})->group(__DIR__, __FILE__);
+    assertMatchesJsonSnapshot(
+        $this
+            ->apiResponse()
+            ->unshiftPipes(PaginatorDataPipe::with($wrap))
+            ->success($simplePaginate)
+            ->content()
+    );
+})->group(__DIR__, __FILE__)->with('wraps');
 
-it('is cursor paginate', function (): void {
+it('is cursor paginate', function (?string $wrap): void {
     $cursorPaginate = User::query()->with(['country', 'posts'])->cursorPaginate(3);
-    assertMatchesJsonSnapshot($this->apiResponse()->success($cursorPaginate)->content());
-})->group(__DIR__, __FILE__)->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0'));
+    assertMatchesJsonSnapshot(
+        $this
+            ->apiResponse()
+            ->unshiftPipes(PaginatorDataPipe::with($wrap))
+            ->success($cursorPaginate)
+            ->content()
+    );
+})->group(__DIR__, __FILE__)->with('wraps')->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0'));
 
 it('is resource', function (): void {
     $userResource = UserResource::make(User::query()->with(['country', 'posts'])->first());
@@ -68,13 +91,19 @@ it('is resource', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success($userResource)->content());
 })->group(__DIR__, __FILE__);
 
-it('is resource collection', function (): void {
+it('is resource collection', function (?string $wrap): void {
     $userCollection = UserCollection::make(User::query()->with(['country', 'posts'])->get());
     assertMatchesJsonSnapshot($this->apiResponse()->success($userCollection)->content());
 
     $userCollection = UserCollection::make(User::query()->with(['country', 'posts'])->simplePaginate(3));
-    assertMatchesJsonSnapshot($this->apiResponse()->success($userCollection)->content());
-})->group(__DIR__, __FILE__);
+    assertMatchesJsonSnapshot(
+        $this
+            ->apiResponse()
+            ->unshiftPipes(PaginatorDataPipe::with($wrap))
+            ->success($userCollection)
+            ->content()
+    );
+})->group(__DIR__, __FILE__)->with('wraps');
 
 it('is responsable', function (array $array): void {
     $responsable = new class($array) implements Responsable {

@@ -19,12 +19,11 @@ use GuzzleHttp\Psr7\Response;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
-beforeEach(function (): void {
-    // JsonResource::wrap('data');
-    // JsonResource::wrap('list');
-    // JsonResource::withoutWrapping();
-});
+beforeEach(function (): void {});
 
+/**
+ * @see \Guanguans\LaravelApiResponse\Pipes\JsonResponsableDataPipe::dataFor()
+ */
 it('is psr response', function (array $array): void {
     $psrResponse = new Response(SymfonyResponse::HTTP_OK, ['Content-Type' => 'application/json'], json_encode($array));
     assertMatchesJsonSnapshot($this->apiResponse()->success($psrResponse)->content());

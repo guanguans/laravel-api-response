@@ -17,14 +17,9 @@ declare(strict_types=1);
 
 use Guanguans\LaravelApiResponse\Support\Macros\CollectionMacro;
 use Guanguans\LaravelApiResponse\Support\Utils;
-use Illuminate\Http\Resources\Json\JsonResource;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
-beforeEach(function (): void {
-    // JsonResource::wrap('data');
-    // JsonResource::wrap('list');
-    // JsonResource::withoutWrapping();
-});
+beforeEach(function (): void {});
 
 /** @see https://www.php.net/manual/en/language.types.php */
 it('is null', function (string $language): void {
