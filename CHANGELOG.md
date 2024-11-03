@@ -8,6 +8,31 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.4"></a>
+## [1.0.4] - 2024-11-03
+### Bug Fixes
+- **ErrorPipe:** Correct message assignment logic
+- **MessagePipe:** Improve error handling messages
+- **api:** Change response data to null instead of empty object
+- **api-response:** Simplify data structure in response
+- **utils:** Rename error code validation methods
+
+### Code Refactoring
+- **api:** Remove ResourceCollectionDataPipe class
+- **api:** Improve visibility and remove middleware
+- **api-response:** rename ToJsonResponseDataPipe to JsonResponsableDataPipe
+- **nullDataPipe:** Improve data handling in dataFor method
+
+### Features
+- **pipes:** Enhance PaginatorDataPipe to support wrapping data
+
+### Style
+- **ExceptionPipes:** Refactor variable naming from data to structure
+
+### Tests
+- **LaravelDataTest:** Add tests for pagination wrappers
+
+
 <a name="1.0.3"></a>
 ## [1.0.3] - 2024-11-02
 ### Bug Fixes
@@ -176,7 +201,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.3...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.4...HEAD
+[1.0.4]: https://github.com/guanguans/laravel-api-response/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/guanguans/laravel-api-response/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/guanguans/laravel-api-response/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/guanguans/laravel-api-response/compare/1.0.0...1.0.1
