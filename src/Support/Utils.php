@@ -41,39 +41,13 @@ class Utils
     /**
      * @param int|string $code
      */
-    public static function isErrorCode($code): bool
+    public static function isValidErrorCode($code): bool
     {
-        return self::isErrorStatusCode(self::statusCodeFor($code));
+        return self::isValidErrorStatusCode(self::statusCodeFor($code));
     }
 
-    public static function isErrorStatusCode(int $statusCode): bool
+    public static function isValidErrorStatusCode(int $statusCode): bool
     {
-        return self::isClientErrorStatusCode($statusCode) || self::isServerErrorStatusCode($statusCode);
-    }
-
-    /**
-     * @param int|string $code
-     */
-    public static function isClientErrorCode($code): bool
-    {
-        return self::isClientErrorStatusCode(self::statusCodeFor($code));
-    }
-
-    public static function isClientErrorStatusCode(int $statusCode): bool
-    {
-        return Response::HTTP_BAD_REQUEST <= $statusCode && Response::HTTP_INTERNAL_SERVER_ERROR > $statusCode;
-    }
-
-    /**
-     * @param int|string $code
-     */
-    public static function isServerErrorCode($code): bool
-    {
-        return self::isServerErrorStatusCode(self::statusCodeFor($code));
-    }
-
-    public static function isServerErrorStatusCode(int $statusCode): bool
-    {
-        return Response::HTTP_INTERNAL_SERVER_ERROR <= $statusCode && 600 > $statusCode;
+        return Response::HTTP_BAD_REQUEST <= $statusCode && 600 > $statusCode;
     }
 }
