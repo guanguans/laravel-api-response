@@ -46,6 +46,6 @@ class NullDataPipe
      */
     private function dataFor($data, bool $assoc)
     {
-        return $data ?? ($assoc ? [] : (object) []);
+        return $data ?? ($assoc ? (array) $data : (object) $data);
     }
 }
