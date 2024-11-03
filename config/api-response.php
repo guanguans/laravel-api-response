@@ -23,12 +23,12 @@ use Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe;
 use Guanguans\LaravelApiResponse\Pipes\ErrorPipe;
 use Guanguans\LaravelApiResponse\Pipes\JsonResourceDataPipe;
+use Guanguans\LaravelApiResponse\Pipes\JsonResponsableDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
 use Guanguans\LaravelApiResponse\Pipes\NullDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\ScalarDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\StatusCodePipe;
-use Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\RenderUsings\ShouldReturnJsonRenderUsing;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -103,7 +103,7 @@ return [
         // ScalarDataPipe::with(JsonResource::$wrap),
         PaginatorDataPipe::with(/* 'list' */),
         JsonResourceDataPipe::class,
-        ToJsonResponseDataPipe::class,
+        JsonResponsableDataPipe::class,
 
         /*
          * After...

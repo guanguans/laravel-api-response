@@ -16,12 +16,12 @@ declare(strict_types=1);
 
 use Guanguans\LaravelApiResponse\Pipes\ErrorPipe;
 use Guanguans\LaravelApiResponse\Pipes\JsonResourceDataPipe;
+use Guanguans\LaravelApiResponse\Pipes\JsonResponsableDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
 use Guanguans\LaravelApiResponse\Pipes\NullDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\ScalarDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\StatusCodePipe;
-use Guanguans\LaravelApiResponse\Pipes\ToJsonResponseDataPipe;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,9 +42,9 @@ it('can use pipes', function (): void {
             ErrorPipe::with(true),
             NullDataPipe::with(false),
             ScalarDataPipe::with(JsonResource::$wrap),
-            PaginatorDataPipe::class,
+            PaginatorDataPipe::with(/* 'list' */),
             JsonResourceDataPipe::class,
-            ToJsonResponseDataPipe::class,
+            JsonResponsableDataPipe::class,
 
             /*
              * After...

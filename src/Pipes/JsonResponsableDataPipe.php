@@ -17,7 +17,7 @@ use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Router;
 
-class ToJsonResponseDataPipe
+class JsonResponsableDataPipe
 {
     use WithPipeArgs;
 
