@@ -20,7 +20,7 @@ use Illuminate\Support\Collection;
  */
 trait HasExceptionPipes
 {
-    private Collection $exceptionPipes;
+    protected Collection $exceptionPipes;
 
     public function unshiftExceptionPipes(...$exceptionPipes): self
     {

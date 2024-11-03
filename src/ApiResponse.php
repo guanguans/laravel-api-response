@@ -24,6 +24,7 @@ use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Dumpable;
+use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Localizable;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Traits\Tappable;
@@ -43,6 +44,7 @@ class ApiResponse implements ApiResponseContract
     // use Dumpable;
     use ConcreteHttpStatus;
     use Conditionable;
+    use ForwardsCalls;
     use HasExceptionPipes;
     use HasPipes;
     use Localizable;
@@ -51,8 +53,8 @@ class ApiResponse implements ApiResponseContract
 
     public function __construct(?Collection $pipes = null, ?Collection $exceptionPipes = null)
     {
-        $this->pipes = collect($pipes);
-        $this->exceptionPipes = collect($exceptionPipes);
+        $this->pipes = $pipes ?? collect();
+        $this->exceptionPipes = $exceptionPipes ?? collect();
     }
 
     /**

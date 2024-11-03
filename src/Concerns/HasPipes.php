@@ -20,7 +20,7 @@ use Illuminate\Support\Collection;
  */
 trait HasPipes
 {
-    private Collection $pipes;
+    protected Collection $pipes;
 
     public function unshiftPipes(...$pipes): self
     {

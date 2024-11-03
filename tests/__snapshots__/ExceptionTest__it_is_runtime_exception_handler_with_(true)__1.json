@@ -7,7 +7,7 @@
         "message": "This is a runtime exception.",
         "exception": "RuntimeException",
         "file": "\/tests\/TestCase.php",
-        "line": 90,
+        "line": 89,
         "trace": [
             {
                 "file": "\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Route.php",
@@ -49,20 +49,6 @@
                 "line": 167,
                 "function": "handle",
                 "class": "Guanguans\\LaravelApiResponse\\Middleware\\SetJsonAcceptHeader",
-                "type": "->"
-            },
-            {
-                "file": "\/src\/Middleware\/SetAcceptHeader.php",
-                "line": 33,
-                "function": "Illuminate\\Pipeline\\{closure}",
-                "class": "Illuminate\\Pipeline\\Pipeline",
-                "type": "->"
-            },
-            {
-                "file": "\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php",
-                "line": 167,
-                "function": "handle",
-                "class": "Guanguans\\LaravelApiResponse\\Middleware\\SetAcceptHeader",
                 "type": "->"
             },
             {
