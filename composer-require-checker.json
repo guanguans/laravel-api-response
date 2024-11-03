@@ -19,6 +19,7 @@
         "bool",
         "callable",
         "false",
+        "float",
         "int",
         "null",
         "object",
