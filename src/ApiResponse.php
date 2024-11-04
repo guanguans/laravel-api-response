@@ -133,13 +133,15 @@ class ApiResponse implements ApiResponseContract
         ];
     }
 
+    /**
+     * @see https://github.com/MarcinOrlowski/laravel-api-response-builder/blob/master/config/response_builder.php
+     * @see \Illuminate\Foundation\Exceptions\Handler::prepareJsonResponse()
+     */
     protected function destination(): \Closure
     {
         return static function (array $structure): JsonResponse {
-            $options = \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
-                | \JSON_HEX_TAG | \JSON_HEX_APOS | \JSON_HEX_AMP | \JSON_HEX_QUOT;
-
-            $structure['status'] or $options |= \JSON_PRETTY_PRINT;
+            $options = \JSON_UNESCAPED_UNICODE;
+            $structure['status'] or $options |= (\JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES);
 
             return new JsonResponse(
                 $structure,
