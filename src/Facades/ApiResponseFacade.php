@@ -21,6 +21,13 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static \Illuminate\Http\JsonResponse accepted(mixed $data = null, string $message = '', string|null $location = null)
  * @method static \Illuminate\Http\JsonResponse badRequest(string $message = '')
+ * @method static \Guanguans\LaravelApiResponse\ApiResponse castTo(string $type)
+ * @method static \Guanguans\LaravelApiResponse\ApiResponse castToArray()
+ * @method static \Guanguans\LaravelApiResponse\ApiResponse castToBoolean()
+ * @method static \Guanguans\LaravelApiResponse\ApiResponse castToFloat()
+ * @method static \Guanguans\LaravelApiResponse\ApiResponse castToInteger()
+ * @method static \Guanguans\LaravelApiResponse\ApiResponse castToObject()
+ * @method static \Guanguans\LaravelApiResponse\ApiResponse castToString()
  * @method static \Illuminate\Http\JsonResponse conflict(string $message = '')
  * @method static array convertExceptionToArray(\Throwable $throwable)
  * @method static \Illuminate\Http\JsonResponse created(mixed $data = null, string $message = '', string|null $location = null)

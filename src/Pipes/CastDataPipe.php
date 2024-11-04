@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Pipes;
 
+use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 
@@ -41,6 +42,7 @@ class CastDataPipe
 
     /**
      * @see \Illuminate\Database\Eloquent\Concerns\HasAttributes::castAttribute()
+     * @see https://github.com/TheDragonCode/support/blob/main/src/Concerns/Castable.php
      *
      * @noinspection MultipleReturnStatementsInspection
      *
@@ -68,7 +70,7 @@ class CastDataPipe
             case 'array':
                 return (array) $data;
             default:
-                throw new \InvalidArgumentException("Invalid cast type [$type].");
+                throw new InvalidArgumentException("Invalid cast type [$type].");
         }
     }
 

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse;
 
+use Guanguans\LaravelApiResponse\Concerns\ConcreteCast;
 use Guanguans\LaravelApiResponse\Concerns\ConcreteHttpStatus;
 use Guanguans\LaravelApiResponse\Concerns\HasExceptionPipes;
 use Guanguans\LaravelApiResponse\Concerns\HasPipes;
@@ -42,6 +43,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ApiResponse implements ApiResponseContract
 {
     // use Dumpable;
+    use ConcreteCast;
     use ConcreteHttpStatus;
     use Conditionable;
     use ForwardsCalls;
