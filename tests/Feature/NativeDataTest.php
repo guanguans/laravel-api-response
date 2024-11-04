@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection JsonEncodingApiUsageInspection */
 /** @noinspection PhpUnusedAliasInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
@@ -16,6 +17,7 @@ declare(strict_types=1);
  */
 
 use Guanguans\LaravelApiResponse\Support\Traits\MakeStaticable;
+use Illuminate\Support\Str;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {});
@@ -96,8 +98,14 @@ it('is callable', function (): void {
 })->group(__DIR__, __FILE__);
 
 it('is iterable', function (array $array): void {
-    assertMatchesJsonSnapshot($this->apiResponse()->success(new FilesystemIterator(__DIR__))->content());
-    assertMatchesJsonSnapshot($this->apiResponse()->success(new GlobIterator(__DIR__.'/*'))->content());
+    assertMatchesJsonSnapshot(
+        (string) Str::of($this->apiResponse()->success(new FilesystemIterator(__DIR__))->content())
+            ->remove($basePath = trim(json_encode(\dirname(__DIR__, 2)), '"'))
+    );
+    assertMatchesJsonSnapshot(
+        (string) Str::of($this->apiResponse()->success(new GlobIterator(__DIR__.'/*'))->content())
+            ->remove($basePath)
+    );
     assertMatchesJsonSnapshot($this->apiResponse()->success(
         (function () use ($array) {
             foreach ($array as $key => $value) {
