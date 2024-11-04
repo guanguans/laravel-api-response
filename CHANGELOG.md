@@ -8,6 +8,21 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.5"></a>
+## [1.0.5] - 2024-11-04
+### Features
+- **ApiResponse:** Add ConcreteCast trait for data casting
+- **pipe:** Add CallableDataPipe for processing response data
+- **pipes:** Add IterableDataPipe for processing iterable data
+- **pipes:** Add CastDataPipe class for data type casting
+
+### Performance Improvements
+- **ApiResponse:** Enhance JSON options for response formatting
+
+### Tests
+- **iterable-data-pipe:** Update iterable data handling logic
+
+
 <a name="1.0.4"></a>
 ## [1.0.4] - 2024-11-03
 ### Bug Fixes
@@ -201,7 +216,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.4...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.5...HEAD
+[1.0.5]: https://github.com/guanguans/laravel-api-response/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/guanguans/laravel-api-response/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/guanguans/laravel-api-response/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/guanguans/laravel-api-response/compare/1.0.1...1.0.2
