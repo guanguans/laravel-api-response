@@ -46,6 +46,6 @@ class IterableDataPipe
      */
     private function dataFor($data)
     {
-        return is_iterable($data) ? iterator_to_array($data) : $data;
+        return is_iterable($data) && !\is_array($data) ? iterator_to_array($data) : $data;
     }
 }

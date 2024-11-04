@@ -15,8 +15,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Guanguans\LaravelApiResponse\Support\Macros\CollectionMacro;
-use Guanguans\LaravelApiResponse\Support\Utils;
+use Guanguans\LaravelApiResponse\Support\Traits\MakeStaticable;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {});
@@ -68,19 +67,32 @@ it('is resource', function (): void {
 })->group(__DIR__, __FILE__)->throws(\InvalidArgumentException::class, 'Type is not supported');
 
 it('is callable', function (): void {
-    assertMatchesJsonSnapshot($this->apiResponse()->success(fn (): string => 'callable')->content());
-    assertMatchesJsonSnapshot($this->apiResponse()->success('\make')->content());
-    assertMatchesJsonSnapshot($this->apiResponse()->success([Utils::class, 'statusCodeFor'])->content());
-    assertMatchesJsonSnapshot($this->apiResponse()->success(Utils::class.'::statusCodeFor')->content());
-    assertMatchesJsonSnapshot($this->apiResponse()->success([new CollectionMacro, 'unshift'])->content());
-    assertMatchesJsonSnapshot($this->apiResponse()->success(
-        new class {
-            public function __invoke(): string
-            {
-                return 'callable';
-            }
+    class NativeDataTest
+    {
+        use MakeStaticable;
+
+        public function __invoke(): string
+        {
+            return __METHOD__;
         }
-    )->content());
+
+        public static function staticMethod(): string
+        {
+            return __METHOD__;
+        }
+
+        public function generalMethod(): string
+        {
+            return __METHOD__;
+        }
+    }
+
+    assertMatchesJsonSnapshot($this->apiResponse()->success(fn (): string => __METHOD__)->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success('\time')->content()); // unsupported
+    assertMatchesJsonSnapshot($this->apiResponse()->success([NativeDataTest::class, 'staticMethod'])->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success(NativeDataTest::class.'::staticMethod')->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success([NativeDataTest::make(), 'generalMethod'])->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success(NativeDataTest::make())->content());
 })->group(__DIR__, __FILE__);
 
 it('is iterable', function (array $array): void {

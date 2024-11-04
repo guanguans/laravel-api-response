@@ -21,7 +21,9 @@ use Guanguans\LaravelApiResponse\ExceptionPipes\SetErrorExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetHeadersExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe;
+use Guanguans\LaravelApiResponse\Pipes\CallableDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\ErrorPipe;
+use Guanguans\LaravelApiResponse\Pipes\IterableDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\JsonResourceDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\JsonResponsableDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
@@ -101,9 +103,11 @@ return [
 
         // NullDataPipe::with(false),
         // ScalarDataPipe::with(JsonResource::$wrap),
+        CallableDataPipe::class,
         PaginatorDataPipe::with(/* 'list' */),
         JsonResourceDataPipe::class,
         JsonResponsableDataPipe::class,
+        IterableDataPipe::class,
 
         /*
          * After...

@@ -2,9 +2,6 @@
     "status": true,
     "code": 200,
     "message": "OK",
-    "data": [
-        "Guanguans\\LaravelApiResponse\\Support\\Utils",
-        "statusCodeFor"
-    ],
+    "data": "NativeDataTest::staticMethod",
     "error": {}
 }

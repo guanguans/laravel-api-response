@@ -2,9 +2,6 @@
     "status": true,
     "code": 200,
     "message": "OK",
-    "data": [
-        {},
-        "unshift"
-    ],
+    "data": "NativeDataTest::generalMethod",
     "error": {}
 }

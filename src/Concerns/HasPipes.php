@@ -16,6 +16,9 @@ namespace Guanguans\LaravelApiResponse\Concerns;
 use Illuminate\Support\Collection;
 
 /**
+ * @see https://github.com/guzzle/guzzle/blob/8.0/src/HandlerStack.php
+ * @see \GuzzleHttp\HandlerStack
+ *
  * @mixin \Guanguans\LaravelApiResponse\ApiResponse
  */
 trait HasPipes

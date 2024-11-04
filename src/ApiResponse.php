@@ -138,6 +138,7 @@ class ApiResponse implements ApiResponseContract
     /**
      * @see https://github.com/MarcinOrlowski/laravel-api-response-builder/blob/master/config/response_builder.php
      * @see \Illuminate\Foundation\Exceptions\Handler::prepareJsonResponse()
+     * @see \Illuminate\Support\Js::REQUIRED_FLAGS
      */
     protected function destination(): \Closure
     {
