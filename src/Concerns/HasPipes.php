@@ -41,6 +41,33 @@ trait HasPipes
         });
     }
 
+    public function beforePipes(string $findPipe, ...$pipes): self
+    {
+        return $this->splicePipes($findPipe, $pipes, true);
+    }
+
+    public function afterPipes(string $findPipe, ...$pipes): self
+    {
+        return $this->splicePipes($findPipe, $pipes, false);
+    }
+
+    public function removePipes(string ...$findPipes): self
+    {
+        return $this->extendPipes(
+            static fn (Collection $pipes): Collection => $pipes
+                ->reject(static function ($pipe) use ($findPipes): bool {
+                    \is_object($pipe) and !$pipe instanceof \Closure and $pipe = \get_class($pipe);
+
+                    if (!\is_string($pipe)) {
+                        return false;
+                    }
+
+                    return Str::of($pipe)->startsWith($findPipes);
+                })
+                ->values()
+        );
+    }
+
     public function extendPipes(callable $callback): self
     {
         $this->pipes = $this->pipes->pipe($callback);
@@ -56,50 +83,22 @@ trait HasPipes
     }
 
     /**
-     * @param mixed $pipe
+     * @param list<mixed> $pipes
      */
-    public function before(string $findPipe, $pipe): self
-    {
-        return $this->splice($findPipe, $pipe, true);
-    }
-
-    /**
-     * @param mixed $pipe
-     */
-    public function after(string $findPipe, $pipe): self
-    {
-        return $this->splice($findPipe, $pipe, false);
-    }
-
-    public function remove(string $findPipe): self
-    {
-        return $this->extendPipes(
-            fn (Collection $pipes): Collection => $this
-                ->pipes
-                ->reject(static fn ($pipe): bool => $pipe === $findPipe)
-                ->values()
-        );
-    }
-
-    /**
-     * @param mixed $pipe
-     */
-    private function splice(string $findPipe, $pipe, bool $before): self
+    private function splicePipes(string $findPipe, array $pipes, bool $before): self
     {
         $idx = $this->findByPipe($findPipe);
 
         if ($before) {
             if (0 === $idx) {
-                $this->pipes->unshift($pipe);
+                $this->pipes->unshift(...$pipes);
             } else {
-                $replacement = [$pipe, $this->pipes[$idx]];
-                $this->pipes->splice($idx, 1, $replacement);
+                $this->pipes->splice($idx, 1, [...$pipes, $this->pipes[$idx]]);
             }
         } elseif ($this->pipes->count() - 1 === $idx) {
-            $this->pipes[] = $pipe;
+            $this->pipes->push(...$pipes);
         } else {
-            $replacement = [$this->pipes[$idx], $pipe];
-            $this->pipes->splice($idx, 1, $replacement);
+            $this->pipes->splice($idx, 1, [$this->pipes[$idx], ...$pipes]);
         }
 
         return $this;

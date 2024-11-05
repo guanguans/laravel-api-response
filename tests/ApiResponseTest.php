@@ -14,18 +14,19 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Guanguans\LaravelApiResponse\Pipes\CallableDataPipe;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 it('can return JsonResponse', function (): void {
-    // $this
-    //     ->apiResponse()
-    //     ->dump()
-    //     ->before(\Guanguans\LaravelApiResponse\Pipes\CallableDataPipe::with(), fn (array $data, $next) => $next($data))
-    //     ->after(\Guanguans\LaravelApiResponse\Pipes\CallableDataPipe::with(), fn (array $data, $next) => $next($data))
-    //     ->remove(\Guanguans\LaravelApiResponse\Pipes\CallableDataPipe::with())
-    //     ->dd();
+    $this
+        ->apiResponse()
+        ->dump()
+        ->beforePipes(CallableDataPipe::with(), fn (array $data, $next) => $next($data), fn (array $data, $next) => $next($data))
+        ->afterPipes(CallableDataPipe::with(), fn (array $data, $next) => $next($data), fn (array $data, $next) => $next($data))
+        ->removePipes(CallableDataPipe::with())
+        ->dump();
 
     expect($this->apiResponse()->exception(new HttpException(Response::HTTP_BAD_REQUEST, $this->faker()->title())))
         ->toBeInstanceOf(JsonResponse::class)
