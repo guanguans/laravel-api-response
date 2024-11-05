@@ -19,8 +19,8 @@ use Illuminate\Http\Request;
 
 class ApiPathsRenderUsing extends RenderUsing
 {
-    use SetStateable;
     use MakeStaticable;
+    use SetStateable;
 
     /** @var list<string> */
     protected array $only;

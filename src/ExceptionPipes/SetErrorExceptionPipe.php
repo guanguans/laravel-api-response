@@ -20,9 +20,9 @@ use Illuminate\Support\Arr;
 
 class SetErrorExceptionPipe
 {
-    use WithPipeArgs;
     use MakeStaticable;
     use SetStateable;
+    use WithPipeArgs;
     private ?array $error;
     private array $classes;
 

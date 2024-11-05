@@ -94,11 +94,7 @@ return [
         /*
          * Before...
          */
-        MessagePipe::with(
-            'http-statuses',
-            Response::$statusTexts[Response::HTTP_INTERNAL_SERVER_ERROR],
-            Response::$statusTexts[Response::HTTP_OK]
-        ),
+        MessagePipe::with('http-statuses'),
         ErrorPipe::with(/* !app()->hasDebugModeEnabled() */),
 
         // NullDataPipe::with(false),
@@ -112,6 +108,6 @@ return [
         /*
          * After...
          */
-        StatusCodePipe::with(Response::HTTP_INTERNAL_SERVER_ERROR, Response::HTTP_OK),
+        StatusCodePipe::with(),
     ],
 ];

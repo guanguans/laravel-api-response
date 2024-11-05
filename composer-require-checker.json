@@ -30,6 +30,9 @@
         "true",
         "void",
 
+        "dd",
+        "dump",
+
         "PhpParser\\Node",
         "PhpParser\\Node\\Expr\\New_",
         "PhpParser\\Node\\Name",

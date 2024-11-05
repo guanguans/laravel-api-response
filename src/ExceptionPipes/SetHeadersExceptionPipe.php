@@ -20,9 +20,9 @@ use Illuminate\Support\Arr;
 
 class SetHeadersExceptionPipe
 {
-    use WithPipeArgs;
     use MakeStaticable;
     use SetStateable;
+    use WithPipeArgs;
     private array $headers;
     private array $classes;
 

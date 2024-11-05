@@ -27,10 +27,10 @@ use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
+    use ApiResponseFactory;
+    use Faker;
     use MockeryPHPUnitIntegration;
     use VarDumperTestTrait;
-    use Faker;
-    use ApiResponseFactory;
 
     protected function setUp(): void
     {

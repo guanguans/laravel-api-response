@@ -75,6 +75,9 @@
         "psr-4": {
             "Guanguans\\LaravelApiResponse\\": "src"
         },
+        "classmap": [
+            "src/Support/Polyfills/Dumpable.php"
+        ],
         "files": [
             "src/Support/helpers.php"
         ]

@@ -42,10 +42,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ApiResponse implements ApiResponseContract
 {
-    // use Dumpable;
     use ConcreteCast;
     use ConcreteHttpStatus;
     use Conditionable;
+    use Dumpable;
     use ForwardsCalls;
     use HasExceptionPipes;
     use HasPipes;
