@@ -8,6 +8,16 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.6"></a>
+## [1.0.6] - 2024-11-05
+### Bug Fixes
+- **HasPipes:** Support multiple pipes in before and after methods
+
+### Features
+- **HasExceptionPipes:** Add new methods for exception pipe management
+- **api-response:** Add Dumpable trait for improved debugging
+
+
 <a name="1.0.5"></a>
 ## [1.0.5] - 2024-11-04
 ### Features
@@ -216,7 +226,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.5...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.6...HEAD
+[1.0.6]: https://github.com/guanguans/laravel-api-response/compare/1.0.5...1.0.6
 [1.0.5]: https://github.com/guanguans/laravel-api-response/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/guanguans/laravel-api-response/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/guanguans/laravel-api-response/compare/1.0.2...1.0.3
