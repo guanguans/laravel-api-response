@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Concerns;
 
+use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 /**
  * @mixin \Guanguans\LaravelApiResponse\ApiResponse
@@ -36,6 +38,33 @@ trait HasExceptionPipes
         });
     }
 
+    public function beforeExceptionPipes(string $findExceptionPipe, ...$exceptionPipes): self
+    {
+        return $this->spliceExceptionPipes($findExceptionPipe, $exceptionPipes, true);
+    }
+
+    public function afterExceptionPipes(string $findExceptionPipe, ...$exceptionPipes): self
+    {
+        return $this->spliceExceptionPipes($findExceptionPipe, $exceptionPipes, false);
+    }
+
+    public function removeExceptionPipes(string ...$findExceptionPipes): self
+    {
+        return $this->extendExceptionPipes(
+            static fn (Collection $exceptionPipes): Collection => $exceptionPipes
+                ->reject(static function ($exceptionPipe) use ($findExceptionPipes): bool {
+                    \is_object($exceptionPipe) and !$exceptionPipe instanceof \Closure and $exceptionPipe = \get_class($exceptionPipe);
+
+                    if (!\is_string($exceptionPipe)) {
+                        return false;
+                    }
+
+                    return Str::of($exceptionPipe)->startsWith($findExceptionPipes);
+                })
+                ->values()
+        );
+    }
+
     public function extendExceptionPipes(callable $callback): self
     {
         $this->exceptionPipes = $this->exceptionPipes->pipe($callback);
@@ -48,5 +77,38 @@ trait HasExceptionPipes
         tap($this->exceptionPipes, $callback);
 
         return $this;
+    }
+
+    /**
+     * @param list<mixed> $exceptionPipes
+     */
+    private function spliceExceptionPipes(string $findExceptionPipe, array $exceptionPipes, bool $before): self
+    {
+        $idx = $this->findByExceptionPipe($findExceptionPipe);
+
+        if ($before) {
+            if (0 === $idx) {
+                $this->exceptionPipes->unshift(...$exceptionPipes);
+            } else {
+                $this->exceptionPipes->splice($idx, 1, [...$exceptionPipes, $this->exceptionPipes[$idx]]);
+            }
+        } elseif ($this->exceptionPipes->count() - 1 === $idx) {
+            $this->exceptionPipes->push(...$exceptionPipes);
+        } else {
+            $this->exceptionPipes->splice($idx, 1, [$this->exceptionPipes[$idx], ...$exceptionPipes]);
+        }
+
+        return $this;
+    }
+
+    private function findByExceptionPipe(string $findExceptionPipe): int
+    {
+        foreach ($this->exceptionPipes as $idx => $exceptionPipe) {
+            if (\is_string($exceptionPipe) && Str::of($exceptionPipe)->startsWith($findExceptionPipe)) {
+                return $idx;
+            }
+        }
+
+        throw new InvalidArgumentException("ExceptionPipe not found: $findExceptionPipe");
     }
 }

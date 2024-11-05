@@ -25,7 +25,7 @@ it('can return JsonResponse', function (): void {
         ->dump()
         ->beforePipes(CallableDataPipe::with(), fn (array $data, $next) => $next($data), fn (array $data, $next) => $next($data))
         ->afterPipes(CallableDataPipe::with(), fn (array $data, $next) => $next($data), fn (array $data, $next) => $next($data))
-        ->removePipes(CallableDataPipe::with())
+        ->removePipes(CallableDataPipe::with(), CallableDataPipe::with())
         ->dump();
 
     expect($this->apiResponse()->exception(new HttpException(Response::HTTP_BAD_REQUEST, $this->faker()->title())))

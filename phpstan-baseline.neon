@@ -2,7 +2,7 @@ parameters:
 	ignoreErrors:
 		-
 			message: "#^Call to an undefined method Illuminate\\\\Support\\\\Collection\\:\\:unshift\\(\\)\\.$#"
-			count: 3
+			count: 4
 			path: src/ApiResponse.php
 
 		-
