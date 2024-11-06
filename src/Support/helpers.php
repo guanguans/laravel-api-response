@@ -41,7 +41,7 @@ if (!\function_exists('make')) {
             if (isset($abstract[$class])) {
                 return make(
                     $abstract[$class],
-                    Arr::except($abstract, $class) + $parameters,
+                    $parameters + Arr::except($abstract, $class),
                 );
             }
         }

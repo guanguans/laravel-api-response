@@ -53,6 +53,10 @@ class CastDataPipe
     private function dataFor($data, string $type)
     {
         switch ($type) {
+            case 'null':
+                // return (unset) $data;
+                /** @noinspection PhpInconsistentReturnPointsInspection */
+                return;
             case 'int':
             case 'integer':
                 return (int) $data;
