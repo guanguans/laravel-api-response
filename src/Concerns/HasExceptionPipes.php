@@ -53,7 +53,9 @@ trait HasExceptionPipes
         return $this->extendExceptionPipes(
             static fn (Collection $exceptionPipes): Collection => $exceptionPipes
                 ->reject(static function ($exceptionPipe) use ($findExceptionPipes): bool {
-                    \is_object($exceptionPipe) and !$exceptionPipe instanceof \Closure and $exceptionPipe = \get_class($exceptionPipe);
+                    if (\is_object($exceptionPipe) && !$exceptionPipe instanceof \Closure) {
+                        $exceptionPipe = \get_class($exceptionPipe);
+                    }
 
                     if (!\is_string($exceptionPipe)) {
                         return false;
@@ -104,6 +106,10 @@ trait HasExceptionPipes
     private function findByExceptionPipe(string $findExceptionPipe): int
     {
         foreach ($this->exceptionPipes as $idx => $exceptionPipe) {
+            if (\is_object($exceptionPipe) && !$exceptionPipe instanceof \Closure) {
+                $exceptionPipe = \get_class($exceptionPipe);
+            }
+
             if (\is_string($exceptionPipe) && Str::of($exceptionPipe)->startsWith($findExceptionPipe)) {
                 return $idx;
             }

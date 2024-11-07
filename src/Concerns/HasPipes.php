@@ -56,7 +56,9 @@ trait HasPipes
         return $this->extendPipes(
             static fn (Collection $pipes): Collection => $pipes
                 ->reject(static function ($pipe) use ($findPipes): bool {
-                    \is_object($pipe) and !$pipe instanceof \Closure and $pipe = \get_class($pipe);
+                    if (\is_object($pipe) && !$pipe instanceof \Closure) {
+                        $pipe = \get_class($pipe);
+                    }
 
                     if (!\is_string($pipe)) {
                         return false;
@@ -107,6 +109,10 @@ trait HasPipes
     private function findByPipe(string $findPipe): int
     {
         foreach ($this->pipes as $idx => $pipe) {
+            if (\is_object($pipe) && !$pipe instanceof \Closure) {
+                $pipe = \get_class($pipe);
+            }
+
             if (\is_string($pipe) && Str::of($pipe)->startsWith($findPipe)) {
                 return $idx;
             }

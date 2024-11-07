@@ -5,7 +5,7 @@
 - Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe
 - {  }
 - {  }
+- 'Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe:Whoops, looks like something went wrong.'
 - {  }
 - {  }
-- Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe
 - {  }

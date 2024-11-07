@@ -55,3 +55,15 @@ it('can use pipes', function (): void {
         ->exception(new HttpException(500000))->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(600))->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);
+
+it('can will throw InvalidArgumentException', function ($data): void {
+    $this->apiResponse()->castToFloat()->success($data);
+})->group(__DIR__, __FILE__)->throws(InvalidArgumentException::class)->with([
+    'Infinity',
+    '-Infinity',
+    'NaN',
+]);
+
+it('can will throw Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException', function (): void {
+    $this->apiResponse()->castTo('resource')->success($this->faker()->name());
+})->group(__DIR__, __FILE__)->throws(Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException::class, 'resource');

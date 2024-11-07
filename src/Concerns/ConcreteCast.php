@@ -20,6 +20,11 @@ use Guanguans\LaravelApiResponse\Pipes\CastDataPipe;
  */
 trait ConcreteCast
 {
+    public function castToNull(): self
+    {
+        return $this->castTo('null');
+    }
+
     public function castToInteger(): self
     {
         return $this->castTo('integer');

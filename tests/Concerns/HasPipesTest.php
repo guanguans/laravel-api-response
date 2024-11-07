@@ -36,6 +36,12 @@ it('can use pipes', function (): void {
             MessagePipe::with(),
             static fn (array $structure, \Closure $next): JsonResponse => $next($structure),
             static fn (array $structure, \Closure $next): JsonResponse => $next($structure),
+            new class {
+                public function handle(array $structure, \Closure $next): JsonResponse
+                {
+                    return $next($structure);
+                }
+            }
         )
         ->beforePipes(
             CallableDataPipe::with(),
@@ -51,7 +57,8 @@ it('can use pipes', function (): void {
         )
         ->removePipes(
             CallableDataPipe::with(),
-            CallableDataPipe::with()
+            CallableDataPipe::with(),
+            'class@anonymous'
         )
         ->tapPipes(static function (Collection $pipes): void {
             assertMatchesObjectSnapshot($pipes);

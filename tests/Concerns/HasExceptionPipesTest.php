@@ -19,7 +19,6 @@ use Guanguans\LaravelApiResponse\ApiResponse;
 use Guanguans\LaravelApiResponse\ExceptionPipes\AuthenticationExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetCodeExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetHeadersExceptionPipe;
-use Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe;
 use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Collection;
 use function Spatie\Snapshots\assertMatchesObjectSnapshot;
@@ -31,8 +30,7 @@ it('can throw InvalidArgumentException', function (): void {
 it('can use exception pipes', function (): void {
     expect($this->apiResponse())
         ->unshiftExceptionPipes()
-        ->removeExceptionPipes(SetMessageExceptionPipe::with())
-        ->pushExceptionPipes(SetMessageExceptionPipe::with())
+        ->pushExceptionPipes()
         ->beforeExceptionPipes(
             AuthenticationExceptionPipe::with(),
             static fn (\Throwable $throwable, \Closure $next): array => $next($throwable),
@@ -47,8 +45,7 @@ it('can use exception pipes', function (): void {
             static fn (\Throwable $throwable, \Closure $next): array => $next($throwable),
         )
         ->afterExceptionPipes(
-            // SetHeadersExceptionPipe::with(),
-            SetMessageExceptionPipe::with(),
+            SetHeadersExceptionPipe::with(),
             static fn (\Throwable $throwable, \Closure $next): array => $next($throwable),
         )
         ->removeExceptionPipes(

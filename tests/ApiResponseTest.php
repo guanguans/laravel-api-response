@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 it('can return JsonResponse', function (): void {
-    expect($this->apiResponse()->exception(new HttpException(Response::HTTP_BAD_REQUEST, $this->faker()->title())))
+    expect($this->apiResponse()->dump()->exception(new HttpException(Response::HTTP_BAD_REQUEST, $this->faker()->title())))
         ->toBeInstanceOf(JsonResponse::class)
         ->isClientError()->toBeTrue()
         ->and($this->apiResponse()->exception(new \RuntimeException($this->faker()->title(), 0)))
