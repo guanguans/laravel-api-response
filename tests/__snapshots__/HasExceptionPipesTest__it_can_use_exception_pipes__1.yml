@@ -1,0 +1,11 @@
+- {  }
+- {  }
+- Guanguans\LaravelApiResponse\ExceptionPipes\AuthenticationExceptionPipe
+- Guanguans\LaravelApiResponse\ExceptionPipes\HttpExceptionPipe
+- Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe
+- {  }
+- {  }
+- {  }
+- {  }
+- Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe
+- {  }
