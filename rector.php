@@ -225,7 +225,7 @@ return RectorConfig::configure()
             // __DIR__.'/src/OutputManager.php',
         ],
         RemoveDumpDataDeadCodeRector::class => [
-            __DIR__.'/src/Support/Polyfills/Dumpable.php',
+            __DIR__.'/src/Support/Traits/Dumpable.php',
             __DIR__.'/tests/Feature/ExceptionTest.php',
         ],
         ToInternalExceptionRector::class => [

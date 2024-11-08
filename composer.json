@@ -76,7 +76,7 @@
             "Guanguans\\LaravelApiResponse\\": "src"
         },
         "classmap": [
-            "src/Support/Polyfills/Dumpable.php"
+            "src/Support/Traits/Dumpable.php"
         ],
         "files": [
             "src/Support/helpers.php"
