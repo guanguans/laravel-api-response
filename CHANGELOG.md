@@ -8,6 +8,26 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.7"></a>
+## [1.0.7] - 2024-11-08
+### Bug Fixes
+- **CastDataPipe:** Handle null case in dataFor method
+- **ErrorPipe:** Enhance error message handling
+
+### Code Refactoring
+- **composer:** Rename Dumpable.php to Traits
+- **laravel-api-response:** rename Macros to Mixins
+
+### Features
+- **JsonResponsableDataPipe:** Add associative option for JSON response
+
+### Performance Improvements
+- **Pipes:** Optimize dataFor method type check
+
+### Tests
+- **pipes:** Improve pipe handling and add exception test
+
+
 <a name="1.0.6"></a>
 ## [1.0.6] - 2024-11-05
 ### Bug Fixes
@@ -226,7 +246,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.6...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.7...HEAD
+[1.0.7]: https://github.com/guanguans/laravel-api-response/compare/1.0.6...1.0.7
 [1.0.6]: https://github.com/guanguans/laravel-api-response/compare/1.0.5...1.0.6
 [1.0.5]: https://github.com/guanguans/laravel-api-response/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/guanguans/laravel-api-response/compare/1.0.3...1.0.4
