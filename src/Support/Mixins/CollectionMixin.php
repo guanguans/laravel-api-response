@@ -16,7 +16,7 @@ namespace Guanguans\LaravelApiResponse\Support\Mixins;
 /**
  * @property array $items
  *
- * @see \Illuminate\Support\Collection
+ * @mixin  \Illuminate\Support\Collection
  */
 class CollectionMixin
 {

@@ -15,6 +15,7 @@ namespace Guanguans\LaravelApiResponse\Pipes;
 
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ErrorPipe
 {
@@ -59,7 +60,11 @@ class ErrorPipe
         if (
             $structure['message']
             && isset($error['message'])
-            && \in_array($error['message'], ['', 'Server Error'], true)
+            && \in_array(
+                $error['message'],
+                ['', 'Server Error', Response::$statusTexts[Response::HTTP_INTERNAL_SERVER_ERROR]],
+                true
+            )
         ) {
             $error['message'] = $structure['message'];
         }
