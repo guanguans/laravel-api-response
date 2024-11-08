@@ -33,9 +33,9 @@ class JsonResponsableDataPipe
      *  error: ?array,
      * }  $structure
      */
-    public function handle(array $structure, \Closure $next): JsonResponse
+    public function handle(array $structure, \Closure $next, bool $assoc = false): JsonResponse
     {
-        $structure['data'] = $this->dataFor($structure['data']);
+        $structure['data'] = $this->dataFor($structure['data'], $assoc);
 
         return $next($structure);
     }
@@ -51,11 +51,11 @@ class JsonResponsableDataPipe
      *
      * @return mixed
      */
-    private function dataFor($data)
+    private function dataFor($data, bool $assoc)
     {
         try {
             return ($response = Router::toResponse(request(), $data)) instanceof JsonResponse
-                ? $response->getData()
+                ? $response->getData($assoc)
                 : $data;
         } catch (\TypeError $typeError) {
             return $data;

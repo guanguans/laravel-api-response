@@ -15,41 +15,18 @@ declare(strict_types=1);
  */
 
 use Guanguans\LaravelApiResponse\Pipes\ErrorPipe;
-use Guanguans\LaravelApiResponse\Pipes\JsonResourceDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\JsonResponsableDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
 use Guanguans\LaravelApiResponse\Pipes\NullDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
 use Guanguans\LaravelApiResponse\Pipes\ScalarDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\StatusCodePipe;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 it('can use pipes', function (): void {
     expect($this->apiResponse())
         ->pushPipes(
-            /*
-             * Before...
-             */
-            MessagePipe::with(
-                'http-statuses',
-                Response::$statusTexts[Response::HTTP_INTERNAL_SERVER_ERROR],
-                Response::$statusTexts[Response::HTTP_OK]
-            ),
-            // ErrorPipe::with(/* !app()->hasDebugModeEnabled() */),
             ErrorPipe::with(true),
             NullDataPipe::with(false),
             ScalarDataPipe::with(JsonResource::$wrap),
-            PaginatorDataPipe::with(/* 'list' */),
-            JsonResourceDataPipe::class,
-            JsonResponsableDataPipe::class,
-
-            /*
-             * After...
-             */
-            StatusCodePipe::with(Response::HTTP_INTERNAL_SERVER_ERROR, Response::HTTP_OK),
         )
         ->success($this->faker()->name())->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(500000))->toBeInstanceOf(JsonResponse::class)

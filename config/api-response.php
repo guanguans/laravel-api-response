@@ -69,7 +69,7 @@ return [
             // class...
         ),
         SetMessageExceptionPipe::with(
-            'Whoops, looks like something went wrong.', // message.
+            'Whoops! looks like something went wrong.', // message.
             // class...
         ),
         SetErrorExceptionPipe::make(
@@ -102,7 +102,7 @@ return [
         CallableDataPipe::class,
         PaginatorDataPipe::with(/* 'list' */),
         JsonResourceDataPipe::class,
-        JsonResponsableDataPipe::class,
+        JsonResponsableDataPipe::with(),
         IterableDataPipe::class,
 
         /*
