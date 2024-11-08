@@ -46,6 +46,8 @@ class CallableDataPipe
      */
     private function dataFor($data)
     {
-        return \is_callable($data) && !(\is_string($data) && \function_exists($data)) ? $data() : $data;
+        return \is_callable($data) && !(\is_string($data) && \function_exists($data))
+            ? $data()
+            : $data;
     }
 }

@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Guanguans\LaravelApiResponse\ApiResponse castToBoolean()
  * @method static \Guanguans\LaravelApiResponse\ApiResponse castToFloat()
  * @method static \Guanguans\LaravelApiResponse\ApiResponse castToInteger()
+ * @method static \Guanguans\LaravelApiResponse\ApiResponse castToNull()
  * @method static \Guanguans\LaravelApiResponse\ApiResponse castToObject()
  * @method static \Guanguans\LaravelApiResponse\ApiResponse castToString()
  * @method static \Illuminate\Http\JsonResponse conflict(string $message = '')
