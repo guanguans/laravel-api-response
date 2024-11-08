@@ -19,7 +19,7 @@ namespace Illuminate\Support {
     /**
      * @method self unshift(...$values)
      *
-     * @see \Guanguans\LaravelApiResponse\Support\Macros\CollectionMacro
+     * @see \Guanguans\LaravelApiResponse\Support\Mixins\CollectionMixin
      */
     class Collection {}
 }

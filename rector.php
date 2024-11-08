@@ -216,7 +216,7 @@ return RectorConfig::configure()
             __DIR__.'/src/Pipes/MessagePipe.php',
         ],
         RemoveExtraParametersRector::class => [
-            // __DIR__.'/src/Macros/QueryBuilderMacro.php',
+            // __DIR__.'/src/Mixins/QueryBuilderMacro.php',
         ],
         RemoveUselessReturnTagRector::class => [
             __DIR__.'/src/Support/Traits/ApiResponseFactory.php',

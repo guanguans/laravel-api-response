@@ -30,7 +30,7 @@ if (!trait_exists(Dumpable::class)) {
          */
         public function dd(...$args): void
         {
-            dd($this, ...$args);
+            dd($this, ...$args); // @codeCoverageIgnore
         }
 
         /**

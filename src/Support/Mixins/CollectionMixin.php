@@ -11,14 +11,14 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Support\Macros;
+namespace Guanguans\LaravelApiResponse\Support\Mixins;
 
 /**
  * @property array $items
  *
  * @see \Illuminate\Support\Collection
  */
-class CollectionMacro
+class CollectionMixin
 {
     public function unshift(): \Closure
     {

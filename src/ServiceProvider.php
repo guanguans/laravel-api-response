@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse;
 
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
-use Guanguans\LaravelApiResponse\Support\Macros\CollectionMacro;
+use Guanguans\LaravelApiResponse\Support\Mixins\CollectionMixin;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
@@ -37,7 +37,7 @@ class ServiceProvider extends PackageServiceProvider
      */
     public function packageBooted(): void
     {
-        Collection::mixin(new CollectionMacro);
+        Collection::mixin(new CollectionMixin);
         $this->registerRenderUsing();
     }
 

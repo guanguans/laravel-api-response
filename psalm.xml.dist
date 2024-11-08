@@ -24,12 +24,12 @@
     <PropertyNotSetInConstructor errorLevel="info"/>
     <InaccessibleProperty>
       <errorLevel type="suppress">
-        <directory name="src/Macros"/>
+        <directory name="src/Mixins"/>
       </errorLevel>
     </InaccessibleProperty>
     <TooManyArguments>
       <errorLevel type="suppress">
-        <file name="src/Macros/StringableMacro.php"/>
+        <file name="src/Mixins/StringableMacro.php"/>
       </errorLevel>
     </TooManyArguments>
     <InvalidReturnStatement>
