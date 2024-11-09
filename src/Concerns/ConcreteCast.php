@@ -57,6 +57,6 @@ trait ConcreteCast
 
     public function castTo(string $type): self
     {
-        return $this->pushPipes(CastDataPipe::with($type));
+        return $this->pushPipes(CastDataPipe::make($type));
     }
 }

@@ -14,12 +14,31 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\Pipes;
 
 use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
+use Guanguans\LaravelApiResponse\Support\Traits\MakeStaticable;
+use Guanguans\LaravelApiResponse\Support\Traits\SetStateable;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class CastDataPipe
 {
+    use MakeStaticable;
+    use SetStateable;
     use WithPipeArgs;
+    private string $type;
+
+    /** @var null|list<string> */
+    private ?array $only;
+
+    /** @var null|list<string> */
+    private ?array $except;
+
+    public function __construct(string $type, ?array $only = null, ?array $except = null)
+    {
+        $this->type = $type;
+        $this->only = $only;
+        $this->except = $except;
+    }
 
     /**
      * @noinspection RedundantDocCommentTagInspection
@@ -33,9 +52,11 @@ class CastDataPipe
      *  error: ?array,
      * }  $structure
      */
-    public function handle(array $structure, \Closure $next, string $type): JsonResponse
+    public function handle(array $structure, \Closure $next): JsonResponse
     {
-        $structure['data'] = $this->dataFor($structure['data'], $type);
+        if ($this->shouldCast(request())) {
+            $structure['data'] = $this->dataFor($structure['data']);
+        }
 
         return $next($structure);
     }
@@ -50,9 +71,9 @@ class CastDataPipe
      *
      * @return mixed
      */
-    private function dataFor($data, string $type)
+    private function dataFor($data)
     {
-        switch ($type) {
+        switch ($this->type) {
             case 'null':
                 // return (unset) $data;
                 /** @noinspection PhpInconsistentReturnPointsInspection */
@@ -74,7 +95,7 @@ class CastDataPipe
             case 'array':
                 return (array) $data;
             default:
-                throw new InvalidArgumentException("Invalid cast type [$type].");
+                throw new InvalidArgumentException("Invalid cast type [$this->type].");
         }
     }
 
@@ -93,5 +114,22 @@ class CastDataPipe
             default:
                 return (float) $value;
         }
+    }
+
+    private function shouldCast(Request $request): bool
+    {
+        if (null === $this->only && null === $this->except) {
+            return true;
+        }
+
+        if (null !== $this->only && null === $this->except) {
+            return $request->is($this->only);
+        }
+
+        if (null !== $this->except && null === $this->only) {
+            return !$request->is($this->except);
+        }
+
+        return $request->is($this->only) && !$request->is($this->except);
     }
 }
