@@ -49,64 +49,39 @@ php artisan vendor:publish --provider="Guanguans\\LaravelApiResponse\\ServicePro
 
 namespace App\Http\Controllers\Api;
 
-use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
-use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
-use Guanguans\LaravelApiResponse\Middleware\SetJsonAcceptHeader;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Controller extends \App\Http\Controllers\Controller
 {
     use ApiResponseFactory;
-
-    public function __construct()
-    {
-        $this->middleware(SetJsonAcceptHeader::class)->only('exceptionHandler');
-    }
-
-    public function getInstance(): JsonResponse
-    {
-        /** @var \Guanguans\LaravelApiResponse\ApiResponse $apiResponse */
-        // $apiResponse = ApiResponseFacade::getFacadeRoot();
-        // $apiResponse = resolve(ApiResponseContract::class);
-        // $apiResponse = app(ApiResponseContract::class);
-        $apiResponse = $this->apiResponse();
-
-        return $apiResponse->success($data);
-    }
-
-    public function exampleMethods(): JsonResponse
-    {
-        // return $this->apiResponse()->error($message);
-        // return $this->apiResponse()->exception($exception);
-        return $this->apiResponse()->success($data);
-    }
 
     /**
      * @response
      *
      * ```json
      * {
-     *     "status": false,
-     *     "code": 500,
-     *     "message": "This is a runtime exception.",
-     *     "data": {},
-     *     "error": {
-     *         "message": "This is a runtime exception.",
-     *         "exception": "RuntimeException",
-     *         ...
-     *         "trace": [
-     *             ...
-     *         ]
-     *     }
+     *     "status": "boolean",
+     *     "code": "integer",
+     *     "message": "string",
+     *     "data": "mixed",
+     *     "error": "array<string, mixed>
      * }
      * ```
      */
-    public function exceptionHandler(): JsonResponse
+    public function examples(): JsonResponse
     {
-        config()->set('app.debug', true);
-
-        throw new \RuntimeException('This is a runtime exception.');
+        // return $this->apiResponse()->error($message);
+        // return $this->apiResponse()->badRequest($message);
+        // return $this->apiResponse()->unauthorized($message);
+        // return $this->apiResponse()->exception($exception);
+        // throw new \RuntimeException('This is a runtime exception.');
+        // throw new HttpException(400);
+        // return $this->apiResponse()->success($data);
+        // return $this->apiResponse()->noContent($message);
+        // ...
+        return $this->apiResponse()->ok();
     }
 }
 ```
@@ -123,7 +98,7 @@ class Controller extends \App\Http\Controllers\Controller
     "status": "boolean",
     "code": "integer",
     "message": "string",
-    "data": "array<mixed>|array<string, mixed>",
+    "data": "mixed",
     "error": "array<string, mixed>"
 }
 ```
@@ -643,160 +618,158 @@ class Controller extends \App\Http\Controllers\Controller
     "status": true,
     "code": 200,
     "message": "OK",
-    "data": {
-        "data": [
-            {
+    "data": [
+        {
+            "id": 1,
+            "name": "John",
+            "country_id": 1,
+            "created_at": "2024-01-01 00:00:01",
+            "updated_at": "2024-01-01 00:00:01",
+            "country": {
                 "id": 1,
-                "name": "John",
-                "country_id": 1,
+                "name": "China",
                 "created_at": "2024-01-01 00:00:01",
-                "updated_at": "2024-01-01 00:00:01",
-                "country": {
+                "updated_at": "2024-01-01 00:00:01"
+            },
+            "posts": [
+                {
                     "id": 1,
-                    "name": "China",
+                    "title": "PHP is the best language!",
+                    "user_id": 1,
                     "created_at": "2024-01-01 00:00:01",
                     "updated_at": "2024-01-01 00:00:01"
                 },
-                "posts": [
-                    {
-                        "id": 1,
-                        "title": "PHP is the best language!",
-                        "user_id": 1,
-                        "created_at": "2024-01-01 00:00:01",
-                        "updated_at": "2024-01-01 00:00:01"
-                    },
-                    {
-                        "id": 2,
-                        "title": "JAVA is the best language!",
-                        "user_id": 1,
-                        "created_at": "2024-01-01 00:00:02",
-                        "updated_at": "2024-01-01 00:00:02"
-                    },
-                    {
-                        "id": 3,
-                        "title": "Python is the best language!",
-                        "user_id": 1,
-                        "created_at": "2024-01-01 00:00:03",
-                        "updated_at": "2024-01-01 00:00:03"
-                    }
-                ]
-            },
-            {
-                "id": 2,
-                "name": "Tom",
-                "country_id": 2,
-                "created_at": "2024-01-01 00:00:02",
-                "updated_at": "2024-01-01 00:00:02",
-                "country": {
+                {
                     "id": 2,
-                    "name": "USA",
+                    "title": "JAVA is the best language!",
+                    "user_id": 1,
                     "created_at": "2024-01-01 00:00:02",
                     "updated_at": "2024-01-01 00:00:02"
                 },
-                "posts": [
-                    {
-                        "id": 4,
-                        "title": "Go is the best language!",
-                        "user_id": 2,
-                        "created_at": "2024-01-01 00:00:04",
-                        "updated_at": "2024-01-01 00:00:04"
-                    },
-                    {
-                        "id": 5,
-                        "title": "JavaScript is the best language!",
-                        "user_id": 2,
-                        "created_at": "2024-01-01 00:00:05",
-                        "updated_at": "2024-01-01 00:00:05"
-                    },
-                    {
-                        "id": 6,
-                        "title": "Ruby is the best language!",
-                        "user_id": 2,
-                        "created_at": "2024-01-01 00:00:06",
-                        "updated_at": "2024-01-01 00:00:06"
-                    }
-                ]
-            },
-            {
-                "id": 3,
-                "name": "Jerry",
-                "country_id": 3,
-                "created_at": "2024-01-01 00:00:03",
-                "updated_at": "2024-01-01 00:00:03",
-                "country": {
+                {
                     "id": 3,
-                    "name": "Japan",
+                    "title": "Python is the best language!",
+                    "user_id": 1,
                     "created_at": "2024-01-01 00:00:03",
                     "updated_at": "2024-01-01 00:00:03"
-                },
-                "posts": [
-                    {
-                        "id": 7,
-                        "title": "C is the best language!",
-                        "user_id": 3,
-                        "created_at": "2024-01-01 00:00:07",
-                        "updated_at": "2024-01-01 00:00:07"
-                    }
-                ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Tom",
+            "country_id": 2,
+            "created_at": "2024-01-01 00:00:02",
+            "updated_at": "2024-01-01 00:00:02",
+            "country": {
+                "id": 2,
+                "name": "USA",
+                "created_at": "2024-01-01 00:00:02",
+                "updated_at": "2024-01-01 00:00:02"
             },
-            {
-                "id": 4,
-                "name": "Jack",
-                "country_id": 4,
-                "created_at": "2024-01-01 00:00:04",
-                "updated_at": "2024-01-01 00:00:04",
-                "country": {
+            "posts": [
+                {
                     "id": 4,
-                    "name": "Korea",
+                    "title": "Go is the best language!",
+                    "user_id": 2,
                     "created_at": "2024-01-01 00:00:04",
                     "updated_at": "2024-01-01 00:00:04"
                 },
-                "posts": []
-            },
-            {
-                "id": 5,
-                "name": "Rose",
-                "country_id": 5,
-                "created_at": "2024-01-01 00:00:05",
-                "updated_at": "2024-01-01 00:00:05",
-                "country": {
+                {
                     "id": 5,
-                    "name": "UK",
+                    "title": "JavaScript is the best language!",
+                    "user_id": 2,
                     "created_at": "2024-01-01 00:00:05",
                     "updated_at": "2024-01-01 00:00:05"
                 },
-                "posts": []
-            },
-            {
-                "id": 6,
-                "name": "Lucy",
-                "country_id": 6,
-                "created_at": "2024-01-01 00:00:06",
-                "updated_at": "2024-01-01 00:00:06",
-                "country": {
+                {
                     "id": 6,
-                    "name": "France",
+                    "title": "Ruby is the best language!",
+                    "user_id": 2,
                     "created_at": "2024-01-01 00:00:06",
                     "updated_at": "2024-01-01 00:00:06"
-                },
-                "posts": []
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Jerry",
+            "country_id": 3,
+            "created_at": "2024-01-01 00:00:03",
+            "updated_at": "2024-01-01 00:00:03",
+            "country": {
+                "id": 3,
+                "name": "Japan",
+                "created_at": "2024-01-01 00:00:03",
+                "updated_at": "2024-01-01 00:00:03"
             },
-            {
-                "id": 7,
-                "name": "Lily",
-                "country_id": 7,
-                "created_at": "2024-01-01 00:00:07",
-                "updated_at": "2024-01-01 00:00:07",
-                "country": {
+            "posts": [
+                {
                     "id": 7,
-                    "name": "Germany",
+                    "title": "C is the best language!",
+                    "user_id": 3,
                     "created_at": "2024-01-01 00:00:07",
                     "updated_at": "2024-01-01 00:00:07"
-                },
-                "posts": []
-            }
-        ]
-    },
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Jack",
+            "country_id": 4,
+            "created_at": "2024-01-01 00:00:04",
+            "updated_at": "2024-01-01 00:00:04",
+            "country": {
+                "id": 4,
+                "name": "Korea",
+                "created_at": "2024-01-01 00:00:04",
+                "updated_at": "2024-01-01 00:00:04"
+            },
+            "posts": []
+        },
+        {
+            "id": 5,
+            "name": "Rose",
+            "country_id": 5,
+            "created_at": "2024-01-01 00:00:05",
+            "updated_at": "2024-01-01 00:00:05",
+            "country": {
+                "id": 5,
+                "name": "UK",
+                "created_at": "2024-01-01 00:00:05",
+                "updated_at": "2024-01-01 00:00:05"
+            },
+            "posts": []
+        },
+        {
+            "id": 6,
+            "name": "Lucy",
+            "country_id": 6,
+            "created_at": "2024-01-01 00:00:06",
+            "updated_at": "2024-01-01 00:00:06",
+            "country": {
+                "id": 6,
+                "name": "France",
+                "created_at": "2024-01-01 00:00:06",
+                "updated_at": "2024-01-01 00:00:06"
+            },
+            "posts": []
+        },
+        {
+            "id": 7,
+            "name": "Lily",
+            "country_id": 7,
+            "created_at": "2024-01-01 00:00:07",
+            "updated_at": "2024-01-01 00:00:07",
+            "country": {
+                "id": 7,
+                "name": "Germany",
+                "created_at": "2024-01-01 00:00:07",
+                "updated_at": "2024-01-01 00:00:07"
+            },
+            "posts": []
+        }
+    ],
     "error": {}
 }
 ```
@@ -830,7 +803,7 @@ class Controller extends \App\Http\Controllers\Controller
     "status": false,
     "code": 400,
     "message": "This is an error.",
-    "data": {},
+    "data": null,
     "error": {}
 }
 ```
@@ -867,9 +840,9 @@ class Controller extends \App\Http\Controllers\Controller
     "status": false,
     "code": 500,
     "message": "Internal Server Error",
-    "data": {},
+    "data": null,
     "error": {
-        "message": "Server Error"
+        "message": "Internal Server Error"
     }
 }
 ```
@@ -906,7 +879,7 @@ class Controller extends \App\Http\Controllers\Controller
     "status": false,
     "code": 500,
     "message": "This is a runtime exception.",
-    "data": {},
+    "data": null,
     "error": {
         "message": "This is a runtime exception.",
         "exception": "RuntimeException",
@@ -1073,9 +1046,9 @@ class Controller extends \App\Http\Controllers\Controller
     "status": false,
     "code": 500,
     "message": "Internal Server Error",
-    "data": {},
+    "data": null,
     "error": {
-        "message": "Server Error"
+        "message": "Internal Server Error"
     }
 }
 ```
@@ -1108,14 +1081,24 @@ class Controller extends \App\Http\Controllers\Controller
 }
 ```
 
+`resources/lang/zh_CN.json`
+
+```json
+{
+    "...": "...",
+    "Unauthenticated.": "未认证。",
+    "This is a runtime exception.": "这是一个运行时异常。"
+}
+```
+
 ```json
 {
     "status": false,
     "code": 500,
-    "message": "内部服务器错误",
-    "data": {},
+    "message": "这是一个运行时异常。",
+    "data": null,
     "error": {
-        "message": "Server Error"
+        "message": "这是一个运行时异常。"
     }
 }
 ```
@@ -1125,7 +1108,7 @@ class Controller extends \App\Http\Controllers\Controller
 <details>
 <summary>more examples...</summary>
 
-* [feature](tests/Feature)
+* [feature code](tests/Feature)
 * [examples](tests/__snapshots__)
 
 </details>
@@ -1141,12 +1124,12 @@ class Controller extends \App\Http\Controllers\Controller
 ```php
 <?php
 
-static function (array $data, \Closure $next): JsonResponse {
-    if ($data['data'] instanceof \iterable) {
-        $data['data'] = iterator_to_array($data['data']);
+static function (array $structure, \Closure $next): JsonResponse {
+    if ($structure['data'] instanceof \Traversable) {
+        $structure['data'] = iterator_to_array($structure['data']);
     }
 
-    return $next($data);
+    return $next($structure);
 };
 ```
 
@@ -1160,7 +1143,7 @@ static function (array $data, \Closure $next): JsonResponse {
 </details>
 
 <details>
-<summary>How to customize pipe in a single api</summary>
+<summary>How to operate pipe dynamically in a single api</summary>
 
 * Reference to the [HasPipes.php](src/Concerns/HasPipes.php)、[HasExceptionPipes.php](src/Concerns/HasExceptionPipes.php)
 * Simple example:
@@ -1181,19 +1164,14 @@ class Controller extends \App\Http\Controllers\Controller
     {
         return $this
             ->apiResponse()
-            // ->unshiftPipes(...)
-            ->pushPipes(
-                static function (array $data, \Closure $next): JsonResponse {
-                    if ($data['data'] instanceof \iterable) {
-                        $data['data'] = iterator_to_array($data['data']);
-                    }
-
-                    return $next($data);
-                }
-            )
-            // ->unshiftExceptionPipes(...)
-            // ->pushExceptionPipes(...)
-            ->success($iterator);
+            // ->unshiftPipes(...$pipes)
+            // ->pushPipes(...$pipes)
+            // ->beforePipes($findPipe, ...$pipes)
+            // ->afterPipes($findPipe, ...$pipes)
+            // ->removePipes(...$findPipes)
+            // ->extendPipes($callback)
+            // ->tapPipes($callback)
+            ->success($data);
     }
 }
 ```
@@ -1212,7 +1190,8 @@ class Controller extends \App\Http\Controllers\Controller
 <summary>How to localize message</summary>
 
 * Reference to the [MessagePipe.php](src/Pipes/MessagePipe.php)
-* Install [Laravel-Lang/http-statuses](https://github.com/Laravel-Lang/http-statuses) `composer require --dev laravel-lang/http-statuses` or create lang files `resources/lang/***/http-statuses.php`
+* Add localize status code message [install [Laravel-Lang/http-statuses](https://github.com/Laravel-Lang/http-statuses) `composer require --dev laravel-lang/http-statuses` or create lang files `resources/lang/***/http-statuses.php`]
+* Add localize message [`resources/lang/xxx.json`]
 
 </details>
 
@@ -1220,6 +1199,13 @@ class Controller extends \App\Http\Controllers\Controller
 <summary>Shortcut methods of http status</summary>
 
 * Reference to the [ConcreteHttpStatus.php](src/Concerns/ConcreteHttpStatus.php)
+
+</details>
+
+<details>
+<summary>All methods</summary>
+
+* Reference to the [ApiResponseFacade.php](src/Facades/ApiResponseFacade.php)
 
 </details>
 
