@@ -58,7 +58,7 @@ class Controller extends \App\Http\Controllers\Controller
     use ApiResponseFactory;
 
     /**
-     * @response
+     * Default response structure
      *
      * ```json
      * {
@@ -1108,12 +1108,69 @@ class Controller extends \App\Http\Controllers\Controller
 <details>
 <summary>more examples...</summary>
 
-* [feature code](tests/Feature)
-* [examples](tests/__snapshots__)
+* [feature](tests/Feature)
+* [snapshots](tests/__snapshots__)
 
 </details>
 
 ### FAQ
+
+<details>
+<summary>How to get [\Guanguans\LaravelApiResponse\ApiResponse] instance</summary>
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
+use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
+use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
+use Illuminate\Http\JsonResponse;
+
+class Controller extends \App\Http\Controllers\Controller
+{
+    use ApiResponseFactory;
+
+    public function getInstance(): JsonResponse
+    {
+        /** @var \Guanguans\LaravelApiResponse\ApiResponse $apiResponse */
+        // $apiResponse = ApiResponseFacade::getFacadeRoot();
+        // $apiResponse = resolve(ApiResponseContract::class);
+        // $apiResponse = app(ApiResponseContract::class);
+        $apiResponse = $this->apiResponse();
+
+        return $apiResponse->ok();
+    }
+}
+```
+
+</details>
+
+<details>
+<summary>How to specify api paths to automatically handle exception</summary>
+
+* Reference to the [ApiPathsRenderUsing.php](src/RenderUsings/ApiPathsRenderUsing.php)
+* Update the configuration `api-response.render_using`
+
+</details>
+
+<details>
+<summary>How to always respond with successful http status code</summary>
+
+* Reference to the [StatusCodePipe.php](src/Pipes/StatusCodePipe.php)
+* Remove the configuration `api-response.pipes.StatusCodePipe`
+
+</details>
+
+<details>
+<summary>How to localize message</summary>
+
+* Reference to the [MessagePipe.php](src/Pipes/MessagePipe.php)
+* Add localize status code message [install [Laravel-Lang/http-statuses](https://github.com/Laravel-Lang/http-statuses) `composer require --dev laravel-lang/http-statuses` or create lang files `resources/lang/***/http-statuses.php`]
+* Add localize message [create lang json files `resources/lang/***.json`]
+
+</details>
 
 <details>
 <summary>How to customize pipe</summary>
@@ -1175,23 +1232,6 @@ class Controller extends \App\Http\Controllers\Controller
     }
 }
 ```
-
-</details>
-
-<details>
-<summary>How to always respond with successful http status code</summary>
-
-* Reference to the [StatusCodePipe.php](src/Pipes/StatusCodePipe.php)
-* Remove the configuration `api-response.pipes.StatusCodePipe`
-
-</details>
-
-<details>
-<summary>How to localize message</summary>
-
-* Reference to the [MessagePipe.php](src/Pipes/MessagePipe.php)
-* Add localize status code message [install [Laravel-Lang/http-statuses](https://github.com/Laravel-Lang/http-statuses) `composer require --dev laravel-lang/http-statuses` or create lang files `resources/lang/***/http-statuses.php`]
-* Add localize message [`resources/lang/xxx.json`]
 
 </details>
 

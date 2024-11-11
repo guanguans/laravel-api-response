@@ -92,15 +92,23 @@ it('is resource', function (): void {
 })->group(__DIR__, __FILE__);
 
 it('is resource collection', function (?string $wrap): void {
-    $userCollection = UserCollection::make(User::query()->with(['country', 'posts'])->get());
-    assertMatchesJsonSnapshot($this->apiResponse()->success($userCollection)->content());
+    $users = User::query()->with(['country', 'posts'])->get();
+    assertMatchesJsonSnapshot($this->apiResponse()->success(UserCollection::make($users))->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success(UserResource::collection($users))->content());
 
-    $userCollection = UserCollection::make(User::query()->with(['country', 'posts'])->simplePaginate(3));
+    $simplePaginate = User::query()->with(['country', 'posts'])->simplePaginate(3);
     assertMatchesJsonSnapshot(
         $this
             ->apiResponse()
             ->unshiftPipes(PaginatorDataPipe::with($wrap))
-            ->success($userCollection)
+            ->success(UserCollection::make($simplePaginate))
+            ->content()
+    );
+    assertMatchesJsonSnapshot(
+        $this
+            ->apiResponse()
+            ->unshiftPipes(PaginatorDataPipe::with($wrap))
+            ->success(UserResource::collection($simplePaginate))
             ->content()
     );
 })->group(__DIR__, __FILE__)->with('wraps');
