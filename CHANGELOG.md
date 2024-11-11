@@ -8,6 +8,21 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.8"></a>
+## [1.0.8] - 2024-11-11
+### Bug Fixes
+- **api-response-facade:** Add castToNull method declaration
+
+### Docs
+- **api:** Update response documentation and code examples
+
+### Features
+- **Pipes:** Refactor CastDataPipe to improve data casting logic
+
+### Tests
+- **LaravelDataTest:** Enhance resource collection tests
+
+
 <a name="1.0.7"></a>
 ## [1.0.7] - 2024-11-08
 ### Bug Fixes
@@ -246,7 +261,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.7...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.8...HEAD
+[1.0.8]: https://github.com/guanguans/laravel-api-response/compare/1.0.7...1.0.8
 [1.0.7]: https://github.com/guanguans/laravel-api-response/compare/1.0.6...1.0.7
 [1.0.6]: https://github.com/guanguans/laravel-api-response/compare/1.0.5...1.0.6
 [1.0.5]: https://github.com/guanguans/laravel-api-response/compare/1.0.4...1.0.5
