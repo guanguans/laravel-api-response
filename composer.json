@@ -59,12 +59,12 @@
         "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
         "pestphp/pest-plugin-laravel": "^1.2 || ^2.0",
         "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan": "^1.12",
-        "phpstan/phpstan-deprecation-rules": "^1.2",
+        "phpstan/phpstan": "^1.12 || ^2.0",
+        "phpstan/phpstan-deprecation-rules": "^1.2 || ^2.0",
         "povils/phpmnd": "^3.5",
         "rector/rector": "^1.2",
         "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
-        "spaze/phpstan-disallowed-calls": "^3.5"
+        "spaze/phpstan-disallowed-calls": "^3.5 || ^4.0"
     },
     "suggest": {
         "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
