@@ -7,7 +7,7 @@
         "message": "This is a runtime exception.",
         "exception": "RuntimeException",
         "file": "\/tests\/TestCase.php",
-        "line": 90,
+        "line": 92,
         "trace": [
             {
                 "file": "\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Route.php",

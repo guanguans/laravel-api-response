@@ -21,6 +21,7 @@ use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\ServiceProvider;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Guanguans\LaravelApiResponse\Tests\Laravel\seeders\TablesSeeder;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
@@ -37,6 +38,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         parent::setUp();
         $this->app->useLangPath(__DIR__.'/Laravel/lang');
         $this->startMockery();
+        JsonResource::wrap(collect([null, 'data'])->random());
     }
 
     protected function tearDown(): void

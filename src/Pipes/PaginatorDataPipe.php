@@ -15,6 +15,7 @@ namespace Guanguans\LaravelApiResponse\Pipes;
 
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\AbstractCursorPaginator;
 use Illuminate\Pagination\AbstractPaginator;
@@ -58,16 +59,20 @@ class PaginatorDataPipe
      */
     private function dataFor($data, ?string $wrap)
     {
-        if (!$data instanceof AbstractCursorPaginator && !$data instanceof AbstractPaginator) {
-            return $data;
+        if ($data instanceof AbstractCursorPaginator || $data instanceof AbstractPaginator) {
+            $data = ResourceCollection::make($data);
         }
 
-        $originalWrap = ResourceCollection::$wrap;
-
-        empty($wrap) or ResourceCollection::wrap($wrap);
-        $data = ResourceCollection::make($data)->toResponse(request())->getData();
-
-        ResourceCollection::wrap($originalWrap);
+        if (
+            !empty($wrap)
+            && $data instanceof JsonResource
+            && (
+                $data->resource instanceof AbstractCursorPaginator
+                || $data->resource instanceof AbstractPaginator
+            )
+        ) {
+            $data::wrap($wrap);
+        }
 
         return $data;
     }
