@@ -16,6 +16,8 @@ namespace Guanguans\LaravelApiResponse\Pipes;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Pagination\AbstractCursorPaginator;
+use Illuminate\Pagination\AbstractPaginator;
 
 class JsonResourceDataPipe
 {
@@ -35,7 +37,11 @@ class JsonResourceDataPipe
      */
     public function handle(array $structure, \Closure $next): JsonResponse
     {
-        if ($structure['data'] instanceof JsonResource) {
+        if (
+            $structure['data'] instanceof JsonResource
+            && !$structure['data']->resource instanceof AbstractCursorPaginator
+            && !$structure['data']->resource instanceof AbstractPaginator
+        ) {
             JsonResource::withoutWrapping();
         }
 
