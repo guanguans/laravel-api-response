@@ -8,6 +8,19 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.9"></a>
+## [1.0.9] - 2024-11-12
+### Bug Fixes
+- **PaginatorDataPipe:** Change data output structure for resources
+- **Pipes:** Prevent JsonResource wrapping for paginated data
+
+### Build
+- **composer:** Update PHPStan and dependencies version constraints
+
+### CI
+- **facade:** Add new PHPDoc annotations and methods in ApiResponseFacade
+
+
 <a name="1.0.8"></a>
 ## [1.0.8] - 2024-11-11
 ### Bug Fixes
@@ -261,7 +274,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.8...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.9...HEAD
+[1.0.9]: https://github.com/guanguans/laravel-api-response/compare/1.0.8...1.0.9
 [1.0.8]: https://github.com/guanguans/laravel-api-response/compare/1.0.7...1.0.8
 [1.0.7]: https://github.com/guanguans/laravel-api-response/compare/1.0.6...1.0.7
 [1.0.6]: https://github.com/guanguans/laravel-api-response/compare/1.0.5...1.0.6
