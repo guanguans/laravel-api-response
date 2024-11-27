@@ -44,11 +44,12 @@
         "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
         "driftingly/rector-laravel": "^1.2",
         "ergebnis/composer-normalize": "^2.44",
-        "ergebnis/license": "^2.5",
+        "ergebnis/license": "^2.6",
         "ergebnis/php-cs-fixer-config": "dev-main",
-        "ergebnis/rector-rules": "^1.1",
+        "ergebnis/rector-rules": "^1.2",
         "guanguans/ai-commit": "dev-main",
         "guanguans/monorepo-builder-worker": "^1.4",
+        "guzzlehttp/psr7": "^2.7",
         "hyperf/composer-plugin": "^1.0",
         "icanhazstring/composer-unused": "^0.8",
         "laravel-lang/http-statuses": "^3.2",
@@ -64,7 +65,7 @@
         "povils/phpmnd": "^3.5",
         "rector/rector": "^1.2",
         "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
-        "spaze/phpstan-disallowed-calls": "^3.5 || ^4.0"
+        "spaze/phpstan-disallowed-calls": "^4.0"
     },
     "suggest": {
         "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
