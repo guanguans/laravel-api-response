@@ -43,6 +43,7 @@ class JsonResourceDataPipe
             && !$structure['data']->resource instanceof AbstractPaginator
         ) {
             JsonResource::withoutWrapping();
+            method_exists($structure['data'], 'withoutWrapper') and $structure['data']->withoutWrapper();
         }
 
         return $next($structure);

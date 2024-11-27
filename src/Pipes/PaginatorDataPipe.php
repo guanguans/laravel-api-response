@@ -72,6 +72,7 @@ class PaginatorDataPipe
             )
         ) {
             $data::wrap($wrap);
+            method_exists($data, 'withWrapper') and $data->withWrapper($wrap);
         }
 
         return $data;
