@@ -41,9 +41,6 @@ php artisan vendor:publish --provider="Guanguans\\LaravelApiResponse\\ServicePro
 
 ### Quick start
 
-<details>
-<summary>details</summary>
-
 ```php
 <?php
 
@@ -57,19 +54,6 @@ class Controller extends \App\Http\Controllers\Controller
 {
     use ApiResponseFactory;
 
-    /**
-     * Default response structure
-     *
-     * ```json
-     * {
-     *     "status": "boolean",
-     *     "code": "integer",
-     *     "message": "string",
-     *     "data": "mixed",
-     *     "error": "array<string, mixed>
-     * }
-     * ```
-     */
     public function examples(): JsonResponse
     {
         // return $this->apiResponse()->error($message);
@@ -86,12 +70,7 @@ class Controller extends \App\Http\Controllers\Controller
 }
 ```
 
-</details>
-
 ### Default response structure
-
-<details>
-<summary>details</summary>
 
 ```json
 {
@@ -102,8 +81,6 @@ class Controller extends \App\Http\Controllers\Controller
     "error": "array<string, mixed>"
 }
 ```
-
-</details>
 
 ### Default response examples
 
