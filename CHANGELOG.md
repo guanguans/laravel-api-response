@@ -8,6 +8,22 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.0.10"></a>
+## [1.0.10] - 2024-11-27
+### Bug Fixes
+- **Pipes:** Handle withoutWrapper method in data structures
+
+### Build
+- **deps:** Update ergebnis/license and ergebnis/rector-rules versions
+- **deps:** bump codecov/codecov-action from 4 to 5
+
+### Docs
+- **readme:** Remove unnecessary detail sections
+
+### Pull Requests
+- Merge pull request [#2](https://github.com/guanguans/laravel-api-response/issues/2) from guanguans/dependabot/github_actions/codecov/codecov-action-5
+
+
 <a name="1.0.9"></a>
 ## [1.0.9] - 2024-11-12
 ### Bug Fixes
@@ -274,7 +290,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.9...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.10...HEAD
+[1.0.10]: https://github.com/guanguans/laravel-api-response/compare/1.0.9...1.0.10
 [1.0.9]: https://github.com/guanguans/laravel-api-response/compare/1.0.8...1.0.9
 [1.0.8]: https://github.com/guanguans/laravel-api-response/compare/1.0.7...1.0.8
 [1.0.7]: https://github.com/guanguans/laravel-api-response/compare/1.0.6...1.0.7
