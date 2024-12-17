@@ -42,8 +42,8 @@
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
-        "driftingly/rector-laravel": "^1.2",
-        "ergebnis/composer-normalize": "^2.44",
+        "driftingly/rector-laravel": "^1.2 || ^2.0",
+        "ergebnis/composer-normalize": "^2.45",
         "ergebnis/license": "^2.6",
         "ergebnis/php-cs-fixer-config": "dev-main",
         "ergebnis/rector-rules": "^1.2",
@@ -63,7 +63,7 @@
         "phpstan/phpstan": "^1.12 || ^2.0",
         "phpstan/phpstan-deprecation-rules": "^1.2 || ^2.0",
         "povils/phpmnd": "^3.5",
-        "rector/rector": "^1.2",
+        "rector/rector": "^1.2 || ^2.0",
         "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
         "spaze/phpstan-disallowed-calls": "^4.0"
     },
