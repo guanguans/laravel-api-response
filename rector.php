@@ -170,9 +170,24 @@ return RectorConfig::configure()
     ])
     ->withConfiguredRule(RectorLaravel\Rector\StaticCall\RouteActionCallableRector::class, [
     ])
-    ->withConfiguredRule(RenameFunctionRector::class, [
-        'test' => 'it',
-    ])
+    ->withConfiguredRule(
+        RenameFunctionRector::class,
+        [
+            'test' => 'it',
+        ] + array_reduce(
+            [
+                // 'make',
+                // 'env_explode',
+            ],
+            static function (array $carry, string $func): array {
+                /** @see https://github.com/laravel/framework/blob/11.x/src/Illuminate/Support/functions.php */
+                $carry[$func] = "Guanguans\\LaravelApiResponse\\Support\\$func";
+
+                return $carry;
+            },
+            []
+        )
+    )
     // ->withConfiguredRule(StaticCallToFuncCallRector::class, [
     //     new StaticCallToFuncCall(Str::class, 'of', 'str'),
     // ])
@@ -220,6 +235,9 @@ return RectorConfig::configure()
         ],
         RemoveUselessReturnTagRector::class => [
             __DIR__.'/src/Support/Traits/ApiResponseFactory.php',
+        ],
+        RenameFunctionRector::class => [
+            // __DIR__.'/src/Support/helpers.php',
         ],
         RenameForeachValueVariableToMatchExprVariableRector::class => [
             // __DIR__.'/src/OutputManager.php',
