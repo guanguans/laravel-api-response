@@ -18,7 +18,7 @@ parameters:
     tmpDir: .build/phpstan
 #    checkOctaneCompatibility: true
 #    checkModelProperties: true
-    checkMissingIterableValueType: true
+#    checkMissingIterableValueType: true
 #    disallowFloatsEverywhere: true
 
 #    strictRules:
@@ -46,6 +46,11 @@ parameters:
             message: 'use config() instead'
     ignoreErrors:
         - "#^Unsafe usage of new static\\(\\)\\.$#"
+        - '#^Method Guanguans\\LaravelApiResponse\\Support\\Rectors\\ToInternalExceptionRector\:\:refactor\(\) never returns \d so it can be removed from the return type\.$#'
+        - '#^Method Guanguans\\LaravelApiResponse\\Support\\Rectors\\ToInternalExceptionRector\:\:refactor\(\) never returns array\<PhpParser\\Node\> so it can be removed from the return type\.$#'
+        - '#^Method Guanguans\\LaravelApiResponse\\Support\\Rectors\\ToInternalExceptionRector\:\:refactor\(\) never returns null so it can be removed from the return type\.$#'
+        - '#^Method Guanguans\\LaravelApiResponse\\Support\\Rectors\\ToInternalExceptionRector\:\:refactor\(\) should return 1\|2\|3\|4\|array\<PhpParser\\Node\>\|PhpParser\\Node\|null but empty return statement found\.$#'
+        - '#^Unused result of "or" operator\.$#'
 #        - "#^Unsafe call to private method Guanguans\\\\LaravelApiResponse\\\\.*\\:\\:.*\\(\\) through static\\:\\:\\.$#"
         -
             message: "#^Calling env\\(\\) is forbidden, use config\\(\\) instead\\.$#"

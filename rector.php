@@ -27,6 +27,7 @@ use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
+use Rector\DowngradePhp81\Rector\Array_\DowngradeArraySpreadStringKeyRector;
 use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
 use Rector\Naming\Rector\Assign\RenameVariableToMatchMethodCallReturnTypeRector;
 use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
@@ -223,6 +224,10 @@ return RectorConfig::configure()
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
+        DowngradeArraySpreadStringKeyRector::class => [
+            __DIR__.'/src/Concerns/HasPipes.php',
+            __DIR__.'/src/Concerns/HasExceptionPipes.php',
+        ],
         DisallowedEmptyRuleFixerRector::class => [
             __DIR__.'/src/Pipes/PaginatorDataPipe.php',
             __DIR__.'/src/Pipes/ScalarDataPipe.php',

@@ -1,21 +1,37 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to an undefined method Illuminate\\\\Support\\\\Collection\\:\\:unshift\\(\\)\\.$#"
+			message: '#^Call to an undefined method Illuminate\\Support\\Collection\:\:unshift\(\)\.$#'
+			identifier: method.notFound
 			count: 4
 			path: src/ApiResponse.php
 
 		-
-			message: "#^Cannot call method has\\(\\) on array\\|Illuminate\\\\Contracts\\\\Translation\\\\Translator\\|string\\.$#"
+			message: '#^Call to function function_exists\(\) with callable\-string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Pipes/CallableDataPipe.php
+
+		-
+			message: '#^Cannot call method has\(\) on array\|Illuminate\\Contracts\\Translation\\Translator\|string\.$#'
+			identifier: method.nonObject
 			count: 2
 			path: src/Pipes/MessagePipe.php
 
 		-
-			message: "#^Method Guanguans\\\\LaravelApiResponse\\\\Support\\\\Rectors\\\\ToInternalExceptionRector\\:\\:refactor\\(\\) should return 1\\|2\\|3\\|4\\|array\\<PhpParser\\\\Node\\>\\|PhpParser\\\\Node\\|null but empty return statement found\\.$#"
+			message: '#^Trait Guanguans\\LaravelApiResponse\\Support\\Traits\\ApiResponseFactory is used zero times and is not analysed\.$#'
+			identifier: trait.unused
 			count: 1
-			path: src/Support/Rectors/ToInternalExceptionRector.php
+			path: src/Support/Traits/ApiResponseFactory.php
 
 		-
-			message: "#^Result of && is always false\\.$#"
+			message: '#^Call to function is_array\(\) with array\<string, mixed\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Support/helpers.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
 			count: 1
 			path: src/Support/helpers.php
