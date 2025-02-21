@@ -2,8 +2,22 @@
     "preset": "laravel",
     "ignore": {
         "words": [
+            "args",
+            "dumpable",
+            "iterable",
+            "mixin",
+            "mixins",
+            "paginator",
+            "responsable",
+            "stateable",
+            "staticable",
+            "usings",
+            "utils",
             "php"
         ],
-        "paths": []
+        "paths": [
+            "vendor/",
+            "vendor-bin/"
+        ]
     }
 }

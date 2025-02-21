@@ -1,6 +1,6 @@
 {
     "require-dev": {
-        "peckphp/peck": "^0.1.1",
+        "peckphp/peck": "^0.1",
         "symfony/process": "^7.2"
     }
 }
