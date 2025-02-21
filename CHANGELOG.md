@@ -8,6 +8,31 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="1.1.0"></a>
+## [1.1.0] - 2025-02-21
+### Build
+- **composer:** Update dependency versions in composer.json
+- **dependencies:** Update version constraints for dev packages
+- **deps:** bump dependabot/fetch-metadata from 2.2.0 to 2.3.0
+
+### CI
+- Update peck configuration and dependencies
+- **composer:** Add peck command to composer.json
+- **config:** Update phpstan baseline and ignore errors
+- **dependencies:** Update spaze/phpstan-disallowed-calls and peck
+- **license:** Update copyright year in LICENSE files
+- **workflows:** Update PHP version in test matrix
+
+### Code Refactoring
+- **rector:** refactor code using RenameFunctionRector
+
+### Features
+- **composer:** Update Laravel framework version requirement
+
+### Pull Requests
+- Merge pull request [#3](https://github.com/guanguans/laravel-api-response/issues/3) from guanguans/dependabot/github_actions/dependabot/fetch-metadata-2.3.0
+
+
 <a name="1.0.10"></a>
 ## [1.0.10] - 2024-11-27
 ### Bug Fixes
@@ -290,7 +315,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.0.10...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/guanguans/laravel-api-response/compare/1.0.10...1.1.0
 [1.0.10]: https://github.com/guanguans/laravel-api-response/compare/1.0.9...1.0.10
 [1.0.9]: https://github.com/guanguans/laravel-api-response/compare/1.0.8...1.0.9
 [1.0.8]: https://github.com/guanguans/laravel-api-response/compare/1.0.7...1.0.8
