@@ -95,7 +95,7 @@ it('is callable', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success(NativeDataTest::class.'::staticMethod')->content());
     assertMatchesJsonSnapshot($this->apiResponse()->success([NativeDataTest::make(), 'generalMethod'])->content());
     assertMatchesJsonSnapshot($this->apiResponse()->success(NativeDataTest::make())->content());
-})->group(__DIR__, __FILE__);
+})->group(__DIR__, __FILE__)->skip(\PHP_VERSION_ID >= 80400, 'Closure type data is not compatible with PHP 8.4');
 
 it('is iterable', function (array $array): void {
     assertMatchesJsonSnapshot(
