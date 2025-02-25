@@ -11,7 +11,7 @@ jobs:
         os: [ ubuntu-latest ]
         php: [ 7.4, 8.4 ]
         dependency-version: [ prefer-stable ]
-        laravel: [ 8.*.*, 9.*, 10.*, 11.* ]
+        laravel: [ 8.*.*, 9.*, 10.*, 11.*, 12.* ]
         include:
           - laravel: 8.*.*
             testbench: 6.*
@@ -21,8 +21,8 @@ jobs:
             testbench: 8.*
           - laravel: 11.*
             testbench: 9.*
-          # - laravel: 12.*
-          #   testbench: 10.*
+          - laravel: 12.*
+            testbench: 10.*
         exclude:
           - php: 7.4
             laravel: 9.*
@@ -30,8 +30,8 @@ jobs:
             laravel: 10.*
           - php: 7.4
             laravel: 11.*
-          # - php: 7.4
-          #   laravel: 12.*
+          - php: 7.4
+            laravel: 12.*
           - php: 8.4
             laravel: 8.*.*
 
