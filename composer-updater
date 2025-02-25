@@ -96,6 +96,9 @@ $status = (new SingleCommandApplication)
                 $this->differ = $differ ?? new Differ;
             }
 
+            /**
+             * @noinspection NullPointerExceptionInspection
+             */
             public function __invoke(): void
             {
                 $this
@@ -104,7 +107,7 @@ $status = (new SingleCommandApplication)
                     ->updateComposerPackages()
                     ->updateOutdatedComposerPackages()
                     ->updateComposerPackages()
-                    ->normalizeComposerJson()
+                    // ->normalizeComposerJson()
                     ->success();
             }
 
@@ -160,7 +163,7 @@ $status = (new SingleCommandApplication)
             {
                 $outdatedComposerPackages = $this->getOutdatedComposerPackages();
                 $decodedComposerJson = json_decode(file_get_contents($this->composerJsonPath), true);
-                (fn () => self::reload(null))->call(new InstalledVersions);
+                InstalledVersions::reload([]);
 
                 foreach ($decodedComposerJson as $name => &$value) {
                     if (!\in_array($name, ['require', 'require-dev'], true)) {
@@ -249,7 +252,7 @@ $status = (new SingleCommandApplication)
             ): Process {
                 $additionalOptions = [
                     '--no-interaction',
-                    // '--no-plugins',
+                    '--no-plugins',
                     '--no-scripts',
                     '--ansi',
                 ];
@@ -280,7 +283,6 @@ $status = (new SingleCommandApplication)
 
             /**
              * @noinspection SuspiciousLoopInspection
-             * @noinspection ComparisonScalarOrderInspection
              * @noinspection MissingParameterTypeDeclarationInspection
              *
              * @param array|string $pattern
