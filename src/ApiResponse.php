@@ -59,10 +59,7 @@ class ApiResponse implements ApiResponseContract
         $this->exceptionPipes = $exceptionPipes ?? collect();
     }
 
-    /**
-     * @param mixed $data
-     */
-    public function success($data = null, string $message = '', int $code = Response::HTTP_OK): JsonResponse
+    public function success(mixed $data = null, string $message = '', int $code = Response::HTTP_OK): JsonResponse
     {
         return $this->json(true, $code, $message, $data);
     }
@@ -92,10 +89,9 @@ class ApiResponse implements ApiResponseContract
      * @noinspection CompactReplacementInspection
      *
      * @param int<100, 599>|int<100000, 599999> $code
-     * @param mixed $data
      * @param null|array<string, mixed> $error
      */
-    public function json(bool $status, int $code, string $message = '', $data = null, ?array $error = null): JsonResponse
+    public function json(bool $status, int $code, string $message = '', mixed $data = null, ?array $error = null): JsonResponse
     {
         return $this
             ->newPipeline()

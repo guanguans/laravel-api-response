@@ -57,7 +57,7 @@ trait HasPipes
             static fn (Collection $pipes): Collection => $pipes
                 ->reject(static function ($pipe) use ($findPipes): bool {
                     if (\is_object($pipe) && !$pipe instanceof \Closure) {
-                        $pipe = \get_class($pipe);
+                        $pipe = $pipe::class;
                     }
 
                     if (!\is_string($pipe)) {
@@ -110,7 +110,7 @@ trait HasPipes
     {
         foreach ($this->pipes as $idx => $pipe) {
             if (\is_object($pipe) && !$pipe instanceof \Closure) {
-                $pipe = \get_class($pipe);
+                $pipe = $pipe::class;
             }
 
             if (\is_string($pipe) && Str::of($pipe)->startsWith($findPipe)) {

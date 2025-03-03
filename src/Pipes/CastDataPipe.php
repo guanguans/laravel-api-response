@@ -66,18 +66,13 @@ class CastDataPipe
      * @see https://github.com/TheDragonCode/support/blob/main/src/Concerns/Castable.php
      *
      * @noinspection MultipleReturnStatementsInspection
-     *
-     * @param mixed $data
-     *
-     * @return mixed
      */
-    private function dataFor($data)
+    private function dataFor(mixed $data): mixed
     {
         switch ($this->type) {
             case 'null':
                 // return (unset) $data;
-                /** @noinspection PhpInconsistentReturnPointsInspection */
-                return;
+                return null;
             case 'int':
             case 'integer':
                 return (int) $data;
@@ -99,10 +94,7 @@ class CastDataPipe
         }
     }
 
-    /**
-     * @param mixed $value
-     */
-    private function fromFloat($value): float
+    private function fromFloat(mixed $value): float
     {
         switch ((string) $value) {
             case 'Infinity':

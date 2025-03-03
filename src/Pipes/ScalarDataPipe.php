@@ -39,12 +39,7 @@ class ScalarDataPipe
         return $next($structure);
     }
 
-    /**
-     * @param mixed $data
-     *
-     * @return mixed
-     */
-    private function dataFor($data, ?string $wrap)
+    private function dataFor(mixed $data, ?string $wrap): mixed
     {
         if (!\is_scalar($data) || empty($wrap)) {
             return $data;

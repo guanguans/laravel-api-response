@@ -39,12 +39,7 @@ class IterableDataPipe
         return $next($structure);
     }
 
-    /**
-     * @param mixed $data
-     *
-     * @return mixed
-     */
-    private function dataFor($data)
+    private function dataFor(mixed $data): mixed
     {
         // return is_iterable($data) && !\is_array($data) ? iterator_to_array($data) : $data;
         return $data instanceof \Traversable ? iterator_to_array($data) : $data;

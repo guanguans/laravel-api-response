@@ -33,20 +33,20 @@ it('can use exception pipes', function (): void {
         ->pushExceptionPipes()
         ->beforeExceptionPipes(
             AuthenticationExceptionPipe::with(),
-            static fn (\Throwable $throwable, \Closure $next): array => $next($throwable),
-            static fn (\Throwable $throwable, \Closure $next): array => $next($throwable),
+            static fn (Throwable $throwable, Closure $next): array => $next($throwable),
+            static fn (Throwable $throwable, Closure $next): array => $next($throwable),
         )
         ->beforeExceptionPipes(
             SetCodeExceptionPipe::with(),
-            static fn (\Throwable $throwable, \Closure $next): array => $next($throwable),
+            static fn (Throwable $throwable, Closure $next): array => $next($throwable),
         )
         ->afterExceptionPipes(
             SetCodeExceptionPipe::with(),
-            static fn (\Throwable $throwable, \Closure $next): array => $next($throwable),
+            static fn (Throwable $throwable, Closure $next): array => $next($throwable),
         )
         ->afterExceptionPipes(
             SetHeadersExceptionPipe::with(),
-            static fn (\Throwable $throwable, \Closure $next): array => $next($throwable),
+            static fn (Throwable $throwable, Closure $next): array => $next($throwable),
         )
         ->removeExceptionPipes(
             SetCodeExceptionPipe::with(),

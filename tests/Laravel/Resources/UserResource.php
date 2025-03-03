@@ -20,10 +20,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class UserResource extends JsonResource
 {
-    /**
-     * @param mixed $request
-     */
-    public function toArray($request): array
+    public function toArray(mixed $request): array
     {
         // return [
         //     'id' => $this->id,

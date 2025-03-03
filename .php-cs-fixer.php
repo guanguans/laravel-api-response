@@ -27,7 +27,7 @@ $license = License\Type\MIT::text(
 
 $license->save();
 
-$ruleSet = Config\RuleSet\Php74::create()
+$ruleSet = Config\RuleSet\Php80::create()
     ->withHeader($license->header())
     ->withRules(Config\Rules::fromArray([
         '@PHP70Migration' => true,
@@ -37,8 +37,8 @@ $ruleSet = Config\RuleSet\Php74::create()
         '@PHP73Migration' => true,
         '@PHP74Migration' => true,
         '@PHP74Migration:risky' => true,
-        // '@PHP80Migration' => true,
-        // '@PHP80Migration:risky' => true,
+        '@PHP80Migration' => true,
+        '@PHP80Migration:risky' => true,
         // '@PHP81Migration' => true,
         // '@PHP82Migration' => true,
         // '@PHP83Migration' => true,
@@ -48,6 +48,9 @@ $ruleSet = Config\RuleSet\Php74::create()
         // '@DoctrineAnnotation' => true,
         // '@PhpCsFixer' => true,
         // '@PhpCsFixer:risky' => true,
+        'attribute_empty_parentheses' => [
+            'use_parentheses' => false,
+        ],
         'blank_line_before_statement' => [
             'statements' => [
                 'break',
@@ -92,6 +95,32 @@ $ruleSet = Config\RuleSet\Php74::create()
         'final_class' => false,
         // 'final_internal_class' => false,
         // 'final_public_method_for_abstract_class' => false,
+        'fully_qualified_strict_types' => [
+            'import_symbols' => false,
+            'leading_backslash_in_global_namespace' => false,
+            'phpdoc_tags' => [
+                // 'param',
+                // 'phpstan-param',
+                // 'phpstan-property',
+                // 'phpstan-property-read',
+                // 'phpstan-property-write',
+                // 'phpstan-return',
+                // 'phpstan-var',
+                // 'property',
+                // 'property-read',
+                // 'property-write',
+                // 'psalm-param',
+                // 'psalm-property',
+                // 'psalm-property-read',
+                // 'psalm-property-write',
+                // 'psalm-return',
+                // 'psalm-var',
+                // 'return',
+                // 'see',
+                // 'throws',
+                // 'var',
+            ],
+        ],
         'logical_operators' => false,
         'mb_str_functions' => false,
         'native_function_invocation' => [
@@ -105,7 +134,7 @@ $ruleSet = Config\RuleSet\Php74::create()
             'named_class' => false,
         ],
         'ordered_traits' => [
-            'case_sensitive' => false,
+            'case_sensitive' => true,
         ],
         'php_unit_data_provider_name' => [
             'prefix' => 'provide',
@@ -139,13 +168,17 @@ $ruleSet = Config\RuleSet\Php74::create()
         ],
         'phpdoc_order' => [
             'order' => [
+                'noinspection',
+                'phan-suppress',
+                'phpcsSuppress',
+                'phpstan-ignore',
+                'psalm-suppress',
+
                 'deprecated',
                 'internal',
                 'covers',
                 'uses',
                 'dataProvider',
-                'noinspection',
-                'psalm-suppress',
                 'param',
                 'throws',
                 'return',
@@ -172,14 +205,17 @@ $ruleSet = Config\RuleSet\Php74::create()
         ],
         'phpdoc_to_param_type' => [
             'scalar_types' => true,
+            'types_map' => [],
             'union_types' => true,
         ],
         'phpdoc_to_property_type' => [
             'scalar_types' => true,
+            'types_map' => [],
             'union_types' => true,
         ],
         'phpdoc_to_return_type' => [
             'scalar_types' => true,
+            'types_map' => [],
             'union_types' => true,
         ],
         'simplified_if_return' => true,

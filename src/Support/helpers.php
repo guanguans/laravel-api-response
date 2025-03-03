@@ -22,10 +22,8 @@ if (!\function_exists('make')) {
      * @param array<string, mixed> $parameters
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     *
-     * @return mixed
      */
-    function make($abstract, array $parameters = [])
+    function make(array|string $abstract, array $parameters = []): mixed
     {
         if (!\is_string($abstract) && !\is_array($abstract)) {
             throw new InvalidArgumentException(
@@ -56,12 +54,8 @@ if (!\function_exists('make')) {
 if (!\function_exists('env_explode')) {
     /**
      * @noinspection LaravelFunctionsInspection
-     *
-     * @param mixed $default
-     *
-     * @return mixed
      */
-    function env_explode(string $key, $default = null, string $delimiter = ',', int $limit = \PHP_INT_MAX)
+    function env_explode(string $key, mixed $default = null, string $delimiter = ',', int $limit = \PHP_INT_MAX): mixed
     {
         $env = env($key, $default);
 

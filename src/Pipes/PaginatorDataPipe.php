@@ -52,12 +52,8 @@ class PaginatorDataPipe
      * @see \Illuminate\Pagination\Paginator::toArray()
      * @see \Illuminate\Pagination\LengthAwarePaginator::toArray()
      * @see \Illuminate\Pagination\CursorPaginator::toArray()
-     *
-     * @param mixed $data
-     *
-     * @return mixed
      */
-    private function dataFor($data, ?string $wrap)
+    private function dataFor(mixed $data, ?string $wrap): mixed
     {
         if ($data instanceof AbstractCursorPaginator || $data instanceof AbstractPaginator) {
             $data = ResourceCollection::make($data);

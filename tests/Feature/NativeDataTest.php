@@ -66,7 +66,7 @@ it('is enum', function (): void {
 
 it('is resource', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success(fopen(__FILE__, 'rb'))->content());
-})->group(__DIR__, __FILE__)->throws(\InvalidArgumentException::class, 'Type is not supported');
+})->group(__DIR__, __FILE__)->throws(InvalidArgumentException::class, 'Type is not supported');
 
 it('is callable', function (): void {
     class NativeDataTest

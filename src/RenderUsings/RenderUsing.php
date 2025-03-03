@@ -21,10 +21,8 @@ abstract class RenderUsing
     /**
      * @see \Illuminate\Foundation\Exceptions\Handler::renderable()
      * @see \Guanguans\LaravelApiResponse\ServiceProvider::registerRenderUsing()
-     *
-     * @return \Illuminate\Http\JsonResponse|void
      */
-    public function __invoke(\Throwable $throwable, Request $request)
+    public function __invoke(\Throwable $throwable, Request $request): ?\Illuminate\Http\JsonResponse
     {
         try {
             if ($this->when($request, $throwable)) {
@@ -35,6 +33,8 @@ abstract class RenderUsing
             // and to let the default exception handler handle original exception.
             report($throwable);
         }
+
+        return null;
     }
 
     abstract protected function when(Request $request, \Throwable $throwable): bool;

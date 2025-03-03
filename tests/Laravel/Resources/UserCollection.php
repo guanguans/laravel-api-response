@@ -22,10 +22,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  */
 class UserCollection extends ResourceCollection
 {
-    /**
-     * @param mixed $request
-     */
-    public function toArray($request)
+    public function toArray(mixed $request)
     {
         // return [
         //     'data' => $this->collection,

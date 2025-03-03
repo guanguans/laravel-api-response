@@ -39,12 +39,7 @@ class NullDataPipe
         return $next($structure);
     }
 
-    /**
-     * @param mixed $data
-     *
-     * @return mixed
-     */
-    private function dataFor($data, bool $assoc)
+    private function dataFor(mixed $data, bool $assoc): mixed
     {
         return $data ?? ($assoc ? (array) $data : (object) $data);
     }

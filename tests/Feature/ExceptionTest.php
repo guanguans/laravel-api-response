@@ -48,7 +48,7 @@ it('is runtime exception', function (bool $debug): void {
     }
 
     config()->set('app.debug', $debug);
-    $runtimeException = new \RuntimeException('This is a runtime exception.', Response::HTTP_BAD_REQUEST);
+    $runtimeException = new RuntimeException('This is a runtime exception.', Response::HTTP_BAD_REQUEST);
     $response = $this->apiResponse()->exception($runtimeException);
     expect($response)->getStatusCode()->toBe(Response::HTTP_BAD_REQUEST);
     assertMatchesJsonSnapshot((string) Str::of($response->content())->remove(\dirname(__DIR__, 2)));

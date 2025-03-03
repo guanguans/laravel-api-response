@@ -17,18 +17,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Utils
 {
-    /**
-     * @param int|string $code
-     */
-    public static function statusCodeFor($code): int
+    public static function statusCodeFor(int|string $code): int
     {
         return (int) substr((string) $code, 0, 3);
     }
 
-    /**
-     * @param int|string $code
-     */
-    public static function isValidCode($code): bool
+    public static function isValidCode(int|string $code): bool
     {
         return self::isValidStatusCode(self::statusCodeFor($code));
     }
@@ -38,10 +32,7 @@ class Utils
         return Response::HTTP_CONTINUE <= $statusCode && 600 > $statusCode;
     }
 
-    /**
-     * @param int|string $code
-     */
-    public static function isValidErrorCode($code): bool
+    public static function isValidErrorCode(int|string $code): bool
     {
         return self::isValidErrorStatusCode(self::statusCodeFor($code));
     }

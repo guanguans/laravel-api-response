@@ -19,11 +19,11 @@ declare(strict_types=1);
 
 it('will throw `InvalidArgumentException` when abstract is null', function (): void {
     make(null);
-})->group(__DIR__, __FILE__)->throws(\InvalidArgumentException::class);
+})->group(__DIR__, __FILE__)->throws(InvalidArgumentException::class);
 
 it('will throw `InvalidArgumentException` when abstract is empty array', function (): void {
     make([]);
-})->group(__DIR__, __FILE__)->throws(\InvalidArgumentException::class);
+})->group(__DIR__, __FILE__)->throws(InvalidArgumentException::class);
 
 it('can explode env', function (): void {
     expect([

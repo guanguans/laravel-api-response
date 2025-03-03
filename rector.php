@@ -44,7 +44,6 @@ use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
 use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use Rector\Transform\ValueObject\ScalarValueToConstFetch;
-use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Set\LaravelSetList;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -201,7 +200,7 @@ return RectorConfig::configure()
             new ClassConstFetch(new FullyQualified(Response::class), new Identifier($constant))
         ),
         $constants = array_filter(
-            (new \ReflectionClass(Response::class))->getConstants(),
+            (new ReflectionClass(Response::class))->getConstants(),
             static fn ($value): bool => \is_int($value),
         ),
         array_keys($constants)
@@ -247,7 +246,7 @@ return RectorConfig::configure()
         RenameForeachValueVariableToMatchExprVariableRector::class => [
             // __DIR__.'/src/OutputManager.php',
         ],
-        RemoveDumpDataDeadCodeRector::class => [
+        RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/src/Support/Traits/Dumpable.php',
             __DIR__.'/tests/Feature/ExceptionTest.php',
         ],

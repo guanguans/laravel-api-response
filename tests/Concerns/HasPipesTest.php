@@ -34,10 +34,10 @@ it('can use pipes', function (): void {
         ->pushPipes()
         ->beforePipes(
             MessagePipe::with(),
-            static fn (array $structure, \Closure $next): JsonResponse => $next($structure),
-            static fn (array $structure, \Closure $next): JsonResponse => $next($structure),
+            static fn (array $structure, Closure $next): JsonResponse => $next($structure),
+            static fn (array $structure, Closure $next): JsonResponse => $next($structure),
             new class {
-                public function handle(array $structure, \Closure $next): JsonResponse
+                public function handle(array $structure, Closure $next): JsonResponse
                 {
                     return $next($structure);
                 }
@@ -45,15 +45,15 @@ it('can use pipes', function (): void {
         )
         ->beforePipes(
             CallableDataPipe::with(),
-            static fn (array $structure, \Closure $next): JsonResponse => $next($structure),
+            static fn (array $structure, Closure $next): JsonResponse => $next($structure),
         )
         ->afterPipes(
             CallableDataPipe::with(),
-            static fn (array $structure, \Closure $next): JsonResponse => $next($structure),
+            static fn (array $structure, Closure $next): JsonResponse => $next($structure),
         )
         ->afterPipes(
             StatusCodePipe::with(),
-            static fn (array $structure, \Closure $next): JsonResponse => $next($structure),
+            static fn (array $structure, Closure $next): JsonResponse => $next($structure),
         )
         ->removePipes(
             CallableDataPipe::with(),

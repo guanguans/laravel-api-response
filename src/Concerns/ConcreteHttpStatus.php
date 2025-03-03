@@ -28,26 +28,17 @@ trait ConcreteHttpStatus
         return $this->success(null, $message, $code);
     }
 
-    /**
-     * @param mixed $data
-     */
-    public function created($data = null, string $message = '', ?string $location = null): JsonResponse
+    public function created(mixed $data = null, string $message = '', ?string $location = null): JsonResponse
     {
         return $this->localize($data, $message, Response::HTTP_CREATED, $location);
     }
 
-    /**
-     * @param mixed $data
-     */
-    public function accepted($data = null, string $message = '', ?string $location = null): JsonResponse
+    public function accepted(mixed $data = null, string $message = '', ?string $location = null): JsonResponse
     {
         return $this->localize($data, $message, Response::HTTP_ACCEPTED, $location);
     }
 
-    /**
-     * @param mixed $data
-     */
-    public function localize($data = null, string $message = '', int $code = Response::HTTP_OK, ?string $location = null): JsonResponse
+    public function localize(mixed $data = null, string $message = '', int $code = Response::HTTP_OK, ?string $location = null): JsonResponse
     {
         return tap(
             $this->success($data, $message, $code),

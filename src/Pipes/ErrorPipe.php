@@ -45,11 +45,9 @@ class ErrorPipe
     }
 
     /**
-     * @return array|\stdClass
-     *
      * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
      */
-    private function errorFor(array $structure)
+    private function errorFor(array $structure): array|\stdClass
     {
         $error = (array) $structure['error'];
 

@@ -46,12 +46,8 @@ class JsonResponsableDataPipe
      *
      * @noinspection PhpPossiblePolymorphicInvocationInspection
      * @noinspection BadExceptionsProcessingInspection
-     *
-     * @param mixed $data
-     *
-     * @return mixed
      */
-    private function dataFor($data, bool $assoc)
+    private function dataFor(mixed $data, bool $assoc): mixed
     {
         try {
             return ($response = Router::toResponse(request(), $data)) instanceof JsonResponse

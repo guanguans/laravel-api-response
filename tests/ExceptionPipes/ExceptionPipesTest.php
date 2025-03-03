@@ -30,26 +30,26 @@ it('can use exception pipes', function (): void {
         ->pushExceptionPipes(
             SetCodeExceptionPipe::with(
                 Response::HTTP_UNAUTHORIZED,
-                \Throwable::class,
+                Throwable::class,
             ),
             SetMessageExceptionPipe::with(
                 'Whoops, looks like something went wrong.',
-                \Throwable::class,
+                Throwable::class,
             ),
             SetErrorExceptionPipe::make(
                 [
                     'message' => 'Server Error',
                 ],
-                \Throwable::class,
+                Throwable::class,
             ),
             SetHeadersExceptionPipe::make(
                 [
                     'X-Foo' => 'Bar',
                 ],
-                \Throwable::class,
+                Throwable::class,
             ),
         )
-        ->exception(new \RuntimeException($this->faker()->title()))->toBeInstanceOf(JsonResponse::class);
+        ->exception(new RuntimeException($this->faker()->title()))->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);
 
 it('can set state for SetErrorExceptionPipe', function (): void {
