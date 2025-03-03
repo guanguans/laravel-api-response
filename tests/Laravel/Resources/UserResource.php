@@ -20,6 +20,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class UserResource extends JsonResource
 {
+    /**
+     * @noinspection PhpRedundantMethodOverrideInspection
+     */
     public function toArray(mixed $request): array
     {
         // return [

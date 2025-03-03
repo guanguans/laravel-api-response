@@ -36,6 +36,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // \DG\BypassFinals::enable();
         $this->app->useLangPath(__DIR__.'/Laravel/lang');
         $this->startMockery();
         JsonResource::wrap(collect([null, 'data'])->random());

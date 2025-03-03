@@ -161,7 +161,7 @@ it('is jsonable', function (array $array): void {
     $jsonable = new class($array) implements Jsonable {
         public function __construct(private array $array) {}
 
-        public function toJson($options = 0)
+        public function toJson($options = 0): string
         {
             return json_encode($this->array, $options);
         }

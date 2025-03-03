@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpInconsistentReturnPointsInspection */
 /** @noinspection PhpUnused */
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
@@ -25,7 +26,11 @@ uses(TestCase::class)
     })
     ->afterEach(function (): void {})
     ->afterAll(function (): void {})
-    ->in(__DIR__);
+    ->in(
+        __DIR__,
+        // __DIR__.'/Feature',
+        // __DIR__.'/Unit'
+    );
 
 /*
 |--------------------------------------------------------------------------

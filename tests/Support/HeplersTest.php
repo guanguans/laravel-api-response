@@ -17,6 +17,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Pest\Expectation;
 use function Guanguans\LaravelApiResponse\Support\env_explode;
 use function Guanguans\LaravelApiResponse\Support\make;
@@ -32,6 +33,10 @@ use function Guanguans\LaravelApiResponse\Support\make;
 it('will throw `InvalidArgumentException` when abstract is empty array', function (): void {
     make([]);
 })->group(__DIR__, __FILE__)->throws(InvalidArgumentException::class);
+
+it('can make api response', function (): void {
+    expect(make(['class' => ApiResponseContract::class]))->toBeInstanceOf(ApiResponseContract::class);
+})->group(__DIR__, __FILE__);
 
 it('can explode env', function (): void {
     expect([

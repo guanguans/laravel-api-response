@@ -22,6 +22,10 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  */
 class UserCollection extends ResourceCollection
 {
+    /**
+     * @noinspection PhpMissingReturnTypeInspection
+     * @noinspection MissingReturnTypeInspection
+     */
     public function toArray(mixed $request)
     {
         // return [

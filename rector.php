@@ -173,6 +173,7 @@ return RectorConfig::configure()
     ->withConfiguredRule(RectorLaravel\Rector\StaticCall\RouteActionCallableRector::class, [
     ])
     ->withConfiguredRule(RemoveAnnotationRector::class, [
+        'codeCoverageIgnore',
         'phpstan-ignore',
         'phpstan-ignore-next-line',
         'psalm-suppress',
