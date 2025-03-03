@@ -1,7 +1,6 @@
 {
     "require-dev": {
         "ergebnis/license": "^2.6",
-        "ergebnis/php-cs-fixer-config": "dev-main",
-        "friendsofphp/php-cs-fixer": "^3.70"
+        "ergebnis/php-cs-fixer-config": "dev-main"
     }
 }
