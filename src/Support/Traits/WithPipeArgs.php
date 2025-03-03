@@ -15,7 +15,7 @@ namespace Guanguans\LaravelApiResponse\Support\Traits;
 
 trait WithPipeArgs
 {
-    public static function with(...$args): string
+    public static function with(mixed ...$args): string
     {
         if ([] === $args) {
             return static::class;

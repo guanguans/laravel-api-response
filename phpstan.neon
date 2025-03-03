@@ -27,12 +27,12 @@ includes:
 
 parameters:
     paths:
-        - config
-        - src
+        - config/
+        - src/
     excludePaths:
-        - tests/fixtures/
+        - tests/Fixtures/
 #    level: max
-    level: 5
+    level: 6
     tmpDir: .build/phpstan
     errorFormat: symplify
 #    errorFormat: friendly
@@ -57,8 +57,17 @@ parameters:
             function: 'env_getcsv()'
             message: 'use config() instead'
     ignoreErrors:
-        - '#^Unsafe usage of new static\(\)\.$#'
-        - '#^Unused result of .* operator\.$#'
+#        - '#^Unable to resolve the template type T(Key|Value) in call to function collect$#'
+        -
+            identifier: argument.templateType
+        -
+            identifier: missingType.iterableValue
+        -
+            identifier: missingType.generics
+        -
+            identifier: new.static
+        -
+            identifier: logicalOr.resultUnused
         -
             message: '#^Calling env\(\) is forbidden, use config\(\) instead\.$#'
             count: 1
