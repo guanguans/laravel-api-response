@@ -1,9 +1,12 @@
 {
-    "preset": "base",
+    "preset": "laravel",
     "ignore": {
         "words": [
             "php"
         ],
-        "paths": []
+        "paths": [
+            "vendor/",
+            "vendor-bin/"
+        ]
     }
 }
