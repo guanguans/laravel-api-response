@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpInternalEntityUsedInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
 declare(strict_types=1);
 
 /**
@@ -11,6 +13,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Ergebnis\Rector\Rules\Arrays\SortAssociativeArrayByKeyRector;
 use Guanguans\LaravelApiResponse\Support\Rectors\ToInternalExceptionRector;
 use Illuminate\Support\Str;
 use PhpParser\Node\Expr\ClassConstFetch;
@@ -24,6 +27,7 @@ use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
 use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
+use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
@@ -36,14 +40,12 @@ use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php74\Rector\Ternary\ParenthesizeNestedTernaryRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
-use Rector\Set\ValueObject\DowngradeLevelSetList;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Set\ValueObject\SetList;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
 use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use Rector\Transform\ValueObject\ScalarValueToConstFetch;
+use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Set\LaravelSetList;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -52,41 +54,42 @@ return RectorConfig::configure()
         __DIR__.'/config',
         __DIR__.'/src',
         __DIR__.'/tests',
-        __DIR__.'/*.php',
-        __DIR__.'/.*.php',
         __DIR__.'/composer-updater',
     ])
+    ->withRootFiles()
+    // ->withSkipPath(__DIR__.'/tests.php')
+    ->withSkip([
+        '**/__snapshots__/*',
+        '**/Fixtures/*',
+        __DIR__.'/src/RenderUsings/RenderUsing.php',
+        __FILE__,
+    ])
+    ->withCache(__DIR__.'/.build/rector/')
     ->withParallel()
     // ->withoutParallel()
-    ->withImportNames(false)
-    ->withAttributesSets()
-    ->withDeadCodeLevel(42)
-    ->withTypeCoverageLevel(37)
+    // ->withImportNames(importNames: false)
+    ->withImportNames(importDocBlockNames: false, importShortClasses: false)
+    ->withPhpVersion(PhpVersion::PHP_80)
     ->withFluentCallNewLine()
-    // ->withPhpSets()
-    // ->withPreparedSets()
-    ->withSets([
-        DowngradeLevelSetList::DOWN_TO_PHP_80,
-        LevelSetList::UP_TO_PHP_80,
-    ])
-    ->withSets([
-        SetList::CODE_QUALITY,
-        SetList::CODING_STYLE,
-        // SetList::DEAD_CODE,
-        // SetList::STRICT_BOOLEANS,
-        // SetList::GMAGICK_TO_IMAGICK,
-        SetList::NAMING,
-        // SetList::PRIVATIZATION,
-        // SetList::TYPE_DECLARATION,
-        SetList::EARLY_RETURN,
-        SetList::INSTANCEOF,
-    ])
+    ->withAttributesSets(phpunit: true)
+    ->withComposerBased(phpunit: true)
+    ->withPhpVersion(PhpVersion::PHP_80)
+    ->withDowngradeSets(php80: true)
+    ->withPhpSets(php80: true)
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        codingStyle: true,
+        typeDeclarations: true,
+        privatization: true,
+        naming: true,
+        instanceOf: true,
+        earlyReturn: true,
+        phpunitCodeQuality: true,
+    )
     ->withSets([
         PHPUnitSetList::PHPUNIT_90,
-        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-        PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
-    ])
-    ->withSets([
+
         LaravelSetList::LARAVEL_80,
         // LaravelSetList::LARAVEL_STATIC_TO_INJECTION,
         LaravelSetList::LARAVEL_CODE_QUALITY,
@@ -158,6 +161,8 @@ return RectorConfig::configure()
         // RectorLaravel\Rector\StaticCall\RouteActionCallableRector::class,
     ])
     ->withRules([
+        ArraySpreadInsteadOfArrayMergeRector::class,
+        // SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
         ToInternalExceptionRector::class,
@@ -205,12 +210,7 @@ return RectorConfig::configure()
         ),
         array_keys($constants)
     ))
-    ->withSkip([
-        '**/fixtures/*',
-        '**/Fixtures/*',
-        '**/__snapshots__/*',
-        __DIR__.'/src/RenderUsings/RenderUsing.php',
-    ])
+
     ->withSkip([
         EncapsedStringsToSprintfRector::class,
         ExplicitBoolCompareRector::class,
