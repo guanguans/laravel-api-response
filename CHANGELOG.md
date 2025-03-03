@@ -8,6 +8,32 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="2.0.0"></a>
+## [2.0.0] - 2025-03-03
+### Build
+- **dependencies:** Add Laravel Facade Documenter and cleanup unused files
+
+### CI
+- **baselines:** Add new error baselines for PHPStan analysis
+- **composer:** Add bamarni/composer-bin-plugin dependency
+- **composer:** Add facade-lint and update facade-update command
+
+### Code Refactoring
+- Remove unused baseline files and update type coverage
+- Simplify variable names and remove unused rectors
+- Replace Str::of with str in several files
+- Update function existence checks and config rules
+- Simplify property definitions in multiple classes
+- improve type safety and consistency
+- **config:** Improve PHP CS Fixer and Rector configuration
+
+### Features
+- **workflows:** Upgrade PHP version to 8.0 in CI configs
+
+### Style
+- **config:** Increase PHPStan level and adjust type hints
+
+
 <a name="1.1.1"></a>
 ## [1.1.1] - 2025-02-25
 ### Build
@@ -321,7 +347,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/1.1.1...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/guanguans/laravel-api-response/compare/1.1.1...2.0.0
 [1.1.1]: https://github.com/guanguans/laravel-api-response/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/guanguans/laravel-api-response/compare/1.0.10...1.1.0
 [1.0.10]: https://github.com/guanguans/laravel-api-response/compare/1.0.9...1.0.10
