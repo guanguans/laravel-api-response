@@ -25,20 +25,14 @@ class CastDataPipe
     use MakeStaticable;
     use SetStateable;
     use WithPipeArgs;
-    private string $type;
 
-    /** @var null|list<string> */
-    private ?array $only;
-
-    /** @var null|list<string> */
-    private ?array $except;
-
-    public function __construct(string $type, ?array $only = null, ?array $except = null)
-    {
-        $this->type = $type;
-        $this->only = $only;
-        $this->except = $except;
-    }
+    public function __construct(
+        private string $type,
+        /** @var null|list<string> */
+        private ?array $only = null,
+        /** @var null|list<string> */
+        private ?array $except = null
+    ) {}
 
     /**
      * @noinspection RedundantDocCommentTagInspection
@@ -69,43 +63,27 @@ class CastDataPipe
      */
     private function dataFor(mixed $data): mixed
     {
-        switch ($this->type) {
-            case 'null':
-                // return (unset) $data;
-                return null;
-            case 'int':
-            case 'integer':
-                return (int) $data;
-            case 'real':
-            case 'float':
-            case 'double':
-                return $this->fromFloat($data);
-            case 'string':
-                return (string) $data;
-            case 'bool':
-            case 'boolean':
-                return (bool) $data;
-            case 'object':
-                return (object) $data;
-            case 'array':
-                return (array) $data;
-            default:
-                throw new InvalidArgumentException("Invalid cast type [$this->type].");
-        }
+        return match ($this->type) {
+            // return (unset) $data;
+            'null' => null,
+            'int', 'integer' => (int) $data,
+            'real', 'float', 'double' => $this->fromFloat($data),
+            'string' => (string) $data,
+            'bool', 'boolean' => (bool) $data,
+            'object' => (object) $data,
+            'array' => (array) $data,
+            default => throw new InvalidArgumentException("Invalid cast type [$this->type]."),
+        };
     }
 
     private function fromFloat(mixed $value): float
     {
-        switch ((string) $value) {
-            case 'Infinity':
-                return \INF;
-            case '-Infinity':
-                return -\INF;
-            case 'NaN':
-                return \NAN;
-            default:
-                return (float) $value;
-        }
+        return match ((string) $value) {
+            'Infinity' => \INF,
+            '-Infinity' => -\INF,
+            'NaN' => \NAN,
+            default => (float) $value,
+        };
     }
 
     private function shouldCast(Request $request): bool

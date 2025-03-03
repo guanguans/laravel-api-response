@@ -131,12 +131,7 @@ it('is simple paginate resource collection', function (?string $wrap): void {
 
 it('is responsable', function (array $array): void {
     $responsable = new class($array) implements Responsable {
-        private array $array;
-
-        public function __construct(array $array)
-        {
-            $this->array = $array;
-        }
+        public function __construct(private array $array) {}
 
         public function toResponse($request): JsonResponse
         {
@@ -153,12 +148,7 @@ it('is stringable', function (array $array): void {
 
 it('is arrayable', function (array $array): void {
     $arrayable = new class($array) implements Arrayable {
-        private array $array;
-
-        public function __construct(array $array)
-        {
-            $this->array = $array;
-        }
+        public function __construct(private array $array) {}
 
         public function toArray(): array
         {
@@ -170,12 +160,7 @@ it('is arrayable', function (array $array): void {
 
 it('is jsonable', function (array $array): void {
     $jsonable = new class($array) implements Jsonable {
-        private array $array;
-
-        public function __construct(array $array)
-        {
-            $this->array = $array;
-        }
+        public function __construct(private array $array) {}
 
         public function toJson($options = 0)
         {

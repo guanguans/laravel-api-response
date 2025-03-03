@@ -25,13 +25,12 @@ class ApiPathsRenderUsing extends RenderUsing
     /** @var list<string> */
     protected array $only;
 
-    /** @var list<string> */
-    protected array $except;
-
-    public function __construct(?array $only = null, array $except = [])
-    {
+    public function __construct(
+        ?array $only = null,
+        /** @var list<string> */
+        protected array $except = []
+    ) {
         $this->only = $only ?? $this->defaultOnly();
-        $this->except = $except;
     }
 
     protected function when(Request $request, \Throwable $throwable): bool

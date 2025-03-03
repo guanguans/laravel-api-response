@@ -23,15 +23,15 @@ class SetErrorExceptionPipe
     use MakeStaticable;
     use SetStateable;
     use WithPipeArgs;
-    private ?array $error;
     private array $classes;
 
     /**
      * @param string ...$classes
      */
-    public function __construct(?array $error, ...$classes)
-    {
-        $this->error = $error;
+    public function __construct(
+        private ?array $error,
+        ...$classes
+    ) {
         $this->classes = $classes;
     }
 

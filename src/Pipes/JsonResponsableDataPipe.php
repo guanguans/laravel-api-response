@@ -53,7 +53,7 @@ class JsonResponsableDataPipe
             return ($response = Router::toResponse(request(), $data)) instanceof JsonResponse
                 ? $response->getData($assoc)
                 : $data;
-        } catch (\TypeError $typeError) {
+        } catch (\TypeError) {
             return $data;
         } catch (\Throwable $throwable) {
             report($throwable);

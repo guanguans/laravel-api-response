@@ -23,15 +23,15 @@ class SetHeadersExceptionPipe
     use MakeStaticable;
     use SetStateable;
     use WithPipeArgs;
-    private array $headers;
     private array $classes;
 
     /**
      * @param string ...$classes
      */
-    public function __construct(array $headers, ...$classes)
-    {
-        $this->headers = $headers;
+    public function __construct(
+        private array $headers,
+        ...$classes
+    ) {
         $this->classes = $classes;
     }
 
