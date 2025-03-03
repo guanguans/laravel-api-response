@@ -49,7 +49,6 @@
         "guanguans/ai-commit": "dev-main",
         "guanguans/monorepo-builder-worker": "^1.4",
         "guzzlehttp/psr7": "^2.7",
-        "hyperf/composer-plugin": "^1.0",
         "laravel-lang/http-statuses": "^3.2",
         "laravel/facade-documenter": "dev-main",
         "maglnet/composer-require-checker": "^4.4",
@@ -61,10 +60,15 @@
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-webmozart-assert": "^2.0",
         "povils/phpmnd": "^3.5",
         "rector/rector": "^2.0",
+        "shipmonk/phpstan-baseline-per-identifier": "^2.1",
         "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
-        "spaze/phpstan-disallowed-calls": "^4.4"
+        "spaze/phpstan-disallowed-calls": "^4.4",
+        "symplify/phpstan-extensions": "^12.0",
+        "symplify/phpstan-rules": "^14.3",
+        "tomasvotruba/type-coverage": "^2.0"
     },
     "suggest": {
         "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
@@ -96,7 +100,6 @@
     "config": {
         "allow-plugins": {
             "ergebnis/composer-normalize": true,
-            "hyperf/composer-plugin": true,
             "pestphp/pest-plugin": true,
             "phpstan/extension-installer": true
         },
@@ -207,6 +210,11 @@
         "phpmnd": "@php ./vendor/bin/phpmnd src --exclude-path=Support/Utils.php --hint --progress --ansi -v",
         "phpstan": "@php ./vendor/bin/phpstan analyse --ansi -v",
         "phpstan-baseline": "@phpstan --generate-baseline --allow-empty-baseline",
+        "phpstan-split-baseline": [
+            "@phpstan --generate-baseline=baselines/loader.neon --allow-empty-baseline",
+            "find baselines/ -type f -not -name loader.neon -delete",
+            "@php ./vendor/bin/split-phpstan-baseline baselines/loader.neon"
+        ],
         "post-merge": [
             "composer install --ansi -v"
         ],
@@ -218,7 +226,8 @@
             "@putenv PHP80=/opt/homebrew/opt/php@8.0/bin/php",
             "@putenv PHP81=/opt/homebrew/opt/php@8.1/bin/php",
             "@putenv PHP82=/opt/homebrew/opt/php@8.2/bin/php",
-            "@putenv PHP83=/opt/homebrew/opt/php@8.3/bin/php"
+            "@putenv PHP83=/opt/homebrew/opt/php@8.3/bin/php",
+            "@putenv PHP84=/opt/homebrew/opt/php@8.4/bin/php"
         ],
         "rector": "@php ./vendor/bin/rector --ansi -v",
         "rector-custom-rule": "@rector custom-rule",

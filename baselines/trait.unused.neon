@@ -1,0 +1,8 @@
+# total 1 error
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Trait Guanguans\\LaravelApiResponse\\Support\\Traits\\ApiResponseFactory is used zero times and is not analysed\.$#'
+            count: 1
+            path: ../src/Support/Traits/ApiResponseFactory.php

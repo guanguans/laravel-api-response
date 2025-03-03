@@ -1,0 +1,8 @@
+# total 1 error
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Unused result of "or" operator\.$#'
+            count: 1
+            path: ../src/ApiResponse.php

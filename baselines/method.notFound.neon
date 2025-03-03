@@ -1,0 +1,8 @@
+# total 4 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Call to an undefined method Illuminate\\Support\\Collection\:\:unshift\(\)\.$#'
+            count: 4
+            path: ../src/ApiResponse.php
