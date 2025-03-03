@@ -44,8 +44,10 @@ use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
+use Rector\Transform\Rector\StaticCall\StaticCallToFuncCallRector;
 use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use Rector\Transform\ValueObject\ScalarValueToConstFetch;
+use Rector\Transform\ValueObject\StaticCallToFuncCall;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Set\LaravelSetList;
 use Symfony\Component\HttpFoundation\Response;
@@ -98,6 +100,13 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_LEGACY_FACTORIES_TO_CLASSES,
         LaravelSetList::LARAVEL_FACADE_ALIASES_TO_FULL_NAMES,
         LaravelSetList::LARAVEL_ELOQUENT_MAGIC_METHOD_TO_QUERY_BUILDER,
+    ])
+    ->withRules([
+        ArraySpreadInsteadOfArrayMergeRector::class,
+        // SortAssociativeArrayByKeyRector::class,
+        StaticArrowFunctionRector::class,
+        StaticClosureRector::class,
+        ToInternalExceptionRector::class,
     ])
     ->withRules([
         // // RectorLaravel\Rector\Assign\CallOnAppArrayAccessToStandaloneAssignRector::class,
@@ -161,13 +170,6 @@ return RectorConfig::configure()
         // // RectorLaravel\Rector\StaticCall\EloquentMagicMethodToQueryBuilderRector::class,
         // RectorLaravel\Rector\StaticCall\RouteActionCallableRector::class,
     ])
-    ->withRules([
-        ArraySpreadInsteadOfArrayMergeRector::class,
-        // SortAssociativeArrayByKeyRector::class,
-        StaticArrowFunctionRector::class,
-        StaticClosureRector::class,
-        ToInternalExceptionRector::class,
-    ])
     ->withConfiguredRule(RectorLaravel\Rector\MethodCall\EloquentOrderByToLatestOrOldestRector::class, [
     ])
     ->withConfiguredRule(RectorLaravel\Rector\MethodCall\ReplaceServiceContainerCallArgRector::class, [
@@ -181,6 +183,23 @@ return RectorConfig::configure()
         'phpstan-ignore-next-line',
         'psalm-suppress',
     ])
+    ->withConfiguredRule(StaticCallToFuncCallRector::class, [
+        new StaticCallToFuncCall(Str::class, 'of', 'str'),
+    ])
+    // ->withConfiguredRule(FuncCallToStaticCallRector::class, [
+    //     new FuncCallToStaticCall('str', Str::class, 'of'),
+    // ])
+    ->withConfiguredRule(ScalarValueToConstFetchRector::class, array_map(
+        static fn (int $value, string $constant): ScalarValueToConstFetch => new ScalarValueToConstFetch(
+            new LNumber($value),
+            new ClassConstFetch(new FullyQualified(Response::class), new Identifier($constant))
+        ),
+        $constants = array_filter(
+            (new ReflectionClass(Response::class))->getConstants(),
+            static fn ($value): bool => \is_int($value),
+        ),
+        array_keys($constants)
+    ))
     ->withConfiguredRule(
         RenameFunctionRector::class,
         [
@@ -202,24 +221,6 @@ return RectorConfig::configure()
             []
         )
     )
-    // ->withConfiguredRule(StaticCallToFuncCallRector::class, [
-    //     new StaticCallToFuncCall(Str::class, 'of', 'str'),
-    // ])
-    ->withConfiguredRule(FuncCallToStaticCallRector::class, [
-        new FuncCallToStaticCall('str', Str::class, 'of'),
-    ])
-    ->withConfiguredRule(ScalarValueToConstFetchRector::class, array_map(
-        static fn (int $value, string $constant): ScalarValueToConstFetch => new ScalarValueToConstFetch(
-            new LNumber($value),
-            new ClassConstFetch(new FullyQualified(Response::class), new Identifier($constant))
-        ),
-        $constants = array_filter(
-            (new ReflectionClass(Response::class))->getConstants(),
-            static fn ($value): bool => \is_int($value),
-        ),
-        array_keys($constants)
-    ))
-
     ->withSkip([
         EncapsedStringsToSprintfRector::class,
         ExplicitBoolCompareRector::class,

@@ -23,7 +23,6 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -39,7 +38,7 @@ it('is runtime exception handler', function (bool $debug): void {
     config()->set('app.debug', $debug);
     $response = $this->post('api/exception');
     $response->assertStatus(Response::HTTP_BAD_GATEWAY);
-    assertMatchesJsonSnapshot((string) Str::of($response->content())->remove(\dirname(__DIR__, 2)));
+    assertMatchesJsonSnapshot((string) str($response->content())->remove(\dirname(__DIR__, 2)));
 })->group(__DIR__, __FILE__)->with('debugs');
 
 it('is runtime exception', function (bool $debug): void {
@@ -51,7 +50,7 @@ it('is runtime exception', function (bool $debug): void {
     $runtimeException = new RuntimeException('This is a runtime exception.', Response::HTTP_BAD_REQUEST);
     $response = $this->apiResponse()->exception($runtimeException);
     expect($response)->getStatusCode()->toBe(Response::HTTP_BAD_REQUEST);
-    assertMatchesJsonSnapshot((string) Str::of($response->content())->remove(\dirname(__DIR__, 2)));
+    assertMatchesJsonSnapshot((string) str($response->content())->remove(\dirname(__DIR__, 2)));
 })->group(__DIR__, __FILE__)->with('debugs');
 
 it('is authentication exception', function (string $language): void {

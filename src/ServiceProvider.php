@@ -113,7 +113,7 @@ class ServiceProvider extends PackageServiceProvider
      */
     private function toAlias(string $class): string
     {
-        return Str::of($class)
+        return str($class)
             ->replaceFirst(__NAMESPACE__, '')
             ->start('\\'.class_basename(ApiResponse::class))
             ->replaceFirst('\\', '')

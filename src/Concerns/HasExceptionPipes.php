@@ -15,7 +15,6 @@ namespace Guanguans\LaravelApiResponse\Concerns;
 
 use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 /**
  * @mixin \Guanguans\LaravelApiResponse\ApiResponse
@@ -61,7 +60,7 @@ trait HasExceptionPipes
                         return false;
                     }
 
-                    return Str::of($exceptionPipe)->startsWith($findExceptionPipes);
+                    return str($exceptionPipe)->startsWith($findExceptionPipes);
                 })
                 ->values()
         );
@@ -110,7 +109,7 @@ trait HasExceptionPipes
                 $exceptionPipe = $exceptionPipe::class;
             }
 
-            if (\is_string($exceptionPipe) && Str::of($exceptionPipe)->startsWith($findExceptionPipe)) {
+            if (\is_string($exceptionPipe) && str($exceptionPipe)->startsWith($findExceptionPipe)) {
                 return $idx;
             }
         }

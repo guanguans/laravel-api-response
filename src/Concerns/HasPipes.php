@@ -15,7 +15,6 @@ namespace Guanguans\LaravelApiResponse\Concerns;
 
 use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 /**
  * @see https://github.com/guzzle/guzzle/blob/8.0/src/HandlerStack.php
@@ -64,7 +63,7 @@ trait HasPipes
                         return false;
                     }
 
-                    return Str::of($pipe)->startsWith($findPipes);
+                    return str($pipe)->startsWith($findPipes);
                 })
                 ->values()
         );
@@ -113,7 +112,7 @@ trait HasPipes
                 $pipe = $pipe::class;
             }
 
-            if (\is_string($pipe) && Str::of($pipe)->startsWith($findPipe)) {
+            if (\is_string($pipe) && str($pipe)->startsWith($findPipe)) {
                 return $idx;
             }
         }

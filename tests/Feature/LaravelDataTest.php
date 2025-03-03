@@ -28,7 +28,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Support\Str;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {
@@ -142,7 +141,7 @@ it('is responsable', function (array $array): void {
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is stringable', function (array $array): void {
-    $stringable = Str::of(json_encode($array));
+    $stringable = str(json_encode($array));
     assertMatchesJsonSnapshot($this->apiResponse()->success($stringable)->content());
 })->group(__DIR__, __FILE__)->with('arrays');
 
