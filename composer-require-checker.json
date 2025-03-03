@@ -32,6 +32,7 @@
 
         "dd",
         "dump",
+        "make",
 
         "PhpParser\\Node",
         "PhpParser\\Node\\Expr\\New_",

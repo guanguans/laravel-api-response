@@ -67,3 +67,13 @@ function fixtures_path(string $path = ''): string
 {
     return __DIR__.\DIRECTORY_SEPARATOR.'Fixtures'.($path ? \DIRECTORY_SEPARATOR.$path : $path);
 }
+
+function faker(string $locale = Factory::DEFAULT_LOCALE): Generator
+{
+    return fake($locale);
+}
+
+// function fake(string $locale = Factory::DEFAULT_LOCALE): Generator
+// {
+//     return Factory::create($locale);
+// }

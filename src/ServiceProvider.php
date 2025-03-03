@@ -21,6 +21,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use function Guanguans\LaravelApiResponse\Support\make;
 
 class ServiceProvider extends PackageServiceProvider
 {

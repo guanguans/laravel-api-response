@@ -18,6 +18,8 @@ declare(strict_types=1);
  */
 
 use Pest\Expectation;
+use function Guanguans\LaravelApiResponse\Support\env_explode;
+use function Guanguans\LaravelApiResponse\Support\make;
 
 /**
  * Copyright (c) 2024-2025 guanguans<ityaozm@gmail.com>.
@@ -27,10 +29,6 @@ use Pest\Expectation;
  *
  * @see https://github.com/guanguans/laravel-api-response
  */
-it('will throw `InvalidArgumentException` when abstract is null', function (): void {
-    make(null);
-})->group(__DIR__, __FILE__)->throws(InvalidArgumentException::class);
-
 it('will throw `InvalidArgumentException` when abstract is empty array', function (): void {
     make([]);
 })->group(__DIR__, __FILE__)->throws(InvalidArgumentException::class);

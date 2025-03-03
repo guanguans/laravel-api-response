@@ -30,6 +30,7 @@ use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
 use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
+use Rector\DeadCode\Rector\ClassLike\RemoveAnnotationRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\DowngradePhp81\Rector\Array_\DowngradeArraySpreadStringKeyRector;
 use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
@@ -90,7 +91,7 @@ return RectorConfig::configure()
     ->withSets([
         PHPUnitSetList::PHPUNIT_90,
 
-        LaravelSetList::LARAVEL_80,
+        LaravelSetList::LARAVEL_90,
         // LaravelSetList::LARAVEL_STATIC_TO_INJECTION,
         LaravelSetList::LARAVEL_CODE_QUALITY,
         LaravelSetList::LARAVEL_ARRAY_STR_FUNCTION_TO_STATIC_CALL,
@@ -175,14 +176,22 @@ return RectorConfig::configure()
     ])
     ->withConfiguredRule(RectorLaravel\Rector\StaticCall\RouteActionCallableRector::class, [
     ])
+    ->withConfiguredRule(RemoveAnnotationRector::class, [
+        'phpstan-ignore',
+        'phpstan-ignore-next-line',
+        'psalm-suppress',
+    ])
     ->withConfiguredRule(
         RenameFunctionRector::class,
         [
+            'Pest\Faker\fake' => 'fake',
+            'Pest\Faker\faker' => 'faker',
+            // 'faker' => 'fake',
             'test' => 'it',
         ] + array_reduce(
             [
-                // 'make',
-                // 'env_explode',
+                'make',
+                'env_explode',
             ],
             static function (array $carry, string $func): array {
                 /** @see https://github.com/laravel/framework/blob/11.x/src/Illuminate/Support/functions.php */
@@ -239,9 +248,6 @@ return RectorConfig::configure()
         ],
         RemoveUselessReturnTagRector::class => [
             __DIR__.'/src/Support/Traits/ApiResponseFactory.php',
-        ],
-        RenameFunctionRector::class => [
-            // __DIR__.'/src/Support/helpers.php',
         ],
         RenameForeachValueVariableToMatchExprVariableRector::class => [
             // __DIR__.'/src/OutputManager.php',

@@ -11,10 +11,12 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+namespace Guanguans\LaravelApiResponse\Support;
+
 use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Arr;
 
-if (!\function_exists('make')) {
+if (!\function_exists('Guanguans\LaravelApiResponse\Support\make')) {
     /**
      * @codeCoverageIgnore
      *
@@ -25,12 +27,6 @@ if (!\function_exists('make')) {
      */
     function make(array|string $abstract, array $parameters = []): mixed
     {
-        if (!\is_string($abstract) && !\is_array($abstract)) {
-            throw new InvalidArgumentException(
-                \sprintf('Invalid argument type(string/array): %s.', \gettype($abstract))
-            );
-        }
-
         if (\is_string($abstract)) {
             return resolve($abstract, $parameters);
         }
@@ -51,7 +47,7 @@ if (!\function_exists('make')) {
     }
 }
 
-if (!\function_exists('env_explode')) {
+if (!\function_exists('Guanguans\LaravelApiResponse\Support\env_explode')) {
     /**
      * @noinspection LaravelFunctionsInspection
      */
