@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\RenderUsings;
 
 use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 abstract class RenderUsing
@@ -22,7 +23,7 @@ abstract class RenderUsing
      * @see \Illuminate\Foundation\Exceptions\Handler::renderable()
      * @see \Guanguans\LaravelApiResponse\ServiceProvider::registerRenderUsing()
      */
-    public function __invoke(\Throwable $throwable, Request $request): ?\Illuminate\Http\JsonResponse
+    public function __invoke(\Throwable $throwable, Request $request): ?JsonResponse
     {
         try {
             if ($this->when($request, $throwable)) {

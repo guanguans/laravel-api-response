@@ -58,8 +58,6 @@ class CastDataPipe
     /**
      * @see \Illuminate\Database\Eloquent\Concerns\HasAttributes::castAttribute()
      * @see https://github.com/TheDragonCode/support/blob/main/src/Concerns/Castable.php
-     *
-     * @noinspection MultipleReturnStatementsInspection
      */
     private function dataFor(mixed $data): mixed
     {

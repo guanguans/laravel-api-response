@@ -22,7 +22,7 @@ class CollectionMixin
 {
     public function unshift(): \Closure
     {
-        return function (...$values): self {
+        return function (mixed ...$values): self {
             array_unshift($this->items, ...$values);
 
             return $this;

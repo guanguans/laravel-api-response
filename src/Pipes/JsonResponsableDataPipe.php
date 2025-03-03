@@ -45,7 +45,6 @@ class JsonResponsableDataPipe
      * @see \Illuminate\Routing\Router::toResponse()
      *
      * @noinspection PhpPossiblePolymorphicInvocationInspection
-     * @noinspection BadExceptionsProcessingInspection
      */
     private function dataFor(mixed $data, bool $assoc): mixed
     {

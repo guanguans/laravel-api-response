@@ -18,6 +18,8 @@ use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 trait ApiResponseFactory
 {
     /**
+     * @noinspection PhpDocSignatureInspection
+     *
      * @return \Guanguans\LaravelApiResponse\ApiResponse|\Guanguans\LaravelApiResponse\Contracts\ApiResponseContract
      */
     public function apiResponse(): ApiResponseContract
