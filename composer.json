@@ -51,6 +51,7 @@
         "guzzlehttp/psr7": "^2.7",
         "hyperf/composer-plugin": "^1.0",
         "laravel-lang/http-statuses": "^3.2",
+        "laravel/facade-documenter": "dev-main",
         "maglnet/composer-require-checker": "^4.4",
         "mockery/mockery": "^1.6",
         "orchestra/testbench": "^7.52 || ^8.0 || ^9.0 || ^10.0",
@@ -67,6 +68,12 @@
     },
     "suggest": {
         "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
+    },
+    "repositories": {
+        "facade-documenter": {
+            "type": "vcs",
+            "url": "git@github.com:laravel/facade-documenter.git"
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
