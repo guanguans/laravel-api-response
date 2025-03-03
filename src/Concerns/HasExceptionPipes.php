@@ -23,26 +23,26 @@ trait HasExceptionPipes
 {
     protected Collection $exceptionPipes;
 
-    public function unshiftExceptionPipes(...$exceptionPipes): self
+    public function unshiftExceptionPipes(mixed ...$exceptionPipes): self
     {
         return $this->tapExceptionPipes(static function (Collection $originalExceptionPipes) use ($exceptionPipes): void {
             $originalExceptionPipes->unshift(...$exceptionPipes);
         });
     }
 
-    public function pushExceptionPipes(...$exceptionPipes): self
+    public function pushExceptionPipes(mixed ...$exceptionPipes): self
     {
         return $this->tapExceptionPipes(static function (Collection $originalExceptionPipes) use ($exceptionPipes): void {
             $originalExceptionPipes->push(...$exceptionPipes);
         });
     }
 
-    public function beforeExceptionPipes(string $findExceptionPipe, ...$exceptionPipes): self
+    public function beforeExceptionPipes(string $findExceptionPipe, mixed ...$exceptionPipes): self
     {
         return $this->spliceExceptionPipes($findExceptionPipe, $exceptionPipes, true);
     }
 
-    public function afterExceptionPipes(string $findExceptionPipe, ...$exceptionPipes): self
+    public function afterExceptionPipes(string $findExceptionPipe, mixed ...$exceptionPipes): self
     {
         return $this->spliceExceptionPipes($findExceptionPipe, $exceptionPipes, false);
     }

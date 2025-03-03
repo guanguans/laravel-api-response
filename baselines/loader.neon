@@ -1,8 +1,6 @@
 includes:
-    - disallowed.function.neon
     - function.alreadyNarrowedType.neon
-    - logicalOr.resultUnused.neon
     - method.nonObject.neon
     - method.notFound.neon
-    - new.static.neon
     - trait.unused.neon
+    - typeCoverage.paramTypeCoverage.neon

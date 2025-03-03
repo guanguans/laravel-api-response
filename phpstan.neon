@@ -41,11 +41,11 @@ parameters:
 #        lineAfter: 3
 #        editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
     type_coverage:
-        declare: 0
-        return_type: 0
-        param_type: 0
-        property_type: 0
-        constant_type: 0
+        declare: 100
+        return_type: 100
+        param_type: 100
+        property_type: 100
+        constant_type: 100
     disallowedFunctionCalls:
         -
             function: 'env()'
@@ -57,8 +57,9 @@ parameters:
             function: 'env_getcsv()'
             message: 'use config() instead'
     ignoreErrors:
-#        - "#^Unsafe usage of new static\\(\\)\\.$#"
-#        - '#^Unused result of "or" operator\.$#'
-#        -
-#            message: "#^Calling env\\(\\) is forbidden, use config\\(\\) instead\\.$#"
-#            path: src/Support/helpers.php
+        - '#^Unsafe usage of new static\(\)\.$#'
+        - '#^Unused result of .* operator\.$#'
+        -
+            message: '#^Calling env\(\) is forbidden, use config\(\) instead\.$#'
+            count: 1
+            path: ./src/Support/helpers.php

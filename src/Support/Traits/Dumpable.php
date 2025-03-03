@@ -28,7 +28,7 @@ if (!trait_exists(Dumpable::class)) {
          *
          * @return never
          */
-        public function dd(...$args): void
+        public function dd(mixed ...$args): void
         {
             dd($this, ...$args); // @codeCoverageIgnore
         }
@@ -36,7 +36,7 @@ if (!trait_exists(Dumpable::class)) {
         /**
          * Dump the given arguments.
          */
-        public function dump(...$args): self
+        public function dump(mixed ...$args): self
         {
             dump($this, ...$args);
 

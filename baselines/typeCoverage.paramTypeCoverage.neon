@@ -1,0 +1,8 @@
+# total 2 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Out of 191 possible param types, only 189 \- 98\.9 %% actually have it\. Add more param types to get over 100 %%$#'
+            count: 2
+            path: ../src/ApiResponse.php
