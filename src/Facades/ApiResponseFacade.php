@@ -49,7 +49,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Http\JsonResponse tooManyRequests(string $message = '')
  * @method static \Guanguans\LaravelApiResponse\ApiResponse|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
- * @method static never dd(mixed ...$args)
+ * @method static void dd(mixed ...$args)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse dump(mixed ...$args)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse unshiftExceptionPipes(mixed ...$exceptionPipes)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse pushExceptionPipes(mixed ...$exceptionPipes)

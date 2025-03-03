@@ -107,7 +107,9 @@
         },
         "meta": {
             "path": "http:\/\/localhost",
-            "per_page": 3
+            "per_page": 3,
+            "next_cursor": "eyJ1c2Vycy5pZCI6MywiX3BvaW50c1RvTmV4dEl0ZW1zIjp0cnVlfQ",
+            "prev_cursor": null
         }
     },
     "error": {}

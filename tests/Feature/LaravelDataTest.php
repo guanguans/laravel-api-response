@@ -58,7 +58,10 @@ it('is paginate', function (?string $wrap): void {
             ->success($paginate)
             ->content()
     );
-})->group(__DIR__, __FILE__)->with('wraps')->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '10.0.0'));
+})
+    ->group(__DIR__, __FILE__)
+    // ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '10.0.0'))
+    ->with('wraps');
 
 it('is simple paginate', function (?string $wrap): void {
     $simplePaginate = User::query()->with(['country', 'posts'])->simplePaginate(3);
@@ -94,7 +97,10 @@ it('is cursor paginate', function (?string $wrap): void {
             ->success($cursorPaginate)
             ->content()
     );
-})->group(__DIR__, __FILE__)->with('wraps')->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0'));
+})
+    ->group(__DIR__, __FILE__)
+    // ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0'))
+    ->with('wraps');
 
 it('is resource', function (): void {
     $userResource = UserResource::make(User::query()->with(['country', 'posts'])->first());

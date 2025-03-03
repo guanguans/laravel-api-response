@@ -25,8 +25,6 @@ if (!trait_exists(Dumpable::class)) {
     {
         /**
          * Dump the given arguments and terminate execution.
-         *
-         * @return never-return
          */
         public function dd(mixed ...$args): void
         {
