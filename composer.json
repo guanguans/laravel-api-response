@@ -161,6 +161,7 @@
             "@composer-unused",
             "@yaml-lint",
             "@md-lint",
+            "@facade-lint",
             "@style-lint",
             "@phpmnd",
             "@test",
@@ -179,7 +180,7 @@
         "facade-lint": "@facade-update --lint",
         "facade-update": [
             "@putenvs",
-            "$PHP81 -f ./facade.php -- Guanguans\\\\LaravelApiResponse\\\\Facades\\\\ApiResponseFacade"
+            "$PHP81 -f ./vendor/bin/facade.php -- Guanguans\\\\LaravelApiResponse\\\\Facades\\\\ApiResponseFacade"
         ],
         "lint": [
             "@putenvs",
