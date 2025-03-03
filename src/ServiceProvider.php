@@ -94,7 +94,7 @@ class ServiceProvider extends PackageServiceProvider
     {
         $this->app->bind(
             ApiResponseContract::class,
-            static fn (Application $app): ApiResponseContract => $app->make(ApiResponse::class)
+            static fn (Application $application): ApiResponseContract => $application->make(ApiResponse::class)
         );
 
         $this->alias(ApiResponseContract::class);

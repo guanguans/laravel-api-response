@@ -42,8 +42,8 @@ trait ConcreteHttpStatus
     {
         return tap(
             $this->success($data, $message, $code),
-            static function (JsonResponse $response) use ($location): void {
-                $location and $response->header('Location', $location);
+            static function (JsonResponse $jsonResponse) use ($location): void {
+                $location and $jsonResponse->header('Location', $location);
             }
         );
     }

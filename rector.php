@@ -20,7 +20,6 @@ use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Scalar\LNumber;
-use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
@@ -34,11 +33,6 @@ use Rector\DeadCode\Rector\ClassLike\RemoveAnnotationRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\DowngradePhp81\Rector\Array_\DowngradeArraySpreadStringKeyRector;
 use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
-use Rector\Naming\Rector\Assign\RenameVariableToMatchMethodCallReturnTypeRector;
-use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
-use Rector\Naming\Rector\Foreach_\RenameForeachValueVariableToMatchExprVariableRector;
-use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
-use Rector\Php74\Rector\Ternary\ParenthesizeNestedTernaryRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
@@ -224,11 +218,8 @@ return RectorConfig::configure()
     ->withSkip([
         EncapsedStringsToSprintfRector::class,
         ExplicitBoolCompareRector::class,
-        ExplicitReturnNullRector::class,
         LogicalToBooleanRector::class,
         NewlineAfterStatementRector::class,
-        RenameParamToMatchTypeRector::class,
-        RenameVariableToMatchMethodCallReturnTypeRector::class,
         ReturnBinaryOrToEarlyReturnRector::class,
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
@@ -241,17 +232,8 @@ return RectorConfig::configure()
             __DIR__.'/src/Pipes/PaginatorDataPipe.php',
             __DIR__.'/src/Pipes/ScalarDataPipe.php',
         ],
-        ParenthesizeNestedTernaryRector::class => [
-            __DIR__.'/src/Pipes/MessagePipe.php',
-        ],
-        RemoveExtraParametersRector::class => [
-            // __DIR__.'/src/Mixins/QueryBuilderMacro.php',
-        ],
         RemoveUselessReturnTagRector::class => [
             __DIR__.'/src/Support/Traits/ApiResponseFactory.php',
-        ],
-        RenameForeachValueVariableToMatchExprVariableRector::class => [
-            // __DIR__.'/src/OutputManager.php',
         ],
         RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/src/Support/Traits/Dumpable.php',

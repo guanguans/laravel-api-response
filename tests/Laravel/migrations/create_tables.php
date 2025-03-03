@@ -21,24 +21,24 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('countries', static function (Blueprint $table): void {
-            $table->increments('id');
-            $table->string('name');
-            $table->timestamps();
+        Schema::create('countries', static function (Blueprint $blueprint): void {
+            $blueprint->increments('id');
+            $blueprint->string('name');
+            $blueprint->timestamps();
         });
 
-        Schema::create('users', static function (Blueprint $table): void {
-            $table->increments('id');
-            $table->string('name');
-            $table->unsignedInteger('country_id');
-            $table->timestamps();
+        Schema::create('users', static function (Blueprint $blueprint): void {
+            $blueprint->increments('id');
+            $blueprint->string('name');
+            $blueprint->unsignedInteger('country_id');
+            $blueprint->timestamps();
         });
 
-        Schema::create('posts', static function (Blueprint $table): void {
-            $table->increments('id');
-            $table->string('title');
-            $table->unsignedInteger('user_id');
-            $table->timestamps();
+        Schema::create('posts', static function (Blueprint $blueprint): void {
+            $blueprint->increments('id');
+            $blueprint->string('title');
+            $blueprint->unsignedInteger('user_id');
+            $blueprint->timestamps();
         });
     }
 

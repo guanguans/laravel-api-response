@@ -74,7 +74,7 @@ final class ToInternalExceptionRector extends AbstractRector implements Configur
      *
      * @throws \ReflectionException
      */
-    public function refactor(Node $node)
+    public function refactor(Node $node): ?Node
     {
         $class = $node->class;
 
@@ -84,7 +84,7 @@ final class ToInternalExceptionRector extends AbstractRector implements Configur
             || str_starts_with($class->toString(), 'Guanguans\\LaravelApiResponse\\Exceptions\\')
             || !str_ends_with($class->toString(), 'Exception')
         ) {
-            return;
+            return null;
         }
 
         $internalExceptionClass = "\\Guanguans\\LaravelApiResponse\\Exceptions\\{$class->getLast()}";
