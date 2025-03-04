@@ -18,6 +18,8 @@ use Illuminate\Support\Arr;
 
 if (!\function_exists('Guanguans\LaravelApiResponse\Support\make')) {
     /**
+     * @see https://github.com/yiisoft/yii2/blob/master/framework/BaseYii.php
+     *
      * @param array<string, mixed>|string $abstract
      * @param array<string, mixed> $parameters
      *
@@ -29,18 +31,27 @@ if (!\function_exists('Guanguans\LaravelApiResponse\Support\make')) {
             return resolve($abstract, $parameters);
         }
 
-        foreach ($classes = ['__class', '_class', 'class'] as $class) {
-            if (isset($abstract[$class])) {
-                return make(
-                    $abstract[$class],
-                    $parameters + Arr::except($abstract, $class),
-                );
+        foreach (
+            $keys ??= [
+                '__abstract',
+                '__class',
+                '__name',
+                '_abstract',
+                '_class',
+                '_name',
+                'abstract',
+                'class',
+                'name',
+            ] as $key
+        ) {
+            if (isset($abstract[$key])) {
+                return make($abstract[$key], $parameters + Arr::except($abstract, $key));
             }
         }
 
         throw new InvalidArgumentException(\sprintf(
             'The argument of abstract must be an array containing a `%s` element.',
-            implode('` or `', $classes)
+            implode('` or `', $keys)
         ));
     }
 }

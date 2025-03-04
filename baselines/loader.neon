@@ -2,5 +2,6 @@ includes:
     - function.alreadyNarrowedType.neon
     - method.nonObject.neon
     - method.notFound.neon
+    - nullCoalesce.variable.neon
     - trait.unused.neon
     - typeCoverage.paramTypeCoverage.neon

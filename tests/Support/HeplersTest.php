@@ -17,7 +17,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
+use Guanguans\LaravelApiResponse\ApiResponse;
 use Pest\Expectation;
 use function Guanguans\LaravelApiResponse\Support\env_explode;
 use function Guanguans\LaravelApiResponse\Support\make;
@@ -34,9 +34,20 @@ it('will throw `InvalidArgumentException` when abstract is empty array', functio
     make([]);
 })->group(__DIR__, __FILE__)->throws(InvalidArgumentException::class);
 
-it('can make api response', function (): void {
-    expect(make(['class' => ApiResponseContract::class]))->toBeInstanceOf(ApiResponseContract::class);
-})->group(__DIR__, __FILE__);
+it('can make api response', function (array|string $abstract): void {
+    expect(make($abstract))->toBeInstanceOf(ApiResponse::class);
+})->group(__DIR__, __FILE__)->with([
+    ['abstract' => ApiResponse::class],
+    ['abstract' => ['__abstract' => ApiResponse::class, 'pipes' => collect(), 'exceptionPipes' => collect()]],
+    ['abstract' => ['__class' => ApiResponse::class, 'pipes' => collect(), 'exceptionPipes' => collect()]],
+    ['abstract' => ['__name' => ApiResponse::class, 'pipes' => collect(), 'exceptionPipes' => collect()]],
+    ['abstract' => ['_abstract' => ApiResponse::class, 'pipes' => collect(), 'exceptionPipes' => collect()]],
+    ['abstract' => ['_class' => ApiResponse::class, 'pipes' => collect(), 'exceptionPipes' => collect()]],
+    ['abstract' => ['_name' => ApiResponse::class, 'pipes' => collect(), 'exceptionPipes' => collect()]],
+    ['abstract' => ['abstract' => ApiResponse::class, 'pipes' => collect(), 'exceptionPipes' => collect()]],
+    ['abstract' => ['class' => ApiResponse::class, 'pipes' => collect(), 'exceptionPipes' => collect()]],
+    ['abstract' => ['name' => ApiResponse::class, 'pipes' => collect(), 'exceptionPipes' => collect()]],
+]);
 
 it('can explode env', function (): void {
     expect([
