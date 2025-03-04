@@ -239,9 +239,7 @@ $ruleSet = Php80::create()
 $ruleSet->withCustomFixers(Fixers::fromFixers(
     ...array_filter(
         iterator_to_array(new PhpCsFixerCustomFixers\Fixers),
-        static fn (
-            AbstractFixer $fixer
-        ): bool => !$fixer instanceof DeprecatedFixerInterface
+        static fn (AbstractFixer $fixer): bool => !$fixer instanceof DeprecatedFixerInterface
             && !\array_key_exists($fixer->getName(), $ruleSet->rules()->toArray())
     )
 ));
@@ -249,34 +247,26 @@ $ruleSet->withCustomFixers(Fixers::fromFixers(
 return Factory::fromRuleSet($ruleSet)
     ->setFinder(
         Finder::create()
-            ->in(__DIR__)
-            ->exclude([
-                '.build/',
-                '.chglog/',
-                '.github/',
-                'build/',
-                'docs/',
-                'vendor-bin/',
-                '__snapshots__/',
-                'tests/fixtures/',
-                'tests/Fixtures/',
+            ->in([
+                __DIR__.'/config/',
+                __DIR__.'/src/',
+                __DIR__.'/tests/',
             ])
-            ->append(glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE))
+            ->exclude([
+                '__snapshots__',
+                'Fixtures',
+            ])
             ->append([
+                ...array_filter(
+                    glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),
+                    static fn (string $filename): bool => !\in_array($filename, [
+                        __DIR__.'/.phpstorm.meta.php',
+                        // __DIR__.'/_ide_helper.php',
+                        __DIR__.'/_ide_helper_models.php',
+                    ], true)
+                ),
                 __DIR__.'/composer-updater',
             ])
-            ->notPath([
-                'bootstrap/*',
-                'storage/*',
-                'resources/view/mail/*',
-                'vendor-bin/*',
-            ])
-            ->notName([
-                '*.blade.php',
-                // '_ide_helper.php',
-            ])
-            ->ignoreDotFiles(true)
-            ->ignoreVCS(true)
     )
     ->setRiskyAllowed(true)
     ->setUsingCache(true)

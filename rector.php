@@ -226,6 +226,7 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         DowngradeArraySpreadStringKeyRector::class => [
+            __DIR__.'/.php-cs-fixer.php',
             __DIR__.'/src/Concerns/HasPipes.php',
             __DIR__.'/src/Concerns/HasExceptionPipes.php',
         ],
