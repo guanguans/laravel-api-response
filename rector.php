@@ -97,7 +97,7 @@ return RectorConfig::configure()
     ])
     ->withRules([
         ArraySpreadInsteadOfArrayMergeRector::class,
-        // SortAssociativeArrayByKeyRector::class,
+        SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
         ToInternalExceptionRector::class,
@@ -248,4 +248,9 @@ return RectorConfig::configure()
             __DIR__.'/tests',
         ],
         StaticClosureRector::class => $staticClosureSkipPaths,
+        SortAssociativeArrayByKeyRector::class => [
+            __DIR__.'/config',
+            __DIR__.'/src',
+            __DIR__.'/tests',
+        ],
     ]);
