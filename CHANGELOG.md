@@ -8,6 +8,17 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="2.0.2"></a>
+## [2.0.2] - 2025-03-04
+### CI
+- **config:** Update paths and ignore patterns in PHP CS Fixer config
+- **config:** Update preset and paths in peck.json
+- **rector:** Enable SortAssociativeArrayByKeyRector
+
+### Features
+- **helpers:** Improve make function to support more keys
+
+
 <a name="2.0.1"></a>
 ## [2.0.1] - 2025-03-03
 ### Performance Improvements
@@ -357,7 +368,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.0.1...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.0.2...HEAD
+[2.0.2]: https://github.com/guanguans/laravel-api-response/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/guanguans/laravel-api-response/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/guanguans/laravel-api-response/compare/1.1.1...2.0.0
 [1.1.1]: https://github.com/guanguans/laravel-api-response/compare/1.1.0...1.1.1
