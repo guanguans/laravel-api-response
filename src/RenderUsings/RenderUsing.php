@@ -25,17 +25,11 @@ abstract class RenderUsing
      */
     public function __invoke(\Throwable $throwable, Request $request): ?JsonResponse
     {
-        try {
-            if ($this->when($request, $throwable)) {
-                return ApiResponseFacade::exception($throwable);
-            }
-        } catch (\Throwable $throwable) {
-            // If catch an exception, only report it,
-            // and to let the default exception handler handle original exception.
-            report($throwable);
-        }
-
-        return null;
+        // If catch an exception, only report it,
+        // and to let the default exception handler handle original exception.
+        return rescue(
+            fn (): ?JsonResponse => $this->when($request, $throwable) ? ApiResponseFacade::exception($throwable) : null
+        );
     }
 
     abstract protected function when(Request $request, \Throwable $throwable): bool;

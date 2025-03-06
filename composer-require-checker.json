@@ -15,21 +15,6 @@
         "Foo.php"
     ],
     "symbol-whitelist": [
-        "array",
-        "bool",
-        "callable",
-        "false",
-        "float",
-        "int",
-        "null",
-        "object",
-        "parent",
-        "self",
-        "static",
-        "string",
-        "true",
-        "void",
-
         "dd",
         "dump",
         "make",
