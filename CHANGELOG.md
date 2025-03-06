@@ -8,6 +8,15 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="2.0.4"></a>
+## [2.0.4] - 2025-03-06
+### CI
+- **delete:** Remove composer-require-checker.json and composer-unused.php
+
+### Code Refactoring
+- **loader:** Remove unused method nonObject.neon
+
+
 <a name="2.0.3"></a>
 ## [2.0.3] - 2025-03-06
 ### CI
@@ -377,7 +386,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.0.3...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.0.4...HEAD
+[2.0.4]: https://github.com/guanguans/laravel-api-response/compare/2.0.3...2.0.4
 [2.0.3]: https://github.com/guanguans/laravel-api-response/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/guanguans/laravel-api-response/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/guanguans/laravel-api-response/compare/2.0.0...2.0.1
