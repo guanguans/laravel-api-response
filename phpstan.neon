@@ -29,6 +29,7 @@ parameters:
     paths:
         - config/
         - src/
+#        - tests/
     excludePaths:
         - tests/Fixtures/
 #    level: max
