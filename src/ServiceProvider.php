@@ -59,8 +59,6 @@ class ServiceProvider extends PackageServiceProvider
     }
 
     /**
-     * @noinspection PhpPossiblePolymorphicInvocationInspection
-     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     private function registerRenderUsing(): void
@@ -73,6 +71,7 @@ class ServiceProvider extends PackageServiceProvider
                 $renderUsing = make($renderUsing);
             }
 
+            /** @var \Illuminate\Foundation\Exceptions\Handler $exceptionHandler */
             $exceptionHandler->renderable($renderUsing);
         }
     }

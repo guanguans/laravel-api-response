@@ -16,6 +16,7 @@ namespace Guanguans\LaravelApiResponse\Pipes;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Guanguans\LaravelApiResponse\Support\Utils;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Lang;
 use Symfony\Component\HttpFoundation\Response;
 
 class MessagePipe
@@ -52,9 +53,6 @@ class MessagePipe
         return $next($structure);
     }
 
-    /**
-     * @noinspection NullPointerExceptionInspection
-     */
     private function transKeyFor(
         array $structure,
         string $mainTransKey,
@@ -63,13 +61,13 @@ class MessagePipe
     ): string {
         $code = $structure['code'];
 
-        if (trans()->has($key = "$mainTransKey.$code")) {
+        if (Lang::has($key = "$mainTransKey.$code")) {
             return $key;
         }
 
         $statusCode = Utils::statusCodeFor($code);
 
-        if (trans()->has($key = "$mainTransKey.$statusCode")) {
+        if (Lang::has($key = "$mainTransKey.$statusCode")) {
             return $key;
         }
 

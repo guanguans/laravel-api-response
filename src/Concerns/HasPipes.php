@@ -17,6 +17,8 @@ use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Collection;
 
 /**
+ * @noinspection PhpUndefinedNamespaceInspection
+ *
  * @see https://github.com/guzzle/guzzle/blob/8.0/src/HandlerStack.php
  * @see \GuzzleHttp\HandlerStack
  *

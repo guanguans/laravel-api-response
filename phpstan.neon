@@ -32,8 +32,8 @@ parameters:
 #        - tests/
     excludePaths:
         - tests/Fixtures/
-#    level: max
-    level: 6
+    level: max
+#    level: 10
     tmpDir: .build/phpstan
     errorFormat: symplify
 #    errorFormat: friendly
@@ -58,17 +58,26 @@ parameters:
             function: 'env_getcsv()'
             message: 'use config() instead'
     ignoreErrors:
-#        - '#^Unable to resolve the template type T(Key|Value) in call to function collect$#'
+        - '#^Cannot call method .*\(\) on mixed\.$#'
+        - '#^Cannot cast mixed to .*\.$#'
+        - '#^Cannot use array destructuring on mixed\.$#'
+        - '#Property .* does not accept mixed#'
         -
             identifier: argument.templateType
         -
-            identifier: missingType.iterableValue
+            identifier: argument.type
         -
             identifier: missingType.generics
         -
-            identifier: new.static
+            identifier: missingType.iterableValue
+        -
+            identifier: return.type
+        -
+            identifier: encapsedStringPart.nonString
         -
             identifier: logicalOr.resultUnused
+        -
+            identifier: new.static
         -
             message: '#^Calling env\(\) is forbidden, use config\(\) instead\.$#'
             count: 1

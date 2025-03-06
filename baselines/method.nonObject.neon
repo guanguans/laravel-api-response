@@ -1,8 +1,0 @@
-# total 2 errors
-
-parameters:
-    ignoreErrors:
-        -
-            message: '#^Cannot call method has\(\) on array\|Illuminate\\Contracts\\Translation\\Translator\|string\.$#'
-            count: 2
-            path: ../src/Pipes/MessagePipe.php
