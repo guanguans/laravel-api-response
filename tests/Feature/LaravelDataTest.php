@@ -140,7 +140,7 @@ it('is responsable', function (array $array): void {
 
         public function toResponse($request): JsonResponse
         {
-            return response()->json($this->array);
+            return new JsonResponse($this->array);
         }
     };
     assertMatchesJsonSnapshot($this->apiResponse()->success($responsable)->content());

@@ -27,11 +27,17 @@ class Post extends Model
         'user_id' => 'int',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\User, \Guanguans\LaravelApiResponse\Tests\Laravel\Models\Post>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\Country>
+     */
     public function userCountry(): HasOneThrough
     {
         return $this->hasOneThrough(

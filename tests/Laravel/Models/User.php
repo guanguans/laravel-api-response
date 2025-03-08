@@ -27,11 +27,17 @@ class User extends Model
         'country_id' => 'int',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\Country, \Guanguans\LaravelApiResponse\Tests\Laravel\Models\User>
+     */
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\Post>
+     */
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);

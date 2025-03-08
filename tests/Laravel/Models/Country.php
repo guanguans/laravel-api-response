@@ -24,11 +24,17 @@ class Country extends Model
 {
     public $timestamps = false;
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\User>
+     */
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\Post>
+     */
     public function posts(): HasManyThrough
     {
         return $this->hasManyThrough(Post::class, User::class);
