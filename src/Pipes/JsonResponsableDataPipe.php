@@ -16,6 +16,7 @@ namespace Guanguans\LaravelApiResponse\Pipes;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Request;
 
 class JsonResponsableDataPipe
 {
@@ -49,7 +50,7 @@ class JsonResponsableDataPipe
     private function dataFor(mixed $data, bool $assoc): mixed
     {
         try {
-            return ($response = Router::toResponse(request(), $data)) instanceof JsonResponse
+            return ($response = Router::toResponse(Request::getFacadeRoot(), $data)) instanceof JsonResponse
                 ? $response->getData($assoc)
                 : $data;
         } catch (\TypeError) {

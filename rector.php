@@ -48,6 +48,7 @@ use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
+use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Set\LaravelSetList;
@@ -67,7 +68,7 @@ return RectorConfig::configure()
         '**/__snapshots__/*',
         '**/Fixtures/*',
         __DIR__.'/src/RenderUsings/RenderUsing.php',
-        __FILE__,
+        // __FILE__,
     ])
     ->withCache(__DIR__.'/.build/rector/')
     ->withParallel()
@@ -191,19 +192,20 @@ return RectorConfig::configure()
     ->withSkip([
         DowngradeArraySpreadStringKeyRector::class => [
             __DIR__.'/.php-cs-fixer.php',
-            __DIR__.'/src/Concerns/HasPipes.php',
             __DIR__.'/src/Concerns/HasExceptionPipes.php',
+            __DIR__.'/src/Concerns/HasPipes.php',
+            __FILE__,
         ],
         DisallowedEmptyRuleFixerRector::class => [
             __DIR__.'/src/Pipes/PaginatorDataPipe.php',
             __DIR__.'/src/Pipes/ScalarDataPipe.php',
         ],
-        RemoveUselessReturnTagRector::class => [
-            __DIR__.'/src/Support/Traits/ApiResponseFactory.php',
-        ],
-        RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector::class => [
+        RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/src/Support/Traits/Dumpable.php',
             __DIR__.'/tests/Feature/ExceptionTest.php',
+        ],
+        RemoveUselessReturnTagRector::class => [
+            __DIR__.'/src/Support/Traits/ApiResponseFactory.php',
         ],
         ToInternalExceptionRector::class => [
             __DIR__.'/tests',

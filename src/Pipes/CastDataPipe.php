@@ -48,7 +48,7 @@ class CastDataPipe
      */
     public function handle(array $structure, \Closure $next): JsonResponse
     {
-        if ($this->shouldCast(request())) {
+        if ($this->shouldCast(\Illuminate\Support\Facades\Request::getFacadeRoot())) {
             $structure['data'] = $this->dataFor($structure['data']);
         }
 
