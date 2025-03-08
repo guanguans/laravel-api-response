@@ -54,7 +54,7 @@
         "laravel/facade-documenter": "dev-main",
         "maglnet/composer-require-checker": "^4.4",
         "mockery/mockery": "^1.6",
-        "orchestra/testbench": "^7.52 || ^8.0 || ^9.0 || ^10.0",
+        "orchestra/testbench": "^7.53 || ^8.0 || ^9.0 || ^10.0",
         "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
         "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
         "pestphp/pest-plugin-laravel": "^1.4 || ^2.0 || ^3.0",
