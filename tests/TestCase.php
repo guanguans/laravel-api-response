@@ -50,12 +50,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getPackageProviders($app): array
     {
-        return array_merge(
-            parent::getPackageProviders($app),
-            [
-                ServiceProvider::class,
-            ]
-        );
+        return [
+            ServiceProvider::class,
+            ...parent::getPackageProviders($app),
+        ];
     }
 
     protected function getPackageAliases($app): array
