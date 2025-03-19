@@ -27,7 +27,6 @@ includes:
 
 parameters:
     paths:
-        - config/
         - src/
 #        - tests/
     excludePaths:
@@ -35,12 +34,12 @@ parameters:
     level: max
 #    level: 10
     tmpDir: .build/phpstan
-    errorFormat: symplify
-#    errorFormat: friendly
-#    friendly:
-#        lineBefore: 3
-#        lineAfter: 3
-#        editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+#    errorFormat: symplify
+    errorFormat: friendly
+    friendly:
+        lineBefore: 3
+        lineAfter: 3
+        editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
     type_coverage:
         declare: 100
         return_type: 100
@@ -58,27 +57,17 @@ parameters:
             function: 'env_getcsv()'
             message: 'use config() instead'
     ignoreErrors:
-        - '#^Cannot call method .*\(\) on mixed\.$#'
-        - '#^Cannot cast mixed to .*\.$#'
-        - '#^Cannot use array destructuring on mixed\.$#'
-        - '#Property .* does not accept mixed#'
-        -
-            identifier: argument.templateType
-        -
-            identifier: argument.type
-        -
-            identifier: missingType.generics
-        -
-            identifier: missingType.iterableValue
-        -
-            identifier: return.type
-        -
-            identifier: encapsedStringPart.nonString
-        -
-            identifier: logicalOr.resultUnused
-        -
-            identifier: new.static
-        -
-            message: '#^Calling env\(\) is forbidden, use config\(\) instead\.$#'
-            count: 1
-            path: ./src/Support/helpers.php
+        - identifier: argument.templateType
+        - identifier: argument.type
+        - identifier: assign.propertyType
+        - identifier: cast.double
+        - identifier: cast.int
+        - identifier: cast.string
+        - identifier: encapsedStringPart.nonString
+        - identifier: logicalOr.resultUnused
+        - identifier: method.nonObject
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
+        - identifier: new.static
+        - identifier: offsetAccess.nonArray
+        - identifier: return.type

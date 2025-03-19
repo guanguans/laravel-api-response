@@ -1,4 +1,6 @@
+# total 10 errors
 includes:
+    - disallowed.function.neon
     - function.alreadyNarrowedType.neon
     - method.notFound.neon
     - nullCoalesce.variable.neon
