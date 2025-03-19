@@ -91,12 +91,12 @@ trait HasExceptionPipes
             if (0 === $idx) {
                 $this->exceptionPipes->unshift(...$exceptionPipes);
             } else {
-                $this->exceptionPipes->splice($idx, 1, [...$exceptionPipes, $this->exceptionPipes[$idx]]);
+                $this->exceptionPipes->splice($idx, 1, [...$exceptionPipes, $this->exceptionPipes->get($idx)]);
             }
         } elseif ($this->exceptionPipes->count() - 1 === $idx) {
             $this->exceptionPipes->push(...$exceptionPipes);
         } else {
-            $this->exceptionPipes->splice($idx, 1, [$this->exceptionPipes[$idx], ...$exceptionPipes]);
+            $this->exceptionPipes->splice($idx, 1, [$this->exceptionPipes->get($idx), ...$exceptionPipes]);
         }
 
         return $this;

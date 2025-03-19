@@ -1,4 +1,4 @@
-# total 10 errors
+# total 11 errors
 includes:
     - disallowed.function.neon
     - function.alreadyNarrowedType.neon
@@ -6,3 +6,4 @@ includes:
     - nullCoalesce.variable.neon
     - trait.unused.neon
     - typeCoverage.paramTypeCoverage.neon
+    - typePerfect.narrowPublicClassMethodParamType.neon

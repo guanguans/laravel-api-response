@@ -64,6 +64,7 @@
         "phpstan/phpstan-webmozart-assert": "^2.0",
         "povils/phpmnd": "^3.6",
         "rector/rector": "^2.0",
+        "rector/type-perfect": "^2.0",
         "shipmonk/composer-dependency-analyser": "^1.8",
         "shipmonk/phpstan-baseline-per-identifier": "^2.1",
         "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",

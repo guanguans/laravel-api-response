@@ -96,12 +96,12 @@ trait HasPipes
             if (0 === $idx) {
                 $this->pipes->unshift(...$pipes);
             } else {
-                $this->pipes->splice($idx, 1, [...$pipes, $this->pipes[$idx]]);
+                $this->pipes->splice($idx, 1, [...$pipes, $this->pipes->get($idx)]);
             }
         } elseif ($this->pipes->count() - 1 === $idx) {
             $this->pipes->push(...$pipes);
         } else {
-            $this->pipes->splice($idx, 1, [$this->pipes[$idx], ...$pipes]);
+            $this->pipes->splice($idx, 1, [$this->pipes->get($idx), ...$pipes]);
         }
 
         return $this;
