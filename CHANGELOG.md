@@ -8,6 +8,16 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="2.0.6"></a>
+## [2.0.6] - 2025-03-19
+### CI
+- **configuration:** Add new baseline and update dependencies
+- **git:** Simplify .gitattributes and .gitignore files
+
+### Code Refactoring
+- Improve error handling and type usage in pipeline traits
+
+
 <a name="2.0.5"></a>
 ## [2.0.5] - 2025-03-08
 ### Build
@@ -399,7 +409,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.0.5...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.0.6...HEAD
+[2.0.6]: https://github.com/guanguans/laravel-api-response/compare/2.0.5...2.0.6
 [2.0.5]: https://github.com/guanguans/laravel-api-response/compare/2.0.4...2.0.5
 [2.0.4]: https://github.com/guanguans/laravel-api-response/compare/2.0.3...2.0.4
 [2.0.3]: https://github.com/guanguans/laravel-api-response/compare/2.0.2...2.0.3
