@@ -91,8 +91,13 @@ class ApiResponse implements ApiResponseContract
      * @param int<100, 599>|int<100000, 599999> $code
      * @param null|array<string, mixed> $error
      */
-    public function json(bool $status, int $code, string $message = '', mixed $data = null, ?array $error = null): JsonResponse
-    {
+    public function json(
+        bool|int|string $status,
+        int $code,
+        string $message = '',
+        mixed $data = null,
+        ?array $error = null
+    ): JsonResponse {
         return $this
             ->newPipeline()
             ->send([

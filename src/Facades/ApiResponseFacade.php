@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Http\JsonResponse success(mixed $data = null, string $message = '', int $code = 200)
  * @method static \Illuminate\Http\JsonResponse error(string $message = '', int $code = 400, array|null $error = null)
  * @method static \Illuminate\Http\JsonResponse exception(\Throwable $throwable)
- * @method static \Illuminate\Http\JsonResponse json(bool $status, int $code, string $message = '', mixed $data = null, null|array $error = null)
+ * @method static \Illuminate\Http\JsonResponse json(string|int|bool $status, int $code, string $message = '', mixed $data = null, null|array $error = null)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse castToNull()
  * @method static \Guanguans\LaravelApiResponse\ApiResponse castToInteger()
  * @method static \Guanguans\LaravelApiResponse\ApiResponse castToFloat()
