@@ -13,17 +13,13 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponse\Support\Traits;
 
+use Guanguans\LaravelApiResponse\ApiResponse;
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 
 trait ApiResponseFactory
 {
-    /**
-     * @noinspection PhpDocSignatureInspection
-     *
-     * @return \Guanguans\LaravelApiResponse\ApiResponse|\Guanguans\LaravelApiResponse\Contracts\ApiResponseContract
-     */
-    public function apiResponse(): ApiResponseContract
+    public function apiResponse(): ApiResponse
     {
-        return app(ApiResponseContract::class);
+        return resolve(ApiResponseContract::class);
     }
 }
