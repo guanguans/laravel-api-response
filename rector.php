@@ -57,7 +57,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__.'/config',
+        // __DIR__.'/config',
         __DIR__.'/src',
         __DIR__.'/tests',
         ...glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),

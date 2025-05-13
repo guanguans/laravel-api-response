@@ -14,25 +14,9 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Guanguans\LaravelApiResponse\ExceptionPipes\AuthenticationExceptionPipe;
-use Guanguans\LaravelApiResponse\ExceptionPipes\HttpExceptionPipe;
-use Guanguans\LaravelApiResponse\ExceptionPipes\SetCodeExceptionPipe;
-use Guanguans\LaravelApiResponse\ExceptionPipes\SetErrorExceptionPipe;
-use Guanguans\LaravelApiResponse\ExceptionPipes\SetHeadersExceptionPipe;
-use Guanguans\LaravelApiResponse\ExceptionPipes\SetMessageExceptionPipe;
-use Guanguans\LaravelApiResponse\ExceptionPipes\ValidationExceptionPipe;
-use Guanguans\LaravelApiResponse\Pipes\CallableDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\ErrorPipe;
-use Guanguans\LaravelApiResponse\Pipes\IterableDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\JsonResourceDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\JsonResponsableDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
-use Guanguans\LaravelApiResponse\Pipes\NullDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\ScalarDataPipe;
-use Guanguans\LaravelApiResponse\Pipes\StatusCodePipe;
-use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
-use Guanguans\LaravelApiResponse\RenderUsings\ShouldReturnJsonRenderUsing;
+use Guanguans\LaravelApiResponse\ExceptionPipes;
+use Guanguans\LaravelApiResponse\Pipes;
+use Guanguans\LaravelApiResponse\RenderUsings;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,8 +24,8 @@ return [
     /**
      * Render using.
      */
-    'render_using' => ShouldReturnJsonRenderUsing::class,
-    // 'render_using' => ApiPathsRenderUsing::make(
+    'render_using' => RenderUsings\ShouldReturnJsonRenderUsing::class,
+    // 'render_using' => RenderUsings\ApiPathsRenderUsing::make(
     //     [
     //         'api/*',
     //     ],
@@ -61,25 +45,25 @@ return [
         /*
          * After...
          */
-        AuthenticationExceptionPipe::class,
-        HttpExceptionPipe::class,
-        ValidationExceptionPipe::class,
-        SetCodeExceptionPipe::with(
+        ExceptionPipes\AuthenticationExceptionPipe::class,
+        ExceptionPipes\HttpExceptionPipe::class,
+        ExceptionPipes\ValidationExceptionPipe::class,
+        ExceptionPipes\SetCodeExceptionPipe::with(
             Response::HTTP_UNAUTHORIZED, // code.
             // class...
         ),
-        SetMessageExceptionPipe::with(
+        ExceptionPipes\SetMessageExceptionPipe::with(
             'Whoops! looks like something went wrong.', // message.
             // class...
         ),
-        SetErrorExceptionPipe::make(
+        ExceptionPipes\SetErrorExceptionPipe::make(
             [
                 // 'message' => 'Whoops, looks like something went wrong.',
                 // error...
             ],
             // class...
         ),
-        SetHeadersExceptionPipe::make(
+        ExceptionPipes\SetHeadersExceptionPipe::make(
             [
                 // header...
             ],
@@ -94,20 +78,20 @@ return [
         /*
          * Before...
          */
-        MessagePipe::with('http-statuses'),
-        ErrorPipe::with(/* !app()->hasDebugModeEnabled() */),
+        Pipes\MessagePipe::with('http-statuses'),
+        Pipes\ErrorPipe::with(/* !app()->hasDebugModeEnabled() */),
 
-        // NullDataPipe::with(false),
-        // ScalarDataPipe::with(JsonResource::$wrap),
-        CallableDataPipe::class,
-        PaginatorDataPipe::with(/* 'list' */),
-        JsonResourceDataPipe::class,
-        JsonResponsableDataPipe::with(),
-        IterableDataPipe::class,
+        // Pipes\NullDataPipe::with(false),
+        // Pipes\ScalarDataPipe::with(JsonResource::$wrap),
+        Pipes\CallableDataPipe::class,
+        Pipes\PaginatorDataPipe::with(/* 'list' */),
+        Pipes\JsonResourceDataPipe::class,
+        Pipes\JsonResponsableDataPipe::with(),
+        Pipes\IterableDataPipe::class,
 
         /*
          * After...
          */
-        StatusCodePipe::with(),
+        Pipes\StatusCodePipe::with(),
     ],
 ];
