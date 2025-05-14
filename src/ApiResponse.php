@@ -37,6 +37,8 @@ use Symfony\Component\HttpFoundation\Response;
  * @see https://github.com/flugg/laravel-responder
  * @see https://github.com/jiannei/laravel-response
  * @see https://github.com/MarcinOrlowski/laravel-api-response-builder
+ * @see https://github.com/spatie/laravel-json-api-paginate
+ * @see https://jsonapi.org/
  *
  * @method array convertExceptionToArray(\Throwable $throwable)
  */
