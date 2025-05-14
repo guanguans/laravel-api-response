@@ -8,6 +8,22 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="2.1.1"></a>
+## [2.1.1] - 2025-05-15
+### 🐞 Bug Fixes
+- **ApiResponseContract:** update json method parameter type ([84a5edc](https://github.com/guanguans/laravel-api-response/commit/84a5edc))
+
+### 🎨 Styles
+- **config:** Refactor import statements for exception pipes ([52e33dc](https://github.com/guanguans/laravel-api-response/commit/52e33dc))
+
+### 📦 Builds
+- **composer:** update orchestra/testbench and rector/type-perfect versions ([daa1aaa](https://github.com/guanguans/laravel-api-response/commit/daa1aaa))
+- **deps:** bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 ([d42f3c9](https://github.com/guanguans/laravel-api-response/commit/d42f3c9))
+
+### Pull Requests
+- Merge pull request [#4](https://github.com/guanguans/laravel-api-response/issues/4) from guanguans/dependabot/github_actions/dependabot/fetch-metadata-2.4.0
+
+
 <a name="2.1.0"></a>
 ## [2.1.0] - 2025-05-04
 ### 💅 Code Refactorings
@@ -425,7 +441,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.1.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.1.1...HEAD
+[2.1.1]: https://github.com/guanguans/laravel-api-response/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/guanguans/laravel-api-response/compare/2.0.6...2.1.0
 [2.0.6]: https://github.com/guanguans/laravel-api-response/compare/2.0.5...2.0.6
 [2.0.5]: https://github.com/guanguans/laravel-api-response/compare/2.0.4...2.0.5
