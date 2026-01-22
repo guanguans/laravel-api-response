@@ -83,13 +83,13 @@ return RectorConfig::configure()
     // ->withoutParallel()
     // ->withImportNames(importNames: false)
     ->withImportNames(importDocBlockNames: false, importShortClasses: false)
-    ->withPhpVersion(PhpVersion::PHP_80)
+    ->withPhpVersion(PhpVersion::PHP_81)
     ->withFluentCallNewLine()
     ->withAttributesSets(phpunit: true)
     ->withComposerBased(phpunit: true)
-    ->withPhpVersion(PhpVersion::PHP_80)
-    ->withDowngradeSets(php80: true)
-    ->withPhpSets(php80: true)
+    ->withPhpVersion(PhpVersion::PHP_81)
+    ->withDowngradeSets(php81: true)
+    ->withPhpSets(php81: true)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,

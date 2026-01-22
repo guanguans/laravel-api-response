@@ -21,7 +21,7 @@
 
 ## Requirement
 
-* PHP >= 8.0
+* PHP >= 8.1
 
 ## Installation
 
@@ -93,7 +93,7 @@ class Controller extends \App\Http\Controllers\Controller
 namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
+use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
@@ -165,7 +165,7 @@ class Controller extends \App\Http\Controllers\Controller
 namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
+use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
@@ -353,7 +353,7 @@ class Controller extends \App\Http\Controllers\Controller
 namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
+use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
@@ -500,8 +500,8 @@ class Controller extends \App\Http\Controllers\Controller
 namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserResource;
+use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
+use Guanguans\LaravelApiResponseTests\Laravel\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
@@ -573,8 +573,8 @@ class Controller extends \App\Http\Controllers\Controller
 namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserCollection;
+use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
+use Guanguans\LaravelApiResponseTests\Laravel\Resources\UserCollection;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller

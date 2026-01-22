@@ -1,6 +1,0 @@
-{
-    "require-dev": {
-        "php": ">=8.0",
-        "icanhazstring/composer-unused": "^0.8"
-    }
-}

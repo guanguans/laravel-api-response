@@ -13,14 +13,14 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Tests;
+namespace Guanguans\LaravelApiResponseTests;
 
 use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Guanguans\LaravelApiResponse\Middleware\SetJsonAcceptHeader;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\ServiceProvider;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponse\Tests\Laravel\seeders\TablesSeeder;
+use Guanguans\LaravelApiResponseTests\Laravel\seeders\TablesSeeder;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Symfony\Component\HttpFoundation\Response;

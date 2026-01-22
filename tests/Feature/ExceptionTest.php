@@ -18,7 +18,7 @@ declare(strict_types=1);
  */
 
 use Composer\Semver\Comparator;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
+use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;

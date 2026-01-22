@@ -11,11 +11,11 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Tests\Laravel\seeders;
+namespace Guanguans\LaravelApiResponseTests\Laravel\seeders;
 
-use Guanguans\LaravelApiResponse\Tests\Laravel\Models\Country;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Models\Post;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
+use Guanguans\LaravelApiResponseTests\Laravel\Models\Country;
+use Guanguans\LaravelApiResponseTests\Laravel\Models\Post;
+use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;

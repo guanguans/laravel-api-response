@@ -1,7 +1,0 @@
-{
-    "require-dev": {
-        "php": ">=8.0",
-        "ergebnis/license": "^2.6",
-        "ergebnis/php-cs-fixer-config": "dev-main"
-    }
-}

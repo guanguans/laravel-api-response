@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Tests;
+namespace Guanguans\LaravelApiResponseTests;
 
 use Faker\Factory;
 use Faker\Generator;

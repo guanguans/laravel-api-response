@@ -17,7 +17,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Guanguans\LaravelApiResponse\Tests\TestCase;
+use Guanguans\LaravelApiResponseTests\TestCase;
 
 uses(TestCase::class)
     ->beforeAll(function (): void {})

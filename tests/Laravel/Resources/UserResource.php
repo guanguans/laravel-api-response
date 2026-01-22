@@ -11,12 +11,12 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Tests\Laravel\Resources;
+namespace Guanguans\LaravelApiResponseTests\Laravel\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin \Guanguans\LaravelApiResponse\Tests\Laravel\Models\User
+ * @mixin \Guanguans\LaravelApiResponseTests\Laravel\Models\User
  */
 class UserResource extends JsonResource
 {

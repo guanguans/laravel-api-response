@@ -13,12 +13,12 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Tests\Laravel\Resources;
+namespace Guanguans\LaravelApiResponseTests\Laravel\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
- * @see \Guanguans\LaravelApiResponse\Tests\Laravel\Models\User
+ * @see \Guanguans\LaravelApiResponseTests\Laravel\Models\User
  */
 class UserCollection extends ResourceCollection
 {

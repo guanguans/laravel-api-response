@@ -14,7 +14,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Tests\Laravel\Models;
+namespace Guanguans\LaravelApiResponseTests\Laravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,7 +25,7 @@ class Country extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\User>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Guanguans\LaravelApiResponseTests\Laravel\Models\User>
      */
     public function users(): HasMany
     {
@@ -33,7 +33,7 @@ class Country extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\Post>
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\Guanguans\LaravelApiResponseTests\Laravel\Models\Post>
      */
     public function posts(): HasManyThrough
     {

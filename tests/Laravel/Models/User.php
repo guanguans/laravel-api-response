@@ -14,7 +14,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponse\Tests\Laravel\Models;
+namespace Guanguans\LaravelApiResponseTests\Laravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,7 +28,7 @@ class User extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\Country, self>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Guanguans\LaravelApiResponseTests\Laravel\Models\Country, self>
      */
     public function country(): BelongsTo
     {
@@ -36,7 +36,7 @@ class User extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\Post>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Guanguans\LaravelApiResponseTests\Laravel\Models\Post>
      */
     public function posts(): HasMany
     {

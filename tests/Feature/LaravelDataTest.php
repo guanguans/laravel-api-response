@@ -18,9 +18,9 @@ declare(strict_types=1);
 
 use Composer\Semver\Comparator;
 use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Models\User;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserCollection;
-use Guanguans\LaravelApiResponse\Tests\Laravel\Resources\UserResource;
+use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
+use Guanguans\LaravelApiResponseTests\Laravel\Resources\UserCollection;
+use Guanguans\LaravelApiResponseTests\Laravel\Resources\UserResource;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Responsable;
