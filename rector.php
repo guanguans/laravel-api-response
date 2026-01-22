@@ -111,7 +111,7 @@ return RectorConfig::configure()
     ])
     ->withRules([
         ArraySpreadInsteadOfArrayMergeRector::class,
-        SortAssociativeArrayByKeyRector::class,
+        // SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
         ToInternalExceptionRector::class,
