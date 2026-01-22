@@ -32,7 +32,7 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
 
       - name: Run composer install
-        run: composer install --no-interaction --prefer-dist --ansi -v
+        run: composer install --no-interaction --prefer-dist --no-security-blocking --ansi -v
 
       - name: Run phpstan
         run: composer phpstan

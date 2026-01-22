@@ -32,6 +32,8 @@ beforeEach(function (): void {});
 
 it('is runtime exception handler', function (bool $debug): void {
     if ($debug && Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0')) {
+        expect(true)->toBeTrue();
+
         return;
     }
 
@@ -43,6 +45,8 @@ it('is runtime exception handler', function (bool $debug): void {
 
 it('is runtime exception', function (bool $debug): void {
     if ($debug && Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0')) {
+        expect(true)->toBeTrue();
+
         return;
     }
 

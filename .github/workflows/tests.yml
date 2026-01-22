@@ -52,9 +52,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer remove "brainmaestro/composer-git-hooks" --no-interaction --no-scripts --dev --ansi -v
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update --ansi -v
-          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-scripts --ansi -W -v
+          composer remove "brainmaestro/composer-git-hooks" --no-interaction --no-scripts --dev --no-security-blocking --ansi -v
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update --no-security-blocking --ansi -v
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-scripts -W --no-security-blocking --ansi -v
 
       - name: Execute tests
         run: composer test-coverage

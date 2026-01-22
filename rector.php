@@ -25,6 +25,7 @@ use PhpParser\Node\Scalar\LNumber;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
+use Rector\CodingStyle\Rector\ClassLike\NewlineBetweenClassLikeStmtsRector;
 use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
@@ -33,6 +34,7 @@ use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassLike\RemoveAnnotationRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
+use Rector\DowngradePhp74\Rector\Array_\DowngradeArraySpreadRector;
 use Rector\DowngradePhp81\Rector\Array_\DowngradeArraySpreadStringKeyRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
@@ -46,8 +48,11 @@ use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use Rector\Transform\ValueObject\ScalarValueToConstFetch;
 use Rector\Transform\ValueObject\StaticCallToFuncCall;
 use Rector\ValueObject\PhpVersion;
+use RectorLaravel\Rector\ArrayDimFetch\ArrayToArrGetRector;
+use RectorLaravel\Rector\Class_\AddHasFactoryToModelsRector;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
+use RectorLaravel\Rector\FuncCall\AppToResolveRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
@@ -68,6 +73,8 @@ return RectorConfig::configure()
     ->withSkip([
         '**/__snapshots__/*',
         '**/Fixtures/*',
+        __DIR__.'/src/Concerns/HasExceptionPipes.php',
+        __DIR__.'/src/Concerns/HasPipes.php',
         __DIR__.'/src/RenderUsings/RenderUsing.php',
         // __FILE__,
     ])
@@ -110,7 +117,7 @@ return RectorConfig::configure()
             ->all(),
     ])
     ->withRules([
-        ArraySpreadInsteadOfArrayMergeRector::class,
+        // ArraySpreadInsteadOfArrayMergeRector::class,
         // SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
@@ -176,6 +183,9 @@ return RectorConfig::configure()
         )
     )
     ->withSkip([
+        NewlineBetweenClassLikeStmtsRector::class,
+        DowngradeArraySpreadRector::class,
+
         ChangeOrIfContinueToMultiContinueRector::class,
         EncapsedStringsToSprintfRector::class,
         ExplicitBoolCompareRector::class,
@@ -185,6 +195,10 @@ return RectorConfig::configure()
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
+        ArrayToArrGetRector::class,
+        AppToResolveRector::class,
+        AddHasFactoryToModelsRector::class,
+
         DispatchToHelperFunctionsRector::class,
         EmptyToBlankAndFilledFuncRector::class,
         HelperFuncCallToFacadeClassRector::class,
@@ -192,12 +206,12 @@ return RectorConfig::configure()
         TypeHintTappableCallRector::class,
     ])
     ->withSkip([
-        DowngradeArraySpreadStringKeyRector::class => [
-            __DIR__.'/.php-cs-fixer.php',
-            __DIR__.'/src/Concerns/HasExceptionPipes.php',
-            __DIR__.'/src/Concerns/HasPipes.php',
-            __FILE__,
-        ],
+        // DowngradeArraySpreadStringKeyRector::class => [
+        //     __DIR__.'/.php-cs-fixer.php',
+        //     __DIR__.'/src/Concerns/HasExceptionPipes.php',
+        //     __DIR__.'/src/Concerns/HasPipes.php',
+        //     __FILE__,
+        // ],
         DisallowedEmptyRuleFixerRector::class => [
             __DIR__.'/src/Pipes/PaginatorDataPipe.php',
             __DIR__.'/src/Pipes/ScalarDataPipe.php',
