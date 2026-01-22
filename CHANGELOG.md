@@ -8,6 +8,40 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="2.2.0"></a>
+## [2.2.0] - 2026-01-22
+### 🎨 Styles
+- apply php-cs-fixer ([b4a1608](https://github.com/guanguans/laravel-api-response/commit/b4a1608))
+
+### 📦 Builds
+- **deps:** bump package versions in composer.json ([ca74957](https://github.com/guanguans/laravel-api-response/commit/ca74957))
+- **deps:** bump dependabot/fetch-metadata from 2.4.0 to 2.5.0 ([fac0e8b](https://github.com/guanguans/laravel-api-response/commit/fac0e8b))
+- **deps:** bump actions/cache from 4 to 5 ([dfd769d](https://github.com/guanguans/laravel-api-response/commit/dfd769d))
+- **deps:** bump actions/checkout from 5 to 6 ([8f2b536](https://github.com/guanguans/laravel-api-response/commit/8f2b536))
+- **deps:** bump actions/setup-node from 5 to 6 ([020883a](https://github.com/guanguans/laravel-api-response/commit/020883a))
+- **deps:** bump stefanzweifel/git-auto-commit-action from 6 to 7 ([d82ee83](https://github.com/guanguans/laravel-api-response/commit/d82ee83))
+- **deps:** bump actions/stale from 9 to 10 ([75900bb](https://github.com/guanguans/laravel-api-response/commit/75900bb))
+- **deps:** bump actions/labeler from 5 to 6 ([4c0169a](https://github.com/guanguans/laravel-api-response/commit/4c0169a))
+- **deps:** bump actions/setup-node from 4 to 5 ([f1d66bb](https://github.com/guanguans/laravel-api-response/commit/f1d66bb))
+- **deps:** bump actions/checkout from 4 to 5 ([958bf9d](https://github.com/guanguans/laravel-api-response/commit/958bf9d))
+- **deps:** bump stefanzweifel/git-auto-commit-action from 5 to 6 ([5c8b6d2](https://github.com/guanguans/laravel-api-response/commit/5c8b6d2))
+
+### 🤖 Continuous Integrations
+- **config:** Update config files ([50eac81](https://github.com/guanguans/laravel-api-response/commit/50eac81))
+
+### Pull Requests
+- Merge pull request [#14](https://github.com/guanguans/laravel-api-response/issues/14) from guanguans/dependabot/github_actions/dependabot/fetch-metadata-2.5.0
+- Merge pull request [#13](https://github.com/guanguans/laravel-api-response/issues/13) from guanguans/dependabot/github_actions/actions/cache-5
+- Merge pull request [#12](https://github.com/guanguans/laravel-api-response/issues/12) from guanguans/dependabot/github_actions/actions/checkout-6
+- Merge pull request [#11](https://github.com/guanguans/laravel-api-response/issues/11) from guanguans/dependabot/github_actions/actions/setup-node-6
+- Merge pull request [#10](https://github.com/guanguans/laravel-api-response/issues/10) from guanguans/dependabot/github_actions/stefanzweifel/git-auto-commit-action-7
+- Merge pull request [#9](https://github.com/guanguans/laravel-api-response/issues/9) from guanguans/dependabot/github_actions/actions/stale-10
+- Merge pull request [#8](https://github.com/guanguans/laravel-api-response/issues/8) from guanguans/dependabot/github_actions/actions/labeler-6
+- Merge pull request [#7](https://github.com/guanguans/laravel-api-response/issues/7) from guanguans/dependabot/github_actions/actions/setup-node-5
+- Merge pull request [#6](https://github.com/guanguans/laravel-api-response/issues/6) from guanguans/dependabot/github_actions/actions/checkout-5
+- Merge pull request [#5](https://github.com/guanguans/laravel-api-response/issues/5) from guanguans/dependabot/github_actions/stefanzweifel/git-auto-commit-action-6
+
+
 <a name="2.1.1"></a>
 ## [2.1.1] - 2025-05-15
 ### 🐞 Bug Fixes
@@ -441,7 +475,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.1.1...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.2.0...HEAD
+[2.2.0]: https://github.com/guanguans/laravel-api-response/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/guanguans/laravel-api-response/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/guanguans/laravel-api-response/compare/2.0.6...2.1.0
 [2.0.6]: https://github.com/guanguans/laravel-api-response/compare/2.0.5...2.0.6
