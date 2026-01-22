@@ -35,44 +35,49 @@
         }
     ],
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "ext-json": "*",
-        "laravel/framework": "^9.52 || ^10.0 || ^11.0 || ^12.0",
+        "laravel/framework": "^10.50 || ^11.0 || ^12.0",
         "spatie/laravel-package-tools": "^1.92"
     },
     "require-dev": {
+        "adamwojs/php-cs-fixer-phpdoc-force-fqcn": "^2.0",
         "bamarni/composer-bin-plugin": "^1.8",
         "brainmaestro/composer-git-hooks": "^3.0",
         "composer/semver": "^3.4",
         "driftingly/rector-laravel": "^2.1",
         "ergebnis/composer-normalize": "^2.48",
+        "ergebnis/license": "^2.7",
+        "ergebnis/php-cs-fixer-config": "^6.58",
         "ergebnis/rector-rules": "^1.9",
         "guanguans/monorepo-builder-worker": "^2.2 || ^3.0",
+        "guanguans/php-cs-fixer-custom-fixers": "^1.1",
         "guzzlehttp/psr7": "^2.8",
-        "laravel-lang/http-statuses": "^3.2",
+        "laravel-lang/http-statuses": "^3.11",
         "laravel/facade-documenter": "dev-main",
-        "maglnet/composer-require-checker": "^4.4",
+        "maglnet/composer-require-checker": "^4.7",
         "mockery/mockery": "^1.6",
-        "orchestra/testbench": "^7.56 || ^8.0 || ^9.0 || ^10.0",
-        "pestphp/pest": "^1.23 || ^2.0 || ^3.0 || ^4.0",
-        "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0 || ^4.0",
-        "pestphp/pest-plugin-laravel": "^1.4 || ^2.0 || ^3.0 || ^4.0",
+        "orchestra/testbench": "^8.37 || ^9.0 || ^10.0",
+        "pestphp/pest": "^2.36 || ^3.0 || ^4.0",
+        "pestphp/pest-plugin-faker": "^2.0 || ^3.0 || ^4.0",
+        "pestphp/pest-plugin-laravel": "^2.4 || ^3.0 || ^4.0",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-webmozart-assert": "^2.0",
+        "phpunit/phpunit": "^10.5",
         "povils/phpmnd": "^3.6",
-        "rector/jack": "^0.1",
+        "rector/jack": "^0.5",
         "rector/rector": "^2.3",
         "rector/type-perfect": "^2.1",
         "shipmonk/composer-dependency-analyser": "^1.8",
         "shipmonk/phpstan-baseline-per-identifier": "^2.3",
-        "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
+        "spatie/pest-plugin-snapshots": "^2.2",
         "spaze/phpstan-disallowed-calls": "^4.7",
         "symplify/phpstan-extensions": "^12.0",
         "symplify/phpstan-rules": "^14.9",
         "tomasvotruba/type-coverage": "^2.1",
-        "yamadashy/phpstan-friendly-formatter": "^1.2"
+        "yamadashy/phpstan-friendly-formatter": "^1.3"
     },
     "suggest": {
         "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
@@ -121,7 +126,7 @@
             "target-directory": "vendor-bin"
         },
         "branch-alias": {
-            "dev-main": "2.x-dev"
+            "dev-main": "3.x-dev"
         },
         "composer-normalize": {
             "indent-size": 4,
@@ -180,7 +185,28 @@
         "class-leak-check": "@class-leak check ./config ./src --skip-suffix=Pipe --skip-path=Support/Traits --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Channel --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Collector --skip-type=Rector\\Rector\\AbstractRector",
         "composer-audit": "@composer audit --ansi -v",
         "composer-bin-all-update": "@composer bin all update --ansi -v",
+        "composer-bump": [
+            "@putenv:php",
+            "@composer-config:disable-process-timeout",
+            "@php composer-bump --highest-php-binary=$PHP85 --except-package=foo/bar --ansi"
+        ],
+        "composer-bump:all": [
+            "@composer-bump",
+            "@composer-bump:vendor-bin-common",
+            "@composer-bump:vendor-bin-php82"
+        ],
+        "composer-bump:vendor-bin-common": [
+            "@putenv:php",
+            "ln -f composer-bump vendor-bin/common/composer-bump",
+            "@php vendor-bin/common/composer-bump --highest-php-binary=$PHP85 --ansi"
+        ],
+        "composer-bump:vendor-bin-php82": [
+            "@putenv:php",
+            "ln -f composer-bump vendor-bin/php82/composer-bump",
+            "$PHP82 vendor-bin/php82/composer-bump --php-binary=$PHP82 --highest-php-binary=$PHP85 --ansi"
+        ],
         "composer-check-platform-reqs": "@composer check-platform-reqs --lock --ansi -v",
+        "composer-config:disable-process-timeout": "Composer\\Config::disableProcessTimeout",
         "composer-dependency-analyser": "@php ./vendor/bin/composer-dependency-analyser --verbose",
         "composer-normalize": "@composer normalize --dry-run --diff --ansi -v",
         "composer-require-checker": "@php ./vendor/bin/composer-require-checker check --config-file=composer-require-checker.json composer.json --ansi -v",
@@ -223,6 +249,22 @@
         "pest-profile": "@pest --profile",
         "pest-type-coverage": "@pest --type-coverage",
         "pest-update-snapshots": "@pest -d --update-snapshots",
+        "php-cs-fixer": "@php vendor/bin/php-cs-fixer --ansi -vv",
+        "php-cs-fixer:custom": "@php-cs-fixer --config=.php-cs-fixer-custom.php",
+        "php-cs-fixer:custom-fix": "@php-cs-fixer:custom fix --show-progress=dots --diff",
+        "php-cs-fixer:custom-fix-dry-run": [
+            "@php-cs-fixer:custom-list-files",
+            "@php-cs-fixer:custom-fix --dry-run"
+        ],
+        "php-cs-fixer:custom-list-files": "@php-cs-fixer:custom list-files",
+        "php-cs-fixer:custom-ln-config": [
+            "ln -f vendor/guanguans/php-cs-fixer-custom-fixers/.php-cs-fixer-custom.php .php-cs-fixer-custom.php",
+            "YEAR=$(date +%Y); sed -i '' -e 's|guanguans/php-cs-fixer-custom-fixers|guanguans/laravel-soar|g' -e \"s|2025-$YEAR|2020-$YEAR|g\" -e \"s|2025|2020-$YEAR|g\" .php-cs-fixer-custom.php"
+        ],
+        "php-cs-fixer:fix": "@php-cs-fixer fix --show-progress=dots --diff",
+        "php-cs-fixer:fix-dry-run": "@php-cs-fixer:fix --dry-run",
+        "php-cs-fixer:list-files": "@php-cs-fixer list-files",
+        "php-cs-fixer:list-sets": "@php-cs-fixer list-sets --ansi -vv",
         "phpmnd": "@php ./vendor/bin/phpmnd src --exclude-path=Support/Utils.php --hint --progress --ansi -v",
         "phpstan": "@php ./vendor/bin/phpstan analyse --ansi -v",
         "phpstan-baseline": "@phpstan --generate-baseline --allow-empty-baseline",
@@ -236,6 +278,15 @@
         ],
         "psalm": "@php ./vendor/bin/psalm",
         "psalm-baseline": "@psalm --update-baseline",
+        "putenv:php": [
+            "@putenv PHP74=/opt/homebrew/opt/php@7.4/bin/php",
+            "@putenv PHP80=/opt/homebrew/opt/php@8.0/bin/php",
+            "@putenv PHP81=/opt/homebrew/opt/php@8.1/bin/php",
+            "@putenv PHP82=/opt/homebrew/opt/php@8.2/bin/php",
+            "@putenv PHP83=/opt/homebrew/opt/php@8.3/bin/php",
+            "@putenv PHP84=/opt/homebrew/opt/php@8.4/bin/php",
+            "@putenv PHP85=/opt/homebrew/opt/php@8.5/bin/php"
+        ],
         "putenvs": [
             "@putenv PHP73=/opt/homebrew/opt/php@7.3/bin/php",
             "@putenv PHP74=/opt/homebrew/opt/php@7.4/bin/php",

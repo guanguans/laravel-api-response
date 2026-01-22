@@ -1,0 +1,18 @@
+{
+    "status": false,
+    "code": 422,
+    "message": "Foo 必须是整数。",
+    "data": null,
+    "error": {
+        "foo": [
+            "Foo 必须是整数。",
+            "已选的属性 foo 无效。"
+        ],
+        "bar": [
+            "Bar 不是一个合法的邮箱。"
+        ],
+        "baz": [
+            "Baz 不能为空。"
+        ]
+    }
+}

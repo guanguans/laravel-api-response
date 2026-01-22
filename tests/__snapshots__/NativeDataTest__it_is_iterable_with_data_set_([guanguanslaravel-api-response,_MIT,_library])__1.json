@@ -1,0 +1,13 @@
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": {
+        "/tests/Feature/NativeDataTest.php": {},
+        "/tests/Feature/ExceptionTest.php": {},
+        "/tests/Feature/LaravelDataTest.php": {},
+        "/tests/Feature/OtherDataTest.php": {},
+        "/tests/Feature/ErrorTest.php": {}
+    },
+    "error": {}
+}
