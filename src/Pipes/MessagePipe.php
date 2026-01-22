@@ -24,10 +24,6 @@ class MessagePipe
     use WithPipeArgs;
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
-     * @param \Closure(array): \Illuminate\Http\JsonResponse $next
-     * @param string $fallbackErrorMessage // ['Whoops, looks like something went wrong.', 'Server Error', 'Internal Server Error', 'Unknown Status'];
      * @param  array{
      *  status: bool,
      *  code: int,
@@ -35,6 +31,10 @@ class MessagePipe
      *  data: mixed,
      *  error: ?array,
      * }  $structure
+     * @param \Closure(array): \Illuminate\Http\JsonResponse $next
+     * @param string $fallbackErrorMessage // ['Whoops, looks like something went wrong.', 'Server Error', 'Internal Server Error', 'Unknown Status'];
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(
         array $structure,

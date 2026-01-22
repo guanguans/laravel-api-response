@@ -29,15 +29,13 @@ class SetHeadersExceptionPipe
      * @param string ...$classes
      */
     public function __construct(
-        private array $headers,
+        private readonly array $headers,
         ...$classes
     ) {
         $this->classes = $classes;
     }
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
      * @param \Closure(\Throwable): array $next
      *
      * @return array{
@@ -46,6 +44,8 @@ class SetHeadersExceptionPipe
      *     error: array,
      *     headers: array,
      * }
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(\Throwable $throwable, \Closure $next): array
     {

@@ -22,9 +22,9 @@ class SetJsonAcceptHeader
     use WithPipeArgs;
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
      * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(Request $request, \Closure $next): Response
     {

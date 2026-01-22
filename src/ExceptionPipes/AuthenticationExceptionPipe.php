@@ -22,8 +22,6 @@ class AuthenticationExceptionPipe
     use WithPipeArgs;
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
      * @param \Closure(\Throwable): array $next
      *
      * @return array{
@@ -32,6 +30,8 @@ class AuthenticationExceptionPipe
      *     error: array,
      *     headers: array,
      * }
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(\Throwable $throwable, \Closure $next): array
     {

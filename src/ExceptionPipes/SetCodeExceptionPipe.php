@@ -21,8 +21,6 @@ class SetCodeExceptionPipe
     use WithPipeArgs;
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
      * @param \Closure(\Throwable): array $next
      *
      * @return array{
@@ -31,6 +29,8 @@ class SetCodeExceptionPipe
      *     error: array,
      *     headers: array,
      * }
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(\Throwable $throwable, \Closure $next, int $code, string ...$classes): array
     {

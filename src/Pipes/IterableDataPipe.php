@@ -21,9 +21,6 @@ class IterableDataPipe
     use WithPipeArgs;
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
-     * @param \Closure(array): \Illuminate\Http\JsonResponse $next
      * @param  array{
      *  status: bool,
      *  code: int,
@@ -31,6 +28,9 @@ class IterableDataPipe
      *  data: mixed,
      *  error: ?array,
      * }  $structure
+     * @param \Closure(array): \Illuminate\Http\JsonResponse $next
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(array $structure, \Closure $next): JsonResponse
     {

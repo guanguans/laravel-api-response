@@ -25,11 +25,27 @@ use function Guanguans\LaravelApiResponse\Support\make;
 
 class ServiceProvider extends PackageServiceProvider
 {
+    public function provides(): array
+    {
+        return [
+            $this->toAlias(ApiResponse::class),
+            $this->toAlias(ApiResponseContract::class),
+            ApiResponse::class,
+            ApiResponseContract::class,
+        ];
+    }
+
     public function configurePackage(Package $package): void
     {
         $package
             ->name('laravel-api-response')
             ->hasConfigFile();
+    }
+
+    public function packageRegistered(): void
+    {
+        $this->registerApiResponse();
+        $this->registerApiResponseContract();
     }
 
     /**
@@ -40,22 +56,6 @@ class ServiceProvider extends PackageServiceProvider
     {
         Collection::mixin(new CollectionMixin);
         $this->registerRenderUsing();
-    }
-
-    public function packageRegistered(): void
-    {
-        $this->registerApiResponse();
-        $this->registerApiResponseContract();
-    }
-
-    public function provides(): array
-    {
-        return [
-            $this->toAlias(ApiResponse::class),
-            $this->toAlias(ApiResponseContract::class),
-            ApiResponse::class,
-            ApiResponseContract::class,
-        ];
     }
 
     /**

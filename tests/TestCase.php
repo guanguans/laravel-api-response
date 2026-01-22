@@ -48,6 +48,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
         parent::tearDown();
     }
 
+    protected function getPackageAliases($app): array
+    {
+        return [
+            'ApiResponseFacade' => ApiResponseFacade::class,
+        ];
+    }
+
     protected function getPackageProviders($app): array
     {
         return [
@@ -56,11 +63,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ];
     }
 
-    protected function getPackageAliases($app): array
+    protected function defineEnvironment($app): void
     {
-        return [
-            'ApiResponseFacade' => ApiResponseFacade::class,
-        ];
+        // config()->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
+        config()->set('database.default', 'testing');
+        config()->set('mail.default', 'log');
     }
 
     /**
@@ -74,13 +81,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function defineDatabaseSeeders(): void
     {
         $this->seed(TablesSeeder::class);
-    }
-
-    protected function defineEnvironment($app): void
-    {
-        // config()->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
-        config()->set('database.default', 'testing');
-        config()->set('mail.default', 'log');
     }
 
     protected function defineRoutes($router): void

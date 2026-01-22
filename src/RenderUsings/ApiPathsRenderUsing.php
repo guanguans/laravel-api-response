@@ -23,8 +23,8 @@ class ApiPathsRenderUsing extends RenderUsing
     use SetStateable;
 
     public function __construct(
-        protected array $only = ['api/*'],
-        protected array $except = []
+        protected readonly array $only = ['api/*'],
+        protected readonly array $except = []
     ) {}
 
     protected function when(Request $request, \Throwable $throwable): bool

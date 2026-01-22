@@ -19,7 +19,7 @@ use Illuminate\Http\JsonResponse;
 
 it('can return JsonResponse', function (): void {
     expect([
-        \ApiResponseFacade::success(),
+        ApiResponseFacade::success(),
         ApiResponseFacade::success(),
     ])->each->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);

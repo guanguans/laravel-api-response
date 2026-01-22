@@ -28,7 +28,7 @@ class User extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\Country, \Guanguans\LaravelApiResponse\Tests\Laravel\Models\User>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\Country, self>
      */
     public function country(): BelongsTo
     {

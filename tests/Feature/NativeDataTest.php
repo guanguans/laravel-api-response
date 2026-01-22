@@ -125,7 +125,7 @@ it('is std class', function (array $array): void {
 it('is json serializable', function (array $array): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success(
         new class($array) implements JsonSerializable {
-            public function __construct(private array $array) {}
+            public function __construct(private readonly array $array) {}
 
             public function jsonSerialize(): array
             {

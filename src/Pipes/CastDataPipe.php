@@ -27,17 +27,14 @@ class CastDataPipe
     use WithPipeArgs;
 
     public function __construct(
-        private string $type,
+        private readonly string $type,
         /** @var null|list<string> */
-        private ?array $only = null,
+        private readonly ?array $only = null,
         /** @var null|list<string> */
-        private ?array $except = null
+        private readonly ?array $except = null
     ) {}
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
-     * @param \Closure(array): \Illuminate\Http\JsonResponse $next
      * @param  array{
      *  status: bool,
      *  code: int,
@@ -45,6 +42,9 @@ class CastDataPipe
      *  data: mixed,
      *  error: ?array,
      * }  $structure
+     * @param \Closure(array): \Illuminate\Http\JsonResponse $next
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(array $structure, \Closure $next): JsonResponse
     {

@@ -28,7 +28,7 @@ class Post extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\User, \Guanguans\LaravelApiResponse\Tests\Laravel\Models\Post>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Guanguans\LaravelApiResponse\Tests\Laravel\Models\User, self>
      */
     public function user(): BelongsTo
     {

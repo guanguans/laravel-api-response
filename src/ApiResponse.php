@@ -88,10 +88,10 @@ class ApiResponse implements ApiResponseContract
     }
 
     /**
-     * @noinspection CompactReplacementInspection
-     *
      * @param int<100, 599>|int<100000, 599999> $code
      * @param null|array<string, mixed> $error
+     *
+     * @noinspection CompactReplacementInspection
      */
     public function json(
         bool|int|string $status,
