@@ -1,9 +1,11 @@
-# total 11 errors
+# total 12 errors
+
 includes:
+    - assign.propertyType.neon
     - disallowed.function.neon
     - function.alreadyNarrowedType.neon
-    - method.notFound.neon
+    - new.static.neon
     - nullCoalesce.variable.neon
     - trait.unused.neon
-    - typeCoverage.paramTypeCoverage.neon
     - typePerfect.narrowPublicClassMethodParamType.neon
+    - variable.undefined.neon

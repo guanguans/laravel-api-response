@@ -20,6 +20,9 @@ interface ApiResponseContract
 {
     public function success(mixed $data = null, string $message = '', int $code = Response::HTTP_OK): JsonResponse;
 
+    /**
+     * @param null|array<array-key, mixed> $error
+     */
     public function error(string $message = '', int $code = Response::HTTP_BAD_REQUEST, ?array $error = null): JsonResponse;
 
     public function exception(\Throwable $throwable): JsonResponse;

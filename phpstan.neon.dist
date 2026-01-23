@@ -81,13 +81,15 @@ parameters:
             enabled: false
         noParameterWithContainerTypeDeclaration:
             enabled: false
+        noNullableReturnTypeDeclaration:
+            enabled: false
     guanguans:
         exceptionMustImplementNativeThrowable:
             nativeThrowable: Guanguans\LaravelApiResponse\Contracts\ThrowableContract
         forbiddenSideEffects:
             enabled: false
 #    sidzIgnoreNumericStrings: true
-#    sidzIgnoreMagicNumbers: [2, 3, 5, 100, 512, 1000]
+    sidzIgnoreMagicNumbers: [2, 3, 100, 600, 512, 0o755, 1000]
     cognitive_complexity:
         class: 42
         function: 8
@@ -124,6 +126,7 @@ parameters:
             message: 'use config() instead'
     ignoreErrors:
 #        - identifier: argument.templateType
+#        - identifier: argument.type
 #        - identifier: arrayFilter.strict
 #        - identifier: assign.propertyType
 #        - identifier: binaryOp.invalid
@@ -145,63 +148,42 @@ parameters:
 #        - identifier: offsetAccess.notFound
 #        - identifier: paramOut.type
 #        - identifier: phpstanApi.class
+#        - identifier: return.type
 #        - identifier: return.void
 #        - identifier: symplify.explicitInterfaceSuffixName
 #        - identifier: symplify.explicitTraitSuffixName
+#        - identifier: symplify.forbiddenArrayMethodCall
 #        - identifier: symplify.forbiddenExtendOfNonAbstractClass
+#        - identifier: symplify.forbiddenNode
 #        - identifier: symplify.forbiddenStaticClassConstFetch
+#        - identifier: symplify.noArrayMapWithArrayCallable
 #        - identifier: symplify.noDynamicName
 #        - identifier: symplify.noReference
 #        - identifier: symplify.noReturnSetterMethod
 #        - identifier: symplify.requireExceptionNamespace
 #        - identifier: trait.unused
 #        - identifier: typePerfect.noMixedMethodCaller
+#        - message: '#^Unused Guanguans\\laravelApiResponse\\Rector\\.*\\.*\:\:__construct$#'
 
-
-        - identifier: argument.templateType
         - identifier: argument.type
-        - identifier: assign.propertyType
         - identifier: cast.double
         - identifier: cast.int
         - identifier: cast.string
-        - identifier: encapsedStringPart.nonString
+        - identifier: empty.notAllowed
         - identifier: logicalOr.resultUnused
         - identifier: method.nonObject
-        - identifier: missingType.generics
-        - identifier: missingType.iterableValue
-        - identifier: new.static
-        - identifier: offsetAccess.nonArray
         - identifier: return.type
-        - identifier: typePerfect.noMixedMethodCaller
-
-
-        - identifier: argument.type
-        - identifier: cast.int
-#        - identifier: cast.string
-        - identifier: empty.notAllowed
-        - identifier: encapsedStringPart.nonString
-        - identifier: method.childParameterType
-        - identifier: return.type
+        - identifier: shipmonk.binaryOperationWithNull
+        - identifier: shipmonk.checkedExceptionInCallable
+        - identifier: shipmonk.deadMethod
+        - identifier: shipmonk.forbiddenCast
+        - identifier: shipmonk.iteratorToArrayWithoutPreserveKeys
+        - identifier: shipmonk.variableTypeOverwritten
         - identifier: symplify.explicitInterfaceSuffixName
-        - identifier: symplify.forbiddenArrayMethodCall
+        - identifier: symplify.explicitTraitSuffixName
+        - identifier: symplify.forbiddenFuncCall
         - identifier: symplify.forbiddenNode
         - identifier: symplify.forbiddenStaticClassConstFetch
-        - identifier: symplify.noArrayMapWithArrayCallable
-        - message: '#^Unused Guanguans\\laravelApiResponse\\Rector\\.*\\.*\:\:__construct$#'
-
-
-        -
-            identifier: guanguans.exceptionMustImplementNativeThrowable
-            path: src/Support/helpers.php
-        -
-            identifier: rector.noClassReflectionStaticReflection
-            path: src/Support/helpers.php
-        -
-            identifier: rector.noInstanceOfStaticReflection
-            path: src/Support/helpers.php
-        -
-            identifier: symplify.forbiddenFuncCall
-            path: src/Support/helpers.php
-
-        - identifier: typeCoverage.paramTypeCoverage
-#        - identifier: typeCoverage.returnTypeCoverage
+        - identifier: symplify.requireExceptionNamespace
+        - message: '#^Call to an undefined method Illuminate\\Support\\Collection.*\:\:unshift\(\)\.$#'
+        - message: '#^Class Guanguans\\LaravelApiResponse\\Facades\\ApiResponseFacade has PHPDoc tag @method for method .*\(\) parameter \#\d \$error with no value type specified in iterable type array\.$#'

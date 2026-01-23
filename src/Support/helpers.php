@@ -18,6 +18,8 @@ use Illuminate\Support\Arr;
 
 if (!\function_exists('Guanguans\LaravelApiResponse\Support\env_explode')) {
     /**
+     * @param non-empty-string $delimiter
+     *
      * @noinspection LaravelFunctionsInspection
      */
     function env_explode(string $key, mixed $default = null, string $delimiter = ',', int $limit = \PHP_INT_MAX): mixed

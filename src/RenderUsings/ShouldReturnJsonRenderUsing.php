@@ -21,10 +21,14 @@ use Illuminate\Http\Request;
 /**
  * @method bool shouldReturnJson(\Illuminate\Http\Request $request, \Throwable $throwable)
  */
-class ShouldReturnJsonRenderUsing extends RenderUsing
+class ShouldReturnJsonRenderUsing extends AbstractRenderUsing
 {
     protected function when(Request $request, \Throwable $throwable): bool
     {
-        return (fn (): bool => $this->shouldReturnJson($request, $throwable))->call(resolve(ExceptionHandler::class));
+        // return (fn (): bool => $this->shouldReturnJson($request, $throwable))->call(resolve(ExceptionHandler::class));
+        return (fn (): bool => $this->shouldReturnJson($request, $throwable))->bindTo(
+            $exceptionHandler = resolve(ExceptionHandler::class),
+            $exceptionHandler,
+        )();
     }
 }

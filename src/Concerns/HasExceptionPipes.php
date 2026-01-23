@@ -21,6 +21,7 @@ use Illuminate\Support\Collection;
  */
 trait HasExceptionPipes
 {
+    /** @var \Illuminate\Support\Collection<int, mixed> */
     protected Collection $exceptionPipes;
 
     public function unshiftExceptionPipes(mixed ...$exceptionPipes): self
@@ -51,7 +52,7 @@ trait HasExceptionPipes
     {
         return $this->extendExceptionPipes(
             static fn (Collection $exceptionPipes): Collection => $exceptionPipes
-                ->reject(static function ($exceptionPipe) use ($findExceptionPipes): bool {
+                ->reject(static function (callable|object|string $exceptionPipe) use ($findExceptionPipes): bool {
                     if (\is_object($exceptionPipe) && !$exceptionPipe instanceof \Closure) {
                         $exceptionPipe = $exceptionPipe::class;
                     }
@@ -66,6 +67,11 @@ trait HasExceptionPipes
         );
     }
 
+    /**
+     * @param callable(\Illuminate\Support\Collection<int, mixed>): \Illuminate\Support\Collection<int, mixed> $callback
+     *
+     * @noinspection PhpDocSignatureIsNotCompleteInspection
+     */
     public function extendExceptionPipes(callable $callback): self
     {
         $this->exceptionPipes = $this->exceptionPipes->pipe($callback);

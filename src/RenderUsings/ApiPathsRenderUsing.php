@@ -17,11 +17,15 @@ use Guanguans\LaravelApiResponse\Support\Traits\MakeStaticable;
 use Guanguans\LaravelApiResponse\Support\Traits\SetStateable;
 use Illuminate\Http\Request;
 
-class ApiPathsRenderUsing extends RenderUsing
+class ApiPathsRenderUsing extends AbstractRenderUsing
 {
     use MakeStaticable;
     use SetStateable;
 
+    /**
+     * @param list<string> $only
+     * @param list<string> $except
+     */
     public function __construct(
         protected readonly array $only = ['api/*'],
         protected readonly array $except = []

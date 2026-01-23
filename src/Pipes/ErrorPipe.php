@@ -22,14 +22,16 @@ class ErrorPipe
     use WithPipeArgs;
 
     /**
+     * @api
+     *
      * @param  array{
      *  status: bool,
      *  code: int,
      *  message: string,
      *  data: mixed,
-     *  error: ?array,
+     *  error: ?array<array-key, mixed>,
      * }  $structure
-     * @param \Closure(array): \Illuminate\Http\JsonResponse $next
+     * @param \Closure(array<string, mixed>): \Illuminate\Http\JsonResponse $next
      *
      * @noinspection RedundantDocCommentTagInspection
      */
@@ -52,8 +54,10 @@ class ErrorPipe
      * code: int,
      * message: string,
      * data: mixed,
-     * error: ?array,
+     * error: ?array<array-key, mixed>,
      * }  $structure
+     *
+     * @return array<array-key, mixed>|\stdClass
      */
     private function errorFor(array $structure): array|\stdClass
     {

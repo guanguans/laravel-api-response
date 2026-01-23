@@ -1,0 +1,13 @@
+# total 2 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Property Guanguans\\LaravelApiResponse\\ExceptionPipes\\SetErrorExceptionPipe\:\:\$classes \(list\<class\-string\<Throwable\>\>\) does not accept array\<int\|string, class\-string\<Throwable\>\>\.$#'
+            count: 1
+            path: ../src/ExceptionPipes/SetErrorExceptionPipe.php
+
+        -
+            message: '#^Property Guanguans\\LaravelApiResponse\\ExceptionPipes\\SetHeadersExceptionPipe\:\:\$classes \(list\<class\-string\<Throwable\>\>\) does not accept array\<int\|string, class\-string\<Throwable\>\>\.$#'
+            count: 1
+            path: ../src/ExceptionPipes/SetHeadersExceptionPipe.php

@@ -17,7 +17,7 @@ use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-abstract class RenderUsing
+abstract class AbstractRenderUsing
 {
     /**
      * @see \Illuminate\Foundation\Exceptions\Handler::renderable()

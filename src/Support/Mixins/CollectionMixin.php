@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\Support\Mixins;
 
 /**
- * @property array $items
+ * @api
  *
- * @mixin  \Illuminate\Support\Collection
+ * @property array<array-key, mixed> $items
+ *
+ * @mixin \Illuminate\Support\Collection<array-key, mixed>
  */
 class CollectionMixin
 {

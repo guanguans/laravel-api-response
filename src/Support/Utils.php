@@ -15,6 +15,9 @@ namespace Guanguans\LaravelApiResponse\Support;
 
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @api
+ */
 class Utils
 {
     public static function statusCodeFor(int|string $code): int

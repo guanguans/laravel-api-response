@@ -40,7 +40,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @see https://github.com/spatie/laravel-json-api-paginate
  * @see https://jsonapi.org/
  *
- * @method array convertExceptionToArray(\Throwable $throwable)
+ * @method array<string, mixed> convertExceptionToArray(\Throwable $throwable)
  */
 class ApiResponse implements ApiResponseContract
 {
@@ -55,6 +55,10 @@ class ApiResponse implements ApiResponseContract
     use Macroable;
     use Tappable;
 
+    /**
+     * @param null|\Illuminate\Support\Collection<int, mixed> $pipes
+     * @param null|\Illuminate\Support\Collection<int, mixed> $exceptionPipes
+     */
     public function __construct(?Collection $pipes = null, ?Collection $exceptionPipes = null)
     {
         $this->pipes = $pipes ?? collect();
@@ -78,7 +82,7 @@ class ApiResponse implements ApiResponseContract
             'message' => $message,
             'error' => $error,
             'headers' => $headers
-        ] = $this
+        ] = (array) $this
             ->newPipeline()
             ->send($throwable)
             ->through($this->exceptionPipes->all())
@@ -133,7 +137,11 @@ class ApiResponse implements ApiResponseContract
         return static fn (\Throwable $throwable): array => [
             'code' => Utils::isValidErrorCode($code = $throwable->getCode()) ? (int) $code : Response::HTTP_INTERNAL_SERVER_ERROR,
             'message' => app()->hasDebugModeEnabled() ? $throwable->getMessage() : '',
-            'error' => (fn (): array => $this->convertExceptionToArray($throwable))->call(resolve(ExceptionHandler::class)),
+            // 'error' => (fn (): array => $this->convertExceptionToArray($throwable))->call(resolve(ExceptionHandler::class)),
+            'error' => (fn (): array => $this->convertExceptionToArray($throwable))->bindTo(
+                $exceptionHandler = resolve(ExceptionHandler::class),
+                $exceptionHandler
+            )(),
             'headers' => [],
         ];
     }

@@ -24,14 +24,16 @@ class MessagePipe
     use WithPipeArgs;
 
     /**
+     * @api
+     *
      * @param  array{
      *  status: bool,
      *  code: int,
      *  message: string,
      *  data: mixed,
-     *  error: ?array,
+     *  error: ?array<array-key, mixed>,
      * }  $structure
-     * @param \Closure(array): \Illuminate\Http\JsonResponse $next
+     * @param \Closure(array<string, mixed>): \Illuminate\Http\JsonResponse $next
      * @param string $fallbackErrorMessage // ['Whoops, looks like something went wrong.', 'Server Error', 'Internal Server Error', 'Unknown Status'];
      *
      * @noinspection RedundantDocCommentTagInspection
@@ -59,7 +61,7 @@ class MessagePipe
      * code: int,
      * message: string,
      * data: mixed,
-     * error: ?array,
+     * error: ?array<array-key, mixed>,
      * }  $structure
      */
     private function transKeyFor(

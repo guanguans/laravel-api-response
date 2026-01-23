@@ -28,23 +28,26 @@ class SetErrorExceptionPipe
     private array $classes;
 
     /**
+     * @param null|array<array-key, mixed> $error
      * @param class-string<\Throwable> ...$classes
      */
     public function __construct(
         private readonly ?array $error,
-        ...$classes
+        mixed ...$classes
     ) {
         $this->classes = $classes;
     }
 
     /**
-     * @param \Closure(\Throwable): array $next
+     * @api
+     *
+     * @param \Closure(\Throwable): array<string, mixed> $next
      *
      * @return array{
      *     code: int,
      *     message: string,
-     *     error: array,
-     *     headers: array,
+     *     error: array<array-key, mixed>,
+     *     headers: array<string, list<null|string>>,
      * }
      *
      * @noinspection RedundantDocCommentTagInspection

@@ -1,0 +1,23 @@
+# total 4 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Unsafe usage of new static\(\)\.$#'
+            count: 1
+            path: ../src/ExceptionPipes/SetErrorExceptionPipe.php
+
+        -
+            message: '#^Unsafe usage of new static\(\)\.$#'
+            count: 1
+            path: ../src/ExceptionPipes/SetHeadersExceptionPipe.php
+
+        -
+            message: '#^Unsafe usage of new static\(\)\.$#'
+            count: 1
+            path: ../src/Pipes/CastDataPipe.php
+
+        -
+            message: '#^Unsafe usage of new static\(\)\.$#'
+            count: 1
+            path: ../src/RenderUsings/ApiPathsRenderUsing.php

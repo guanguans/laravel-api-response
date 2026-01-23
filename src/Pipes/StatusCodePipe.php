@@ -23,14 +23,16 @@ class StatusCodePipe
     use WithPipeArgs;
 
     /**
+     * @api
+     *
      * @param  array{
      *  status: bool,
      *  code: int,
      *  message: string,
      *  data: mixed,
-     *  error: ?array,
+     *  error: ?array<array-key, mixed>,
      * }  $structure
-     * @param \Closure(array): \Illuminate\Http\JsonResponse $next
+     * @param \Closure(array<string, mixed>): \Illuminate\Http\JsonResponse $next
      *
      * @noinspection RedundantDocCommentTagInspection
      */
@@ -53,7 +55,7 @@ class StatusCodePipe
      *  code: int,
      *  message: string,
      *  data: mixed,
-     *  error: ?array,
+     *  error: ?array<array-key, mixed>,
      * }  $structure
      */
     private function statusCodeFor(array $structure, int $fallbackErrorStatusCode, int $fallbackSuccessStatusCode): int

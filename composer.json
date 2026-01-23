@@ -341,6 +341,7 @@
             "@putenv:xdebug-off"
         ],
         "pest:coverage": "@pest --coverage-html=.build/phpunit/ --coverage-clover=.build/phpunit/clover.xml",
+        "pest:generate-baseline": "@pest --generate-baseline=phpunit-baseline.xml",
         "pest:highest": [
             "@putenv:php",
             "@putenv:xdebug-on",

@@ -21,13 +21,15 @@ class ValidationExceptionPipe
     use WithPipeArgs;
 
     /**
-     * @param \Closure(\Throwable): array $next
+     * @api
+     *
+     * @param \Closure(\Throwable): array<string, mixed> $next
      *
      * @return array{
      *     code: int,
      *     message: string,
-     *     error: array,
-     *     headers: array,
+     *     error: array<string, list<string>>,
+     *     headers: array<string, list<null|string>>,
      * }
      *
      * @noinspection RedundantDocCommentTagInspection

@@ -1,0 +1,8 @@
+# total 1 error
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Undefined variable\: \$this$#'
+            count: 1
+            path: ../src/ApiResponse.php

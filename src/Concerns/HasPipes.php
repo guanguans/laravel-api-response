@@ -26,6 +26,7 @@ use Illuminate\Support\Collection;
  */
 trait HasPipes
 {
+    /** @var \Illuminate\Support\Collection<int, mixed> */
     protected Collection $pipes;
 
     public function unshiftPipes(mixed ...$pipes): self
@@ -56,7 +57,7 @@ trait HasPipes
     {
         return $this->extendPipes(
             static fn (Collection $pipes): Collection => $pipes
-                ->reject(static function ($pipe) use ($findPipes): bool {
+                ->reject(static function (callable|object|string $pipe) use ($findPipes): bool {
                     if (\is_object($pipe) && !$pipe instanceof \Closure) {
                         $pipe = $pipe::class;
                     }
@@ -71,6 +72,11 @@ trait HasPipes
         );
     }
 
+    /**
+     * @param callable(\Illuminate\Support\Collection<int, mixed>): \Illuminate\Support\Collection<int, mixed> $callback
+     *
+     * @noinspection PhpDocSignatureIsNotCompleteInspection
+     */
     public function extendPipes(callable $callback): self
     {
         $this->pipes = $this->pipes->pipe($callback);

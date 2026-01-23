@@ -16,6 +16,8 @@ namespace Guanguans\LaravelApiResponse\Support\Traits;
 trait SetStateable
 {
     /**
+     * @param array<string, mixed> $properties
+     *
      * @noinspection MagicMethodsValidityInspection
      */
     public static function __set_state(array $properties): self

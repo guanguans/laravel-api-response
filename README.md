@@ -2,8 +2,8 @@
 
 > Normalize and standardize Laravel API response data structures. - 规范化和标准化 Laravel API 响应数据结构。
 
-[![tests](https://github.com/guanguans/laravel-api-response/workflows/tests/badge.svg)](https://github.com/guanguans/laravel-api-response/actions)
-[![check & fix styling](https://github.com/guanguans/laravel-api-response/workflows/check%20&%20fix%20styling/badge.svg)](https://github.com/guanguans/laravel-api-response/actions)
+[![tests](https://github.com/guanguans/laravel-api-response/actions/workflows/tests.yml/badge.svg)](https://github.com/guanguans/laravel-api-response/actions/workflows/tests.yml)
+[![php-cs-fixer](https://github.com/guanguans/laravel-api-response/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/guanguans/laravel-api-response/actions/workflows/php-cs-fixer.yml)
 [![codecov](https://codecov.io/gh/guanguans/laravel-api-response/branch/main/graph/badge.svg?token=URGFAWS6S4)](https://codecov.io/gh/guanguans/laravel-api-response)
 [![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-api-response/v)](https://packagist.org/packages/guanguans/laravel-api-response)
 [![GitHub release (with filter)](https://img.shields.io/github/v/release/guanguans/laravel-api-response)](https://github.com/guanguans/laravel-api-response/releases)
