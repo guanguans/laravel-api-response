@@ -16,6 +16,22 @@ namespace Guanguans\LaravelApiResponse\Support;
 use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Arr;
 
+if (!\function_exists('Guanguans\LaravelApiResponse\Support\env_explode')) {
+    /**
+     * @noinspection LaravelFunctionsInspection
+     */
+    function env_explode(string $key, mixed $default = null, string $delimiter = ',', int $limit = \PHP_INT_MAX): mixed
+    {
+        $env = env($key, $default);
+
+        if (\is_string($env)) {
+            return $env ? explode($delimiter, $env, $limit) : [];
+        }
+
+        return $env;
+    }
+}
+
 if (!\function_exists('Guanguans\LaravelApiResponse\Support\make')) {
     /**
      * @see https://github.com/yiisoft/yii2/blob/master/framework/BaseYii.php
@@ -53,21 +69,5 @@ if (!\function_exists('Guanguans\LaravelApiResponse\Support\make')) {
             'The argument of abstract must be an array containing a `%s` element.',
             implode('` or `', $keys)
         ));
-    }
-}
-
-if (!\function_exists('Guanguans\LaravelApiResponse\Support\env_explode')) {
-    /**
-     * @noinspection LaravelFunctionsInspection
-     */
-    function env_explode(string $key, mixed $default = null, string $delimiter = ',', int $limit = \PHP_INT_MAX): mixed
-    {
-        $env = env($key, $default);
-
-        if (\is_string($env)) {
-            return $env ? explode($delimiter, $env, $limit) : [];
-        }
-
-        return $env;
     }
 }

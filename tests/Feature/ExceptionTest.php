@@ -1,11 +1,15 @@
 <?php
 
-/** @noinspection PhpMultipleClassDeclarationsInspection */
+/** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpVoidFunctionResultUsedInspection */
+/** @noinspection StaticClosureCanBeUsedInspection */
 /** @noinspection DebugFunctionUsageInspection */
 /** @noinspection ForgottenDebugOutputInspection */
-/** @noinspection AnonymousFunctionStaticInspection */
-/** @noinspection StaticClosureCanBeUsedInspection */
-
+/** @noinspection PhpMultipleClassDeclarationsInspection */
 declare(strict_types=1);
 
 /**

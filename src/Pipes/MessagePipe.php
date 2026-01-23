@@ -53,6 +53,15 @@ class MessagePipe
         return $next($structure);
     }
 
+    /**
+     * @param  array{
+     * status: bool,
+     * code: int,
+     * message: string,
+     * data: mixed,
+     * error: ?array,
+     * }  $structure
+     */
     private function transKeyFor(
         array $structure,
         string $mainTransKey,

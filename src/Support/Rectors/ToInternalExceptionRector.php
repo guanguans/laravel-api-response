@@ -91,7 +91,7 @@ final class ToInternalExceptionRector extends AbstractRector implements Configur
     public function configure(array $configuration): void
     {
         Assert::allStringNotEmpty($configuration);
-        $this->except = array_merge($this->except, $configuration);
+        $this->except = [...$this->except, ...$configuration];
     }
 
     /**

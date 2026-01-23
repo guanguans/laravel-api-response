@@ -2,6 +2,8 @@
 
 /** @noinspection PhpInternalEntityUsedInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -13,17 +15,15 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Composer\Autoload\ClassLoader;
 use Ergebnis\Rector\Rules\Arrays\SortAssociativeArrayByKeyRector;
-use Guanguans\LaravelApiResponse\Support\Rectors\ToInternalExceptionRector;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-use PhpParser\Node\Expr\ClassConstFetch;
-use PhpParser\Node\Identifier;
-use PhpParser\Node\Name\FullyQualified;
-use PhpParser\Node\Scalar\LNumber;
+use Guanguans\RectorRules\Rector\File\AddNoinspectionDocblockToFileFirstStmtRector;
+use Guanguans\RectorRules\Rector\FunctionLike\RenameGarbageParamNameRector;
+use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
+use Guanguans\RectorRules\Set\SetList;
+use PhpParser\NodeVisitor\ParentConnectingVisitor;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
+use Rector\CodingStyle\Rector\ArrowFunction\ArrowFunctionDelegatingCallToFirstClassCallableRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
 use Rector\CodingStyle\Rector\ClassLike\NewlineBetweenClassLikeStmtsRector;
 use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
@@ -33,60 +33,55 @@ use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassLike\RemoveAnnotationRector;
-use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
-use Rector\DowngradePhp74\Rector\Array_\DowngradeArraySpreadRector;
-use Rector\DowngradePhp81\Rector\Array_\DowngradeArraySpreadStringKeyRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
-use Rector\PHPUnit\Set\PHPUnitSetList;
+use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
+use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
+use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
+use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
-use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
-use Rector\Transform\Rector\StaticCall\StaticCallToFuncCallRector;
-use Rector\Transform\ValueObject\FuncCallToStaticCall;
-use Rector\Transform\ValueObject\ScalarValueToConstFetch;
-use Rector\Transform\ValueObject\StaticCallToFuncCall;
 use Rector\ValueObject\PhpVersion;
+use Rector\ValueObject\Visibility;
+use Rector\Visibility\Rector\ClassMethod\ChangeMethodVisibilityRector;
+use Rector\Visibility\ValueObject\ChangeMethodVisibility;
 use RectorLaravel\Rector\ArrayDimFetch\ArrayToArrGetRector;
-use RectorLaravel\Rector\Class_\AddHasFactoryToModelsRector;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
-use RectorLaravel\Rector\FuncCall\AppToResolveRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
+use RectorLaravel\Rector\If_\ThrowIfRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Set\LaravelSetList;
-use Symfony\Component\HttpFoundation\Response;
+use RectorLaravel\Set\LaravelSetProvider;
+use function Guanguans\RectorRules\Support\classes;
 
 return RectorConfig::configure()
     ->withPaths([
-        // __DIR__.'/config',
-        __DIR__.'/src',
-        __DIR__.'/tests',
-        ...glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),
-        __DIR__.'/composer-updater',
+        // __DIR__.'/config/',
+        __DIR__.'/src/',
+        __DIR__.'/tests/',
+        __DIR__.'/workbench/',
+        __DIR__.'/composer-bump',
     ])
     ->withRootFiles()
-    // ->withSkipPath(__DIR__.'/tests.php')
     ->withSkip([
-        '**/__snapshots__/*',
-        '**/Fixtures/*',
-        __DIR__.'/src/Concerns/HasExceptionPipes.php',
-        __DIR__.'/src/Concerns/HasPipes.php',
-        __DIR__.'/src/RenderUsings/RenderUsing.php',
-        // __FILE__,
+        '*/Fixtures/*',
+        __DIR__.'/tests.php',
     ])
     ->withCache(__DIR__.'/.build/rector/')
-    ->withParallel()
     // ->withoutParallel()
-    // ->withImportNames(importNames: false)
+    ->withParallel()
     ->withImportNames(importDocBlockNames: false, importShortClasses: false)
-    ->withPhpVersion(PhpVersion::PHP_81)
+    // ->withImportNames(importNames: false)
+    // ->withEditorUrl()
     ->withFluentCallNewLine()
-    ->withAttributesSets(phpunit: true)
-    ->withComposerBased(phpunit: true)
+    ->withTreatClassesAsFinal()
+    ->withAttributesSets(phpunit: true, all: true)
+    ->withComposerBased(phpunit: true, laravel: true)
+    ->withSetProviders(LaravelSetProvider::class)
     ->withPhpVersion(PhpVersion::PHP_81)
     ->withDowngradeSets(php81: true)
     ->withPhpSets(php81: true)
@@ -95,147 +90,130 @@ return RectorConfig::configure()
         codeQuality: true,
         codingStyle: true,
         typeDeclarations: true,
+        typeDeclarationDocblocks: true,
         privatization: true,
         naming: true,
         instanceOf: true,
         earlyReturn: true,
-        phpunitCodeQuality: true,
+        carbon: true,
     )
     ->withSets([
-        PHPUnitSetList::PHPUNIT_90,
-        LaravelSetList::LARAVEL_90,
+        SetList::ALL,
         ...collect((new ReflectionClass(LaravelSetList::class))->getConstants(ReflectionClassConstant::IS_PUBLIC))
             ->reject(
-                static fn (
-                    string $constant,
-                    string $name
-                ): bool => \in_array($name, ['LARAVEL_STATIC_TO_INJECTION', 'LARAVEL_'], true)
-                    || preg_match('/^LARAVEL_\d{2,3}$/', $name)
+                static fn (string $constant, string $name): bool => \in_array(
+                    $name,
+                    ['LARAVEL_STATIC_TO_INJECTION', 'LUMEN'],
+                    true
+                ) || preg_match('/^LARAVEL_\d{2,3}$/', $name)
             )
             // ->dd()
-            ->values()
             ->all(),
     ])
     ->withRules([
-        // ArraySpreadInsteadOfArrayMergeRector::class,
-        // SortAssociativeArrayByKeyRector::class,
+        ArraySpreadInsteadOfArrayMergeRector::class,
+        JsonThrowOnErrorRector::class,
+        SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
-        ToInternalExceptionRector::class,
-        ...collect(spl_autoload_functions())
-            ->pipe(static fn (Collection $splAutoloadFunctions): Collection => collect(
-                $splAutoloadFunctions
-                    ->firstOrFail(
-                        static fn (mixed $loader): bool => \is_array($loader) && $loader[0] instanceof ClassLoader
-                    )[0]
-                    ->getClassMap()
-            ))
+        ...classes(static fn (string $class): bool => str_starts_with($class, 'RectorLaravel\Rector'))
+            ->filter(static fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isInstantiable())
             ->keys()
-            ->filter(static fn (string $class): bool => str_starts_with($class, 'RectorLaravel\Rector'))
-            ->filter(static fn (string $class): bool => (new ReflectionClass($class))->isInstantiable())
-            // ->filter(static fn (string $class): bool => is_subclass_of($class, ConfigurableRectorInterface::class))
-            ->values()
             // ->dd()
             ->all(),
     ])
+    ->withConfiguredRule(AddNoinspectionDocblockToFileFirstStmtRector::class, [
+        '*/tests/*' => [
+            'AnonymousFunctionStaticInspection',
+            'NullPointerExceptionInspection',
+            'PhpPossiblePolymorphicInvocationInspection',
+            'PhpUndefinedClassInspection',
+            'PhpUnhandledExceptionInspection',
+            'PhpVoidFunctionResultUsedInspection',
+            // 'SqlResolve',
+            'StaticClosureCanBeUsedInspection',
+        ],
+    ])
+    ->registerDecoratingNodeVisitor(ParentConnectingVisitor::class)
+    ->withConfiguredRule(RenameToConventionalCaseNameRector::class, [
+        'assertMatches*Snapshot',
+        'beforeEach',
+        'MIT',
+        'PDO',
+    ])
     ->withConfiguredRule(RemoveAnnotationRector::class, [
         'codeCoverageIgnore',
+        'inheritDoc',
         'phpstan-ignore',
         'phpstan-ignore-next-line',
         'psalm-suppress',
     ])
-    ->withConfiguredRule(StaticCallToFuncCallRector::class, [
-        new StaticCallToFuncCall(Str::class, 'of', 'str'),
-    ])
-    // ->withConfiguredRule(FuncCallToStaticCallRector::class, [
-    //     new FuncCallToStaticCall('str', Str::class, 'of'),
-    // ])
-    ->withConfiguredRule(ScalarValueToConstFetchRector::class, array_map(
-        static fn (int $value, string $constant): ScalarValueToConstFetch => new ScalarValueToConstFetch(
-            new LNumber($value),
-            new ClassConstFetch(new FullyQualified(Response::class), new Identifier($constant))
-        ),
-        $constants = array_filter(
-            (new ReflectionClass(Response::class))->getConstants(),
-            static fn ($value): bool => \is_int($value),
-        ),
-        array_keys($constants)
-    ))
     ->withConfiguredRule(
-        RenameFunctionRector::class,
-        [
-            'Pest\Faker\fake' => 'fake',
-            'Pest\Faker\faker' => 'faker',
-            // 'faker' => 'fake',
-            'test' => 'it',
-        ] + array_reduce(
-            [
-                'make',
-                'env_explode',
-            ],
-            static function (array $carry, string $func): array {
-                /** @see https://github.com/laravel/framework/blob/11.x/src/Illuminate/Support/functions.php */
-                $carry[$func] = "Guanguans\\LaravelApiResponse\\Support\\$func";
-
-                return $carry;
-            },
-            []
-        )
+        ChangeMethodVisibilityRector::class,
+        classes(static fn (string $class, string $file): bool => str_starts_with($class, 'Guanguans\LaravelApiResponse'))
+            ->filter(static fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isTrait())
+            ->map(
+                static fn (ReflectionClass $reflectionClass): array => collect($reflectionClass->getMethods(ReflectionMethod::IS_PRIVATE))
+                    ->reject(static fn (ReflectionMethod $reflectionMethod): bool => $reflectionMethod->isFinal() || $reflectionMethod->isInternal())
+                    ->map(static fn (ReflectionMethod $reflectionMethod): ChangeMethodVisibility => new ChangeMethodVisibility(
+                        $reflectionClass->getName(),
+                        $reflectionMethod->getName(),
+                        Visibility::PROTECTED
+                    ))
+                    ->all()
+            )
+            ->flatten()
+            // ->dd()
+            ->all(),
     )
     ->withSkip([
-        NewlineBetweenClassLikeStmtsRector::class,
-        DowngradeArraySpreadRector::class,
+        ArrayToFirstClassCallableRector::class,
+        ArrowFunctionDelegatingCallToFirstClassCallableRector::class,
+        DisallowedEmptyRuleFixerRector::class,
 
+        RenameFunctionRector::class,
+        RenameGarbageParamNameRector::class,
+        ScalarValueToConstFetchRector::class,
+    ])
+    ->withSkip([
         ChangeOrIfContinueToMultiContinueRector::class,
         EncapsedStringsToSprintfRector::class,
         ExplicitBoolCompareRector::class,
         LogicalToBooleanRector::class,
         NewlineAfterStatementRector::class,
+        NewlineBetweenClassLikeStmtsRector::class,
         ReturnBinaryOrToEarlyReturnRector::class,
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
-        ArrayToArrGetRector::class,
-        AppToResolveRector::class,
-        AddHasFactoryToModelsRector::class,
+        ModelCastsPropertyToCastsMethodRector::class,
+        TypeHintTappableCallRector::class,
 
+        ArrayToArrGetRector::class,
         DispatchToHelperFunctionsRector::class,
         EmptyToBlankAndFilledFuncRector::class,
         HelperFuncCallToFacadeClassRector::class,
-        ModelCastsPropertyToCastsMethodRector::class,
-        TypeHintTappableCallRector::class,
+        ThrowIfRector::class,
     ])
     ->withSkip([
-        // DowngradeArraySpreadStringKeyRector::class => [
-        //     __DIR__.'/.php-cs-fixer.php',
-        //     __DIR__.'/src/Concerns/HasExceptionPipes.php',
-        //     __DIR__.'/src/Concerns/HasPipes.php',
-        //     __FILE__,
-        // ],
-        DisallowedEmptyRuleFixerRector::class => [
-            __DIR__.'/src/Pipes/PaginatorDataPipe.php',
-            __DIR__.'/src/Pipes/ScalarDataPipe.php',
-        ],
         RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/src/Support/Traits/Dumpable.php',
             __DIR__.'/tests/Feature/ExceptionTest.php',
         ],
-        RemoveUselessReturnTagRector::class => [
-            __DIR__.'/src/Support/Traits/ApiResponseFactory.php',
+        RenameClassConstFetchRector::class => [
+            __DIR__.'/workbench/config/database.php',
         ],
-        ToInternalExceptionRector::class => [
-            __DIR__.'/tests',
+        RenameClassRector::class => [
+            __FILE__,
         ],
-        ScalarValueToConstFetchRector::class => [
-            __DIR__.'/composer-updater',
+        SortAssociativeArrayByKeyRector::class => [
+            // __DIR__.'/config/',
+            __DIR__.'/src/',
+            __DIR__.'/tests/',
+            __DIR__.'/workbench/',
         ],
         StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
-            __DIR__.'/tests',
+            __DIR__.'/tests/',
         ],
         StaticClosureRector::class => $staticClosureSkipPaths,
-        SortAssociativeArrayByKeyRector::class => [
-            __DIR__.'/config',
-            __DIR__.'/src',
-            __DIR__.'/tests',
-        ],
     ]);

@@ -20,6 +20,6 @@ trait SetStateable
      */
     public static function __set_state(array $properties): self
     {
-        return app(static::class, $properties);
+        return resolve(static::class, $properties);
     }
 }

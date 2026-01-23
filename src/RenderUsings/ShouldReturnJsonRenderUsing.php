@@ -25,6 +25,6 @@ class ShouldReturnJsonRenderUsing extends RenderUsing
 {
     protected function when(Request $request, \Throwable $throwable): bool
     {
-        return (fn (): bool => $this->shouldReturnJson($request, $throwable))->call(app(ExceptionHandler::class));
+        return (fn (): bool => $this->shouldReturnJson($request, $throwable))->call(resolve(ExceptionHandler::class));
     }
 }

@@ -1,9 +1,13 @@
 <?php
 
-/** @noinspection JsonEncodingApiUsageInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpVoidFunctionResultUsedInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
-
+/** @noinspection JsonEncodingApiUsageInspection */
 declare(strict_types=1);
 
 /**
@@ -25,11 +29,11 @@ beforeEach(function (): void {});
  * @see \Guanguans\LaravelApiResponse\Pipes\JsonResponsableDataPipe::dataFor()
  */
 it('is psr response', function (array $array): void {
-    $psrResponse = new Response(SymfonyResponse::HTTP_OK, ['Content-Type' => 'application/json'], json_encode($array));
+    $psrResponse = new Response(SymfonyResponse::HTTP_OK, ['Content-Type' => 'application/json'], json_encode($array, \JSON_THROW_ON_ERROR));
     assertMatchesJsonSnapshot($this->apiResponse()->success($psrResponse)->content());
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is symfony response', function (array $array): void {
-    $symfonyResponse = new SymfonyResponse(json_encode($array), SymfonyResponse::HTTP_OK, ['Content-Type' => 'application/json']);
+    $symfonyResponse = new SymfonyResponse(json_encode($array, \JSON_THROW_ON_ERROR), SymfonyResponse::HTTP_OK, ['Content-Type' => 'application/json']);
     assertMatchesJsonSnapshot($this->apiResponse()->success($symfonyResponse)->content());
 })->group(__DIR__, __FILE__)->with('arrays');

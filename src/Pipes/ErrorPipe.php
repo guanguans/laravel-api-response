@@ -46,6 +46,14 @@ class ErrorPipe
 
     /**
      * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
+     *
+     * @param  array{
+     * status: bool,
+     * code: int,
+     * message: string,
+     * data: mixed,
+     * error: ?array,
+     * }  $structure
      */
     private function errorFor(array $structure): array|\stdClass
     {

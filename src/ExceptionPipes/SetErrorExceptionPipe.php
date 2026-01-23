@@ -23,10 +23,12 @@ class SetErrorExceptionPipe
     use MakeStaticable;
     use SetStateable;
     use WithPipeArgs;
+
+    /** @var list<class-string<\Throwable>> */
     private array $classes;
 
     /**
-     * @param string ...$classes
+     * @param class-string<\Throwable> ...$classes
      */
     public function __construct(
         private readonly ?array $error,

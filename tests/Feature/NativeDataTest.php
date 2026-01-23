@@ -1,10 +1,14 @@
 <?php
 
+/** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpVoidFunctionResultUsedInspection */
+/** @noinspection StaticClosureCanBeUsedInspection */
 /** @noinspection JsonEncodingApiUsageInspection */
 /** @noinspection PhpUnusedAliasInspection */
-/** @noinspection AnonymousFunctionStaticInspection */
-/** @noinspection StaticClosureCanBeUsedInspection */
-
 declare(strict_types=1);
 
 /**
@@ -99,7 +103,7 @@ it('is callable', function (): void {
 it('is iterable', function (array $array): void {
     assertMatchesJsonSnapshot(
         (string) str($this->apiResponse()->success(new FilesystemIterator(__DIR__))->content())
-            ->remove($basePath = trim(json_encode(\dirname(__DIR__, 2)), '"'))
+            ->remove($basePath = trim(json_encode(\dirname(__DIR__, 2), \JSON_THROW_ON_ERROR), '"'))
     );
     assertMatchesJsonSnapshot(
         (string) str($this->apiResponse()->success(new GlobIterator(__DIR__.'/*'))->content())

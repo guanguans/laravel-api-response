@@ -1,8 +1,14 @@
 <?php
 
-/** @noinspection PhpUnused */
+/** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpVoidFunctionResultUsedInspection */
+/** @noinspection StaticClosureCanBeUsedInspection */
 /** @noinspection PhpMissingDocCommentInspection */
-
+/** @noinspection PhpUnused */
 declare(strict_types=1);
 
 /**
@@ -16,12 +22,14 @@ declare(strict_types=1);
 
 namespace Guanguans\LaravelApiResponseTests\Laravel\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Post extends Model
 {
+    use HasFactory;
     public $timestamps = false;
     protected $casts = [
         'user_id' => 'int',

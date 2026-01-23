@@ -1,10 +1,14 @@
 <?php
 
+/** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpVoidFunctionResultUsedInspection */
+/** @noinspection StaticClosureCanBeUsedInspection */
 /** @noinspection JsonEncodingApiUsageInspection */
 /** @noinspection PhpMissingDocCommentInspection */
-/** @noinspection AnonymousFunctionStaticInspection */
-/** @noinspection StaticClosureCanBeUsedInspection */
-
 declare(strict_types=1);
 
 /**
@@ -147,7 +151,7 @@ it('is responsable', function (array $array): void {
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is stringable', function (array $array): void {
-    $stringable = str(json_encode($array));
+    $stringable = str(json_encode($array, \JSON_THROW_ON_ERROR));
     assertMatchesJsonSnapshot($this->apiResponse()->success($stringable)->content());
 })->group(__DIR__, __FILE__)->with('arrays');
 

@@ -1,10 +1,14 @@
 <?php
 
-/** @noinspection UsingInclusionReturnValueInspection */
-/** @noinspection DebugFunctionUsageInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpVoidFunctionResultUsedInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
-
+/** @noinspection DebugFunctionUsageInspection */
+/** @noinspection UsingInclusionReturnValueInspection */
 declare(strict_types=1);
 
 /**

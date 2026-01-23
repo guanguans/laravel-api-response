@@ -40,6 +40,12 @@ parameters:
         lineBefore: 3
         lineAfter: 3
         editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+    guanguans:
+        exceptionMustImplementNativeThrowable:
+            nativeThrowable: Guanguans\LaravelApiResponse\Contract\ThrowableContract
+            enabled: false
+        forbiddenSideEffects:
+            enabled: true
     type_coverage:
         declare: 100
         return_type: 100

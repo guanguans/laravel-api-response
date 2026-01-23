@@ -25,6 +25,9 @@ use function Guanguans\LaravelApiResponse\Support\make;
 
 class ServiceProvider extends PackageServiceProvider
 {
+    /**
+     * @return list<string>
+     */
     public function provides(): array
     {
         return [
