@@ -33,7 +33,7 @@ it('can use pipes', function (): void {
             NullDataPipe::with(false),
             ScalarDataPipe::with(JsonResource::$wrap),
         )
-        ->success($this->faker()->name())->toBeInstanceOf(JsonResponse::class)
+        ->success(fake()->name())->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(500000))->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(600))->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);
@@ -47,13 +47,13 @@ it('can will throw InvalidArgumentException', function ($data): void {
 ]);
 
 it('can will throw Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException', function (): void {
-    $this->apiResponse()->castTo('resource')->success($this->faker()->name());
+    $this->apiResponse()->castTo('resource')->success(fake()->name());
 })->group(__DIR__, __FILE__)->throws(Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException::class, 'resource');
 
 it('can ', function (?array $only, ?array $except): void {
     expect($this->apiResponse())
         ->pushPipes(CastDataPipe::make('integer', $only, $except))
-        ->success($this->faker()->phoneNumber())
+        ->success(fake()->phoneNumber())
         ->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__)->with([
     ['only' => null, 'except' => null],

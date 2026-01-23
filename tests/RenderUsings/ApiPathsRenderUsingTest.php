@@ -25,7 +25,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
 
 it('can call ApiPathsRenderUsing', function (): void {
-    expect(ApiPathsRenderUsing::make(['*'])(new RuntimeException($this->faker()->title()), request()))
+    expect(ApiPathsRenderUsing::make(['*'])(new RuntimeException(fake()->title()), request()))
         ->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);
 

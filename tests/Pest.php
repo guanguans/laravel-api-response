@@ -20,19 +20,32 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Faker\Factory;
+use Faker\Generator;
 use Guanguans\LaravelApiResponseTests\TestCase;
+use Illuminate\Support\Facades\Artisan;
+use Pest\Expectation;
 
 uses(TestCase::class)
+    // ->compact()
     ->beforeAll(function (): void {})
     ->beforeEach(function (): void {
-        // $this->markTestSkipped('Not implemented yet.');
+        static $linked;
+        $linked ??= links([
+            __DIR__.'/../'.basename($target = __DIR__.'/../vendor/orchestra/testbench-core/laravel/') => $target,
+        ]);
+
+        /** @var \Guanguans\LaravelApiResponseTests\TestCase $this */
+        $this->defineEnvironment(app());
     })
     ->afterEach(function (): void {})
     ->afterAll(function (): void {})
     ->in(
         __DIR__,
-        // __DIR__.'/Feature',
-        // __DIR__.'/Unit'
+        // __DIR__.'/Arch/',
+        // __DIR__.'/Feature/',
+        // __DIR__.'/Integration/',
+        // __DIR__.'/Unit/'
     );
 
 /*
@@ -46,9 +59,27 @@ uses(TestCase::class)
 |
  */
 
-expect()->extend('toBetween', fn (int $min, int $max): Expectation => expect($this->value)
-    ->toBeGreaterThanOrEqual($min)
-    ->toBeLessThanOrEqual($max));
+/**
+ * @see expect()->toBetween()
+ */
+expect()->extend(
+    'toAssert',
+    function (Closure $assertions): Expectation {
+        $assertions($this->value);
+
+        return $this;
+    }
+);
+
+/**
+ * @see Expectation::toBeBetween()
+ */
+expect()->extend(
+    'toBetween',
+    fn (int $min, int $max): Expectation => expect($this->value)
+        ->toBeGreaterThanOrEqual($min)
+        ->toBeLessThanOrEqual($max)
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -71,17 +102,43 @@ function class_namespace(object|string $class): string
     return (new ReflectionClass($class))->getNamespaceName();
 }
 
-function faker(string $locale = Factory::DEFAULT_LOCALE): Generator
-{
-    return fake($locale);
-}
-
 function fixtures_path(string $path = ''): string
 {
     return __DIR__.\DIRECTORY_SEPARATOR.'Fixtures'.($path ? \DIRECTORY_SEPARATOR.$path : $path);
 }
 
-// function fake(string $locale = Factory::DEFAULT_LOCALE): Generator
-// {
-//     return Factory::create($locale);
-// }
+if (!\function_exists('fake')) {
+    /**
+     * @see https://github.com/laravel/framework/blob/12.x/src/Illuminate/Foundation/helpers.php#L515
+     */
+    function fake(string $locale = Factory::DEFAULT_LOCALE): Generator
+    {
+        return Factory::create($locale);
+    }
+}
+
+function running_in_github_action(): bool
+{
+    return getenv('GITHUB_ACTIONS') === 'true';
+}
+
+/**
+ * @see \Illuminate\Foundation\Console\StorageLinkCommand
+ */
+function links(array $links, array $parameters = []): int
+{
+    $originalLinks = config('filesystems.links', []);
+
+    config()->set('filesystems.links', $links);
+
+    $status = Artisan::call('storage:link', $parameters + [
+        '--ansi' => true,
+        '--verbose' => true,
+    ]);
+
+    config()->set('filesystems.links', $originalLinks);
+
+    // echo Artisan::output();
+
+    return $status;
+}

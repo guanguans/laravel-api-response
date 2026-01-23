@@ -24,34 +24,44 @@ namespace Guanguans\LaravelApiResponseTests;
 use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
 use Guanguans\LaravelApiResponse\Middleware\SetJsonAcceptHeader;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
-use Guanguans\LaravelApiResponse\ServiceProvider;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Guanguans\LaravelApiResponseTests\Laravel\seeders\TablesSeeder;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Orchestra\Testbench\Concerns\WithWorkbench;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
+    // use DatabaseMigrations;
+    // use DatabaseTransactions;
+    // use DatabaseTruncation;
+    // use InteractsWithViews;
+    // use LazilyRefreshDatabase;
+    // use WithCachedConfig;
+    // use WithCachedRoutes;
+
+    // use VarDumperTestTrait;
+    // use PHPMock;
+
     use ApiResponseFactory;
-    use Faker;
-    use MockeryPHPUnitIntegration;
-    use VarDumperTestTrait;
+
+    // use RefreshDatabase;
+    use WithWorkbench;
 
     protected function setUp(): void
     {
         parent::setUp();
         // \DG\BypassFinals::enable();
         $this->app->useLangPath(__DIR__.'/Laravel/lang');
-        $this->startMockery();
         JsonResource::wrap(collect([null, 'data'])->random());
     }
 
-    protected function tearDown(): void
+    protected function getApplicationTimezone(mixed $app): string
     {
-        $this->closeMockery();
-        parent::tearDown();
+        return 'Asia/Shanghai';
     }
 
     protected function getPackageAliases($app): array
@@ -61,19 +71,17 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ];
     }
 
-    protected function getPackageProviders($app): array
+    protected function defineEnvironment(mixed $app): void
     {
-        return [
-            ServiceProvider::class,
-            ...parent::getPackageProviders($app),
-        ];
-    }
+        tap($app->make(Repository::class), function (Repository $repository): void {
+            $repository->set('app.key', 'base64:UZ5sDPZSB7DSLKY+DYlU8G/V1e/qW+Ag0WF03VNxiSg=');
+            $repository->set('app.debug', false);
 
-    protected function defineEnvironment($app): void
-    {
-        // config()->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
-        config()->set('database.default', 'testing');
-        config()->set('mail.default', 'log');
+            $repository->set('database.default', 'sqlite');
+            $repository->set('database.connections.sqlite.database', ':memory:');
+
+            $repository->set('mail.default', 'log');
+        });
     }
 
     /**

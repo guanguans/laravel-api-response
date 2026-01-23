@@ -53,7 +53,7 @@ it('can use exception pipes', function (): void {
                 Throwable::class,
             ),
         )
-        ->exception(new RuntimeException($this->faker()->title()))->toBeInstanceOf(JsonResponse::class);
+        ->exception(new RuntimeException(fake()->title()))->toBeInstanceOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);
 
 it('can set state for SetErrorExceptionPipe', function (): void {

@@ -6,6 +6,7 @@
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
 /** @noinspection PhpVoidFunctionResultUsedInspection */
+/** @noinspection SqlResolve */
 /** @noinspection StaticClosureCanBeUsedInspection */
 declare(strict_types=1);
 
@@ -17,23 +18,29 @@ declare(strict_types=1);
  *
  * @see https://github.com/guanguans/laravel-api-response
  */
-// arch('will not use debugging functions')
-//     ->expect([
-//         'dd',
-//         'die',
-//         'dump',
-//         'echo',
-//         'env',
-//         'env_explode',
-//         'env_getcsv',
-//         'exit',
-//         'print',
-//         'print_r',
-//         'printf',
-//         'ray',
-//         'trap',
-//         'var_dump',
-//         'var_export',
-//         'vprintf',
-//     ])
-//     ->each->not->toBeUsed();
+
+arch('will not use debugging functions')
+    // ->throwsNoExceptions()
+    ->group(__DIR__, __FILE__)
+    ->expect([
+        'dd',
+        'die',
+        'dump',
+        'echo',
+        'env',
+        'env_explode',
+        'env_getcsv',
+        'exit',
+        'print',
+        'print_r',
+        'printf',
+        'ray',
+        'trap',
+        'var_dump',
+        'var_export',
+        'vprintf',
+    ])
+    // ->each
+    ->not->toBeUsed()
+    ->ignoring([
+    ]);

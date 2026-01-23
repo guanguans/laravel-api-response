@@ -53,6 +53,7 @@
         "ergebnis/phpstan-rules": "^2.12",
         "ergebnis/rector-rules": "^1.9",
         "guanguans/php-cs-fixer-custom-fixers": "^1.1",
+        "guanguans/phpstan-rules": "^1.0",
         "guanguans/rector-rules": "^1.5",
         "guzzlehttp/psr7": "^2.8",
         "jbelien/phpstan-sarif-formatter": "^1.2",
