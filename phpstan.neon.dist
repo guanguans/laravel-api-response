@@ -24,11 +24,11 @@ includes:
 
 #    - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
     - vendor/symplify/phpstan-rules/config/phpunit-rules.neon
-    - vendor/symplify/phpstan-rules/config/rector-rules.neon
+#    - vendor/symplify/phpstan-rules/config/rector-rules.neon
 #    - vendor/symplify/phpstan-rules/config/symfony-rules.neon
 
 services:
-    # https://github.com/guanguans/laravel-soar/security/code-scanning
+    # https://github.com/guanguans/laravel-api-response/security/code-scanning
     # https://github.com/jbelien/phpstan-sarif-formatter
     errorFormatter.sarif:
         class: PHPStanSarifErrorFormatter\SarifErrorFormatter
@@ -73,11 +73,21 @@ parameters:
             enabled: false
         noExtends:
             enabled: false
+        final:
+            enabled: false
+        noIsset:
+            enabled: false
+        finalInAbstractClass:
+            enabled: false
+        noParameterWithContainerTypeDeclaration:
+            enabled: false
     guanguans:
         exceptionMustImplementNativeThrowable:
-            nativeThrowable: Guanguans\RectorRules\Contract\ThrowableContract
+            nativeThrowable: Guanguans\LaravelApiResponse\Contracts\ThrowableContract
         forbiddenSideEffects:
             enabled: false
+#    sidzIgnoreNumericStrings: true
+#    sidzIgnoreMagicNumbers: [2, 3, 5, 100, 512, 1000]
     cognitive_complexity:
         class: 42
         function: 8
@@ -177,7 +187,7 @@ parameters:
         - identifier: symplify.forbiddenNode
         - identifier: symplify.forbiddenStaticClassConstFetch
         - identifier: symplify.noArrayMapWithArrayCallable
-        - message: '#^Unused Guanguans\\RectorRules\\Rector\\.*\\.*\:\:__construct$#'
+        - message: '#^Unused Guanguans\\laravelApiResponse\\Rector\\.*\\.*\:\:__construct$#'
 
 
         -

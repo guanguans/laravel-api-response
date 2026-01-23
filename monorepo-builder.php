@@ -65,8 +65,7 @@ return static function (MBConfig $mbConfig): void {
     ]);
 
     if (
-        \PHP_MAJOR_VERSION === 7
-        && \PHP_MINOR_VERSION === 4
+        \PHP_MAJOR_VERSION === 8 && \PHP_MINOR_VERSION === 1
         && !(new ArgvInput)->hasParameterOption('--dry-run', true)
     ) {
         (new Process([

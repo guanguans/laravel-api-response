@@ -47,7 +47,7 @@
     </include>
     <exclude>
       <!--<directory>src/Contracts/</directory>-->
-      <!--<file>src/SoarServiceProvider.php</file>-->
+      <!--<file>src/ServiceProvider.php</file>-->
     </exclude>
   </source>
   <coverage>
@@ -56,7 +56,7 @@
     </include>
     <exclude>
       <!--<directory>src/Contracts/</directory>-->
-      <!--<file>src/SoarServiceProvider.php</file>-->
+      <!--<file>src/ServiceProvider.php</file>-->
     </exclude>
   </coverage>
   <extensions>

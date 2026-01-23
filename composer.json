@@ -425,7 +425,7 @@
         "rector:process-clear-cache-dry-run": "@rector:process-clear-cache --dry-run",
         "rector:process-dry-run": "@rector:process --dry-run",
         "rector:process-dry-run-output-format-github": "@rector:process-dry-run --output-format=github",
-        "rector:process-only": "@rector:process-clear-cache tests.php --only=Guanguans\\LaravelSoar\\Support\\Rectors\\AddHasOptionsDocCommentRector",
+        "rector:process-only": "@rector:process-clear-cache tests.php --only=Guanguans\\laravelApiResponse\\Support\\Rectors\\AddHasOptionsDocCommentRector",
         "rector:process-only-dry-run": "@rector:process-only --dry-run",
         "roave-backward-compatibility-check": [
             "@putenv:php",
@@ -495,7 +495,7 @@
         ],
         "vendor-patches": "@php vendor/bin/vendor-patches generate --ansi -vv",
         "vhs": "vhs < laravel-api-response.tape",
-        "yaml-lint": "@php vendor/bin/yaml-lint .github/ --ansi -vv",
+        "yaml-lint": "@php vendor/bin/yaml-lint .github/ *.yaml --ansi -vv",
         "zhlint": [
             "if ! command -v zhlint >/dev/null 2>&1; then echo 'zhlint not found, installing...'; npm install -g zhlint; fi",
             "@zhlint:prototype"
