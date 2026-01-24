@@ -1,1 +1,9 @@
-{"status":true,"code":200,"message":"OK","data":{"headers":{}},"error":{}}
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": {
+        "headers": {}
+    },
+    "error": {}
+}

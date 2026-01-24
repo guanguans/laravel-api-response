@@ -1,1 +1,7 @@
-{"status":true,"code":200,"message":"OK","data":"NativeDataTest::generalMethod","error":{}}
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": "NativeDataTest::generalMethod",
+    "error": {}
+}

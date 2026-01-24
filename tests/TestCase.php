@@ -27,6 +27,7 @@ use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Lottery;
 use Orchestra\Testbench\Concerns\WithWorkbench;
@@ -79,6 +80,26 @@ class TestCase extends \Orchestra\Testbench\TestCase
             JsonResource::wrap(
                 Lottery::odds(4, 5)->winner(static fn (): string => 'data')->loser(static fn () => null)->choose()
             );
+
+            $application->has('pushed-pipe') or $this
+                ->apiResponse()
+                ->pushPipes(function (array $structure, \Closure $next) use ($application): JsonResponse {
+                    $application->instance('pushed-pipe', true);
+                    $jsonResponse = $next($structure);
+                    \assert($jsonResponse instanceof JsonResponse);
+
+                    /** @see https://github.com/guanguans/php-cs-fixer-custom-fixers/blob/main/src/Fixer/InlineHtml/JsonFixer.php */
+                    return $jsonResponse->setEncodingOptions(
+                        \JSON_INVALID_UTF8_IGNORE |
+                        \JSON_INVALID_UTF8_SUBSTITUTE |
+                        \JSON_PARTIAL_OUTPUT_ON_ERROR |
+                        \JSON_PRESERVE_ZERO_FRACTION |
+                        \JSON_PRETTY_PRINT |
+                        \JSON_THROW_ON_ERROR |
+                        \JSON_UNESCAPED_SLASHES |
+                        \JSON_UNESCAPED_UNICODE
+                    );
+                });
         });
     }
 

@@ -43,7 +43,8 @@ class CallableDataPipe
 
     private function dataFor(mixed $data): mixed
     {
-        return \is_callable($data) && !(\is_string($data) && \function_exists($data))
+        // Skip callable of string type to avoid unexpected behavior.
+        return \is_callable($data) && !\is_string($data)
             ? $data()
             : $data;
     }

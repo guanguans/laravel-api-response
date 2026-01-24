@@ -102,14 +102,14 @@ it('is callable', function (): void {
 })->group(__DIR__, __FILE__)->skip(\PHP_VERSION_ID >= 80400, 'Closure type data is not compatible with PHP 8.4');
 
 it('is iterable', function (array $array): void {
-    // FilesystemIterator is not sorted on php lower versions.
+    // // FilesystemIterator is not sorted on php lower versions.
     // expect(
     //     (string) str($this->apiResponse()->success(new FilesystemIterator(__DIR__))->content())
-    //         ->remove($basePath = trim(json_encode(\dirname(__DIR__, 2), \JSON_THROW_ON_ERROR), '"'))
+    //         ->remove($basePath = trim(json_encode(\dirname(__DIR__, 2), \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_SLASHES), '"'))
     // )->toMatchSnapshot();
     expect(
         (string) str($this->apiResponse()->success(new GlobIterator(__DIR__.'/*'))->content())
-            ->remove($basePath = trim(json_encode(\dirname(__DIR__, 2), \JSON_THROW_ON_ERROR), '"'))
+            ->remove(trim(json_encode(\dirname(__DIR__, 2), \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_SLASHES), '"'))
     )->toMatchSnapshot();
     expect(
         $this->apiResponse()->success(
