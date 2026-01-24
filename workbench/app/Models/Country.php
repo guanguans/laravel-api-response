@@ -2,13 +2,13 @@
 
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpMissingDocCommentInspection */
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpUnused */
 /** @noinspection PhpVoidFunctionResultUsedInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
-/** @noinspection PhpMissingDocCommentInspection */
-/** @noinspection PhpUnused */
 declare(strict_types=1);
 
 /**
@@ -20,34 +20,31 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponseTests\Laravel\Models;
+namespace Workbench\App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
-class User extends Model
+class Country extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $casts = [
-        'country_id' => 'int',
-    ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Guanguans\LaravelApiResponseTests\Laravel\Models\Country, self>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Workbench\App\Models\User>
      */
-    public function country(): BelongsTo
+    public function users(): HasMany
     {
-        return $this->belongsTo(Country::class);
+        return $this->hasMany(User::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Guanguans\LaravelApiResponseTests\Laravel\Models\Post>
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\Workbench\App\Models\Post>
      */
-    public function posts(): HasMany
+    public function posts(): HasManyThrough
     {
-        return $this->hasMany(Post::class);
+        return $this->hasManyThrough(Post::class, User::class);
     }
 }

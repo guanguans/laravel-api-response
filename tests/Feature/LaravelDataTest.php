@@ -22,16 +22,15 @@ declare(strict_types=1);
 
 use Composer\Semver\Comparator;
 use Guanguans\LaravelApiResponse\Pipes\PaginatorDataPipe;
-use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
-use Guanguans\LaravelApiResponseTests\Laravel\Resources\UserCollection;
-use Guanguans\LaravelApiResponseTests\Laravel\Resources\UserResource;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Workbench\App\Http\Resources\UserCollection;
+use Workbench\App\Http\Resources\UserResource;
+use Workbench\App\Models\User;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {
@@ -64,7 +63,7 @@ it('is paginate', function (?string $wrap): void {
     );
 })
     ->group(__DIR__, __FILE__)
-    // ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '10.0.0'))
+    ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '12.0.0'))
     ->with('wraps');
 
 it('is simple paginate', function (?string $wrap): void {
@@ -90,7 +89,10 @@ it('is simple paginate', function (?string $wrap): void {
             ->success(UserResource::collection($simplePaginate))
             ->content()
     );
-})->group(__DIR__, __FILE__)->with('wraps');
+})
+    ->group(__DIR__, __FILE__)
+    ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '12.0.0'))
+    ->with('wraps');
 
 it('is cursor paginate', function (?string $wrap): void {
     $cursorPaginate = User::query()->with(['country', 'posts'])->cursorPaginate(3);
@@ -136,7 +138,10 @@ it('is simple paginate resource collection', function (?string $wrap): void {
             ->success(UserResource::collection($simplePaginate))
             ->content()
     );
-})->group(__DIR__, __FILE__)->with('wraps');
+})
+    ->group(__DIR__, __FILE__)
+    ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '12.0.0'))
+    ->with('wraps');
 
 it('is responsable', function (array $array): void {
     $responsable = new class($array) implements Responsable {

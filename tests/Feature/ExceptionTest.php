@@ -22,7 +22,6 @@ declare(strict_types=1);
  */
 
 use Composer\Semver\Comparator;
-use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
@@ -30,16 +29,16 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Workbench\App\Models\User;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {});
 
 it('is runtime exception handler', function (bool $debug): void {
-    if ($debug && Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0')) {
-        expect(true)->toBeTrue();
-
-        return;
-    }
+    $this->markTestSkippedWhen(
+        $debug && Comparator::greaterThanOrEqualTo(Application::VERSION, '11.0.0'),
+        'Skipping test on Laravel 11+ when debug is true.'
+    );
 
     config()->set('app.debug', $debug);
     $response = $this->post('api/exception');
@@ -48,11 +47,10 @@ it('is runtime exception handler', function (bool $debug): void {
 })->group(__DIR__, __FILE__)->with('debugs');
 
 it('is runtime exception', function (bool $debug): void {
-    if ($debug && Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0')) {
-        expect(true)->toBeTrue();
-
-        return;
-    }
+    $this->markTestSkippedWhen(
+        $debug && Comparator::greaterThanOrEqualTo(Application::VERSION, '11.0.0'),
+        'Skipping test on Laravel 11+ when debug is true.'
+    );
 
     config()->set('app.debug', $debug);
     $runtimeException = new RuntimeException('This is a runtime exception.', Response::HTTP_BAD_REQUEST);

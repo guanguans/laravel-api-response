@@ -16,9 +16,9 @@ declare(strict_types=1);
 use Guanguans\LaravelApiResponse\Middleware\SetJsonAcceptHeader;
 use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
-use Workbench\App\Support\Utils;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +35,17 @@ use Workbench\App\Support\Utils;
 //     return $request->user();
 // });
 
-Route::get('json-example', static fn (): array => ['phrase' => Utils::JSON_OUTPUT_PHRASE]);
+Route::group([
+    'as' => 'api.',
+    'namespace' => '\App\Http\Controllers\Api',
+    'prefix' => 'api',
+    'middleware' => [
+        SetJsonAcceptHeader::class,
+    ],
+], static function (Router $router): void {
+    $router->any('exception', static function (): void {
+        config('api-response.render_using', ApiPathsRenderUsing::make());
 
-// Route::any('api/exception', static function (): void {
-//     config('api-response.render_using', ApiPathsRenderUsing::make());
-//
-//     throw new RuntimeException('This is a runtime exception.', Response::HTTP_BAD_GATEWAY);
-// })->middleware(SetJsonAcceptHeader::class);
+        throw new RuntimeException('This is a runtime exception.', Response::HTTP_BAD_GATEWAY);
+    });
+});

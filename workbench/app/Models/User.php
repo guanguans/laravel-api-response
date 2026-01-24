@@ -1,8 +1,14 @@
 <?php
 
-/** @noinspection ClassOverridesFieldOfSuperClassInspection */
-/** @noinspection LaravelUnknownEloquentFactoryInspection */
-
+/** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpMissingDocCommentInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpUnused */
+/** @noinspection PhpVoidFunctionResultUsedInspection */
+/** @noinspection StaticClosureCanBeUsedInspection */
 declare(strict_types=1);
 
 /**
@@ -16,26 +22,32 @@ declare(strict_types=1);
 
 namespace Workbench\App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Authenticatable
+class User extends Model
 {
     use HasFactory;
-    use Notifiable;
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    public $timestamps = false;
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'country_id' => 'int',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Workbench\App\Models\Country, self>
+     */
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Workbench\App\Models\Post>
+     */
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
 }

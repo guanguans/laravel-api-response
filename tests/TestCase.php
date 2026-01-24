@@ -22,16 +22,13 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponseTests;
 
 use Guanguans\LaravelApiResponse\Facades\ApiResponseFacade;
-use Guanguans\LaravelApiResponse\Middleware\SetJsonAcceptHeader;
-use Guanguans\LaravelApiResponse\RenderUsings\ApiPathsRenderUsing;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponseTests\Laravel\seeders\TablesSeeder;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Orchestra\Testbench\Concerns\WithWorkbench;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\VarDumper\Test\VarDumperTestTrait;
+use Workbench\Database\Seeders\DatabaseSeeder;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -50,14 +47,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     // use RefreshDatabase;
     use WithWorkbench;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        // \DG\BypassFinals::enable();
-        $this->app->useLangPath(__DIR__.'/Laravel/lang');
-        JsonResource::wrap(collect([null, 'data'])->random());
-    }
 
     protected function getApplicationTimezone(mixed $app): string
     {
@@ -82,27 +71,20 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
             $repository->set('mail.default', 'log');
         });
+
+        tap($app, function (Application $application): void {
+            $application->useLangPath(__DIR__.'/../workbench/resources/lang/');
+            JsonResource::wrap(collect([null, 'data'])->random());
+        });
     }
 
-    /**
-     * @see https://github.com/staudenmeir/eloquent-eager-limit
-     */
     protected function defineDatabaseMigrations(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/Laravel/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../workbench/database/migrations/');
     }
 
     protected function defineDatabaseSeeders(): void
     {
-        $this->seed(TablesSeeder::class);
-    }
-
-    protected function defineRoutes($router): void
-    {
-        $router->any('api/exception', static function (): void {
-            config('api-response.render_using', ApiPathsRenderUsing::make());
-
-            throw new \RuntimeException('This is a runtime exception.', Response::HTTP_BAD_GATEWAY);
-        })->middleware(SetJsonAcceptHeader::class);
+        $this->seed(DatabaseSeeder::class);
     }
 }

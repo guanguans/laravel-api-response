@@ -14,7 +14,6 @@ declare(strict_types=1);
  */
 
 use Illuminate\Support\Facades\Route;
-use Workbench\App\Support\Utils;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +27,3 @@ use Workbench\App\Support\Utils;
 */
 
 // Route::get('/', static fn () => view('welcome'));
-
-Route::get('/', static fn () => view('routes', [
-    'routes' => collect(Route::getRoutes()->get('GET'))->filter(
-        static fn (Illuminate\Routing\Route $route) => str($route->uri())->endsWith('-example')
-    ),
-]));
-
-Route::get('general-example', static fn (): string => Utils::GENERAL_OUTPUT_PHRASE);

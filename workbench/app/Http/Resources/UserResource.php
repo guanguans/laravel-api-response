@@ -7,7 +7,6 @@
 /** @noinspection PhpUnhandledExceptionInspection */
 /** @noinspection PhpVoidFunctionResultUsedInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
-/** @noinspection SenselessProxyMethodInspection */
 declare(strict_types=1);
 
 /**
@@ -19,23 +18,28 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponseTests\Laravel\Resources;
+namespace Workbench\App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @see \Guanguans\LaravelApiResponseTests\Laravel\Models\User
+ * @mixin \Workbench\App\Models\User
  */
-class UserCollection extends ResourceCollection
+class UserResource extends JsonResource
 {
     /**
-     * @noinspection PhpMissingReturnTypeInspection
-     * @noinspection MissingReturnTypeInspection
+     * @noinspection PhpRedundantMethodOverrideInspection
      */
-    public function toArray(mixed $request)
+    public function toArray(mixed $request): array
     {
         // return [
-        //     'data' => $this->collection,
+        //     'id' => $this->id,
+        //     'name' => $this->name,
+        //     'country_id' => $this->country_id,
+        //     'country' => $this->country,
+        //     'posts' => $this->posts,
+        //     'created_at' => $this->created_at,
+        //     'updated_at' => $this->updated_at,
         // ];
 
         return parent::toArray($request);

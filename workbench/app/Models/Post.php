@@ -2,13 +2,13 @@
 
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpMissingDocCommentInspection */
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpUnused */
 /** @noinspection PhpVoidFunctionResultUsedInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
-/** @noinspection PhpMissingDocCommentInspection */
-/** @noinspection PhpUnused */
 declare(strict_types=1);
 
 /**
@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-namespace Guanguans\LaravelApiResponseTests\Laravel\Models;
+namespace Workbench\App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -36,7 +36,7 @@ class Post extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Guanguans\LaravelApiResponseTests\Laravel\Models\User, self>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Workbench\App\Models\User, self>
      */
     public function user(): BelongsTo
     {
@@ -44,7 +44,7 @@ class Post extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough<\Guanguans\LaravelApiResponseTests\Laravel\Models\Country>
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough<\Workbench\App\Models\Country>
      */
     public function userCountry(): HasOneThrough
     {
