@@ -18,11 +18,9 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use function Spatie\Snapshots\assertMatchesJsonSnapshot;
-
 beforeEach(function (): void {});
 
 it('is error', function (string $language): void {
     config()->set('app.locale', $language);
-    assertMatchesJsonSnapshot($this->apiResponse()->error('This is an error.')->content());
+    expect($this->apiResponse()->error('This is an error.')->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('languages');

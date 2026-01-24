@@ -16,8 +16,8 @@
 * Support for restful API response(optional)
 * Support for automatically handled api exception
 * Support for localized message
-* Support for customized pipe(Process api response structure through pipeline)
-* Support for customized exception pipe(Convert exception to api response through pipeline)
+* Support for customized [pipe](src/Pipes/)(Process api response structure through pipeline)
+* Support for customized [exception pipe](src/ExceptionPipes/)(Convert exception to api response through pipeline)
 
 ## Requirement
 
@@ -70,7 +70,7 @@ class Controller extends \App\Http\Controllers\Controller
 }
 ```
 
-### Default response structure
+### Default response structure(The following default response structure can be transformed through [pipe](src/Pipes/))
 
 ```json
 {
@@ -1087,6 +1087,7 @@ class Controller extends \App\Http\Controllers\Controller
 
 * [feature](tests/Feature)
 * [snapshots](tests/__snapshots__)
+* [tests/.pest/snapshots/Feature](tests/.pest/snapshots/Feature/)
 
 </details>
 

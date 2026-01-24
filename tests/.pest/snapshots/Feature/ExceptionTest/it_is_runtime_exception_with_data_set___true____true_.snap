@@ -1,0 +1,153 @@
+{
+    "status": false,
+    "code": 400,
+    "message": "This is a runtime exception.",
+    "data": null,
+    "error": {
+        "message": "This is a runtime exception.",
+        "exception": "RuntimeException",
+        "file": "/tests/Feature/ExceptionTest.php",
+        "line": 56,
+        "trace": [
+            {
+                "file": "/vendor/pestphp/pest/src/Factories/TestCaseMethodFactory.php",
+                "line": 110,
+                "function": "{closure}",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
+                "type": "->"
+            },
+            {
+                "function": "Pest\\Factories\\{closure}",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/pestphp/pest/src/Concerns/Testable.php",
+                "line": 339,
+                "function": "call_user_func_array"
+            },
+            {
+                "file": "/vendor/pestphp/pest/src/Support/ExceptionTrace.php",
+                "line": 26,
+                "function": "Pest\\Concerns\\{closure}",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/pestphp/pest/src/Concerns/Testable.php",
+                "line": 339,
+                "function": "ensure",
+                "class": "Pest\\Support\\ExceptionTrace",
+                "type": "::"
+            },
+            {
+                "file": "/vendor/pestphp/pest/src/Concerns/Testable.php",
+                "line": 256,
+                "function": "__callClosure",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(197) : eval()'d code",
+                "line": 54,
+                "function": "__runTest",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/phpunit/phpunit/src/Framework/TestCase.php",
+                "line": 1188,
+                "function": "__pest_evaluable_it_is_runtime_exception",
+                "class": "P\\Tests\\Feature\\ExceptionTest",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/phpunit/phpunit/src/Framework/TestCase.php",
+                "line": 687,
+                "function": "runTest",
+                "class": "PHPUnit\\Framework\\TestCase",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/phpunit/phpunit/src/Framework/TestRunner.php",
+                "line": 106,
+                "function": "runBare",
+                "class": "PHPUnit\\Framework\\TestCase",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/phpunit/phpunit/src/Framework/TestCase.php",
+                "line": 517,
+                "function": "run",
+                "class": "PHPUnit\\Framework\\TestRunner",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/phpunit/phpunit/src/Framework/TestSuite.php",
+                "line": 380,
+                "function": "run",
+                "class": "PHPUnit\\Framework\\TestCase",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/phpunit/phpunit/src/Framework/TestSuite.php",
+                "line": 380,
+                "function": "run",
+                "class": "PHPUnit\\Framework\\TestSuite",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/phpunit/phpunit/src/Framework/TestSuite.php",
+                "line": 380,
+                "function": "run",
+                "class": "PHPUnit\\Framework\\TestSuite",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/phpunit/phpunit/src/Framework/TestSuite.php",
+                "line": 380,
+                "function": "run",
+                "class": "PHPUnit\\Framework\\TestSuite",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/phpunit/phpunit/src/TextUI/TestRunner.php",
+                "line": 64,
+                "function": "run",
+                "class": "PHPUnit\\Framework\\TestSuite",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/phpunit/phpunit/src/TextUI/Application.php",
+                "line": 203,
+                "function": "run",
+                "class": "PHPUnit\\TextUI\\TestRunner",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/pestphp/pest/src/Kernel.php",
+                "line": 103,
+                "function": "run",
+                "class": "PHPUnit\\TextUI\\Application",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/pestphp/pest/bin/pest",
+                "line": 91,
+                "function": "handle",
+                "class": "Pest\\Kernel",
+                "type": "->"
+            },
+            {
+                "file": "/vendor/pestphp/pest/bin/pest",
+                "line": 99,
+                "function": "{closure}"
+            },
+            {
+                "file": "/vendor/bin/pest",
+                "line": 119,
+                "function": "include"
+            }
+        ]
+    }
+}

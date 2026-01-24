@@ -1,0 +1,7 @@
+{
+    "status": false,
+    "code": 400,
+    "message": "这是一个错误。",
+    "data": null,
+    "error": {}
+}

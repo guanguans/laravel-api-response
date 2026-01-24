@@ -25,7 +25,6 @@ use Guanguans\LaravelApiResponse\Pipes\MessagePipe;
 use Guanguans\LaravelApiResponse\Pipes\StatusCodePipe;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
-use function Spatie\Snapshots\assertMatchesObjectSnapshot;
 
 it('can throw InvalidArgumentException', function (): void {
     $this->apiResponse()->beforePipes(self::class);
@@ -64,7 +63,7 @@ it('can use pipes', function (): void {
             'class@anonymous'
         )
         ->tapPipes(static function (Collection $pipes): void {
-            assertMatchesObjectSnapshot($pipes);
+            expect($pipes->toJson(\JSON_PRETTY_PRINT))->toMatchSnapshot();
         })
         ->toBeInstanceOf(ApiResponse::class);
 })->group(__DIR__, __FILE__);

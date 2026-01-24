@@ -88,7 +88,6 @@
         "shipmonk/phpstan-rules": "^4.3",
         "sidz/phpstan-rules": "^0.5.2",
         "spatie/invade": "^2.1",
-        "spatie/pest-plugin-snapshots": "^2.2",
         "spaze/phpstan-disallowed-calls": "^4.7",
         "staabm/annotate-pull-request-from-checkstyle": "^1.8",
         "staabm/phpstan-todo-by": "^0.3",

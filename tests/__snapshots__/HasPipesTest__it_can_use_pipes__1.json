@@ -1,0 +1,14 @@
+[
+    {},
+    {},
+    "Guanguans\\LaravelApiResponse\\Pipes\\MessagePipe:http-statuses",
+    "Guanguans\\LaravelApiResponse\\Pipes\\ErrorPipe",
+    {},
+    {},
+    "Guanguans\\LaravelApiResponse\\Pipes\\PaginatorDataPipe",
+    "Guanguans\\LaravelApiResponse\\Pipes\\JsonResourceDataPipe",
+    "Guanguans\\LaravelApiResponse\\Pipes\\JsonResponsableDataPipe",
+    "Guanguans\\LaravelApiResponse\\Pipes\\IterableDataPipe",
+    "Guanguans\\LaravelApiResponse\\Pipes\\StatusCodePipe",
+    {}
+]

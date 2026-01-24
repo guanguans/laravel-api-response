@@ -136,7 +136,6 @@ return RectorConfig::configure()
     ])
     ->registerDecoratingNodeVisitor(ParentConnectingVisitor::class)
     ->withConfiguredRule(RenameToConventionalCaseNameRector::class, [
-        'assertMatches*Snapshot',
         'beforeEach',
         'MIT',
         'PDO',

@@ -31,7 +31,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Workbench\App\Http\Resources\UserCollection;
 use Workbench\App\Http\Resources\UserResource;
 use Workbench\App\Models\User;
-use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function (): void {
     // JsonResource::$wrap;
@@ -44,23 +43,23 @@ beforeEach(function (): void {
 
 it('is model', function (): void {
     $user = User::query()->with(['country', 'posts'])->first();
-    assertMatchesJsonSnapshot($this->apiResponse()->success($user)->content());
+    expect($this->apiResponse()->success($user)->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
 
 it('is eloquent collection', function (): void {
     $users = User::query()->with(['country', 'posts'])->get();
-    assertMatchesJsonSnapshot($this->apiResponse()->success($users)->content());
+    expect($this->apiResponse()->success($users)->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
 
 it('is paginate', function (?string $wrap): void {
     $paginate = User::query()->with(['country', 'posts'])->paginate(3);
-    assertMatchesJsonSnapshot(
+    expect(
         $this
             ->apiResponse()
             ->unshiftPipes(PaginatorDataPipe::with($wrap))
             ->success($paginate)
             ->content()
-    );
+    )->toMatchSnapshot();
 })
     ->group(__DIR__, __FILE__)
     ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '12.0.0'))
@@ -68,27 +67,27 @@ it('is paginate', function (?string $wrap): void {
 
 it('is simple paginate', function (?string $wrap): void {
     $simplePaginate = User::query()->with(['country', 'posts'])->simplePaginate(3);
-    assertMatchesJsonSnapshot(
+    expect(
         $this
             ->apiResponse()
             ->unshiftPipes(PaginatorDataPipe::with($wrap))
             ->success($simplePaginate)
             ->content()
-    );
-    assertMatchesJsonSnapshot(
+    )->toMatchSnapshot();
+    expect(
         $this
             ->apiResponse()
             ->unshiftPipes(PaginatorDataPipe::with($wrap))
             ->success(UserCollection::make($simplePaginate))
             ->content()
-    );
-    assertMatchesJsonSnapshot(
+    )->toMatchSnapshot();
+    expect(
         $this
             ->apiResponse()
             ->unshiftPipes(PaginatorDataPipe::with($wrap))
             ->success(UserResource::collection($simplePaginate))
             ->content()
-    );
+    )->toMatchSnapshot();
 })
     ->group(__DIR__, __FILE__)
     ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '12.0.0'))
@@ -96,13 +95,13 @@ it('is simple paginate', function (?string $wrap): void {
 
 it('is cursor paginate', function (?string $wrap): void {
     $cursorPaginate = User::query()->with(['country', 'posts'])->cursorPaginate(3);
-    assertMatchesJsonSnapshot(
+    expect(
         $this
             ->apiResponse()
             ->unshiftPipes(PaginatorDataPipe::with($wrap))
             ->success($cursorPaginate)
             ->content()
-    );
+    )->toMatchSnapshot();
 })
     ->group(__DIR__, __FILE__)
     // ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0'))
@@ -110,34 +109,34 @@ it('is cursor paginate', function (?string $wrap): void {
 
 it('is resource', function (): void {
     $userResource = UserResource::make(User::query()->with(['country', 'posts'])->first());
-    assertMatchesJsonSnapshot($this->apiResponse()->success($userResource)->content());
+    expect($this->apiResponse()->success($userResource)->content())->toMatchSnapshot();
 
     JsonResource::wrap('data');
-    assertMatchesJsonSnapshot($this->apiResponse()->success($userResource)->content());
+    expect($this->apiResponse()->success($userResource)->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
 
 it('is resource collection', function (): void {
     $users = User::query()->with(['country', 'posts'])->get();
-    assertMatchesJsonSnapshot($this->apiResponse()->success(UserCollection::make($users))->content());
-    assertMatchesJsonSnapshot($this->apiResponse()->success(UserResource::collection($users))->content());
+    expect($this->apiResponse()->success(UserCollection::make($users))->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success(UserResource::collection($users))->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
 
 it('is simple paginate resource collection', function (?string $wrap): void {
     $simplePaginate = User::query()->with(['country', 'posts'])->simplePaginate(3);
-    assertMatchesJsonSnapshot(
+    expect(
         $this
             ->apiResponse()
             ->unshiftPipes(PaginatorDataPipe::with($wrap))
             ->success(UserCollection::make($simplePaginate))
             ->content()
-    );
-    assertMatchesJsonSnapshot(
+    )->toMatchSnapshot();
+    expect(
         $this
             ->apiResponse()
             ->unshiftPipes(PaginatorDataPipe::with($wrap))
             ->success(UserResource::collection($simplePaginate))
             ->content()
-    );
+    )->toMatchSnapshot();
 })
     ->group(__DIR__, __FILE__)
     ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '12.0.0'))
@@ -152,12 +151,12 @@ it('is responsable', function (array $array): void {
             return new JsonResponse($this->array);
         }
     };
-    assertMatchesJsonSnapshot($this->apiResponse()->success($responsable)->content());
+    expect($this->apiResponse()->success($responsable)->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is stringable', function (array $array): void {
     $stringable = str(json_encode($array, \JSON_THROW_ON_ERROR));
-    assertMatchesJsonSnapshot($this->apiResponse()->success($stringable)->content());
+    expect($this->apiResponse()->success($stringable)->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is arrayable', function (array $array): void {
@@ -169,7 +168,7 @@ it('is arrayable', function (array $array): void {
             return $this->array;
         }
     };
-    assertMatchesJsonSnapshot($this->apiResponse()->success($arrayable)->content());
+    expect($this->apiResponse()->success($arrayable)->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is jsonable', function (array $array): void {
@@ -181,5 +180,5 @@ it('is jsonable', function (array $array): void {
             return json_encode($this->array, $options);
         }
     };
-    assertMatchesJsonSnapshot($this->apiResponse()->success($jsonable)->content());
+    expect($this->apiResponse()->success($jsonable)->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');

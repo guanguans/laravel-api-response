@@ -24,7 +24,6 @@ use Guanguans\LaravelApiResponse\ExceptionPipes\SetCodeExceptionPipe;
 use Guanguans\LaravelApiResponse\ExceptionPipes\SetHeadersExceptionPipe;
 use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Collection;
-use function Spatie\Snapshots\assertMatchesObjectSnapshot;
 
 it('can throw InvalidArgumentException', function (): void {
     $this->apiResponse()->beforeExceptionPipes(self::class);
@@ -56,7 +55,7 @@ it('can use exception pipes', function (): void {
             SetCodeExceptionPipe::with()
         )
         ->tapExceptionPipes(static function (Collection $exceptionPipes): void {
-            assertMatchesObjectSnapshot($exceptionPipes);
+            expect($exceptionPipes->toJson(\JSON_PRETTY_PRINT))->toMatchSnapshot();
         })
         ->toBeInstanceOf(ApiResponse::class);
 })->group(__DIR__, __FILE__);
