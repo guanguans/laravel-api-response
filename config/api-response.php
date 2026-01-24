@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection PhpUnusedAliasInspection */
-/** @noinspection LaravelFunctionsInspection */
 
 declare(strict_types=1);
 

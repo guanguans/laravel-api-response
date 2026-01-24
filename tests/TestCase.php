@@ -8,6 +8,7 @@
 /** @noinspection PhpVoidFunctionResultUsedInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
 /** @noinspection PhpMissingDocCommentInspection */
+/** @noinspection PhpUnusedAliasInspection */
 declare(strict_types=1);
 
 /**
@@ -27,6 +28,7 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Lottery;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Workbench\Database\Seeders\DatabaseSeeder;
 
@@ -74,7 +76,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
         tap($app, function (Application $application): void {
             $application->useLangPath(__DIR__.'/../workbench/resources/lang/');
-            JsonResource::wrap(collect([null, 'data'])->random());
+            JsonResource::wrap(
+                Lottery::odds(4, 5)->winner(static fn (): string => 'data')->loser(static fn () => null)->choose()
+            );
         });
     }
 

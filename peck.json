@@ -2,16 +2,15 @@
     "preset": "laravel",
     "ignore": {
         "words": [
-            "php",
-            "iterable",
-            "responsable",
-            "paginator",
-            "usings",
-            "mixin",
-            "dumpable",
-            "staticable",
-            "stateable",
             "args",
+            "dumpable",
+            "iterable",
+            "mixin",
+            "paginator",
+            "responsable",
+            "stateable",
+            "staticable",
+            "usings",
             "utils"
         ],
         "paths": [

@@ -26,11 +26,11 @@ class StatusCodePipe
      * @api
      *
      * @param  array{
-     *  status: bool,
+     *  status: bool|int|string,
      *  code: int,
      *  message: string,
      *  data: mixed,
-     *  error: ?array<array-key, mixed>,
+     *  error: null|array<string, mixed>,
      * }  $structure
      * @param \Closure(array<string, mixed>): \Illuminate\Http\JsonResponse $next
      *
@@ -51,11 +51,11 @@ class StatusCodePipe
 
     /**
      * @param  array{
-     *  status: bool,
+     *  status: bool|int|string,
      *  code: int,
      *  message: string,
      *  data: mixed,
-     *  error: ?array<array-key, mixed>,
+     *  error: null|array<string, mixed>,
      * }  $structure
      */
     private function statusCodeFor(array $structure, int $fallbackErrorStatusCode, int $fallbackSuccessStatusCode): int

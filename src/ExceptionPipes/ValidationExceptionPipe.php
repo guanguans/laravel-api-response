@@ -28,8 +28,8 @@ class ValidationExceptionPipe
      * @return array{
      *     code: int,
      *     message: string,
-     *     error: array<string, list<string>>,
-     *     headers: array<string, list<null|string>>,
+     *     error: array<string, mixed>,
+     *     headers: array<string, null|list<null|string>|string>,
      * }
      *
      * @noinspection RedundantDocCommentTagInspection

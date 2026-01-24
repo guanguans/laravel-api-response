@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection EfferentObjectCouplingInspection */
+
 declare(strict_types=1);
 
 /**
@@ -56,8 +58,8 @@ class ApiResponse implements ApiResponseContract
     use Tappable;
 
     /**
-     * @param null|\Illuminate\Support\Collection<int, mixed> $pipes
-     * @param null|\Illuminate\Support\Collection<int, mixed> $exceptionPipes
+     * @param null|\Illuminate\Support\Collection<int, callable|object|string> $pipes
+     * @param null|\Illuminate\Support\Collection<int, callable|object|string> $exceptionPipes
      */
     public function __construct(?Collection $pipes = null, ?Collection $exceptionPipes = null)
     {
@@ -131,6 +133,8 @@ class ApiResponse implements ApiResponseContract
      *
      * @noinspection UnnecessaryCastingInspection
      * @noinspection PhpCastIsUnnecessaryInspection
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     * @noinspection Annotator
      */
     protected function exceptionDestination(): \Closure
     {

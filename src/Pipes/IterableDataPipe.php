@@ -24,11 +24,11 @@ class IterableDataPipe
      * @api
      *
      * @param  array{
-     *  status: bool,
+     *  status: bool|int|string,
      *  code: int,
      *  message: string,
      *  data: mixed,
-     *  error: ?array<array-key, mixed>,
+     *  error: null|array<string, mixed>,
      * }  $structure
      * @param \Closure(array<string, mixed>): \Illuminate\Http\JsonResponse $next
      *

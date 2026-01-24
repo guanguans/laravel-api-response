@@ -57,15 +57,17 @@ it('is object', function (array $array): void {
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is enum', function (): void {
-    // enum Suit
-    // {
-    //     case Hearts;
-    //     case Diamonds;
-    //     case Clubs;
-    //     case Spades;
-    // }
-    // assertMatchesJsonSnapshot($this->apiResponse()->success(Suit::Hearts)->content());
-})->group(__DIR__, __FILE__)->skip(\PHP_VERSION_ID < 80100 ? 'Enum type data is not supported' : '');
+    enum Suit: string
+    {
+        case Heart = 'Heart';
+        case Diamond = 'Diamond';
+        case Club = 'Club';
+        case Spade = 'Spade';
+    }
+
+    assertMatchesJsonSnapshot($this->apiResponse()->success(Suit::Heart)->content());
+    assertMatchesJsonSnapshot($this->apiResponse()->success(Suit::cases())->content());
+})->group(__DIR__, __FILE__);
 
 it('is resource', function (): void {
     assertMatchesJsonSnapshot($this->apiResponse()->success(fopen(__FILE__, 'rb'))->content());

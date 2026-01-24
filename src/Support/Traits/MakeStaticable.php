@@ -15,8 +15,8 @@ namespace Guanguans\LaravelApiResponse\Support\Traits;
 
 trait MakeStaticable
 {
-    public static function make(mixed ...$parameters): self
+    public static function make(mixed ...$args): self
     {
-        return new static(...$parameters);
+        return new static(...$args);
     }
 }

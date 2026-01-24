@@ -1226,9 +1226,11 @@ class Controller extends \App\Http\Controllers\Controller
 
 </details>
 
-## Testing
+## Composer scripts
 
 ```shell
+composer checks:required
+composer php-cs-fixer:fix
 composer test
 ```
 

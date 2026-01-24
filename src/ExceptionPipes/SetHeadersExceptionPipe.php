@@ -28,11 +28,15 @@ class SetHeadersExceptionPipe
     private array $classes;
 
     /**
-     * @param array<string, list<null|string>> $headers
+     * @see \Symfony\Component\HttpFoundation\ResponseHeaderBag::add()
+     * @see \Symfony\Component\HttpFoundation\ResponseHeaderBag::set()
+     *
+     * @param array<string, null|list<null|string>|string> $headers
      * @param class-string<\Throwable> ...$classes
      */
     public function __construct(
         private readonly array $headers,
+        /** @see self::__set_state() */
         mixed ...$classes
     ) {
         $this->classes = $classes;
@@ -46,8 +50,8 @@ class SetHeadersExceptionPipe
      * @return array{
      *     code: int,
      *     message: string,
-     *     error: array<array-key, mixed>,
-     *     headers: array<string, list<null|string>>,
+     *     error: array<string, mixed>,
+     *     headers: array<string, null|list<null|string>|string>,
      * }
      *
      * @noinspection RedundantDocCommentTagInspection

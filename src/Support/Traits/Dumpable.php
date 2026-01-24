@@ -17,28 +17,30 @@ declare(strict_types=1);
 
 namespace Illuminate\Support\Traits;
 
-if (!trait_exists(Dumpable::class)) {
+if (trait_exists(Dumpable::class)) {
+    return;
+}
+
+/**
+ * @see https://github.com/laravel/framework/blob/11.x/src/Illuminate/Support/Traits/Dumpable.php
+ */
+trait Dumpable
+{
     /**
-     * @see https://github.com/laravel/framework/blob/11.x/src/Illuminate/Support/Traits/Dumpable.php
+     * Dump the given arguments and terminate execution.
      */
-    trait Dumpable
+    public function dd(mixed ...$args): void
     {
-        /**
-         * Dump the given arguments and terminate execution.
-         */
-        public function dd(mixed ...$args): void
-        {
-            dd($this, ...$args); // @codeCoverageIgnore
-        }
+        dd($this, ...$args); // @codeCoverageIgnore
+    }
 
-        /**
-         * Dump the given arguments.
-         */
-        public function dump(mixed ...$args): self
-        {
-            dump($this, ...$args);
+    /**
+     * Dump the given arguments.
+     */
+    public function dump(mixed ...$args): self
+    {
+        dump($this, ...$args);
 
-            return $this;
-        }
+        return $this;
     }
 }

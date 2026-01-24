@@ -21,14 +21,19 @@ use Illuminate\Support\Collection;
  * @see \GuzzleHttp\HandlerStack
  *
  * @mixin \Guanguans\LaravelApiResponse\ApiResponse
- *
- * @noinspection PhpUndefinedNamespaceInspection
  */
 trait HasPipes
 {
-    /** @var \Illuminate\Support\Collection<int, mixed> */
+    /**
+     * @see \Illuminate\Pipeline\Pipeline::carry()
+     *
+     * @var \Illuminate\Support\Collection<int, callable|object|string>
+     */
     protected Collection $pipes;
 
+    /**
+     * @noinspection PhpStaticAsDynamicMethodCallInspection
+     */
     public function unshiftPipes(mixed ...$pipes): self
     {
         return $this->tapPipes(static function (Collection $originalPipes) use ($pipes): void {
@@ -73,9 +78,7 @@ trait HasPipes
     }
 
     /**
-     * @param callable(\Illuminate\Support\Collection<int, mixed>): \Illuminate\Support\Collection<int, mixed> $callback
-     *
-     * @noinspection PhpDocSignatureIsNotCompleteInspection
+     * @param callable(\Illuminate\Support\Collection<int, callable|object|string>): \Illuminate\Support\Collection<int, callable|object|string> $callback
      */
     public function extendPipes(callable $callback): self
     {
@@ -92,7 +95,10 @@ trait HasPipes
     }
 
     /**
-     * @param list<mixed> $pipes
+     * @param list<callable|object|string> $pipes
+     *
+     * @noinspection StaticInvocationViaThisInspection
+     * @noinspection PhpStaticAsDynamicMethodCallInspection
      */
     private function splicePipes(string $findPipe, array $pipes, bool $before): self
     {

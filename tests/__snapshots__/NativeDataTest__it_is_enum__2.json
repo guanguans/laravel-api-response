@@ -1,0 +1,12 @@
+{
+    "status": true,
+    "code": 200,
+    "message": "OK",
+    "data": [
+        "Heart",
+        "Diamond",
+        "Club",
+        "Spade"
+    ],
+    "error": {}
+}

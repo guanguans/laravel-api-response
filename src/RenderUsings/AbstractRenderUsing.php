@@ -22,6 +22,8 @@ abstract class AbstractRenderUsing
     /**
      * @see \Illuminate\Foundation\Exceptions\Handler::renderable()
      * @see \Guanguans\LaravelApiResponse\ServiceProvider::registerRenderUsing()
+     *
+     * @noinspection PhpIncompatibleReturnTypeInspection
      */
     public function __invoke(\Throwable $throwable, Request $request): ?JsonResponse
     {

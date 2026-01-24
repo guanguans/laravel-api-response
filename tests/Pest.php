@@ -140,5 +140,5 @@ function links(array $links, array $parameters = []): int
 
 function running_in_github_action(): bool
 {
-    return getenv('GITHUB_ACTIONS') === 'true';
+    return 'true' === getenv('GITHUB_ACTIONS');
 }

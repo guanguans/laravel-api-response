@@ -1,6 +1,5 @@
 <?php
 
-/** @noinspection LaravelUnknownViewInspection */
 /** @noinspection PhpUnusedAliasInspection */
 declare(strict_types=1);
 

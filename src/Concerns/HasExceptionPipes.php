@@ -21,9 +21,16 @@ use Illuminate\Support\Collection;
  */
 trait HasExceptionPipes
 {
-    /** @var \Illuminate\Support\Collection<int, mixed> */
+    /**
+     * @see \Illuminate\Pipeline\Pipeline::carry()
+     *
+     * @var \Illuminate\Support\Collection<int, callable|object|string>
+     */
     protected Collection $exceptionPipes;
 
+    /**
+     * @noinspection PhpStaticAsDynamicMethodCallInspection
+     */
     public function unshiftExceptionPipes(mixed ...$exceptionPipes): self
     {
         return $this->tapExceptionPipes(static function (Collection $originalExceptionPipes) use ($exceptionPipes): void {
@@ -68,9 +75,7 @@ trait HasExceptionPipes
     }
 
     /**
-     * @param callable(\Illuminate\Support\Collection<int, mixed>): \Illuminate\Support\Collection<int, mixed> $callback
-     *
-     * @noinspection PhpDocSignatureIsNotCompleteInspection
+     * @param callable(\Illuminate\Support\Collection<int, callable|object|string>): \Illuminate\Support\Collection<int, callable|object|string> $callback
      */
     public function extendExceptionPipes(callable $callback): self
     {
@@ -87,7 +92,10 @@ trait HasExceptionPipes
     }
 
     /**
-     * @param list<mixed> $exceptionPipes
+     * @param list<callable|object|string> $exceptionPipes
+     *
+     * @noinspection StaticInvocationViaThisInspection
+     * @noinspection PhpStaticAsDynamicMethodCallInspection
      */
     private function spliceExceptionPipes(string $findExceptionPipe, array $exceptionPipes, bool $before): self
     {

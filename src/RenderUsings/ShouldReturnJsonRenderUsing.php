@@ -23,6 +23,10 @@ use Illuminate\Http\Request;
  */
 class ShouldReturnJsonRenderUsing extends AbstractRenderUsing
 {
+    /**
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     * @noinspection Annotator
+     */
     protected function when(Request $request, \Throwable $throwable): bool
     {
         // return (fn (): bool => $this->shouldReturnJson($request, $throwable))->call(resolve(ExceptionHandler::class));

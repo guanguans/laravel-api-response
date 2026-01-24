@@ -2,7 +2,6 @@
 
 /** @noinspection PhpInternalEntityUsedInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
-/** @noinspection PhpUnusedAliasInspection */
 
 declare(strict_types=1);
 
@@ -207,6 +206,9 @@ return RectorConfig::configure()
         ],
         RenameClassRector::class => [
             __FILE__,
+        ],
+        RenameToConventionalCaseNameRector::class => [
+            __DIR__.'/tests/Feature/NativeDataTest.php',
         ],
         SortAssociativeArrayByKeyRector::class => [
             // __DIR__.'/config/',

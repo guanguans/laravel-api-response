@@ -1,0 +1,8 @@
+# total 1 error
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Public property `bindings` not marked as readonly\.$#'
+            count: 1
+            path: ../src/ServiceProvider.php

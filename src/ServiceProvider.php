@@ -16,9 +16,7 @@ namespace Guanguans\LaravelApiResponse;
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Guanguans\LaravelApiResponse\Support\Mixins\CollectionMixin;
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use function Guanguans\LaravelApiResponse\Support\make;
@@ -26,13 +24,22 @@ use function Guanguans\LaravelApiResponse\Support\make;
 class ServiceProvider extends PackageServiceProvider
 {
     /**
+     * @api
+     *
+     * @var array<string, string>
+     *
+     * @noinspection ClassOverridesFieldOfSuperClassInspection
+     */
+    public array $bindings = [
+        ApiResponseContract::class => ApiResponse::class,
+    ];
+
+    /**
      * @return list<string>
      */
     public function provides(): array
     {
         return [
-            $this->toAlias(ApiResponse::class),
-            $this->toAlias(ApiResponseContract::class),
             ApiResponse::class,
             ApiResponseContract::class,
         ];
@@ -48,7 +55,6 @@ class ServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         $this->registerApiResponse();
-        $this->registerApiResponseContract();
     }
 
     /**
@@ -88,39 +94,5 @@ class ServiceProvider extends PackageServiceProvider
                 collect((array) config('api-response.exception_pipes'))
             )
         );
-
-        $this->alias(ApiResponse::class);
-    }
-
-    private function registerApiResponseContract(): void
-    {
-        $this->app->bind(
-            ApiResponseContract::class,
-            static fn (Application $application): ApiResponseContract => $application->make(ApiResponse::class)
-        );
-
-        $this->alias(ApiResponseContract::class);
-    }
-
-    /**
-     * @param class-string $class
-     */
-    private function alias(string $class): void
-    {
-        $this->app->alias($class, $this->toAlias($class));
-    }
-
-    /**
-     * @param class-string $class
-     */
-    private function toAlias(string $class): string
-    {
-        return str($class)
-            ->replaceFirst(__NAMESPACE__, '')
-            ->start('\\'.class_basename(ApiResponse::class))
-            ->replaceFirst('\\', '')
-            ->explode('\\')
-            ->map(static fn (string $name): string => Str::snake($name, '-'))
-            ->implode('.');
     }
 }

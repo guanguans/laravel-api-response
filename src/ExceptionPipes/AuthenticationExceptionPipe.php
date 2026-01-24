@@ -29,8 +29,8 @@ class AuthenticationExceptionPipe
      * @return array{
      *     code: int,
      *     message: string,
-     *     error: array<array-key, mixed>,
-     *     headers: array<string, list<null|string>>,
+     *     error: array<string, mixed>,
+     *     headers: array<string, null|list<null|string>|string>,
      * }
      *
      * @noinspection RedundantDocCommentTagInspection

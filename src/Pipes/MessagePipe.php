@@ -27,11 +27,11 @@ class MessagePipe
      * @api
      *
      * @param  array{
-     *  status: bool,
+     *  status: bool|int|string,
      *  code: int,
      *  message: string,
      *  data: mixed,
-     *  error: ?array<array-key, mixed>,
+     *  error: null|array<string, mixed>,
      * }  $structure
      * @param \Closure(array<string, mixed>): \Illuminate\Http\JsonResponse $next
      * @param string $fallbackErrorMessage // ['Whoops, looks like something went wrong.', 'Server Error', 'Internal Server Error', 'Unknown Status'];
@@ -57,11 +57,11 @@ class MessagePipe
 
     /**
      * @param  array{
-     * status: bool,
-     * code: int,
-     * message: string,
-     * data: mixed,
-     * error: ?array<array-key, mixed>,
+     *  status: bool|int|string,
+     *  code: int,
+     *  message: string,
+     *  data: mixed,
+     *  error: null|array<string, mixed>,
      * }  $structure
      */
     private function transKeyFor(
