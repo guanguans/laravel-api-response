@@ -8,6 +8,30 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="3.0.0"></a>
+## [3.0.0] - 2026-01-24
+### 🎨 Styles
+- apply php-cs-fixer ([e47de66](https://github.com/guanguans/laravel-api-response/commit/e47de66))
+
+### 💅 Code Refactorings
+- apply phpstan ([9f19be2](https://github.com/guanguans/laravel-api-response/commit/9f19be2))
+- apply phpstan ([207afff](https://github.com/guanguans/laravel-api-response/commit/207afff))
+- apply phpstan ([c635302](https://github.com/guanguans/laravel-api-response/commit/c635302))
+- apply rector ([1075815](https://github.com/guanguans/laravel-api-response/commit/1075815))
+
+### ✅ Tests
+- Replace assertMatchesJsonSnapshot with expect for snapshot testing ([cf7c19b](https://github.com/guanguans/laravel-api-response/commit/cf7c19b))
+- Migrate test files to workbench ([cdf1cec](https://github.com/guanguans/laravel-api-response/commit/cdf1cec))
+
+### 📦 Builds
+- **deps:** update PHP to 8.1 and Laravel framework to 10 requirements ([b951dde](https://github.com/guanguans/laravel-api-response/commit/b951dde))
+
+### 🤖 Continuous Integrations
+- **config:** Update github config files ([9b33bfe](https://github.com/guanguans/laravel-api-response/commit/9b33bfe))
+- **config:** Update config files ([aa84d61](https://github.com/guanguans/laravel-api-response/commit/aa84d61))
+- **config:** Update config files ([5d4e409](https://github.com/guanguans/laravel-api-response/commit/5d4e409))
+
+
 <a name="2.2.0"></a>
 ## [2.2.0] - 2026-01-22
 ### 🎨 Styles
@@ -475,7 +499,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/2.2.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/guanguans/laravel-api-response/compare/2.2.0...3.0.0
 [2.2.0]: https://github.com/guanguans/laravel-api-response/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/guanguans/laravel-api-response/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/guanguans/laravel-api-response/compare/2.0.6...2.1.0
