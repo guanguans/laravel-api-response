@@ -8,6 +8,13 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="3.0.1"></a>
+## [3.0.1] - 2026-01-25
+### 💅 Code Refactorings
+- **exception-pipes:** Replace Arr::first with collect()->contains ([1ba09a3](https://github.com/guanguans/laravel-api-response/commit/1ba09a3))
+- **pipes:** Replace unshift with prepend for exception and pipes ([a0b5123](https://github.com/guanguans/laravel-api-response/commit/a0b5123))
+
+
 <a name="3.0.0"></a>
 ## [3.0.0] - 2026-01-24
 ### 🎨 Styles
@@ -499,7 +506,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.0.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.0.1...HEAD
+[3.0.1]: https://github.com/guanguans/laravel-api-response/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/guanguans/laravel-api-response/compare/2.2.0...3.0.0
 [2.2.0]: https://github.com/guanguans/laravel-api-response/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/guanguans/laravel-api-response/compare/2.1.0...2.1.1
