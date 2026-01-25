@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Guanguans\LaravelApiResponse\ExceptionPipes;
 
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
-use Illuminate\Support\Arr;
 
 class SetMessageExceptionPipe
 {
@@ -38,7 +37,7 @@ class SetMessageExceptionPipe
     {
         $structure = $next($throwable);
 
-        if (Arr::first($classes, static fn (string $class): bool => $throwable instanceof $class)) {
+        if (collect($classes)->contains(static fn (string $class): bool => $throwable instanceof $class)) {
             return ['message' => $message] + $structure;
         }
 

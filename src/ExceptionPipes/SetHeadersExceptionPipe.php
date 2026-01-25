@@ -16,7 +16,6 @@ namespace Guanguans\LaravelApiResponse\ExceptionPipes;
 use Guanguans\LaravelApiResponse\Support\Traits\MakeStaticable;
 use Guanguans\LaravelApiResponse\Support\Traits\SetStateable;
 use Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs;
-use Illuminate\Support\Arr;
 
 class SetHeadersExceptionPipe
 {
@@ -60,7 +59,7 @@ class SetHeadersExceptionPipe
     {
         $structure = $next($throwable);
 
-        if (Arr::first($this->classes, static fn (string $class): bool => $throwable instanceof $class)) {
+        if (collect($this->classes)->contains(static fn (string $class): bool => $throwable instanceof $class)) {
             return ['headers' => $this->headers] + $structure;
         }
 
