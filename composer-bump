@@ -102,6 +102,7 @@ final class ComposerBump
             ->updateComposerPackages()
             ->updateOutdatedComposerPackages()
             ->updateComposerPackages()
+            ->updateOutdatedComposerPackages()
             ->normalizeComposerJson()
             ->success();
     }
@@ -123,7 +124,8 @@ final class ComposerBump
 
     private function updateComposerPackages(): self
     {
-        $this->mustRunCommand("$this->composer update --with-all-dependencies");
+        // $this->mustRunCommand("$this->composer update --with-all-dependencies --no-security-blocking");
+        $this->mustRunCommand("$this->composer update --no-security-blocking");
 
         return $this;
     }

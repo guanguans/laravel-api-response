@@ -41,10 +41,8 @@ use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
+use Rector\TypeDeclaration\Rector\StmtsAwareInterface\SafeDeclareStrictTypesRector;
 use Rector\ValueObject\PhpVersion;
-use Rector\ValueObject\Visibility;
-use Rector\Visibility\Rector\ClassMethod\ChangeMethodVisibilityRector;
-use Rector\Visibility\ValueObject\ChangeMethodVisibility;
 use RectorLaravel\Rector\ArrayDimFetch\ArrayToArrGetRector;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
@@ -115,6 +113,7 @@ return RectorConfig::configure()
     ->withRules([
         ArraySpreadInsteadOfArrayMergeRector::class,
         JsonThrowOnErrorRector::class,
+        SafeDeclareStrictTypesRector::class,
         SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
@@ -149,24 +148,6 @@ return RectorConfig::configure()
         'phpstan-ignore-next-line',
         'psalm-suppress',
     ])
-    ->withConfiguredRule(
-        ChangeMethodVisibilityRector::class,
-        classes(static fn (string $class, string $file): bool => str_starts_with($class, 'Guanguans\LaravelApiResponse'))
-            ->filter(static fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isTrait())
-            ->map(
-                static fn (ReflectionClass $reflectionClass): array => collect($reflectionClass->getMethods(ReflectionMethod::IS_PRIVATE))
-                    ->reject(static fn (ReflectionMethod $reflectionMethod): bool => $reflectionMethod->isFinal() || $reflectionMethod->isInternal())
-                    ->map(static fn (ReflectionMethod $reflectionMethod): ChangeMethodVisibility => new ChangeMethodVisibility(
-                        $reflectionClass->getName(),
-                        $reflectionMethod->getName(),
-                        Visibility::PROTECTED
-                    ))
-                    ->all()
-            )
-            ->flatten()
-            // ->dd()
-            ->all(),
-    )
     ->withSkip([
         ArrayToFirstClassCallableRector::class,
         ArrowFunctionDelegatingCallToFirstClassCallableRector::class,
