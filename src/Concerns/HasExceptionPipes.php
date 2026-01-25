@@ -17,6 +17,9 @@ use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Collection;
 
 /**
+ * @see https://github.com/guzzle/guzzle/blob/8.0/src/HandlerStack.php
+ * @see \GuzzleHttp\HandlerStack
+ *
  * @mixin \Guanguans\LaravelApiResponse\ApiResponse
  */
 trait HasExceptionPipes
@@ -28,13 +31,13 @@ trait HasExceptionPipes
      */
     protected Collection $exceptionPipes;
 
-    /**
-     * @noinspection PhpStaticAsDynamicMethodCallInspection
-     */
     public function unshiftExceptionPipes(mixed ...$exceptionPipes): self
     {
         return $this->tapExceptionPipes(static function (Collection $originalExceptionPipes) use ($exceptionPipes): void {
-            $originalExceptionPipes->unshift(...$exceptionPipes);
+            // $originalExceptionPipes->unshift(...$exceptionPipes);
+            collect($exceptionPipes)->reverse()->each(
+                static fn (mixed $exceptionPipe): Collection => $originalExceptionPipes->prepend($exceptionPipe)
+            );
         });
     }
 
@@ -93,9 +96,6 @@ trait HasExceptionPipes
 
     /**
      * @param list<callable|object|string> $exceptionPipes
-     *
-     * @noinspection StaticInvocationViaThisInspection
-     * @noinspection PhpStaticAsDynamicMethodCallInspection
      */
     private function spliceExceptionPipes(string $findExceptionPipe, array $exceptionPipes, bool $before): self
     {
@@ -103,7 +103,10 @@ trait HasExceptionPipes
 
         if ($before) {
             if (0 === $idx) {
-                $this->exceptionPipes->unshift(...$exceptionPipes);
+                // $this->exceptionPipes->unshift(...$exceptionPipes);
+                collect($exceptionPipes)->reverse()->each(
+                    fn (mixed $exceptionPipe): Collection => $this->exceptionPipes->prepend($exceptionPipe)
+                );
             } else {
                 $this->exceptionPipes->splice($idx, 1, [...$exceptionPipes, $this->exceptionPipes->get($idx)]);
             }

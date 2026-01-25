@@ -31,13 +31,13 @@ trait HasPipes
      */
     protected Collection $pipes;
 
-    /**
-     * @noinspection PhpStaticAsDynamicMethodCallInspection
-     */
     public function unshiftPipes(mixed ...$pipes): self
     {
         return $this->tapPipes(static function (Collection $originalPipes) use ($pipes): void {
-            $originalPipes->unshift(...$pipes);
+            // $originalPipes->unshift(...$pipes);
+            collect($pipes)->reverse()->each(
+                static fn (mixed $pipe): Collection => $originalPipes->prepend($pipe)
+            );
         });
     }
 
@@ -96,9 +96,6 @@ trait HasPipes
 
     /**
      * @param list<callable|object|string> $pipes
-     *
-     * @noinspection StaticInvocationViaThisInspection
-     * @noinspection PhpStaticAsDynamicMethodCallInspection
      */
     private function splicePipes(string $findPipe, array $pipes, bool $before): self
     {
@@ -106,7 +103,10 @@ trait HasPipes
 
         if ($before) {
             if (0 === $idx) {
-                $this->pipes->unshift(...$pipes);
+                // $this->pipes->unshift(...$pipes);
+                collect($pipes)->reverse()->each(
+                    fn (mixed $pipe): Collection => $this->pipes->prepend($pipe)
+                );
             } else {
                 $this->pipes->splice($idx, 1, [...$pipes, $this->pipes->get($idx)]);
             }

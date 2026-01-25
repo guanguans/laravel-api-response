@@ -37,7 +37,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 Route::group([
     'as' => 'api.',
-    'namespace' => '\App\Http\Controllers\Api',
+    'namespace' => '\Workbench\App\Http\Controllers\Api',
     'prefix' => 'api',
     'middleware' => [
         SetJsonAcceptHeader::class,

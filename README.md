@@ -93,7 +93,7 @@ class Controller extends \App\Http\Controllers\Controller
 namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
+use Workbench\App\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
@@ -165,7 +165,7 @@ class Controller extends \App\Http\Controllers\Controller
 namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
+use Workbench\App\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
@@ -353,7 +353,7 @@ class Controller extends \App\Http\Controllers\Controller
 namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
+use Workbench\App\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
@@ -500,8 +500,8 @@ class Controller extends \App\Http\Controllers\Controller
 namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
-use Guanguans\LaravelApiResponseTests\Laravel\Resources\UserResource;
+use Workbench\App\Models\User;
+use Workbench\App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller
@@ -573,8 +573,8 @@ class Controller extends \App\Http\Controllers\Controller
 namespace App\Http\Controllers\Api;
 
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
-use Guanguans\LaravelApiResponseTests\Laravel\Models\User;
-use Guanguans\LaravelApiResponseTests\Laravel\Resources\UserCollection;
+use Workbench\App\Models\User;
+use Workbench\App\Http\Resources\UserCollection;
 use Illuminate\Http\JsonResponse;
 
 class Controller extends \App\Http\Controllers\Controller

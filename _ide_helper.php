@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection EmptyClassInspection */
-
 declare(strict_types=1);
 
 /**
@@ -18,10 +17,5 @@ namespace {
 }
 
 namespace Illuminate\Support {
-    /**
-     * @method self unshift(...$values)
-     *
-     * @see \Guanguans\LaravelApiResponse\Support\Mixins\CollectionMixin
-     */
-    class Collection {}
+    class NullClass {}
 }

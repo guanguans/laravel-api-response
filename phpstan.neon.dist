@@ -185,5 +185,4 @@ parameters:
         - identifier: symplify.forbiddenNode
         - identifier: symplify.forbiddenStaticClassConstFetch
         - identifier: symplify.requireExceptionNamespace
-        - message: '#^Call to an undefined method Illuminate\\Support\\Collection.*\:\:unshift\(\)\.$#'
         - message: '#^Class Guanguans\\LaravelApiResponse\\Facades\\ApiResponseFacade has PHPDoc tag @method for method .*\(\) parameter \#\d \$error with no value type specified in iterable type array\.$#'

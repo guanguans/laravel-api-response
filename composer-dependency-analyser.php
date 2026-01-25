@@ -18,19 +18,13 @@ return (new Configuration)
     ->addPathsToScan(
         [
             __DIR__.'/config/',
-            // __DIR__.'/src/',
         ],
         false
     )
     ->addPathsToExclude([
         __DIR__.'/tests/',
+        __DIR__.'/workbench/',
     ])
-    // ->ignoreErrorsOnExtensions(
-    //     [
-    //         'ext-mbstring',
-    //     ],
-    //     [ErrorType::SHADOW_DEPENDENCY]
-    // )
     ->ignoreErrorsOnPackages(
         [
             'symfony/http-foundation',
@@ -38,10 +32,4 @@ return (new Configuration)
             'symfony/var-dumper',
         ],
         [ErrorType::SHADOW_DEPENDENCY]
-    )
-    ->ignoreErrorsOnPackages(
-        [
-            // 'guanguans/ai-commit',
-        ],
-        [ErrorType::DEV_DEPENDENCY_IN_PROD]
     );
