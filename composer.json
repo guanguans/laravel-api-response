@@ -61,7 +61,7 @@
         "laravel/facade-documenter": "dev-main",
         "mockery/mockery": "^1.6",
         "nette/utils": "^4.0",
-        "nicksdot/phpstan-phpstorm-error-identifiers": "^0.2 || ^0.3",
+        "nicksdot/phpstan-phpstorm-error-identifiers": "^0.3",
         "orchestra/testbench": "^8.37 || ^9.0 || ^10.0",
         "pestphp/pest": "^2.36 || ^3.0 || ^4.0",
         "pestphp/pest-plugin-arch": "^2.7 || ^3.0 || ^4.0",
@@ -380,7 +380,9 @@
         "phpstan": "@php vendor/bin/phpstan --ansi -vv",
         "phpstan:analyse": "@phpstan analyse",
         "phpstan:analyse-error-format-annotate-pull-request": "@php vendor/bin/phpstan --ansi -vv 'analyse' --error-format=checkstyle | vendor/bin/cs2pr --notices-as-warnings --colorize",
+        "phpstan:analyse-error-format-checkstyle": "@phpstan:analyse --error-format=checkstyle",
         "phpstan:analyse-error-format-github": "@phpstan:analyse --error-format=github",
+        "phpstan:analyse-error-format-llm": "@phpstan:analyse --error-format=llm",
         "phpstan:analyse-error-format-sarif": [
             "[ -d .build/phpstan/ ] || mkdir -p .build/phpstan/",
             "@php vendor/bin/phpstan --ansi -vv 'analyse' --error-format=sarif > .build/phpstan/results.sarif"

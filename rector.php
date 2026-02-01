@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 use Ergebnis\Rector\Rules\Arrays\SortAssociativeArrayByKeyRector;
 use Guanguans\RectorRules\Rector\File\AddNoinspectionDocblockToFileFirstStmtRector;
-use Guanguans\RectorRules\Rector\FunctionLike\RenameGarbageParamNameRector;
 use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
 use Guanguans\RectorRules\Set\SetList;
 use PhpParser\NodeVisitor\ParentConnectingVisitor;
@@ -37,7 +36,6 @@ use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
-use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
@@ -101,7 +99,7 @@ return RectorConfig::configure()
         SetList::ALL,
         ...collect((new ReflectionClass(LaravelSetList::class))->getConstants(ReflectionClassConstant::IS_PUBLIC))
             ->reject(
-                static fn (string $constant, string $name): bool => \in_array(
+                static fn (string $_, string $name): bool => \in_array(
                     $name,
                     ['LARAVEL_STATIC_TO_INJECTION', 'LUMEN'],
                     true
@@ -153,8 +151,6 @@ return RectorConfig::configure()
         ArrowFunctionDelegatingCallToFirstClassCallableRector::class,
         DisallowedEmptyRuleFixerRector::class,
 
-        RenameFunctionRector::class,
-        RenameGarbageParamNameRector::class,
         ScalarValueToConstFetchRector::class,
     ])
     ->withSkip([

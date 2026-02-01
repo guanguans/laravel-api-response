@@ -36,6 +36,10 @@ services:
             relativePathHelper: @simpleRelativePathHelper
             currentWorkingDirectory: %currentWorkingDirectory%
             pretty: true
+#    errorFormatter.checkstyle:
+#        class: NickSdot\PhpStanPhpStormErrorIdentifiers\CheckstyleErrorFormatterPhpStorm
+    errorFormatter.llm:
+        class: NickSdot\PhpStanPhpStormErrorIdentifiers\LlmErrorFormatter
 
 parameters:
     paths:
