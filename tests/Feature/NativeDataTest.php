@@ -58,13 +58,13 @@ it('is object', function (array $array): void {
 it('is enum', function (): void {
     enum Suit: string
     {
-        case Heart = 'Heart';
-        case Diamond = 'Diamond';
-        case Club = 'Club';
-        case Spade = 'Spade';
+        case HEART = '♥︎';
+        case DIAMOND = '♦︎';
+        case CLUB = '♣︎';
+        case SPADE = '︎♠︎';
     }
 
-    expect($this->apiResponse()->success(Suit::Heart)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success(Suit::HEART)->content())->toMatchSnapshot();
     expect($this->apiResponse()->success(Suit::cases())->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
 
@@ -95,7 +95,7 @@ it('is callable', function (): void {
 
     expect($this->apiResponse()->success(fn (): string => __METHOD__)->content())->toMatchSnapshot();
     expect($this->apiResponse()->success('\time')->content())->toMatchSnapshot(); // unsupported
-    expect($this->apiResponse()->success([NativeDataTest::class, 'staticMethod'])->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success(NativeDataTest::staticMethod(...))->content())->toMatchSnapshot();
     expect($this->apiResponse()->success(NativeDataTest::class.'::staticMethod')->content())->toMatchSnapshot();
     expect($this->apiResponse()->success([NativeDataTest::make(), 'generalMethod'])->content())->toMatchSnapshot();
     expect($this->apiResponse()->success(NativeDataTest::make())->content())->toMatchSnapshot();

@@ -422,7 +422,7 @@
         "rector": "@php vendor/bin/rector",
         "rector:custom-rule": "@rector custom-rule",
         "rector:list-rules": "@rector list-rules",
-        "rector:process": "@rector process",
+        "rector:process": "@rector process --ansi",
         "rector:process-clear-cache": "@rector:process --clear-cache",
         "rector:process-clear-cache-dry-run": "@rector:process-clear-cache --dry-run",
         "rector:process-dry-run": "@rector:process --dry-run",

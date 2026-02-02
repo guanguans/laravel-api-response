@@ -31,9 +31,6 @@ class Post extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $casts = [
-        'user_id' => 'int',
-    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Workbench\App\Models\User, self>
@@ -56,5 +53,15 @@ class Post extends Model
             'user_id',
             'country_id'
         );
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'user_id' => 'int',
+        ];
     }
 }

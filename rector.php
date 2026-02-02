@@ -35,14 +35,11 @@ use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
-use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
-use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
 use Rector\TypeDeclaration\Rector\StmtsAwareInterface\SafeDeclareStrictTypesRector;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Rector\ArrayDimFetch\ArrayToArrGetRector;
-use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\ConfigToTypedConfigMethodCallRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
@@ -50,9 +47,7 @@ use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\If_\ThrowIfRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
-use RectorLaravel\Set\LaravelSetList;
 use RectorLaravel\Set\LaravelSetProvider;
-use function Guanguans\RectorRules\Support\classes;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -97,16 +92,6 @@ return RectorConfig::configure()
     )
     ->withSets([
         SetList::ALL,
-        ...collect((new ReflectionClass(LaravelSetList::class))->getConstants(ReflectionClassConstant::IS_PUBLIC))
-            ->reject(
-                static fn (string $_, string $name): bool => \in_array(
-                    $name,
-                    ['LARAVEL_STATIC_TO_INJECTION', 'LUMEN'],
-                    true
-                ) || preg_match('/^LARAVEL_\d{2,3}$/', $name)
-            )
-            // ->dd()
-            ->all(),
     ])
     ->withRules([
         ArraySpreadInsteadOfArrayMergeRector::class,
@@ -115,11 +100,6 @@ return RectorConfig::configure()
         SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
-        ...classes(static fn (string $class): bool => str_starts_with($class, 'RectorLaravel\Rector'))
-            ->filter(static fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isInstantiable())
-            ->keys()
-            // ->dd()
-            ->all(),
     ])
     ->withConfiguredRule(AddNoinspectionDocblockToFileFirstStmtRector::class, [
         '*/tests/*' => [
@@ -147,14 +127,12 @@ return RectorConfig::configure()
         'psalm-suppress',
     ])
     ->withSkip([
-        ArrayToFirstClassCallableRector::class,
-        ArrowFunctionDelegatingCallToFirstClassCallableRector::class,
-        DisallowedEmptyRuleFixerRector::class,
-
+        // ArrayToFirstClassCallableRector::class,
+        // ArrowFunctionDelegatingCallToFirstClassCallableRector::class,
         ScalarValueToConstFetchRector::class,
-    ])
-    ->withSkip([
+
         ChangeOrIfContinueToMultiContinueRector::class,
+        DisallowedEmptyRuleFixerRector::class,
         EncapsedStringsToSprintfRector::class,
         ExplicitBoolCompareRector::class,
         LogicalToBooleanRector::class,
@@ -165,7 +143,6 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         ConfigToTypedConfigMethodCallRector::class,
-        ModelCastsPropertyToCastsMethodRector::class,
         TypeHintTappableCallRector::class,
 
         ArrayToArrGetRector::class,
@@ -178,15 +155,6 @@ return RectorConfig::configure()
         RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/src/Support/Traits/Dumpable.php',
             __DIR__.'/tests/Feature/ExceptionTest.php',
-        ],
-        RenameClassConstFetchRector::class => [
-            __DIR__.'/workbench/config/database.php',
-        ],
-        RenameClassRector::class => [
-            __FILE__,
-        ],
-        RenameToConventionalCaseNameRector::class => [
-            __DIR__.'/tests/Feature/NativeDataTest.php',
         ],
         SortAssociativeArrayByKeyRector::class => [
             // __DIR__.'/config/',
