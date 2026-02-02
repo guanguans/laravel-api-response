@@ -15,6 +15,7 @@ declare(strict_types=1);
  */
 
 use Ergebnis\Rector\Rules\Arrays\SortAssociativeArrayByKeyRector;
+use Guanguans\LaravelApiResponse\Support\Rector\ConcreteHttpStatusRector;
 use Guanguans\RectorRules\Rector\File\AddNoinspectionDocblockToFileFirstStmtRector;
 use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
 use Guanguans\RectorRules\Set\SetList;
@@ -95,6 +96,7 @@ return RectorConfig::configure()
     ])
     ->withRules([
         ArraySpreadInsteadOfArrayMergeRector::class,
+        ConcreteHttpStatusRector::class,
         JsonThrowOnErrorRector::class,
         SafeDeclareStrictTypesRector::class,
         SortAssociativeArrayByKeyRector::class,

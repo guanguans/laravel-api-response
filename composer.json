@@ -427,7 +427,7 @@
         "rector:process-clear-cache-dry-run": "@rector:process-clear-cache --dry-run",
         "rector:process-dry-run": "@rector:process --dry-run",
         "rector:process-dry-run-output-format-github": "@rector:process-dry-run --output-format=github",
-        "rector:process-only": "@rector:process-clear-cache tests.php --only=Guanguans\\laravelApiResponse\\Support\\Rectors\\AddHasOptionsDocCommentRector",
+        "rector:process-only": "@rector:process-clear-cache src/Concerns/ConcreteHttpStatus.php --only=Guanguans\\LaravelApiResponse\\Support\\Rector\\ConcreteHttpStatusRector",
         "rector:process-only-dry-run": "@rector:process-only --dry-run",
         "roave-backward-compatibility-check": [
             "@putenv:php",
