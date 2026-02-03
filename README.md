@@ -74,8 +74,8 @@ class Controller extends \App\Http\Controllers\Controller
 
 ```json
 {
-    "status": "boolean",
-    "code": "integer",
+    "status": "bool",
+    "code": "int",
     "message": "string",
     "data": "mixed",
     "error": "array<string, mixed>"
