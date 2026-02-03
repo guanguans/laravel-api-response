@@ -23,29 +23,24 @@ use Symfony\Component\HttpFoundation\Response;
  */
 trait ConcreteHttpStatus
 {
+    public function teapot(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_I_AM_A_TEAPOT);
+    }
+
     public function ok(string $message = '', int $code = Response::HTTP_OK): JsonResponse
     {
         return $this->success(null, $message, $code);
     }
 
-    public function created(mixed $data = null, string $message = '', ?string $location = null): JsonResponse
+    public function created(mixed $data = null, string $message = ''): JsonResponse
     {
-        return $this->localize($data, $message, Response::HTTP_CREATED, $location);
+        return $this->success($data, $message, Response::HTTP_CREATED);
     }
 
-    public function accepted(mixed $data = null, string $message = '', ?string $location = null): JsonResponse
+    public function accepted(mixed $data = null, string $message = ''): JsonResponse
     {
-        return $this->localize($data, $message, Response::HTTP_ACCEPTED, $location);
-    }
-
-    public function localize(mixed $data = null, string $message = '', int $code = Response::HTTP_OK, ?string $location = null): JsonResponse
-    {
-        return tap(
-            $this->success($data, $message, $code),
-            static function (JsonResponse $jsonResponse) use ($location): void {
-                $location and $jsonResponse->header('Location', $location);
-            }
-        );
+        return $this->success($data, $message, Response::HTTP_ACCEPTED);
     }
 
     public function noContent(string $message = ''): JsonResponse
@@ -91,11 +86,6 @@ trait ConcreteHttpStatus
     public function conflict(string $message = ''): JsonResponse
     {
         return $this->error($message, Response::HTTP_CONFLICT);
-    }
-
-    public function teapot(string $message = ''): JsonResponse
-    {
-        return $this->error($message, Response::HTTP_I_AM_A_TEAPOT);
     }
 
     public function unprocessableEntity(string $message = ''): JsonResponse

@@ -27,7 +27,6 @@ it('can use success http status methods', function (): void {
         'ok',
         'created',
         'accepted',
-        'localize',
         'noContent',
     ])->each(function (Expectation $expectation): void {
         expect($this->apiResponse()->{$expectation->value}())
