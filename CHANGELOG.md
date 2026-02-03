@@ -8,6 +8,28 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="3.1.0"></a>
+## [3.1.0] - 2026-02-04
+### ✨ Features
+- **http:** Enhance error response methods with optional error details ([88148dd](https://github.com/guanguans/laravel-api-response/commit/88148dd))
+- **http:** Add multiple HTTP status helper methods for better response handling ([7cffcac](https://github.com/guanguans/laravel-api-response/commit/7cffcac))
+- **rector:** Add ConcreteHttpStatusRector for dynamic HTTP status methods ([5c2d863](https://github.com/guanguans/laravel-api-response/commit/5c2d863))
+
+### 💅 Code Refactorings
+- **enum:** Replace card names with symbols ([8f0c921](https://github.com/guanguans/laravel-api-response/commit/8f0c921))
+- **rector:** Improve method filtering for dynamic HTTP status codes ([e29f5fc](https://github.com/guanguans/laravel-api-response/commit/e29f5fc))
+
+### 📦 Builds
+- **deps:** Update nicksdot/phpstan-phpstorm-error-identifiers to ^0.3 ([a295273](https://github.com/guanguans/laravel-api-response/commit/a295273))
+- **deps-dev:** update nicksdot/phpstan-phpstorm-error-identifiers requirement || ^0.3 ([48a3279](https://github.com/guanguans/laravel-api-response/commit/48a3279))
+
+### 🤖 Continuous Integrations
+- **config:** Set COMPOSER_NO_SECURITY_BLOCKING environment variable ([78ce2fc](https://github.com/guanguans/laravel-api-response/commit/78ce2fc))
+
+### Pull Requests
+- Merge pull request [#15](https://github.com/guanguans/laravel-api-response/issues/15) from guanguans/dependabot/composer/nicksdot/phpstan-phpstorm-error-identifiers-tw-0.2or-tw-0.3
+
+
 <a name="3.0.1"></a>
 ## [3.0.1] - 2026-01-25
 ### 💅 Code Refactorings
@@ -506,7 +528,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.0.1...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.1.0...HEAD
+[3.1.0]: https://github.com/guanguans/laravel-api-response/compare/3.0.1...3.1.0
 [3.0.1]: https://github.com/guanguans/laravel-api-response/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/guanguans/laravel-api-response/compare/2.2.0...3.0.0
 [2.2.0]: https://github.com/guanguans/laravel-api-response/compare/2.1.1...2.2.0
