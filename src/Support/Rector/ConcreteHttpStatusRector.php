@@ -37,7 +37,6 @@ class ConcreteHttpStatusRector extends AbstractRector
         'HTTP_ACCEPTED', // 202
         'HTTP_NO_CONTENT', // 204
         'HTTP_BAD_REQUEST', // 400
-        'HTTP_UNAUTHORIZED', // 401
     ];
 
     /**
@@ -112,7 +111,7 @@ class ConcreteHttpStatusRector extends AbstractRector
     {
         return match (true) {
             $response->isSuccessful() => $this->rawMakeClassMethodNode($traitNode, $statusName, 'accepted'),
-            $response->isClientError() => $this->rawMakeClassMethodNode($traitNode, $statusName, 'unauthorized'),
+            $response->isClientError() => $this->rawMakeClassMethodNode($traitNode, $statusName, 'badRequest'),
             default => throw new \LogicException("Unsupported status code [{$response->getStatusCode()}]."),
         };
     }
@@ -122,7 +121,7 @@ class ConcreteHttpStatusRector extends AbstractRector
      */
     private function rawMakeClassMethodNode(Trait_ $traitNode, string $statusName, string $prototypeMethodName): ClassMethod
     {
-        $argPositionRules = ['accepted' => 2, 'unauthorized' => 1];
+        $argPositionRules = ['accepted' => 2, 'badRequest' => 1];
         \assert(\array_key_exists($prototypeMethodName, $argPositionRules));
 
         $classMethodNode = $traitNode->getMethod($prototypeMethodName);

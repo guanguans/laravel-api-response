@@ -78,148 +78,235 @@ trait ConcreteHttpStatus
         return $this->success($data, $message, Response::HTTP_IM_USED);
     }
 
-    public function badRequest(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function badRequest(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message);
+        return $this->error($message, Response::HTTP_BAD_REQUEST, $error);
     }
 
-    public function unauthorized(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function unauthorized(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_UNAUTHORIZED);
+        return $this->error($message, Response::HTTP_UNAUTHORIZED, $error);
     }
 
-    public function paymentRequired(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function paymentRequired(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_PAYMENT_REQUIRED);
+        return $this->error($message, Response::HTTP_PAYMENT_REQUIRED, $error);
     }
 
-    public function forbidden(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function forbidden(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_FORBIDDEN);
+        return $this->error($message, Response::HTTP_FORBIDDEN, $error);
     }
 
-    public function notFound(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function notFound(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_NOT_FOUND);
+        return $this->error($message, Response::HTTP_NOT_FOUND, $error);
     }
 
-    public function methodNotAllowed(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function methodNotAllowed(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_METHOD_NOT_ALLOWED);
+        return $this->error($message, Response::HTTP_METHOD_NOT_ALLOWED, $error);
     }
 
-    public function notAcceptable(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function notAcceptable(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_NOT_ACCEPTABLE);
+        return $this->error($message, Response::HTTP_NOT_ACCEPTABLE, $error);
     }
 
-    public function proxyAuthenticationRequired(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function proxyAuthenticationRequired(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_PROXY_AUTHENTICATION_REQUIRED);
+        return $this->error($message, Response::HTTP_PROXY_AUTHENTICATION_REQUIRED, $error);
     }
 
-    public function requestTimeout(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function requestTimeout(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_REQUEST_TIMEOUT);
+        return $this->error($message, Response::HTTP_REQUEST_TIMEOUT, $error);
     }
 
-    public function conflict(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function conflict(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_CONFLICT);
+        return $this->error($message, Response::HTTP_CONFLICT, $error);
     }
 
-    public function gone(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function gone(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_GONE);
+        return $this->error($message, Response::HTTP_GONE, $error);
     }
 
-    public function lengthRequired(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function lengthRequired(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_LENGTH_REQUIRED);
+        return $this->error($message, Response::HTTP_LENGTH_REQUIRED, $error);
     }
 
-    public function preconditionFailed(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function preconditionFailed(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_PRECONDITION_FAILED);
+        return $this->error($message, Response::HTTP_PRECONDITION_FAILED, $error);
     }
 
-    public function requestEntityTooLarge(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function requestEntityTooLarge(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_REQUEST_ENTITY_TOO_LARGE);
+        return $this->error($message, Response::HTTP_REQUEST_ENTITY_TOO_LARGE, $error);
     }
 
-    public function requestUriTooLong(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function requestUriTooLong(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_REQUEST_URI_TOO_LONG);
+        return $this->error($message, Response::HTTP_REQUEST_URI_TOO_LONG, $error);
     }
 
-    public function unsupportedMediaType(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function unsupportedMediaType(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_UNSUPPORTED_MEDIA_TYPE);
+        return $this->error($message, Response::HTTP_UNSUPPORTED_MEDIA_TYPE, $error);
     }
 
-    public function requestedRangeNotSatisfiable(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function requestedRangeNotSatisfiable(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_REQUESTED_RANGE_NOT_SATISFIABLE);
+        return $this->error($message, Response::HTTP_REQUESTED_RANGE_NOT_SATISFIABLE, $error);
     }
 
-    public function expectationFailed(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function expectationFailed(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_EXPECTATION_FAILED);
+        return $this->error($message, Response::HTTP_EXPECTATION_FAILED, $error);
     }
 
-    public function iAmATeapot(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function iAmATeapot(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_I_AM_A_TEAPOT);
+        return $this->error($message, Response::HTTP_I_AM_A_TEAPOT, $error);
     }
 
-    public function misdirectedRequest(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function misdirectedRequest(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_MISDIRECTED_REQUEST);
+        return $this->error($message, Response::HTTP_MISDIRECTED_REQUEST, $error);
     }
 
-    public function unprocessableEntity(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function unprocessableEntity(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_UNPROCESSABLE_ENTITY);
+        return $this->error($message, Response::HTTP_UNPROCESSABLE_ENTITY, $error);
     }
 
-    public function locked(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function locked(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_LOCKED);
+        return $this->error($message, Response::HTTP_LOCKED, $error);
     }
 
-    public function failedDependency(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function failedDependency(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_FAILED_DEPENDENCY);
+        return $this->error($message, Response::HTTP_FAILED_DEPENDENCY, $error);
     }
 
-    public function tooEarly(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function tooEarly(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_TOO_EARLY);
+        return $this->error($message, Response::HTTP_TOO_EARLY, $error);
     }
 
-    public function upgradeRequired(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function upgradeRequired(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_UPGRADE_REQUIRED);
+        return $this->error($message, Response::HTTP_UPGRADE_REQUIRED, $error);
     }
 
-    public function preconditionRequired(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function preconditionRequired(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_PRECONDITION_REQUIRED);
+        return $this->error($message, Response::HTTP_PRECONDITION_REQUIRED, $error);
     }
 
-    public function tooManyRequests(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function tooManyRequests(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_TOO_MANY_REQUESTS);
+        return $this->error($message, Response::HTTP_TOO_MANY_REQUESTS, $error);
     }
 
-    public function requestHeaderFieldsTooLarge(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function requestHeaderFieldsTooLarge(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE);
+        return $this->error($message, Response::HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE, $error);
     }
 
-    public function unavailableForLegalReasons(string $message = ''): JsonResponse
+    /**
+     * @param null|array<string, mixed> $error
+     */
+    public function unavailableForLegalReasons(string $message = '', ?array $error = null): JsonResponse
     {
-        return $this->error($message, Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS);
+        return $this->error($message, Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS, $error);
     }
 }
