@@ -1,6 +1,6 @@
 {
     "name": "guanguans/laravel-api-response",
-    "description": "Normalize and standardize Laravel API response data structures. - 规范化和标准化 Laravel API 响应数据结构。",
+    "description": "Normalize and standardize Laravel API response data structure. - 规范化和标准化 Laravel API 响应数据结构。",
     "license": "MIT",
     "type": "library",
     "keywords": [
@@ -57,7 +57,7 @@
         "guanguans/rector-rules": "^1.6",
         "guzzlehttp/psr7": "^2.8",
         "jbelien/phpstan-sarif-formatter": "^1.2",
-        "laravel-lang/http-statuses": "^3.11",
+        "laravel-lang/http-statuses": "^3.12",
         "laravel/facade-documenter": "dev-main",
         "mockery/mockery": "^1.6",
         "nette/utils": "^4.0",

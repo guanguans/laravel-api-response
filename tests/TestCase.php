@@ -112,4 +112,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $this->seed(DatabaseSeeder::class);
     }
+
+    /**
+     * @see \Guanguans\LaravelApiResponse\Support\Rector\ConcreteHttpStatusRector
+     * @see tests/ArchTest.php
+     */
+    protected function defineRoutes(mixed $router): void
+    {
+        require __DIR__.'/../workbench/routes/api.php';
+    }
 }

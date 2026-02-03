@@ -22,6 +22,7 @@ return (new Configuration)
         false
     )
     ->addPathsToExclude([
+        __DIR__.'/src/Support/Rector/',
         __DIR__.'/tests/',
         __DIR__.'/workbench/',
     ])

@@ -13,7 +13,7 @@
                 "file": "/vendor/laravel/framework/src/Illuminate/Routing/CallableDispatcher.php",
                 "line": 40,
                 "function": "{closure}",
-                "class": "Illuminate\\Routing\\RouteFileRegistrar",
+                "class": "Guanguans\\LaravelApiResponseTests\\TestCase",
                 "type": "::"
             },
             {
@@ -56,48 +56,6 @@
                 "line": 183,
                 "function": "handle",
                 "class": "Guanguans\\LaravelApiResponse\\Middleware\\SetJsonAcceptHeader",
-                "type": "->"
-            },
-            {
-                "file": "/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php",
-                "line": 50,
-                "function": "Illuminate\\Pipeline\\{closure}",
-                "class": "Illuminate\\Pipeline\\Pipeline",
-                "type": "->"
-            },
-            {
-                "file": "/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
-                "line": 183,
-                "function": "handle",
-                "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-                "type": "->"
-            },
-            {
-                "file": "/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
-                "line": 159,
-                "function": "Illuminate\\Pipeline\\{closure}",
-                "class": "Illuminate\\Pipeline\\Pipeline",
-                "type": "->"
-            },
-            {
-                "file": "/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
-                "line": 135,
-                "function": "handleRequest",
-                "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
-                "type": "->"
-            },
-            {
-                "file": "/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
-                "line": 87,
-                "function": "handleRequestUsingNamedLimiter",
-                "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
-                "type": "->"
-            },
-            {
-                "file": "/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
-                "line": 183,
-                "function": "handle",
-                "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
                 "type": "->"
             },
             {

@@ -47,7 +47,7 @@
       <directory>src/</directory>
     </include>
     <exclude>
-      <!--<directory>src/Contracts/</directory>-->
+      <directory>src/Support/Rector/</directory>
       <!--<file>src/ServiceProvider.php</file>-->
     </exclude>
   </source>

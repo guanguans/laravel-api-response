@@ -34,6 +34,7 @@ use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassLike\RemoveAnnotationRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
+use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
@@ -157,6 +158,9 @@ return RectorConfig::configure()
         RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/src/Support/Traits/Dumpable.php',
             __DIR__.'/tests/Feature/ExceptionTest.php',
+        ],
+        RenameParamToMatchTypeRector::class => [
+            __DIR__.'/src/Support/Rector/ConcreteHttpStatusRector.php',
         ],
         SortAssociativeArrayByKeyRector::class => [
             // __DIR__.'/config/',

@@ -87,6 +87,10 @@ parameters:
             enabled: false
         noNullableReturnTypeDeclaration:
             enabled: false
+        noNamedArgument:
+            enabled: false
+        noSwitch:
+            enabled: false
     guanguans:
         exceptionMustImplementNativeThrowable:
             nativeThrowable: Guanguans\LaravelApiResponse\Contracts\ThrowableContract
@@ -190,3 +194,10 @@ parameters:
         - identifier: symplify.forbiddenStaticClassConstFetch
         - identifier: symplify.requireExceptionNamespace
         - message: '#^Class Guanguans\\LaravelApiResponse\\Facades\\ApiResponseFacade has PHPDoc tag @method for method .*\(\) parameter \#\d \$error with no value type specified in iterable type array\.$#'
+
+        -
+            identifier: guanguans.exceptionMustImplementNativeThrowable
+            path: src/Support/Rector/ConcreteHttpStatusRector.php
+        -
+            identifier: method.childParameterType
+            path: src/Support/Rector/ConcreteHttpStatusRector.php

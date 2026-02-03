@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpClassHasTooManyDeclaredMembersInspection */
+
 declare(strict_types=1);
 
 /**
@@ -23,19 +25,17 @@ use Symfony\Component\HttpFoundation\Response;
  */
 trait ConcreteHttpStatus
 {
-    public function teapot(string $message = ''): JsonResponse
+    public function ok(mixed $data = null, string $message = ''): JsonResponse
     {
-        return $this->error($message, Response::HTTP_I_AM_A_TEAPOT);
+        return $this->success($data, $message);
     }
 
-    public function ok(string $message = '', int $code = Response::HTTP_OK): JsonResponse
+    public function created(mixed $data = null, string $message = '', ?string $location = null): JsonResponse
     {
-        return $this->success(null, $message, $code);
-    }
-
-    public function created(mixed $data = null, string $message = ''): JsonResponse
-    {
-        return $this->success($data, $message, Response::HTTP_CREATED);
+        return tap(
+            $this->success($data, $message, Response::HTTP_CREATED),
+            static fn (JsonResponse $jsonResponse): bool => $location and $jsonResponse->header('Location', $location)
+        );
     }
 
     public function accepted(mixed $data = null, string $message = ''): JsonResponse
@@ -43,9 +43,39 @@ trait ConcreteHttpStatus
         return $this->success($data, $message, Response::HTTP_ACCEPTED);
     }
 
+    public function nonAuthoritativeInformation(mixed $data = null, string $message = ''): JsonResponse
+    {
+        return $this->success($data, $message, Response::HTTP_NON_AUTHORITATIVE_INFORMATION);
+    }
+
     public function noContent(string $message = ''): JsonResponse
     {
         return $this->success(null, $message, Response::HTTP_NO_CONTENT);
+    }
+
+    public function resetContent(mixed $data = null, string $message = ''): JsonResponse
+    {
+        return $this->success($data, $message, Response::HTTP_RESET_CONTENT);
+    }
+
+    public function partialContent(mixed $data = null, string $message = ''): JsonResponse
+    {
+        return $this->success($data, $message, Response::HTTP_PARTIAL_CONTENT);
+    }
+
+    public function multiStatus(mixed $data = null, string $message = ''): JsonResponse
+    {
+        return $this->success($data, $message, Response::HTTP_MULTI_STATUS);
+    }
+
+    public function alreadyReported(mixed $data = null, string $message = ''): JsonResponse
+    {
+        return $this->success($data, $message, Response::HTTP_ALREADY_REPORTED);
+    }
+
+    public function imUsed(mixed $data = null, string $message = ''): JsonResponse
+    {
+        return $this->success($data, $message, Response::HTTP_IM_USED);
     }
 
     public function badRequest(string $message = ''): JsonResponse
@@ -78,6 +108,16 @@ trait ConcreteHttpStatus
         return $this->error($message, Response::HTTP_METHOD_NOT_ALLOWED);
     }
 
+    public function notAcceptable(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_NOT_ACCEPTABLE);
+    }
+
+    public function proxyAuthenticationRequired(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_PROXY_AUTHENTICATION_REQUIRED);
+    }
+
     public function requestTimeout(string $message = ''): JsonResponse
     {
         return $this->error($message, Response::HTTP_REQUEST_TIMEOUT);
@@ -88,13 +128,98 @@ trait ConcreteHttpStatus
         return $this->error($message, Response::HTTP_CONFLICT);
     }
 
+    public function gone(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_GONE);
+    }
+
+    public function lengthRequired(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_LENGTH_REQUIRED);
+    }
+
+    public function preconditionFailed(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_PRECONDITION_FAILED);
+    }
+
+    public function requestEntityTooLarge(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_REQUEST_ENTITY_TOO_LARGE);
+    }
+
+    public function requestUriTooLong(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_REQUEST_URI_TOO_LONG);
+    }
+
+    public function unsupportedMediaType(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_UNSUPPORTED_MEDIA_TYPE);
+    }
+
+    public function requestedRangeNotSatisfiable(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_REQUESTED_RANGE_NOT_SATISFIABLE);
+    }
+
+    public function expectationFailed(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_EXPECTATION_FAILED);
+    }
+
+    public function iAmATeapot(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_I_AM_A_TEAPOT);
+    }
+
+    public function misdirectedRequest(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_MISDIRECTED_REQUEST);
+    }
+
     public function unprocessableEntity(string $message = ''): JsonResponse
     {
         return $this->error($message, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
+    public function locked(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_LOCKED);
+    }
+
+    public function failedDependency(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_FAILED_DEPENDENCY);
+    }
+
+    public function tooEarly(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_TOO_EARLY);
+    }
+
+    public function upgradeRequired(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_UPGRADE_REQUIRED);
+    }
+
+    public function preconditionRequired(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_PRECONDITION_REQUIRED);
+    }
+
     public function tooManyRequests(string $message = ''): JsonResponse
     {
         return $this->error($message, Response::HTTP_TOO_MANY_REQUESTS);
+    }
+
+    public function requestHeaderFieldsTooLarge(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE);
+    }
+
+    public function unavailableForLegalReasons(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS);
     }
 }

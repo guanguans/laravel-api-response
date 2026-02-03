@@ -1,6 +1,6 @@
 # laravel-api-response
 
-> Normalize and standardize Laravel API response data structures. - 规范化和标准化 Laravel API 响应数据结构。
+> Normalize and standardize Laravel API response data structure. - 规范化和标准化 Laravel API 响应数据结构。
 
 [![tests](https://github.com/guanguans/laravel-api-response/actions/workflows/tests.yml/badge.svg)](https://github.com/guanguans/laravel-api-response/actions/workflows/tests.yml)
 [![php-cs-fixer](https://github.com/guanguans/laravel-api-response/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/guanguans/laravel-api-response/actions/workflows/php-cs-fixer.yml)

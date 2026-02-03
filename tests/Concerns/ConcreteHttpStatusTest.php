@@ -19,16 +19,22 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
+use Guanguans\LaravelApiResponse\Concerns\ConcreteHttpStatus;
 use Illuminate\Http\JsonResponse;
 use Pest\Expectation;
+use Symfony\Component\HttpFoundation\Response;
 
 it('can use success http status methods', function (): void {
-    expect([
-        'ok',
-        'created',
-        'accepted',
-        'noContent',
-    ])->each(function (Expectation $expectation): void {
+    expect(
+        collect((new ReflectionClass(ConcreteHttpStatus::class))->getMethods())
+            ->filter(
+                fn (ReflectionMethod $reflectionMethod): bool => (new Response(
+                    status: \constant(Response::class.'::'.str($reflectionMethod->name)->snake()->start('HTTP_')->upper()->toString())
+                ))->isSuccessful()
+            )
+            ->map(fn (ReflectionMethod $reflectionMethod): string => $reflectionMethod->getName())
+            ->all()
+    )->each(function (Expectation $expectation): void {
         expect($this->apiResponse()->{$expectation->value}())
             ->toBeInstanceOf(JsonResponse::class)
             ->isSuccessful()->toBeTrue();
@@ -36,19 +42,16 @@ it('can use success http status methods', function (): void {
 })->group(__DIR__, __FILE__);
 
 it('can use client error http status methods', function (): void {
-    expect([
-        'badRequest',
-        'unauthorized',
-        'paymentRequired',
-        'forbidden',
-        'notFound',
-        'methodNotAllowed',
-        'requestTimeout',
-        'conflict',
-        'teapot',
-        'unprocessableEntity',
-        'tooManyRequests',
-    ])->each(function (Expectation $expectation): void {
+    expect(
+        collect((new ReflectionClass(ConcreteHttpStatus::class))->getMethods())
+            ->filter(
+                fn (ReflectionMethod $reflectionMethod): bool => (new Response(
+                    status: \constant(Response::class.'::'.str($reflectionMethod->name)->snake()->start('HTTP_')->upper()->toString())
+                ))->isClientError()
+            )
+            ->map(fn (ReflectionMethod $reflectionMethod): string => $reflectionMethod->getName())
+            ->all()
+    )->each(function (Expectation $expectation): void {
         expect($this->apiResponse()->{$expectation->value}())
             ->toBeInstanceOf(JsonResponse::class)
             ->isClientError()->toBeTrue();
