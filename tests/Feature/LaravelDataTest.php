@@ -177,7 +177,7 @@ it('is jsonable', function (array $array): void {
 
         public function toJson($options = 0): string
         {
-            return json_encode($this->array, $options);
+            return json_encode($this->array, $options | \JSON_THROW_ON_ERROR);
         }
     };
     expect($this->apiResponse()->success($jsonable)->content())->toMatchSnapshot();
