@@ -8,6 +8,21 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="3.2.0"></a>
+## [3.2.0] - 2026-03-19
+### ✨ Features
+- **deps:** Update Laravel framework and Spatie package versions ([aff5f42](https://github.com/guanguans/laravel-api-response/commit/aff5f42))
+
+### 📖 Documents
+- **README:** Update JSON response format in documentation ([e4fcd8c](https://github.com/guanguans/laravel-api-response/commit/e4fcd8c))
+
+### 📦 Builds
+- **deps-dev:** update shipmonk/dead-code-detector requirement || ^0.15 ([04b7046](https://github.com/guanguans/laravel-api-response/commit/04b7046))
+
+### Pull Requests
+- Merge pull request [#16](https://github.com/guanguans/laravel-api-response/issues/16) from guanguans/dependabot/composer/shipmonk/dead-code-detector-tw-0.14or-tw-0.15
+
+
 <a name="3.1.0"></a>
 ## [3.1.0] - 2026-02-04
 ### ✨ Features
@@ -528,7 +543,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.1.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.2.0...HEAD
+[3.2.0]: https://github.com/guanguans/laravel-api-response/compare/3.1.0...3.2.0
 [3.1.0]: https://github.com/guanguans/laravel-api-response/compare/3.0.1...3.1.0
 [3.0.1]: https://github.com/guanguans/laravel-api-response/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/guanguans/laravel-api-response/compare/2.2.0...3.0.0
