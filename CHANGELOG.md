@@ -8,6 +8,17 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="3.2.1"></a>
+## [3.2.1] - 2026-03-24
+### 🐞 Bug Fixes
+- Dumpable Trait Warning on Laravel >=11 ([39c6e47](https://github.com/guanguans/laravel-api-response/commit/39c6e47))
+- **autoload:** Ensure Dumpable trait is loaded if not present ([0232831](https://github.com/guanguans/laravel-api-response/commit/0232831))
+- **tests:** Refactor NativeDataTest and add Suit enum ([dc3daca](https://github.com/guanguans/laravel-api-response/commit/dc3daca))
+
+### 📦 Builds
+- **deps:** Bump peststan, rector-laravel, and rector-rules versions ([f3703c7](https://github.com/guanguans/laravel-api-response/commit/f3703c7))
+
+
 <a name="3.2.0"></a>
 ## [3.2.0] - 2026-03-19
 ### ✨ Features
@@ -543,7 +554,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.2.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.2.1...HEAD
+[3.2.1]: https://github.com/guanguans/laravel-api-response/compare/3.2.0...3.2.1
 [3.2.0]: https://github.com/guanguans/laravel-api-response/compare/3.1.0...3.2.0
 [3.1.0]: https://github.com/guanguans/laravel-api-response/compare/3.0.1...3.1.0
 [3.0.1]: https://github.com/guanguans/laravel-api-response/compare/3.0.0...3.0.1
