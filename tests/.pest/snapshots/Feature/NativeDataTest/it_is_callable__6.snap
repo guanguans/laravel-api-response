@@ -2,6 +2,6 @@
     "status": true,
     "code": 200,
     "message": "OK",
-    "data": "NativeDataTest::__invoke",
+    "data": "Guanguans\\LaravelApiResponseTests\\Fixtures\\NativeDataTest::__invoke",
     "error": {}
 }

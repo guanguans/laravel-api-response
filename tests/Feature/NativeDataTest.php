@@ -20,7 +20,8 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-api-response
  */
 
-use Guanguans\LaravelApiResponse\Support\Traits\MakeStaticable;
+use Guanguans\LaravelApiResponseTests\Fixtures\NativeDataTest;
+use Guanguans\LaravelApiResponseTests\Fixtures\Suit;
 
 beforeEach(function (): void {});
 
@@ -56,14 +57,6 @@ it('is object', function (array $array): void {
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is enum', function (): void {
-    enum Suit: string
-    {
-        case HEART = '♥︎';
-        case DIAMOND = '♦︎';
-        case CLUB = '♣︎';
-        case SPADE = '︎♠︎';
-    }
-
     expect($this->apiResponse()->success(Suit::HEART)->content())->toMatchSnapshot();
     expect($this->apiResponse()->success(Suit::cases())->content())->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
@@ -73,26 +66,6 @@ it('is resource', function (): void {
 })->group(__DIR__, __FILE__)->throws(InvalidArgumentException::class, 'Type is not supported');
 
 it('is callable', function (): void {
-    class NativeDataTest
-    {
-        use MakeStaticable;
-
-        public function __invoke(): string
-        {
-            return __METHOD__;
-        }
-
-        public static function staticMethod(): string
-        {
-            return __METHOD__;
-        }
-
-        public function generalMethod(): string
-        {
-            return __METHOD__;
-        }
-    }
-
     expect($this->apiResponse()->success(fn (): string => __METHOD__)->content())->toMatchSnapshot();
     expect($this->apiResponse()->success('\time')->content())->toMatchSnapshot(); // unsupported
     expect($this->apiResponse()->success(NativeDataTest::staticMethod(...))->content())->toMatchSnapshot();
