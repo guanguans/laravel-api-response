@@ -40,40 +40,32 @@ if (!\function_exists('Guanguans\LaravelApiResponse\Support\env_explode')) {
 
 if (!\function_exists('Guanguans\LaravelApiResponse\Support\make')) {
     /**
+     * @see https://github.com/laravel/framework/blob/12.x/src/Illuminate/Foundation/helpers.php
      * @see https://github.com/yiisoft/yii2/blob/master/framework/BaseYii.php
      *
-     * @param array<string, mixed>|string $abstract
+     * @param array<string, mixed>|string $name
      * @param array<string, mixed> $parameters
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    function make(array|string $abstract, array $parameters = []): mixed
+    function make(array|string $name, array $parameters = []): mixed
     {
-        if (\is_string($abstract)) {
-            return resolve($abstract, $parameters);
+        if (\is_string($name)) {
+            return resolve($name, $parameters);
         }
 
         foreach (
             $keys ??= [
-                '__abstract',
-                '__class',
-                '__name',
-                '_abstract',
-                '_class',
-                '_name',
-                'abstract',
-                'class',
-                'name',
+                '__abstract', '__class', '__name',
+                '_abstract', '_class', '_name',
+                'abstract', 'class', 'name',
             ] as $key
         ) {
-            if (isset($abstract[$key])) {
-                return make($abstract[$key], $parameters + Arr::except($abstract, $key));
+            if (isset($name[$key])) {
+                return make($name[$key], $parameters + Arr::except($name, $key));
             }
         }
 
-        throw new InvalidArgumentException(\sprintf(
-            'The argument of abstract must be an array containing a `%s` element.',
-            implode('` or `', $keys)
-        ));
+        throw new InvalidArgumentException(
+            \sprintf('The argument of name must be an array containing a `%s` element.', implode('` or `', $keys))
+        );
     }
 }
