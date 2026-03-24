@@ -53,14 +53,18 @@ it('can use pipes', function (): void {
             CallableDataPipe::with(),
             static fn (array $structure, Closure $next): JsonResponse => $next($structure),
         )
-        ->afterPipes(
-            StatusCodePipe::with(),
-            static fn (array $structure, Closure $next): JsonResponse => $next($structure),
-        )
         ->removePipes(
             CallableDataPipe::with(),
             CallableDataPipe::with(),
+            StatusCodePipe::with(),
             'class@anonymous'
+        )
+        ->pushPipes(
+            StatusCodePipe::with(),
+        )
+        ->afterPipes(
+            StatusCodePipe::with(),
+            static fn (array $structure, Closure $next): JsonResponse => $next($structure),
         )
         ->tapPipes(static function (Collection $pipes): void {
             expect($pipes->toJson(\JSON_PRETTY_PRINT))->toMatchSnapshot();

@@ -16,6 +16,10 @@ namespace Guanguans\LaravelApiResponse\Support;
 use Guanguans\LaravelApiResponse\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Arr;
 
+if (!trait_exists(\Illuminate\Support\Traits\Dumpable::class)) {
+    require_once __DIR__.'/Traits/Dumpable.php';
+}
+
 if (!\function_exists('Guanguans\LaravelApiResponse\Support\env_explode')) {
     /**
      * @param non-empty-string $delimiter

@@ -116,11 +116,11 @@
         "psr-4": {
             "Guanguans\\LaravelApiResponse\\": "src/"
         },
-        "classmap": [
-            "src/Support/Traits/Dumpable.php"
-        ],
         "files": [
             "src/Support/helpers.php"
+        ],
+        "exclude-from-classmap": [
+            "src/Support/Traits/Dumpable.php"
         ]
     },
     "autoload-dev": {

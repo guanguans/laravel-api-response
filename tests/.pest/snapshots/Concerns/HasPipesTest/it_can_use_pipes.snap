@@ -9,8 +9,8 @@
     "Guanguans\\LaravelApiResponse\\Pipes\\JsonResourceDataPipe",
     "Guanguans\\LaravelApiResponse\\Pipes\\JsonResponsableDataPipe",
     "Guanguans\\LaravelApiResponse\\Pipes\\IterableDataPipe",
+    {},
+    {},
     "Guanguans\\LaravelApiResponse\\Pipes\\StatusCodePipe",
-    {},
-    {},
     {}
 ]
