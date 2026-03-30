@@ -72,7 +72,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Http\JsonResponse unavailableForLegalReasons(string $message = '', null|array $error = null)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
- * @method static void dd(mixed ...$args)
+ * @method static never dd(mixed ...$args)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse dump(mixed ...$args)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse unshiftExceptionPipes(mixed ...$exceptionPipes)
  * @method static \Guanguans\LaravelApiResponse\ApiResponse pushExceptionPipes(mixed ...$exceptionPipes)
@@ -93,7 +93,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)
  * @method static void flushMacros()
- * @method static \Guanguans\LaravelApiResponse\ApiResponse|\Illuminate\Support\HigherOrderTapProxy tap(callable|null $callback = null)
+ * @method static \Illuminate\Support\HigherOrderTapProxy|\Guanguans\LaravelApiResponse\ApiResponse tap(callable|null $callback = null)
  * @method static array<string, mixed> convertExceptionToArray(\Throwable $throwable)
  *
  * @see \Guanguans\LaravelApiResponse\ApiResponse

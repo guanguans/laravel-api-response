@@ -67,7 +67,7 @@
             },
             {
                 "file": "/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
-                "line": 807,
+                "line": 805,
                 "function": "then",
                 "class": "Illuminate\\Pipeline\\Pipeline",
                 "type": "->"
@@ -200,7 +200,7 @@
             },
             {
                 "file": "/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php",
-                "line": 586,
+                "line": 585,
                 "function": "handle",
                 "class": "Illuminate\\Foundation\\Http\\Kernel",
                 "type": "->"
@@ -259,7 +259,7 @@
             },
             {
                 "file": "/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(197) : eval()'d code",
-                "line": 31,
+                "line": 29,
                 "function": "__runTest",
                 "class": "P\\Tests\\Feature\\ExceptionTest",
                 "type": "->"
@@ -329,7 +329,7 @@
             },
             {
                 "file": "/vendor/phpunit/phpunit/src/TextUI/Application.php",
-                "line": 203,
+                "line": 202,
                 "function": "run",
                 "class": "PHPUnit\\TextUI\\TestRunner",
                 "type": "->"

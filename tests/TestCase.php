@@ -78,7 +78,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         tap($app, function (Application $application): void {
             $application->useLangPath(__DIR__.'/../workbench/resources/lang/');
             JsonResource::wrap(
-                Lottery::odds(4, 5)->winner(static fn (): string => 'data')->loser(static fn () => null)->choose()
+                Lottery::odds(4, 5)->winner(static fn (): string => 'data')->loser(static fn (): null => null)->choose()
             );
 
             $application->has('pushed-pipe') or $this

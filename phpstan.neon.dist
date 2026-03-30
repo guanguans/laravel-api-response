@@ -194,6 +194,7 @@ parameters:
         - identifier: symplify.forbiddenStaticClassConstFetch
         - identifier: symplify.requireExceptionNamespace
         - message: '#^Class Guanguans\\LaravelApiResponse\\Facades\\ApiResponseFacade has PHPDoc tag @method for method .*\(\) parameter \#\d \$error with no value type specified in iterable type array\.$#'
+        - message: '#^PHPDoc tag @method for method Guanguans\\LaravelApiResponse\\Facades\\ApiResponseFacade\:\:tap\(\) return type contains generic class Illuminate\\Support\\HigherOrderTapProxy but does not specify its types\: TClass$#'
 
         -
             identifier: guanguans.exceptionMustImplementNativeThrowable
@@ -201,3 +202,6 @@ parameters:
         -
             identifier: method.childParameterType
             path: src/Support/Rector/ConcreteHttpStatusRector.php
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: src/Support/helpers.php

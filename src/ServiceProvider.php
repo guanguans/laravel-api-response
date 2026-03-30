@@ -68,15 +68,13 @@ class ServiceProvider extends PackageServiceProvider
      */
     private function registerRenderUsing(): void
     {
-        if (
-            ($renderUsing = config('api-response.render_using'))
-            && method_exists($exceptionHandler = $this->app->make(ExceptionHandler::class), 'renderable')
-        ) {
+        $exceptionHandler = $this->app->make(ExceptionHandler::class);
+
+        if (($renderUsing = config('api-response.render_using')) && method_exists($exceptionHandler, 'renderable')) {
             if (!\is_callable($renderUsing)) {
                 $renderUsing = make($renderUsing);
             }
 
-            /** @var \Illuminate\Foundation\Exceptions\Handler $exceptionHandler */
             $exceptionHandler->renderable($renderUsing);
         }
     }

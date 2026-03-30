@@ -49,7 +49,7 @@
             },
             {
                 "file": "/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(197) : eval()'d code",
-                "line": 54,
+                "line": 52,
                 "function": "__runTest",
                 "class": "P\\Tests\\Feature\\ExceptionTest",
                 "type": "->"
@@ -119,7 +119,7 @@
             },
             {
                 "file": "/vendor/phpunit/phpunit/src/TextUI/Application.php",
-                "line": 203,
+                "line": 202,
                 "function": "run",
                 "class": "PHPUnit\\TextUI\\TestRunner",
                 "type": "->"

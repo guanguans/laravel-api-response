@@ -37,6 +37,7 @@ use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
 use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
+use Rector\Php82\Rector\Param\AddSensitiveParameterAttributeRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
 use Rector\TypeDeclaration\Rector\StmtsAwareInterface\SafeDeclareStrictTypesRector;
@@ -77,9 +78,9 @@ return RectorConfig::configure()
     ->withAttributesSets(phpunit: true, all: true)
     ->withComposerBased(phpunit: true, laravel: true)
     ->withSetProviders(LaravelSetProvider::class)
-    ->withPhpVersion(PhpVersion::PHP_81)
-    ->withDowngradeSets(php81: true)
-    ->withPhpSets(php81: true)
+    ->withPhpVersion(PhpVersion::PHP_82)
+    ->withDowngradeSets(php82: true)
+    ->withPhpSets(php82: true)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
@@ -145,6 +146,8 @@ return RectorConfig::configure()
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
+        AddSensitiveParameterAttributeRector::class,
+
         ConfigToTypedConfigMethodCallRector::class,
         TypeHintTappableCallRector::class,
 
