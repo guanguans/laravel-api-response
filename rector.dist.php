@@ -40,9 +40,11 @@ use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Php82\Rector\Param\AddSensitiveParameterAttributeRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
+use Rector\Transform\Rector\String_\StringToClassConstantRector;
 use Rector\TypeDeclaration\Rector\StmtsAwareInterface\SafeDeclareStrictTypesRector;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Rector\ArrayDimFetch\ArrayToArrGetRector;
+use RectorLaravel\Rector\ClassMethod\AddGenericReturnTypeToRelationsRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\ConfigToTypedConfigMethodCallRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
@@ -146,7 +148,9 @@ return RectorConfig::configure()
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
+        AddGenericReturnTypeToRelationsRector::class,
         AddSensitiveParameterAttributeRector::class,
+        StringToClassConstantRector::class,
 
         ConfigToTypedConfigMethodCallRector::class,
         TypeHintTappableCallRector::class,
