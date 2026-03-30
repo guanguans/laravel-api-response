@@ -8,6 +8,15 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="3.2.2"></a>
+## [3.2.2] - 2026-03-26
+### 💅 Code Refactorings
+- **helpers:** Simplify key array initialization ([94a3bd1](https://github.com/guanguans/laravel-api-response/commit/94a3bd1))
+
+### 📦 Builds
+- **deps:** bump codecov/codecov-action from 5 to 6 ([b70270a](https://github.com/guanguans/laravel-api-response/commit/b70270a))
+
+
 <a name="3.2.1"></a>
 ## [3.2.1] - 2026-03-24
 ### 🐞 Bug Fixes
@@ -554,7 +563,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.2.1...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.2.2...HEAD
+[3.2.2]: https://github.com/guanguans/laravel-api-response/compare/3.2.1...3.2.2
 [3.2.1]: https://github.com/guanguans/laravel-api-response/compare/3.2.0...3.2.1
 [3.2.0]: https://github.com/guanguans/laravel-api-response/compare/3.1.0...3.2.0
 [3.1.0]: https://github.com/guanguans/laravel-api-response/compare/3.0.1...3.1.0
