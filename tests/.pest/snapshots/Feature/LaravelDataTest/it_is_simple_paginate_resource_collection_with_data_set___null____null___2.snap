@@ -107,6 +107,7 @@
         },
         "meta": {
             "current_page": 1,
+            "current_page_url": "http://localhost?page=1",
             "from": 1,
             "path": "http://localhost",
             "per_page": 3,

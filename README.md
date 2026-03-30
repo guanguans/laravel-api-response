@@ -1086,8 +1086,7 @@ class Controller extends \App\Http\Controllers\Controller
 <summary>more examples...</summary>
 
 * [feature](tests/Feature)
-* [snapshots](tests/__snapshots__)
-* [tests/.pest/snapshots/Feature](tests/.pest/snapshots/Feature/)
+* [snapshots](tests/.pest/snapshots/Feature/)
 
 </details>
 

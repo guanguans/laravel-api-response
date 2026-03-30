@@ -22,5 +22,5 @@ beforeEach(function (): void {});
 
 it('is error', function (string $language): void {
     config()->set('app.locale', $language);
-    expect($this->apiResponse()->error('This is an error.')->content())->toMatchSnapshot();
+    expect($this->apiResponse()->error('This is an error.'))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('languages');

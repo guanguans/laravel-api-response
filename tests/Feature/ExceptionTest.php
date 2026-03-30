@@ -35,40 +35,40 @@ beforeEach(function (): void {});
 
 it('is runtime exception handler', function (bool $debug): void {
     $this->markTestSkippedWhen(
-        $debug && Comparator::greaterThanOrEqualTo(Application::VERSION, '11.0.0'),
-        'Skipping test on Laravel 11+ when debug is true.'
+        $debug && Comparator::lessThan(Application::VERSION, '12.0.0') && Comparator::greaterThanOrEqualTo(Application::VERSION, '13.0.0'),
+        'Skipping test on Laravel 11 or 13 when debug is true.'
     );
 
     config()->set('app.debug', $debug);
     $response = $this->post('api/exception');
     $response->assertStatus(Response::HTTP_BAD_GATEWAY);
 
-    expect((string) str($response->content())->remove(\dirname(__DIR__, 2)))->toMatchSnapshot();
+    expect($response)->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('debugs');
 
 it('is runtime exception', function (bool $debug): void {
     $this->markTestSkippedWhen(
-        $debug && Comparator::greaterThanOrEqualTo(Application::VERSION, '11.0.0'),
-        'Skipping test on Laravel 11+ when debug is true.'
+        $debug && Comparator::lessThan(Application::VERSION, '12.0.0') && Comparator::greaterThanOrEqualTo(Application::VERSION, '13.0.0'),
+        'Skipping test on Laravel 11 or 13 when debug is true.'
     );
 
     config()->set('app.debug', $debug);
     $runtimeException = new RuntimeException('This is a runtime exception.', Response::HTTP_BAD_REQUEST);
     $response = $this->apiResponse()->exception($runtimeException);
     expect($response)->getStatusCode()->toBe(Response::HTTP_BAD_REQUEST);
-    expect((string) str($response->content())->remove(\dirname(__DIR__, 2)))->toMatchSnapshot();
+    expect($response)->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('debugs');
 
 it('is authentication exception', function (string $language): void {
     config()->set('app.locale', $language);
     $authenticationException = new AuthenticationException;
-    expect($this->apiResponse()->exception($authenticationException)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->exception($authenticationException))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('languages');
 
 it('is http exception', function (string $language): void {
     config()->set('app.locale', $language);
     $httpException = new HttpException(Response::HTTP_NOT_FOUND);
-    expect($this->apiResponse()->exception($httpException)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->exception($httpException))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('languages');
 
 it('is query exception', function (string $language): void {
@@ -77,7 +77,7 @@ it('is query exception', function (string $language): void {
         User::query()->groupByRaw('no_such_column')->get();
     } catch (QueryException $queryException) {
         dump($queryException->getCode(), $queryException->getMessage());
-        expect($this->apiResponse()->exception($queryException)->content())->toMatchSnapshot();
+        expect($this->apiResponse()->exception($queryException))->toMatchSnapshot();
     }
 })->group(__DIR__, __FILE__)->with('languages');
 
@@ -89,5 +89,5 @@ it('is validation exception', function (string $language): void {
             ['foo' => ['required', 'int', 'in:1,2'], 'bar' => ['email'], 'baz' => ['required', 'string']]
         )
     );
-    expect($this->apiResponse()->exception($validationException)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->exception($validationException))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('languages');

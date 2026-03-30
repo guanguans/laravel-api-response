@@ -29,10 +29,10 @@ beforeEach(function (): void {});
  */
 it('is psr response', function (array $array): void {
     $psrResponse = new Response(SymfonyResponse::HTTP_OK, ['Content-Type' => 'application/json'], json_encode($array, \JSON_THROW_ON_ERROR));
-    expect($this->apiResponse()->success($psrResponse)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success($psrResponse))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is symfony response', function (array $array): void {
     $symfonyResponse = new SymfonyResponse(json_encode($array, \JSON_THROW_ON_ERROR), SymfonyResponse::HTTP_OK, ['Content-Type' => 'application/json']);
-    expect($this->apiResponse()->success($symfonyResponse)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success($symfonyResponse))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');

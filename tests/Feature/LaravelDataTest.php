@@ -43,103 +43,65 @@ beforeEach(function (): void {
 
 it('is model', function (): void {
     $user = User::query()->with(['country', 'posts'])->first();
-    expect($this->apiResponse()->success($user)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success($user))->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
 
 it('is eloquent collection', function (): void {
     $users = User::query()->with(['country', 'posts'])->get();
-    expect($this->apiResponse()->success($users)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success($users))->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
 
 it('is paginate', function (?string $wrap): void {
     $paginate = User::query()->with(['country', 'posts'])->paginate(3);
-    expect(
-        $this
-            ->apiResponse()
-            ->unshiftPipes(PaginatorDataPipe::with($wrap))
-            ->success($paginate)
-            ->content()
-    )->toMatchSnapshot();
+    $apiResponse = $this->apiResponse()->unshiftPipes(PaginatorDataPipe::with($wrap));
+    expect($apiResponse->success($paginate))->toMatchSnapshot();
 })
     ->group(__DIR__, __FILE__)
-    ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '12.0.0'))
+    ->skip(Comparator::lessThan(Application::VERSION, '12.0.0'))
     ->with('wraps');
 
 it('is simple paginate', function (?string $wrap): void {
     $simplePaginate = User::query()->with(['country', 'posts'])->simplePaginate(3);
-    expect(
-        $this
-            ->apiResponse()
-            ->unshiftPipes(PaginatorDataPipe::with($wrap))
-            ->success($simplePaginate)
-            ->content()
-    )->toMatchSnapshot();
-    expect(
-        $this
-            ->apiResponse()
-            ->unshiftPipes(PaginatorDataPipe::with($wrap))
-            ->success(UserCollection::make($simplePaginate))
-            ->content()
-    )->toMatchSnapshot();
-    expect(
-        $this
-            ->apiResponse()
-            ->unshiftPipes(PaginatorDataPipe::with($wrap))
-            ->success(UserResource::collection($simplePaginate))
-            ->content()
-    )->toMatchSnapshot();
+    $apiResponse = $this->apiResponse()->unshiftPipes(PaginatorDataPipe::with($wrap));
+    expect($apiResponse->success($simplePaginate))->toMatchSnapshot();
+    expect($apiResponse->success(UserCollection::make($simplePaginate)))->toMatchSnapshot();
+    expect($apiResponse->success(UserResource::collection($simplePaginate)))->toMatchSnapshot();
 })
     ->group(__DIR__, __FILE__)
-    ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '12.0.0'))
+    ->skip(Comparator::lessThan(Application::VERSION, '12.0.0'))
     ->with('wraps');
 
 it('is cursor paginate', function (?string $wrap): void {
     $cursorPaginate = User::query()->with(['country', 'posts'])->cursorPaginate(3);
-    expect(
-        $this
-            ->apiResponse()
-            ->unshiftPipes(PaginatorDataPipe::with($wrap))
-            ->success($cursorPaginate)
-            ->content()
-    )->toMatchSnapshot();
+    $apiResponse = $this->apiResponse()->unshiftPipes(PaginatorDataPipe::with($wrap));
+    expect($apiResponse->success($cursorPaginate))->toMatchSnapshot();
 })
     ->group(__DIR__, __FILE__)
-    // ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '9.0.0'))
+    // ->skip(Comparator::lessThan(Application::VERSION, '12.0.0'))
     ->with('wraps');
 
 it('is resource', function (): void {
     $userResource = UserResource::make(User::query()->with(['country', 'posts'])->first());
-    expect($this->apiResponse()->success($userResource)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success($userResource))->toMatchSnapshot();
 
     JsonResource::wrap('data');
-    expect($this->apiResponse()->success($userResource)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success($userResource))->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
 
 it('is resource collection', function (): void {
     $users = User::query()->with(['country', 'posts'])->get();
-    expect($this->apiResponse()->success(UserCollection::make($users))->content())->toMatchSnapshot();
-    expect($this->apiResponse()->success(UserResource::collection($users))->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success(UserCollection::make($users)))->toMatchSnapshot();
+    expect($this->apiResponse()->success(UserResource::collection($users)))->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
 
 it('is simple paginate resource collection', function (?string $wrap): void {
     $simplePaginate = User::query()->with(['country', 'posts'])->simplePaginate(3);
-    expect(
-        $this
-            ->apiResponse()
-            ->unshiftPipes(PaginatorDataPipe::with($wrap))
-            ->success(UserCollection::make($simplePaginate))
-            ->content()
-    )->toMatchSnapshot();
-    expect(
-        $this
-            ->apiResponse()
-            ->unshiftPipes(PaginatorDataPipe::with($wrap))
-            ->success(UserResource::collection($simplePaginate))
-            ->content()
-    )->toMatchSnapshot();
+    $apiResponse = $this->apiResponse()->unshiftPipes(PaginatorDataPipe::with($wrap));
+    expect($apiResponse->success(UserCollection::make($simplePaginate)))->toMatchSnapshot();
+    expect($apiResponse->success(UserResource::collection($simplePaginate)))->toMatchSnapshot();
 })
     ->group(__DIR__, __FILE__)
-    ->skip(Comparator::greaterThanOrEqualTo(Application::VERSION, '12.0.0'))
+    ->skip(Comparator::lessThan(Application::VERSION, '12.0.0'))
     ->with('wraps');
 
 it('is responsable', function (array $array): void {
@@ -151,12 +113,12 @@ it('is responsable', function (array $array): void {
             return new JsonResponse($this->array);
         }
     };
-    expect($this->apiResponse()->success($responsable)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success($responsable))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is stringable', function (array $array): void {
     $stringable = str(json_encode($array, \JSON_THROW_ON_ERROR));
-    expect($this->apiResponse()->success($stringable)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success($stringable))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is arrayable', function (array $array): void {
@@ -168,7 +130,7 @@ it('is arrayable', function (array $array): void {
             return $this->array;
         }
     };
-    expect($this->apiResponse()->success($arrayable)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success($arrayable))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is jsonable', function (array $array): void {
@@ -180,5 +142,5 @@ it('is jsonable', function (array $array): void {
             return json_encode($this->array, $options | \JSON_THROW_ON_ERROR);
         }
     };
-    expect($this->apiResponse()->success($jsonable)->content())->toMatchSnapshot();
+    expect($this->apiResponse()->success($jsonable))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');

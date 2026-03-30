@@ -51,6 +51,23 @@ class TestCase extends \Orchestra\Testbench\TestCase
     // use RefreshDatabase;
     use WithWorkbench;
 
+    /**
+     * Performs assertions shared by all tests of a test case.
+     *
+     * This method is called between setUp() and test.
+     */
+    protected function assertPreConditions(): void {}
+
+    /**
+     * Performs assertions shared by all tests of a test case.
+     *
+     * This method is called between test and tearDown().
+     *
+     * @see \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegrationAssertPostConditions::assertPostConditions()
+     * @see \Mockery\Adapter\Phpunit\MockeryTestCase
+     */
+    protected function assertPostConditions(): void {}
+
     protected function getApplicationTimezone(mixed $app): string
     {
         return 'Asia/Shanghai';

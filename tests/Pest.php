@@ -25,7 +25,9 @@ use Faker\Factory;
 use Faker\Generator;
 use Guanguans\LaravelApiResponseTests\TestCase;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Testing\TestResponse;
 use Pest\Expectation;
 
 // pest()
@@ -118,8 +120,10 @@ expect()->pipe('toMatchSnapshot', function (Closure $next): void {
         \JSON_UNESCAPED_SLASHES |
         \JSON_UNESCAPED_UNICODE;
     $this->value = match (true) {
-        // \is_string($this->value) => str($this->value)->replace('foo', 'bar')->toString(),
-        // \is_object($this->value) && method_exists($this->value, '__toString') => (string) $this->value,
+        $this->value instanceof JsonResponse,
+        $this->value instanceof TestResponse => str($this->value->getContent())->remove(\dirname(__DIR__))->toString(),
+        \is_object($this->value) && method_exists($this->value, '__toString'),
+        \is_string($this->value) => str($this->value)->remove(\dirname(__DIR__))->toString(),
         \is_array($this->value) => json_encode($this->value, $flags),
         $this->value instanceof Traversable => json_encode(iterator_to_array($this->value), $flags),
         $this->value instanceof JsonSerializable => json_encode($this->value->jsonSerialize(), $flags),
