@@ -25,7 +25,6 @@ return (new Configuration)
         [
             'symfony/http-foundation',
             'symfony/http-kernel',
-            // 'symfony/var-dumper',
         ],
         [ErrorType::SHADOW_DEPENDENCY]
     );

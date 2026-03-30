@@ -15,11 +15,12 @@ namespace Guanguans\LaravelApiResponse;
 
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use function Guanguans\LaravelApiResponse\Support\make;
 
-class ServiceProvider extends PackageServiceProvider
+class ServiceProvider extends PackageServiceProvider implements DeferrableProvider
 {
     /**
      * @api
