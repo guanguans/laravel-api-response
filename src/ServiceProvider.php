@@ -84,8 +84,8 @@ class ServiceProvider extends PackageServiceProvider
         $this->app->singleton(
             ApiResponse::class,
             static fn (): ApiResponse => new ApiResponse(
-                collect((array) config('api-response.pipes')),
-                collect((array) config('api-response.exception_pipes'))
+                collect(config()->array('api-response.pipes')),
+                collect(config()->array('api-response.exception_pipes'))
             )
         );
     }

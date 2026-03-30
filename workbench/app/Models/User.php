@@ -33,7 +33,7 @@ class User extends Model
     public $timestamps = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Workbench\App\Models\Country, self>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Workbench\App\Models\Country, $this>
      */
     public function country(): BelongsTo
     {
@@ -41,7 +41,7 @@ class User extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Workbench\App\Models\Post>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Workbench\App\Models\Post, $this>
      */
     public function posts(): HasMany
     {

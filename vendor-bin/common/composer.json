@@ -2,8 +2,12 @@
     "require-dev": {
         "php": ">=8.2",
         "ergebnis/composer-normalize": "^2.50",
+        "laravel/framework": "^11.51 || ^12.0 || ^13.0",
         "peckphp/peck": "^0.2",
         "symplify/rule-doc-generator": "^12.2"
+    },
+    "conflict": {
+        "laravel/framework": ">=12.0"
     },
     "suggest": {
         "mrpunyapal/pest-annotator-plugin": "php > 8.2"

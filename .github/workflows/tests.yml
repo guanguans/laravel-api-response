@@ -28,8 +28,6 @@ jobs:
         exclude:
           - php: 8.2
             laravel: 13.*
-            # - php: 8.5
-            #   laravel: 11.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 

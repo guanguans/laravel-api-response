@@ -25,5 +25,5 @@ it('can return JsonResponse', function (): void {
     expect([
         ApiResponseFacade::success(),
         ApiResponseFacade::success(),
-    ])->each->toBeInstanceOf(JsonResponse::class);
+    ])->toContainOnlyInstancesOf(JsonResponse::class);
 })->group(__DIR__, __FILE__);

@@ -65,7 +65,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function defineEnvironment(mixed $app): void
     {
-        tap($app->make(Repository::class), function (Repository $repository): void {
+        tap($app->make(Repository::class), static function (Repository $repository): void {
             $repository->set('app.key', 'base64:UZ5sDPZSB7DSLKY+DYlU8G/V1e/qW+Ag0WF03VNxiSg=');
             $repository->set('app.debug', false);
 
@@ -83,10 +83,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
             $application->has('pushed-pipe') or $this
                 ->apiResponse()
-                ->pushPipes(function (array $structure, \Closure $next) use ($application): JsonResponse {
+                ->pushPipes(static function (array $structure, \Closure $next) use ($application): JsonResponse {
                     $application->instance('pushed-pipe', true);
                     $jsonResponse = $next($structure);
-                    \assert($jsonResponse instanceof JsonResponse);
+                    self::assertInstanceOf(JsonResponse::class, $jsonResponse);
 
                     /** @see https://github.com/guanguans/php-cs-fixer-custom-fixers/blob/main/src/Fixer/InlineHtml/JsonFixer.php */
                     return $jsonResponse->setEncodingOptions(
