@@ -8,6 +8,29 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="4.0.0"></a>
+## [4.0.0] - 2026-03-31
+### 💅 Code Refactorings
+- apply phpstan ([0789159](https://github.com/guanguans/laravel-api-response/commit/0789159))
+- apply rector ([8c4b9c6](https://github.com/guanguans/laravel-api-response/commit/8c4b9c6))
+- **api:** Remove unused ForwardsCalls trait ([18d2536](https://github.com/guanguans/laravel-api-response/commit/18d2536))
+- **pipes:** Simplify unshift logic for pipes and exception pipes ([be63512](https://github.com/guanguans/laravel-api-response/commit/be63512))
+- **render:** Simplify exception handling closure calls ([564daa2](https://github.com/guanguans/laravel-api-response/commit/564daa2))
+- **support:** Remove Dumpable trait and related autoload configuration ([f40790d](https://github.com/guanguans/laravel-api-response/commit/f40790d))
+
+### ✅ Tests
+- **composer:** Update dependencies and adjust iterable tests ([68a2e34](https://github.com/guanguans/laravel-api-response/commit/68a2e34))
+- **pest:** Update string manipulation logic in value assignment ([250b8d6](https://github.com/guanguans/laravel-api-response/commit/250b8d6))
+
+### 📦 Builds
+- **deps:** Update minimum PHP version requirement to 8.2 ([c2be840](https://github.com/guanguans/laravel-api-response/commit/c2be840))
+- **deps-dev:** update mrpunyapal/peststan requirement || ^0.2 ([eca3b53](https://github.com/guanguans/laravel-api-response/commit/eca3b53))
+
+### 🤖 Continuous Integrations
+- **config:** Update github config files ([9dcac9a](https://github.com/guanguans/laravel-api-response/commit/9dcac9a))
+- **config:** Update config files ([86e1580](https://github.com/guanguans/laravel-api-response/commit/86e1580))
+
+
 <a name="3.2.2"></a>
 ## [3.2.2] - 2026-03-26
 ### 💅 Code Refactorings
@@ -563,7 +586,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/3.2.2...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/4.0.0...HEAD
+[4.0.0]: https://github.com/guanguans/laravel-api-response/compare/3.2.2...4.0.0
 [3.2.2]: https://github.com/guanguans/laravel-api-response/compare/3.2.1...3.2.2
 [3.2.1]: https://github.com/guanguans/laravel-api-response/compare/3.2.0...3.2.1
 [3.2.0]: https://github.com/guanguans/laravel-api-response/compare/3.1.0...3.2.0
