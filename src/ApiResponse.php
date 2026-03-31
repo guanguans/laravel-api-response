@@ -27,7 +27,6 @@ use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Dumpable;
-use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Support\Traits\Localizable;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Traits\Tappable;
@@ -50,7 +49,6 @@ class ApiResponse implements ApiResponseContract
     use ConcreteHttpStatus;
     use Conditionable;
     use Dumpable;
-    use ForwardsCalls;
     use HasExceptionPipes;
     use HasPipes;
     use Localizable;
