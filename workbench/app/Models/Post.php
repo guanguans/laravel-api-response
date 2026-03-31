@@ -1,6 +1,8 @@
 <?php
 
 /** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection ClassOverridesFieldOfSuperClassInspection */
+/** @noinspection LaravelUnknownEloquentFactoryInspection */
 /** @noinspection NullPointerExceptionInspection */
 /** @noinspection PhpMissingDocCommentInspection */
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */

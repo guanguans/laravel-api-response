@@ -29,6 +29,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Lottery;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Workbench\Database\Seeders\DatabaseSeeder;
@@ -82,6 +85,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function defineEnvironment(mixed $app): void
     {
+        tap($app, static function (): void {
+            // File::delete(glob(storage_path('logs/*.log')));
+            Mail::fake();
+            // Queue::fake();
+        });
+
         tap($app->make(Repository::class), static function (Repository $repository): void {
             $repository->set('app.key', 'base64:UZ5sDPZSB7DSLKY+DYlU8G/V1e/qW+Ag0WF03VNxiSg=');
             $repository->set('app.debug', false);

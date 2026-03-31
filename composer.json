@@ -67,7 +67,7 @@
         "mrpunyapal/rector-pest": "^0.2",
         "nette/utils": "^4.1",
         "nicksdot/phpstan-phpstorm-error-identifiers": "^0.3",
-        "orchestra/testbench": "^9.0 || ^10.0 || ^11.0",
+        "orchestra/testbench": "^9.17 || ^10.0 || ^11.0",
         "pestphp/pest": "^3.8 || ^4.0",
         "pestphp/pest-plugin-arch": "^3.1 || ^4.0",
         "pestphp/pest-plugin-laravel": "^3.2 || ^4.0",
@@ -233,6 +233,7 @@
             "@peck",
             "@php-cs-fixer:custom-fix-dry-run",
             "@php-cs-fixer:custom-ln-config",
+            "@laravel-api-response:fix-neon-files",
             "@typos",
             "@zhlint"
         ],
@@ -295,6 +296,7 @@
         "jack:raise-to-installed": "@jack raise-to-installed",
         "jack:raise-to-installed-dry-run": "@jack:raise-to-installed --dry-run",
         "jsonlint": "@php vendor/bin/jsonlint *.json .*rc",
+        "laravel-api-response:fix-neon-files": "Guanguans\\PHPStanRules\\Support\\ComposerScripts::fixNeonFiles",
         "laravel-api-response:phpdoc-parse": "Guanguans\\RectorRules\\Support\\ComposerScripts::phpdocParse",
         "lint-md": [
             "if ! command -v lint-md >/dev/null 2>&1; then echo 'lint-md not found, installing...'; npm install -g @lint-md/cli; fi",

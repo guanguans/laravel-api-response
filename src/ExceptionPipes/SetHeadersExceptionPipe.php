@@ -32,6 +32,8 @@ class SetHeadersExceptionPipe
      *
      * @param array<string, null|list<null|string>|string> $headers
      * @param class-string<\Throwable> ...$classes
+     *
+     * @noinspection SensitiveParameterInspection
      */
     public function __construct(
         private readonly array $headers,

@@ -131,7 +131,6 @@ class ApiResponse implements ApiResponseContract
      *
      * @noinspection UnnecessaryCastingInspection
      * @noinspection PhpCastIsUnnecessaryInspection
-     * @noinspection Annotator
      */
     protected function exceptionDestination(): \Closure
     {

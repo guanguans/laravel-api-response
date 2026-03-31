@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection SensitiveParameterInspection */
+
 declare(strict_types=1);
 
 /**

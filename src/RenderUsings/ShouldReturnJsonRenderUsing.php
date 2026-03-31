@@ -25,8 +25,6 @@ class ShouldReturnJsonRenderUsing extends AbstractRenderUsing
 {
     /**
      * @see \Illuminate\Foundation\Exceptions\Handler::shouldReturnJson()
-     *
-     * @noinspection Annotator
      */
     protected function when(Request $request, \Throwable $throwable): bool
     {

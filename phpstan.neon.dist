@@ -79,7 +79,7 @@ parameters:
     sidzIgnoreMagicNumbers: [2, 3, 100, 600, 512, 0o755, 1000]
     # larastan
     configDirectories:
-        - src/config/
+        - config/
     checkOctaneCompatibility: true
     listenerPaths:
         - src/Listeners/
