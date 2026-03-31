@@ -75,9 +75,6 @@ it('is callable', function (): void {
 })->group(__DIR__, __FILE__)->skip(\PHP_VERSION_ID >= 80400, 'Closure type data is not compatible with PHP 8.4');
 
 it('is iterable', function (array $array): void {
-    // FilesystemIterator is not sorted on php lower versions.
-    expect($this->apiResponse()->success(new FilesystemIterator(__DIR__)))->toMatchSnapshot();
-    expect($this->apiResponse()->success(new GlobIterator(__DIR__.'/*')))->toMatchSnapshot();
     expect($this->apiResponse()->success(
         (function () use ($array) {
             foreach ($array as $key => $value) {
@@ -85,6 +82,9 @@ it('is iterable', function (array $array): void {
             }
         })()
     ))->toMatchSnapshot();
+    expect($this->apiResponse()->success(new GlobIterator(__DIR__.'/*')))->toMatchSnapshot();
+    // // FilesystemIterator is not sorted on php lower versions.
+    // expect($this->apiResponse()->success(new FilesystemIterator(__DIR__)))->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('arrays');
 
 it('is array object', function (array $array): void {

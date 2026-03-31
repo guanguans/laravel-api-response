@@ -119,11 +119,12 @@ expect()->pipe('toMatchSnapshot', function (Closure $next): void {
         \JSON_THROW_ON_ERROR |
         \JSON_UNESCAPED_SLASHES |
         \JSON_UNESCAPED_UNICODE;
+    $basePath = \dirname(__DIR__).\DIRECTORY_SEPARATOR;
     $this->value = match (true) {
         $this->value instanceof JsonResponse,
-        $this->value instanceof TestResponse => str($this->value->getContent())->remove(\dirname(__DIR__))->toString(),
+        $this->value instanceof TestResponse => str($this->value->getContent())->remove($basePath)->toString(),
         \is_object($this->value) && method_exists($this->value, '__toString'),
-        \is_string($this->value) => str($this->value)->remove(\dirname(__DIR__))->toString(),
+        \is_string($this->value) => str($this->value)->remove($basePath)->toString(),
         \is_array($this->value) => json_encode($this->value, $flags),
         $this->value instanceof Traversable => json_encode(iterator_to_array($this->value), $flags),
         $this->value instanceof JsonSerializable => json_encode($this->value->jsonSerialize(), $flags),

@@ -35,20 +35,19 @@ beforeEach(function (): void {});
 
 it('is runtime exception handler', function (bool $debug): void {
     $this->markTestSkippedWhen(
-        $debug && Comparator::lessThan(Application::VERSION, '12.0.0') && Comparator::greaterThanOrEqualTo(Application::VERSION, '13.0.0'),
+        $debug && (Comparator::lessThan(Application::VERSION, '12.0.0') || Comparator::greaterThanOrEqualTo(Application::VERSION, '13.0.0')),
         'Skipping test on Laravel 11 or 13 when debug is true.'
     );
 
     config()->set('app.debug', $debug);
     $response = $this->post('api/exception');
     $response->assertStatus(Response::HTTP_BAD_GATEWAY);
-
     expect($response)->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('debugs');
 
 it('is runtime exception', function (bool $debug): void {
     $this->markTestSkippedWhen(
-        $debug && Comparator::lessThan(Application::VERSION, '12.0.0') && Comparator::greaterThanOrEqualTo(Application::VERSION, '13.0.0'),
+        $debug && (Comparator::lessThan(Application::VERSION, '12.0.0') || Comparator::greaterThanOrEqualTo(Application::VERSION, '13.0.0')),
         'Skipping test on Laravel 11 or 13 when debug is true.'
     );
 
