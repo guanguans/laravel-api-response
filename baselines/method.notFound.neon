@@ -1,0 +1,13 @@
+# total 2 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Call to an undefined method NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler\:\:convertExceptionToArray\(\)\.$#'
+            count: 1
+            path: ../src/ApiResponse.php
+
+        -
+            message: '#^Call to an undefined method NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler\:\:shouldReturnJson\(\)\.$#'
+            count: 1
+            path: ../src/RenderUsings/ShouldReturnJsonRenderUsing.php

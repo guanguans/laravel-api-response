@@ -1,11 +1,11 @@
-# total 12 errors
+# total 13 errors
 
 includes:
     - assign.propertyType.neon
     - disallowed.function.neon
+    - method.notFound.neon
     - new.static.neon
     - nullCoalesce.variable.neon
     - shipmonk.publicPropertyNotReadonly.neon
     - trait.unused.neon
     - typePerfect.narrowPublicClassMethodParamType.neon
-    - variable.undefined.neon
