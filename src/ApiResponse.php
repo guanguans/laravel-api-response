@@ -154,12 +154,7 @@ class ApiResponse implements ApiResponseContract
             $options = \JSON_UNESCAPED_UNICODE;
             $structure['status'] or $options |= (\JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES);
 
-            return new JsonResponse(
-                $structure,
-                Response::HTTP_OK,
-                [],
-                $options
-            );
+            return new JsonResponse($structure, Response::HTTP_OK, [], $options);
         };
     }
 }

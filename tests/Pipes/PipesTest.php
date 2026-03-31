@@ -32,6 +32,8 @@ it('can use pipes', function (): void {
             ErrorPipe::with(true),
             NullDataPipe::with(false),
             ScalarDataPipe::with(JsonResource::$wrap),
+            ScalarDataPipe::with(null),
+            ScalarDataPipe::with('data'),
         )
         ->success(fake()->name())->toBeInstanceOf(JsonResponse::class)
         ->exception(new HttpException(500000))->toBeInstanceOf(JsonResponse::class)

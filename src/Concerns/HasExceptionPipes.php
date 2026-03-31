@@ -34,10 +34,7 @@ trait HasExceptionPipes
     public function unshiftExceptionPipes(mixed ...$exceptionPipes): self
     {
         return $this->tapExceptionPipes(static function (Collection $originalExceptionPipes) use ($exceptionPipes): void {
-            // $originalExceptionPipes->unshift(...$exceptionPipes);
-            collect($exceptionPipes)->reverse()->each(
-                static fn (mixed $exceptionPipe): Collection => $originalExceptionPipes->prepend($exceptionPipe)
-            );
+            $originalExceptionPipes->unshift(...$exceptionPipes);
         });
     }
 
@@ -103,10 +100,7 @@ trait HasExceptionPipes
 
         if ($before) {
             if (0 === $idx) {
-                // $this->exceptionPipes->unshift(...$exceptionPipes);
-                collect($exceptionPipes)->reverse()->each(
-                    fn (mixed $exceptionPipe): Collection => $this->exceptionPipes->prepend($exceptionPipe)
-                );
+                $this->exceptionPipes->unshift(...$exceptionPipes);
             } else {
                 $this->exceptionPipes->splice($idx, 1, [...$exceptionPipes, $this->exceptionPipes->get($idx)]);
             }
