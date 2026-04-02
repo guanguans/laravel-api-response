@@ -1,8 +1,7 @@
-# total 13 errors
+# total 12 errors
 
 includes:
     - assign.propertyType.neon
-    - disallowed.function.neon
     - method.notFound.neon
     - new.static.neon
     - nullCoalesce.variable.neon

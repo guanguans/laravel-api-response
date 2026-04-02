@@ -1,8 +1,0 @@
-# total 1 error
-
-parameters:
-    ignoreErrors:
-        -
-            message: '#^Calling env\(\) is forbidden, use config\(\) instead\.$#'
-            count: 1
-            path: ../src/Support/helpers.php

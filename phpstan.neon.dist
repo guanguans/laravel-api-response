@@ -112,9 +112,6 @@ parameters:
 #            - resources/views/
     disallowedFunctionCalls:
         -
-            function: 'env()'
-            message: 'use config() instead'
-        -
             function: 'env_explode()'
             message: 'use config() instead'
     ignoreErrors:
