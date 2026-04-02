@@ -8,6 +8,16 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="4.0.1"></a>
+## [4.0.1] - 2026-04-02
+### 💅 Code Refactorings
+- **core:** Remove DeferrableProvider implementation from ServiceProvider ([8329037](https://github.com/guanguans/laravel-api-response/commit/8329037))
+- **docs:** Update inspection annotations in code comments ([e700195](https://github.com/guanguans/laravel-api-response/commit/e700195))
+
+### 🤖 Continuous Integrations
+- **config:** Update config files ([d898ace](https://github.com/guanguans/laravel-api-response/commit/d898ace))
+
+
 <a name="4.0.0"></a>
 ## [4.0.0] - 2026-03-31
 ### 💅 Code Refactorings
@@ -586,7 +596,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/4.0.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/4.0.1...HEAD
+[4.0.1]: https://github.com/guanguans/laravel-api-response/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/guanguans/laravel-api-response/compare/3.2.2...4.0.0
 [3.2.2]: https://github.com/guanguans/laravel-api-response/compare/3.2.1...3.2.2
 [3.2.1]: https://github.com/guanguans/laravel-api-response/compare/3.2.0...3.2.1
