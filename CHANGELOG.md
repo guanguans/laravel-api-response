@@ -8,6 +8,40 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="4.0.2"></a>
+## [4.0.2] - 2026-09-19
+### 📦 Builds
+- **deps:** bump github/codeql-action from 4 to 4.37.3 ([d3e1f95](https://github.com/guanguans/laravel-api-response/commit/d3e1f95))
+- **deps:** bump github/codeql-action from 4.37.6 to 4.37.7 ([9f459be](https://github.com/guanguans/laravel-api-response/commit/9f459be))
+- **deps:** Bump dependencies in composer.json ([01a497c](https://github.com/guanguans/laravel-api-response/commit/01a497c))
+- **deps:** bump github/codeql-action from 4.37.7 to 4.37.8 ([c25a468](https://github.com/guanguans/laravel-api-response/commit/c25a468))
+- **deps:** bump actions/stale from 10 to 11 ([a50035c](https://github.com/guanguans/laravel-api-response/commit/a50035c))
+- **deps:** bump github/codeql-action from 4.37.5 to 4.37.6 ([5023c85](https://github.com/guanguans/laravel-api-response/commit/5023c85))
+- **deps:** bump github/codeql-action from 4.37.4 to 4.37.5 ([48e6a21](https://github.com/guanguans/laravel-api-response/commit/48e6a21))
+- **deps:** bump actions/setup-node from 6 to 7 ([82eaf50](https://github.com/guanguans/laravel-api-response/commit/82eaf50))
+- **deps:** bump github/codeql-action from 4.37.8 to 4.37.9 ([ab36796](https://github.com/guanguans/laravel-api-response/commit/ab36796))
+- **deps:** bump github/codeql-action from 4.37.9 to 4.38.0 ([b58642f](https://github.com/guanguans/laravel-api-response/commit/b58642f))
+- **deps:** bump github/codeql-action from 4.37.3 to 4.37.4 ([c8aff62](https://github.com/guanguans/laravel-api-response/commit/c8aff62))
+- **deps:** bump actions/cache from 5 to 6 ([c3631f4](https://github.com/guanguans/laravel-api-response/commit/c3631f4))
+- **deps:** bump actions/checkout from 6 to 7 ([d953b68](https://github.com/guanguans/laravel-api-response/commit/d953b68))
+- **deps:** bump codecov/codecov-action from 6 to 7 ([17e3142](https://github.com/guanguans/laravel-api-response/commit/17e3142))
+- **deps:** bump dependabot/fetch-metadata from 2 to 3 ([7824340](https://github.com/guanguans/laravel-api-response/commit/7824340))
+- **deps-dev:** update rector/jack requirement || ^1.0 ([65a5693](https://github.com/guanguans/laravel-api-response/commit/65a5693))
+- **deps-dev:** update shipmonk/dead-code-detector requirement || ^1.0 ([c58dffa](https://github.com/guanguans/laravel-api-response/commit/c58dffa))
+
+### 🤖 Continuous Integrations
+- **config:** Update config files ([1580977](https://github.com/guanguans/laravel-api-response/commit/1580977))
+
+### Pull Requests
+- Merge pull request [#36](https://github.com/guanguans/laravel-api-response/issues/36) from guanguans/dependabot/github_actions/github/codeql-action-4.38.0
+- Merge pull request [#35](https://github.com/guanguans/laravel-api-response/issues/35) from guanguans/dependabot/github_actions/github/codeql-action-4.37.9
+- Merge pull request [#34](https://github.com/guanguans/laravel-api-response/issues/34) from guanguans/dependabot/github_actions/github/codeql-action-4.37.8
+- Merge pull request [#33](https://github.com/guanguans/laravel-api-response/issues/33) from guanguans/dependabot/github_actions/github/codeql-action-4.37.7
+- Merge pull request [#32](https://github.com/guanguans/laravel-api-response/issues/32) from guanguans/dependabot/github_actions/github/codeql-action-4.37.6
+- Merge pull request [#30](https://github.com/guanguans/laravel-api-response/issues/30) from guanguans/dependabot/github_actions/github/codeql-action-4.37.4
+- Merge pull request [#29](https://github.com/guanguans/laravel-api-response/issues/29) from guanguans/dependabot/github_actions/github/codeql-action-4.37.3
+
+
 <a name="4.0.1"></a>
 ## [4.0.1] - 2026-04-02
 ### 💅 Code Refactorings
@@ -596,7 +630,8 @@ new pipes for proper header and error handling.
 - **apiResponse:** Refactor API response tests to use instance method ([55fb7a6](https://github.com/guanguans/laravel-api-response/commit/55fb7a6))
 
 
-[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/4.0.1...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-api-response/compare/4.0.2...HEAD
+[4.0.2]: https://github.com/guanguans/laravel-api-response/compare/4.0.1...4.0.2
 [4.0.1]: https://github.com/guanguans/laravel-api-response/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/guanguans/laravel-api-response/compare/3.2.2...4.0.0
 [3.2.2]: https://github.com/guanguans/laravel-api-response/compare/3.2.1...3.2.2
