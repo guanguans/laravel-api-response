@@ -1,4 +1,4 @@
-# total 12 errors
+# total 13 errors
 
 includes:
     - assign.propertyType.neon
@@ -7,4 +7,3 @@ includes:
     - nullCoalesce.variable.neon
     - shipmonk.publicPropertyNotReadonly.neon
     - trait.unused.neon
-    - typePerfect.narrowPublicClassMethodParamType.neon

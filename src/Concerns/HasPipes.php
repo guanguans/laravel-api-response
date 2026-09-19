@@ -94,7 +94,7 @@ trait HasPipes
     /**
      * @param list<callable|object|string> $pipes
      */
-    private function splicePipes(string $findPipe, array $pipes, bool $before): self
+    protected function splicePipes(string $findPipe, array $pipes, bool $before): self
     {
         $idx = $this->findByPipe($findPipe);
 
@@ -113,7 +113,7 @@ trait HasPipes
         return $this;
     }
 
-    private function findByPipe(string $findPipe): int
+    protected function findByPipe(string $findPipe): int
     {
         foreach ($this->pipes as $idx => $pipe) {
             if (\is_object($pipe) && !$pipe instanceof \Closure) {

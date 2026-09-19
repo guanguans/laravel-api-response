@@ -42,6 +42,7 @@ it('is runtime exception handler', function (bool $debug): void {
     config()->set('app.debug', $debug);
     $response = $this->post('api/exception');
     $response->assertStatus(Response::HTTP_BAD_GATEWAY);
+
     expect($response)->toMatchSnapshot();
 })->group(__DIR__, __FILE__)->with('debugs');
 
@@ -75,8 +76,9 @@ it('is query exception', function (string $language): void {
         config()->set('app.locale', $language);
         User::query()->groupByRaw('no_such_column')->get();
     } catch (QueryException $queryException) {
-        dump($queryException->getCode(), $queryException->getMessage());
-        expect($this->apiResponse()->exception($queryException))->toMatchSnapshot();
+        expect($this->apiResponse()
+            ->dump($queryException->getCode(), $queryException->getMessage())
+            ->exception($queryException))->toMatchSnapshot();
     }
 })->group(__DIR__, __FILE__)->with('languages');
 

@@ -7,7 +7,7 @@
         "message": "This is a runtime exception.",
         "exception": "RuntimeException",
         "file": "tests/Feature/ExceptionTest.php",
-        "line": 55,
+        "line": 56,
         "trace": [
             {
                 "file": "vendor/pestphp/pest/src/Factories/TestCaseMethodFactory.php",
@@ -48,7 +48,7 @@
                 "type": "->"
             },
             {
-                "file": "vendor/pestphp/pest/src/Factories/TestCaseFactory.php(170) : eval()'d code",
+                "file": "vendor/pestphp/pest/src/Factories/TestCaseFactory.php(173) : eval()'d code",
                 "line": 39,
                 "function": "__runTest",
                 "class": "P\\Tests\\Feature\\ExceptionTest",

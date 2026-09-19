@@ -94,7 +94,7 @@ trait HasExceptionPipes
     /**
      * @param list<callable|object|string> $exceptionPipes
      */
-    private function spliceExceptionPipes(string $findExceptionPipe, array $exceptionPipes, bool $before): self
+    protected function spliceExceptionPipes(string $findExceptionPipe, array $exceptionPipes, bool $before): self
     {
         $idx = $this->findByExceptionPipe($findExceptionPipe);
 
@@ -113,7 +113,7 @@ trait HasExceptionPipes
         return $this;
     }
 
-    private function findByExceptionPipe(string $findExceptionPipe): int
+    protected function findByExceptionPipe(string $findExceptionPipe): int
     {
         foreach ($this->exceptionPipes as $idx => $exceptionPipe) {
             if (\is_object($exceptionPipe) && !$exceptionPipe instanceof \Closure) {

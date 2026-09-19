@@ -7,7 +7,7 @@
         "message": "This is a runtime exception.",
         "exception": "RuntimeException",
         "file": "workbench/routes/api.php",
-        "line": 49,
+        "line": 48,
         "trace": [
             {
                 "file": "vendor/laravel/framework/src/Illuminate/Routing/CallableDispatcher.php",
@@ -314,7 +314,7 @@
                 "type": "->"
             },
             {
-                "file": "vendor/pestphp/pest/src/Factories/TestCaseFactory.php(170) : eval()'d code",
+                "file": "vendor/pestphp/pest/src/Factories/TestCaseFactory.php(173) : eval()'d code",
                 "line": 21,
                 "function": "__runTest",
                 "class": "P\\Tests\\Feature\\ExceptionTest",

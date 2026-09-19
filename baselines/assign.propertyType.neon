@@ -1,13 +1,23 @@
-# total 2 errors
+# total 4 errors
 
 parameters:
     ignoreErrors:
         -
-            message: '#^Property Guanguans\\LaravelApiResponse\\ExceptionPipes\\SetErrorExceptionPipe\:\:\$classes \(list\<class\-string\<Throwable\>\>\) does not accept array\<int\|string, class\-string\<Throwable\>\>\.$#'
+            message: '#^Property Guanguans\\LaravelApiResponse\\ApiResponse\:\:\$exceptionPipes \(Illuminate\\Support\\Collection\<int, \(callable\(\)\: mixed\)\|object\|string\>\) does not accept Illuminate\\Support\\Collection\<\(int\|string\), mixed\>\.$#'
+            count: 1
+            path: ../src/ApiResponse.php
+
+        -
+            message: '#^Property Guanguans\\LaravelApiResponse\\ApiResponse\:\:\$pipes \(Illuminate\\Support\\Collection\<int, \(callable\(\)\: mixed\)\|object\|string\>\) does not accept Illuminate\\Support\\Collection\<\(int\|string\), mixed\>\.$#'
+            count: 1
+            path: ../src/ApiResponse.php
+
+        -
+            message: '#^Property Guanguans\\LaravelApiResponse\\ExceptionPipes\\SetErrorExceptionPipe\:\:\$classes \(list\<class\-string\<Throwable\>\>\) does not accept array\<int\<0, max\>\|string, class\-string\<Throwable\>\>\.$#'
             count: 1
             path: ../src/ExceptionPipes/SetErrorExceptionPipe.php
 
         -
-            message: '#^Property Guanguans\\LaravelApiResponse\\ExceptionPipes\\SetHeadersExceptionPipe\:\:\$classes \(list\<class\-string\<Throwable\>\>\) does not accept array\<int\|string, class\-string\<Throwable\>\>\.$#'
+            message: '#^Property Guanguans\\LaravelApiResponse\\ExceptionPipes\\SetHeadersExceptionPipe\:\:\$classes \(list\<class\-string\<Throwable\>\>\) does not accept array\<int\<0, max\>\|string, class\-string\<Throwable\>\>\.$#'
             count: 1
             path: ../src/ExceptionPipes/SetHeadersExceptionPipe.php

@@ -1,0 +1,18 @@
+{
+    "status": false,
+    "code": 422,
+    "message": "The foo must be an integer.",
+    "data": null,
+    "error": {
+        "foo": [
+            "The foo must be an integer.",
+            "The foo field value is not in the list of allowed values."
+        ],
+        "bar": [
+            "The bar must be a valid email address."
+        ],
+        "baz": [
+            "The baz field is required."
+        ]
+    }
+}

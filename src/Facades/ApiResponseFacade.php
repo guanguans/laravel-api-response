@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection All */
-
 declare(strict_types=1);
 
 /**

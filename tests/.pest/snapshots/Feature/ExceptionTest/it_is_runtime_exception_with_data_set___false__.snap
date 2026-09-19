@@ -1,0 +1,9 @@
+{
+    "status": false,
+    "code": 400,
+    "message": "Bad Request",
+    "data": null,
+    "error": {
+        "message": "Bad Request"
+    }
+}

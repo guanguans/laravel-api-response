@@ -79,8 +79,8 @@ class CastDataPipe
     private function fromFloat(mixed $value): float
     {
         return match ((string) $value) {
-            'Infinity' => \INF,
             '-Infinity' => -\INF,
+            'Infinity' => \INF,
             'NaN' => \NAN,
             default => (float) $value,
         };
