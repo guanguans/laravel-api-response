@@ -183,6 +183,7 @@
         ],
         "actionlint": "actionlint -ignore=SC2035 -ignore=SC2086 -color -oneline -verbose",
         "app:fix-neon": "Guanguans\\PHPStanRules\\Support\\ComposerScripts::fixNeon",
+        "app:generate-gitleaks-ignore": "Guanguans\\Notify\\Foundation\\Support\\ComposerScripts::generateGitleaksIgnore",
         "app:lint-readme": "App\\Support\\ComposerScripts::lintReadme",
         "app:parse-phpdoc": "Guanguans\\RectorRules\\Support\\ComposerScripts::parsePhpdoc",
         "blade-formatter": "blade-formatter resources/views/*.blade.php resources/views/**/*.blade.php --ignore-path= --php-version=8.2 --progress",
@@ -288,7 +289,7 @@
         "jack": "@php vendor/bin/jack",
         "jack:breakpoint": "@jack breakpoint --limit=9",
         "jack:breakpoint-dev": "@jack:breakpoint --dev",
-        "jack:open-versions": "@jack open-versions --limit=99",
+        "jack:open-versions": "@jack open-versions --limit=9",
         "jack:open-versions-dev": "@jack:open-versions --dev",
         "jack:open-versions-dev-dry-run": "@jack:open-versions-dev --dry-run",
         "jack:open-versions-dry-run": "@jack:open-versions --dry-run",
@@ -300,7 +301,7 @@
             "@lint-md:prototype"
         ],
         "lint-md:fix": "@lint-md:prototype --fix",
-        "lint-md:prototype": "lint-md --suppress-warnings *.md .github/ docs/",
+        "lint-md:prototype": "lint-md --suppress-warnings *.md */*.md */*/*.md",
         "mago": "@php vendor/bin/mago",
         "mago:format": "@mago format",
         "mago:format-dry-run": "@mago:format --dry-run",
@@ -495,7 +496,7 @@
             "@zhlint:prototype"
         ],
         "zhlint:fix": "@zhlint:prototype --fix",
-        "zhlint:prototype": "zhlint {,docs/,docs/**/}*-zh_CN.md",
+        "zhlint:prototype": "zhlint '{,*/,*/*/}*-zh_CN.md'",
         "zizmor": "zizmor .github/ --verbose"
     },
     "scripts-aliases": {

@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 use Ergebnis\Rector\Rules\Expressions\Arrays\SortAssociativeArrayByKeyRector;
 use Guanguans\LaravelApiResponse\Support\Rector\ConcreteHttpStatusRector;
+use Guanguans\PhpCsFixerCustomFixers\Support\Utils;
 use Guanguans\RectorRules\NodeVisitor\ParentConnectingVisitor;
 use Guanguans\RectorRules\Rector\File\AddNoinspectionDocblockToFileFirstStmtRector;
 use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
@@ -50,12 +51,11 @@ return RectorConfig::configure()
         __DIR__.'/src/',
         __DIR__.'/tests/',
         __DIR__.'/workbench/',
-        __DIR__.'/composer-bump',
+        ...Utils::defaultRootFiles(),
     ])
     ->withRootFiles()
     ->withSkip([
         '*/Fixtures/*',
-        // __DIR__.'/tests.php',
         __DIR__.'/workbench/app/Models/Country.php',
         __DIR__.'/workbench/app/Models/Post.php',
     ])
