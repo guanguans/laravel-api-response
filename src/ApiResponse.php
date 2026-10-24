@@ -106,6 +106,10 @@ class ApiResponse implements ApiResponseContract
         return $this
             ->newPipeline()
             ->send([
+                /**
+                 * @see \ArrayObject
+                 * @see \Symfony\Component\HttpFoundation\JsonResponse::__construct()
+                 */
                 'status' => $status,
                 'code' => $code,
                 'message' => $message,

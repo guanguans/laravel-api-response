@@ -2,6 +2,7 @@
 
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpFieldAssignmentTypeMismatchInspection */
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
@@ -87,7 +88,7 @@ it('is validation exception', function (string $language): void {
     $validationException = new ValidationException(
         Validator::make(
             ['foo' => 'bar', 'bar' => 'baz'],
-            ['foo' => ['required', 'int', 'in:1,2'], 'bar' => ['email'], 'baz' => ['required', 'string']]
+            ['foo' => 'required|int|in:1,2', 'bar' => 'email', 'baz' => 'required|string']
         )
     );
     expect($this->apiResponse()->exception($validationException))->toMatchSnapshot();

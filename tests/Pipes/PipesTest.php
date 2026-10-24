@@ -2,6 +2,7 @@
 
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpFieldAssignmentTypeMismatchInspection */
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
@@ -43,8 +44,8 @@ it('can use pipes', function (): void {
 it('can will throw InvalidArgumentException', function ($data): void {
     $this->apiResponse()->castToFloat()->success($data);
 })->group(__DIR__, __FILE__)->throws(InvalidArgumentException::class)->with([
-    'Infinity',
     '-Infinity',
+    'Infinity',
     'NaN',
 ]);
 

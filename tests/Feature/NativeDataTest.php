@@ -2,6 +2,7 @@
 
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpFieldAssignmentTypeMismatchInspection */
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
@@ -48,7 +49,7 @@ it('is string', function (): void {
 })->group(__DIR__, __FILE__);
 
 it('is array', function (): void {
-    expect($this->apiResponse()->success(['foo', 'bar', 'baz']))->toMatchSnapshot();
+    expect($this->apiResponse()->success(['bar', 'baz', 'foo']))->toMatchSnapshot();
     expect($this->apiResponse()->success(['foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz']))->toMatchSnapshot();
 })->group(__DIR__, __FILE__);
 

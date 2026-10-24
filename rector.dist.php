@@ -16,9 +16,11 @@ declare(strict_types=1);
 use Ergebnis\Rector\Rules\Expressions\Arrays\SortAssociativeArrayByKeyRector;
 use Guanguans\LaravelApiResponse\Support\Rector\ConcreteHttpStatusRector;
 use Guanguans\PhpCsFixerCustomFixers\Support\Utils;
-use Guanguans\RectorRules\NodeVisitor\ParentConnectingVisitor;
+use Guanguans\RectorRules\Rector\Array_\SortListItemOfSameScalarTypeRector;
 use Guanguans\RectorRules\Rector\File\AddNoinspectionDocblockToFileFirstStmtRector;
 use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
+use Guanguans\RectorRules\Rector\Scalar\ScalarValueToConstFetchRector;
+use Guanguans\RectorRules\Rector\Scalar\StringToClassConstantOfRequestOptionsRector;
 use Guanguans\RectorRules\Set\SetList;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
 use Rector\CodingStyle\Rector\Assign\SplitDoubleAssignRector;
@@ -26,7 +28,6 @@ use Rector\CodingStyle\Rector\ClassLike\NewlineBetweenClassLikeStmtsRector;
 use Rector\Config\RectorConfig;
 use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
-use Rector\Transform\Rector\String_\StringToClassConstantRector;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Rector\ArrayDimFetch\ArrayToArrGetRector;
 use RectorLaravel\Rector\Class_\DescriptionPropertyToDescriptionAttributeRector;
@@ -38,6 +39,7 @@ use RectorLaravel\Rector\ClassMethod\AddGenericReturnTypeToRelationsRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\If_\ThrowIfRector;
+use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Set\LaravelLevelSetList;
 use RectorPest\Set\PestLevelSetList;
@@ -46,16 +48,10 @@ use RectorPest\Set\PestSetList;
 error_reporting(\E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED);
 
 return RectorConfig::configure()
-    ->withPaths([
-        __DIR__.'/config/',
-        __DIR__.'/src/',
-        __DIR__.'/tests/',
-        __DIR__.'/workbench/',
-        ...Utils::defaultRootFiles(),
-    ])
-    ->withRootFiles()
+    ->withPaths([...Utils::defaultRootDirectories(), ...Utils::defaultRootFiles()])
     ->withSkip([
         '*/Fixtures/*',
+        __DIR__.'/workbench/resources/',
         __DIR__.'/workbench/app/Models/Country.php',
         __DIR__.'/workbench/app/Models/Post.php',
     ])
@@ -66,6 +62,7 @@ return RectorConfig::configure()
         SplitDoubleAssignRector::class,
     ])
     ->withSkip([
+        /** @see SortListItemOfSameScalarTypeRector */
         DescriptionPropertyToDescriptionAttributeRector::class,
         SignaturePropertyToSignatureAttributeRector::class,
         FillablePropertyToFillableAttributeRector::class,
@@ -77,6 +74,7 @@ return RectorConfig::configure()
         EmptyToBlankAndFilledFuncRector::class,
         HelperFuncCallToFacadeClassRector::class,
         ThrowIfRector::class,
+        ValidationRuleArrayStringValueToArrayRector::class,
     ])
     ->withSkip([
         // AddGenericReturnTypeToRelationsRector::class => [
@@ -87,6 +85,10 @@ return RectorConfig::configure()
             __DIR__.'/src/Support/Rector/ConcreteHttpStatusRector.php',
             __DIR__.'/tests/Pest.php',
         ],
+        ScalarValueToConstFetchRector::class => [
+            __DIR__.'/tests/Feature/NativeDataTest.php',
+            __DIR__.'/tests/Support/UtilsTest.php',
+        ],
         SortAssociativeArrayByKeyRector::class => [
             /** @see vendor/rector/rector/src/PostRector/Rector/ */
             __DIR__.'/config/',
@@ -94,12 +96,10 @@ return RectorConfig::configure()
             __DIR__.'/tests/',
             __DIR__.'/workbench/',
         ],
-        StringToClassConstantRector::class => [
+        StringToClassConstantOfRequestOptionsRector::class => [
             __DIR__.'/src/ApiResponse.php',
             __DIR__.'/src/ExceptionPipes/HttpExceptionPipe.php',
             __DIR__.'/src/ExceptionPipes/SetHeadersExceptionPipe.php',
-            __DIR__.'/workbench/resources/lang/',
-            __DIR__.'/composer-bump',
         ],
     ])
     ->withCache(__DIR__.'/.build/rector/')
@@ -132,10 +132,10 @@ return RectorConfig::configure()
         phpunitMockToStub: true,
     )
     ->withSets([
-        SetList::ALL,
         LaravelLevelSetList::UP_TO_LARAVEL_110,
         PestLevelSetList::UP_TO_PEST_30,
         PestSetList::PEST_CODE_QUALITY,
+        SetList::ALL,
     ])
     ->withRules([
         ConcreteHttpStatusRector::class,
@@ -144,6 +144,7 @@ return RectorConfig::configure()
         '*/tests/*' => [
             'AnonymousFunctionStaticInspection',
             'NullPointerExceptionInspection',
+            'PhpFieldAssignmentTypeMismatchInspection',
             'PhpPossiblePolymorphicInvocationInspection',
             'PhpUndefinedClassInspection',
             'PhpUnhandledExceptionInspection',
@@ -152,5 +153,4 @@ return RectorConfig::configure()
             'StaticClosureCanBeUsedInspection',
         ],
     ])
-    ->registerDecoratingNodeVisitor(ParentConnectingVisitor::class)
-    ->withConfiguredRule(RenameToConventionalCaseNameRector::class, ['beforeEach', 'MIT', 'PDO']);
+    ->withConfiguredRule(RenameToConventionalCaseNameRector::class, ['MIT', 'PDO', 'beforeEach']);

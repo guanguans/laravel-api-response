@@ -2,6 +2,7 @@
 
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpFieldAssignmentTypeMismatchInspection */
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
@@ -41,9 +42,9 @@ it('can cast type', function ($data): void {
     'string',
     true,
     fn (): array => [],
-    fn (): array => ['foo', 'bar', 'baz'],
+    fn (): array => ['bar', 'baz', 'foo'],
     fn (): array => ['foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz'],
     (object) [],
-    (object) ['foo', 'bar', 'baz'],
+    (object) ['bar', 'baz', 'foo'],
     (object) ['foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz'],
 ]);
